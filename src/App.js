@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import firebase from 'firebase';
+import Account from "./dao/Account";
 
 class App extends Component {
 
@@ -20,8 +21,19 @@ class App extends Component {
         firebase.initializeApp(config);
         /*the above is firebase config*/
 
+        this.state = {
+            username:'username',
+            password:'pw'
+        }
+
     }
 
+
+    create_account(){
+        var account = new Account(this.state.username, this.state.password);
+        account.push();
+        alert("Create account "+this.state.username + " " +this.state.password);
+    }
 
     render() {
         return (
@@ -30,10 +42,30 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
+                <h1>{this.message}</h1>
                 <p className="App-intro">
                     To get started, edit <code>src/App.js</code> and save to reload.
                 </p>
+
+                <form >
+                    <label>Username </label>
+                    <input type={"text"} value={this.state.username} onChange={ e=> this.setState({username: e.target.value})}/>
+                </form>
+
+                <form>
+                    <label>Password </label>
+                    <input type={"text"} value={this.state.password} onChange={ e=> this.setState({password: e.target.value})}/>
+                </form>
+
+                <form>
+                    <button onClick={this.create_account.bind(this)}>Submit</button>
+                </form>
+
+
             </div>
+
+
+
         );
     }
 
