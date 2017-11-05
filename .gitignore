@@ -4,7 +4,7 @@
 /node_modules
 
 # make intellij happy
-.idea/workplace.xml
+.idea/workspace.xml
 
 # testing
 /coverage
