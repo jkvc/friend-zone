@@ -1,5 +1,4 @@
 import md5 from 'md5';
-import firebase from 'firebase';
 
 
 /* class contains an Account object, used to access data in the Account table */
@@ -35,15 +34,13 @@ class Account {
                 this.password === other.password;
     }
 
-    /* add self to Account table */
-    push(){
-        var table = firebase.database().ref("Account");
+    /* add self to table */
+    push(table){
         table.child(this.user_id).set({
             user_id: this.user_id,
             username: this.username,
             password: this.password
         });
-        // alert("pushing" + this.username);
     }
 
 }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import firebase from 'firebase';
-import Account from "./dao/Account";
+import AccountManager from "./dbmanager/AccountManager"
 
 class App extends Component {
 
@@ -31,8 +31,8 @@ class App extends Component {
     handle_submit(event){
         event.preventDefault();
         alert("create account " + this.state.username + this.state.password);
-        var account = new Account(this.state.username , this.state.password);
-        account.push();
+        var am = new AccountManager();
+        am.add_account(this.state.username, this.state.password);
     }
 
     render() {
