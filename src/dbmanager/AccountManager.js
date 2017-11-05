@@ -1,5 +1,6 @@
 import Account from "../dao/Account";
 import firebase from 'firebase';
+import md5 from 'md5';
 
 class AccountManager {
 
@@ -11,18 +12,21 @@ class AccountManager {
 
     /* add account, return: todo: 0 success, 1 username already exists */
     add_account(username, password){
+
+        if (this.lookup_by_username(username) !== null) return 1;
+
         var account = new Account(username,password);
         account.push(this.table);
         return 0;
     }
 
-    /* return Account object if account exists, otherwise return null */
+    /* todo return Account object if account exists, otherwise return null */
     lookup_by_id(user_id){
 
         /*if not exist return false*/
-        if (?){
-            return null;
-        }
+        // if (?){
+        //     return null;
+        // }
 
         var account = new Account("","");
         account.user_id = user_id;
@@ -33,9 +37,8 @@ class AccountManager {
 
     /* return Account object if account exists, otherwise return null */
     lookup_by_username(username){
-
+        return this.lookup_by_id(md5(username));
     }
-
 
 }
 
