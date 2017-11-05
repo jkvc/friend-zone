@@ -5,6 +5,7 @@
 
 # make intellij happy
 /.idea/workspace.xml
+.idea/inspectionProfiles/
 
 
 # testing
@@ -23,3 +24,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
