@@ -1,6 +1,5 @@
 import md5 from 'md5';
 
-
 /* class contains an Account object, used to access data in the Account table */
 class Account {
 
@@ -13,7 +12,7 @@ class Account {
         this.user_id = md5(username);
         this.password = md5(password);
     }
-
+ 
     /* return true if a and b have same user_id */
     has_same_user_id(other){
         if (!(other instanceof Account)) return false;
@@ -44,6 +43,5 @@ class Account {
     }
 
 }
-
 
 export default Account;
