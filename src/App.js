@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import firebase from 'firebase';
-import AccountManager from "./dbmanager/AccountManager"
+import AccountManager from "./controller/AccountManager"
 
 class App extends Component {
 
