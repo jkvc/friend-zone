@@ -42,9 +42,11 @@ class Account {
             user_id: this.user_id,
             username: this.username,
             password: this.password
-        })
+        });
         // alert("pushing" + this.username);
     }
+
 }
+
 
 export default Account;

@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+# make intellij happy
+.idea/workplace.xml
+
 # testing
 /coverage
 

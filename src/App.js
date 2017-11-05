@@ -22,17 +22,17 @@ class App extends Component {
         /*the above is firebase config*/
 
         this.state = {
-            username:'username',
-            password:'pw'
-        }
+            username:'Put username here',
+            password:'put password here'
+        };
 
     }
 
-
-    create_account(){
-        var account = new Account(this.state.username, this.state.password);
+    handle_submit(event){
+        event.preventDefault();
+        alert("create account " + this.state.username + this.state.password);
+        var account = new Account(this.state.username , this.state.password);
         account.push();
-        alert("Create account "+this.state.username + " " +this.state.password);
     }
 
     render() {
@@ -58,18 +58,14 @@ class App extends Component {
                 </form>
 
                 <form>
-                    <button onClick={this.create_account.bind(this)}>Submit</button>
+                    <button onClick={this.handle_submit.bind(this)}>Submit</button>
                 </form>
 
-
             </div>
-
-
-
         );
     }
-
-
 }
+
+
 
 export default App;
