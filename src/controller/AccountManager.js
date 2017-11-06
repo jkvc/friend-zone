@@ -22,17 +22,7 @@ class AccountManager {
 
     /* todo DANDANDANDADNADNADAN return Account object if account exists, otherwise return null */
     lookup_by_id(user_id){
-
-        /*if not exist return false*/
-        // if (?){
-        //     return null;
-        // }
-
-        var account = new Account("","");
-        account.user_id = user_id;
-        // account.password = ?;
-        // account.username = ?;
-        return account;
+        return null; /*todo*/
     }
 
     /* return Account object if account exists, otherwise return null */
