@@ -25,7 +25,6 @@ class UserProfile extends Component{
     render(){
         return(
 
-
             <div>
                 <h1>{this.title}</h1>
                 <form>

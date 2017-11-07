@@ -19,9 +19,11 @@ class Login extends Component{
     }
 
     handle_login_button(event){
-        event.preventDefault();
+        event.preventDefault(); /* to make react happy */
 
-        firebase.auth().signInWithEmailAndPassword(this.state.user_email, this.state.password)
+        firebase.auth().signInWithEmailAndPassword(this.state.user_email, this.state.password) /* login with firebase */
+
+            /* handles login success */
             .then(function(){
                 this.setState({
                    success_msg:"login success!",
@@ -30,6 +32,7 @@ class Login extends Component{
                 ReactDOM.render(<UserProfile />, document.getElementById('root'))
             }.bind(this))
 
+            /* handles failure, show err message*/
             .catch(function(error){
                 this.setState({
                     err_msg:error.message
@@ -39,10 +42,9 @@ class Login extends Component{
 
     render(){
         return(
-
-
             <div>
                 <h1>{this.title}</h1>
+
                 <form >
                     <label>user_email </label>
                     <input type={"text"} value={this.state.user_email}
@@ -56,13 +58,12 @@ class Login extends Component{
                            onChange={ e=> this.setState({password: e.target.value})}/>
                     <label>{this.state.success_msg}</label>
                 </form>
+
                 <form>
                     <button onClick={this.handle_login_button.bind(this)}>login</button>
                 </form>
 
             </div>
-
-            
         )
     }
 }

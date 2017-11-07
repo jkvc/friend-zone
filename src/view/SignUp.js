@@ -3,13 +3,11 @@ import firebase from 'firebase';
 import ReactDOM from 'react-dom';
 import UserProfile from './UserProfile';
 
-// import Account from "../dao/Account";
 
 class SignUp extends Component {
 
     constructor(props) {
         super(props);
-
 
         this.state = {
             user_email:'Put user_email here',
@@ -18,13 +16,14 @@ class SignUp extends Component {
             success_msg:""
         };
         this.title = "SignUp.js";
-
     }
 
     handle_signup_button(event){
-        event.preventDefault();
-        firebase.auth().createUserWithEmailAndPassword(this.state.user_email, this.state.password)
+        event.preventDefault(); /* make react happy */
 
+        firebase.auth().createUserWithEmailAndPassword(this.state.user_email, this.state.password) /*create account*/
+
+            /* handle create success, log in, go to profile */
             .then(function(){
                 this.setState({
                     success_msg:"signup success!",
@@ -34,6 +33,7 @@ class SignUp extends Component {
 
             }.bind(this))
 
+            /* handle create failure, show err message */
             .catch(function(error){
                 // var error_code = error.code;
                 var error_msg = error.message;
@@ -43,7 +43,6 @@ class SignUp extends Component {
 
     render() {
         return (
-
 
             <div>
                 <h1>{this.title}</h1>
@@ -67,11 +66,8 @@ class SignUp extends Component {
 
             </div>
 
-
         );
     }
 }
-
-
 
 export default SignUp;
