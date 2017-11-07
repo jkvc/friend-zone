@@ -9,7 +9,6 @@ class UserProfile extends Component{
     }
 
 
-
     render(){
         return(
 
@@ -20,11 +19,10 @@ class UserProfile extends Component{
                 <h1>{this.title}</h1>
 
                 <NavBar tab="profile"/>
-                <h4>これがうまるちゃんのプロファイルだ！</h4>
+                <h4>これがうまるのプロファイルだ！</h4>
 
 
             </div>
-
 
         )
     }

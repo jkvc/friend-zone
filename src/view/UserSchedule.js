@@ -19,11 +19,10 @@ class UserSchedule extends Component{
                 <h1>{this.title}</h1>
 
                 <NavBar tab="schedule"/>
-                <h4>いつもダラダラしたいなぁ...</h4>
+                <h4>いつでもダラダラしたいなぁ...</h4>
 
 
             </div>
-
 
         )
     }
