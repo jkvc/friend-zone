@@ -1,25 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
+import Login from './Login'
 import firebase from 'firebase';
 
 
 class Main extends Component{
 
     constructor(props){
-
-        /*the following is firebase config*/
-        var config = {
-            apiKey: "AIzaSyABmBOMLTEGtBLrjkwcDu9ab0ExE208R-4",
-            authDomain: "friend-zone-9219b.firebaseapp.com",
-            databaseURL: "https://friend-zone-9219b.firebaseio.com",
-            projectId: "friend-zone-9219b",
-            storageBucket: "",
-            messagingSenderId: "1002501074461"
-        };
-        firebase.initializeApp(config);
-        /*the above is firebase config*/
-
         super(props);
         this.title = "Main.js";
     }
@@ -28,8 +16,14 @@ class Main extends Component{
         ReactDOM.render(<SignUp />, document.getElementById('root'));
     }
 
+    goto_login(){
+        ReactDOM.render(<Login />, document.getElementById('root'));
+    }
+
     render(){
         return(
+
+
             <div>
                 <h1>{this.title}</h1>
 
@@ -37,7 +31,14 @@ class Main extends Component{
                     <button onClick={this.goto_signup.bind(this)}>Sign Up</button>
                 </form>
 
+
+                <form>
+                    <button onClick={this.goto_login.bind(this)}>Login</button>
+                </form>
+
             </div>
+
+
         );
     }
 }
