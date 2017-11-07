@@ -42,7 +42,9 @@ class Login extends Component{
 
     render(){
         return(
-            <div>
+            <div align={'center'}>
+                <img src={"https://res.cloudinary.com/teepublic/image/private/s--8-dGDDZg--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1470902298/production/designs/627022_1.jpg"} alt={""}/>
+
                 <h1>{this.title}</h1>
 
                 <form >
@@ -58,6 +60,7 @@ class Login extends Component{
                            onChange={ e=> this.setState({password: e.target.value})}/>
                     <label>{this.state.success_msg}</label>
                 </form>
+                <br/>
 
                 <form>
                     <button onClick={this.handle_login_button.bind(this)}>login</button>

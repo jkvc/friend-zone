@@ -10,7 +10,7 @@ class SignUp extends Component {
         super(props);
 
         this.state = {
-            user_email:'Put user_email here',
+            user_email:'put user_email here',
             password:'put password here',
             err_msg: "",
             success_msg:""
@@ -44,7 +44,10 @@ class SignUp extends Component {
     render() {
         return (
 
-            <div>
+            <div align={"center"}>
+
+                <img src={"https://res.cloudinary.com/teepublic/image/private/s--8-dGDDZg--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1470902298/production/designs/627022_1.jpg"} alt={""}/>
+
                 <h1>{this.title}</h1>
                 <form >
                     <label>user_email </label>
@@ -52,13 +55,13 @@ class SignUp extends Component {
                            onChange={e=> this.setState({user_email: e.target.value})}/>
                     <label>{this.state.err_msg}</label>
                 </form>
-
                 <form>
                     <label>password </label>
                     <input type={"text"} value={this.state.password}
                            onChange={ e=> this.setState({password: e.target.value})}/>
                     <label>{this.state.success_msg}</label>
                 </form>
+                <br/>
 
                 <form>
                     <button onClick={this.handle_signup_button.bind(this)}>Signup and login</button>
