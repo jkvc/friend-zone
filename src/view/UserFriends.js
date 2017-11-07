@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import NavBar from '../viewcomponent/NavBar'
 
-class UserProfile extends Component{
+class UserFriends extends Component{
 
     constructor(props){
         super(props);
-        this.title = "UserProfile.js";
+        this.title = "UserFriends.js";
     }
-
 
 
     render(){
@@ -19,15 +18,14 @@ class UserProfile extends Component{
 
                 <h1>{this.title}</h1>
 
-                <NavBar tab="profile"/>
-                <h4>これがうまるちゃんのプロファイルだ！</h4>
+                <NavBar tab="friends"/>
+                <h4>うまるの友達!</h4>
 
 
             </div>
-
 
         )
     }
 }
 
-export default UserProfile;
+export default UserFriends;

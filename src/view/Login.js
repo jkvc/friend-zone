@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 import UserProfile from './UserProfile';
+import SignUp from './SignUp';
 
 
 class Login extends Component{
@@ -10,13 +11,19 @@ class Login extends Component{
         super(props);
         this.title = "Login.js";
         this.state = {
-            user_email:'Put user_email here',
+            user_email:'put user_email here',
             password:'put password here',
             err_msg: "",
             success_msg:""
         };
 
     }
+
+
+    goto_signup(){
+        ReactDOM.render(<SignUp />, document.getElementById('root'));
+    }
+
 
     handle_login_button(event){
         event.preventDefault(); /* to make react happy */
@@ -64,6 +71,10 @@ class Login extends Component{
 
                 <form>
                     <button onClick={this.handle_login_button.bind(this)}>login</button>
+                </form>
+                <br/>
+                <form>
+                    <button onClick={this.goto_signup.bind(this)}>go to signup instead</button>
                 </form>
 
             </div>

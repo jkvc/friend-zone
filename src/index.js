@@ -21,7 +21,7 @@ registerServiceWorker();
 this is not working, when refresh, auth().currentUser still resets to null*/
 var user = firebase.auth().currentUser;
 if (user)
-    ReactDOM.render(<UserProfile />, document.getElementById('root'))
+    ReactDOM.render(<UserProfile />, document.getElementById('root'));
 else
     ReactDOM.render(<Main />, document.getElementById('root'));
 

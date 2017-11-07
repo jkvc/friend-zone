@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import NavBar from '../viewcomponent/NavBar'
 
-class UserProfile extends Component{
+class UserInbox extends Component{
 
     constructor(props){
         super(props);
-        this.title = "UserProfile.js";
+        this.title = "UserInbox.js";
     }
-
 
 
     render(){
@@ -19,15 +18,14 @@ class UserProfile extends Component{
 
                 <h1>{this.title}</h1>
 
-                <NavBar tab="profile"/>
-                <h4>これがうまるちゃんのプロファイルだ！</h4>
+                <NavBar tab="inbox"/>
+                <h4>うまるの受信トレイ</h4>
 
 
             </div>
-
 
         )
     }
 }
 
-export default UserProfile;
+export default UserInbox;
