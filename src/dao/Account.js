@@ -13,19 +13,6 @@ class Account {
     }
 
 
-    /* return true if a and b have same password */
-    has_same_password(other){
-        if (!(other instanceof Account)) return false;
-        return this.password === other.password;
-    }
-
-    /* return true if equal */
-    equals(other){
-        if (!(other instanceof Account)) return false;
-        return  this.user_email === other.user_email &&
-                this.password === other.password;
-    }
-
     /* add self to table */
     push(){
         firebase.database().ref('Account').child(this.user_email).set({

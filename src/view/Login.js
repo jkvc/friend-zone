@@ -16,7 +16,6 @@ class Login extends Component{
             err_msg: "",
             success_msg:""
         };
-
     }
 
 

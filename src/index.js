@@ -6,6 +6,7 @@ import firebase from 'firebase';
 import UserProfile from './view/UserProfile';
 import registerServiceWorker from './registerServiceWorker';
 
+/*firebase stuff*/
 var config = {
     apiKey: "AIzaSyABmBOMLTEGtBLrjkwcDu9ab0ExE208R-4",
     authDomain: "friend-zone-9219b.firebaseapp.com",

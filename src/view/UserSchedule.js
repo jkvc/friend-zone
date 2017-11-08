@@ -18,7 +18,7 @@ class UserSchedule extends Component{
                      alt={""} width={"300"}/>
                 <h1>{this.title}</h1>
 
-                <NavBar tab="schedule"/>
+                <NavBar tab="schedule" />
                 <h4>いつでもダラダラしたいなぁ...</h4>
 
 
