@@ -6,8 +6,8 @@ import firebase from 'firebase';
 import UserProfile from './view/UserProfile';
 import registerServiceWorker from './registerServiceWorker';
 
-/*firebase stuff*/
-var config = {
+/* firebase config and setup */
+let config = {
     apiKey: "AIzaSyABmBOMLTEGtBLrjkwcDu9ab0ExE208R-4",
     authDomain: "friend-zone-9219b.firebaseapp.com",
     databaseURL: "https://friend-zone-9219b.firebaseio.com",
@@ -18,11 +18,11 @@ var config = {
 firebase.initializeApp(config);
 registerServiceWorker();
 
-/*todo
-this is not working, when refresh, auth().currentUser still resets to null*/
-var user = firebase.auth().currentUser;
-if (user)
-    ReactDOM.render(<UserProfile />, document.getElementById('root'));
-else
-    ReactDOM.render(<Main />, document.getElementById('root'));
-
+// Using a callback method (observer) avoids the issue that when web are in
+// process of getting the user, user is null even though user has signed in.
+firebase.auth().onAuthStateChanged((user) => {
+    if (user)
+        ReactDOM.render(<UserProfile/>, document.getElementById('root'));
+    else
+        ReactDOM.render(<Main/>, document.getElementById('root'));
+});
