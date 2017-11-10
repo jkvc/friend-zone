@@ -5,7 +5,7 @@ import Main from './view/Main';
 import firebase from 'firebase';
 import UserProfile from './view/UserProfile';
 import registerServiceWorker from './registerServiceWorker';
-import test_most_popular_in_list from './test/TestMatching'
+import test_most_popular_in_list from './test/MostPopularInList'
 
 /* firebase config and setup */
 let config = {
