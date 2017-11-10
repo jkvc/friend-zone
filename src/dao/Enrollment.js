@@ -20,8 +20,8 @@ class Enrollment {
     /* add self to table on Firebase */
     push(){
         firebase.database().ref('Enrolled_Users').child(this.course_id).set({
-           course_id = this.course_id,
-           enrolled_users = this.enrolled_users
+           course_id: this.course_id,
+           enrolled_users: this.enrolled_users
         });
     }
 }
