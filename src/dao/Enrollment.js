@@ -28,7 +28,7 @@ class Enrollment {
     *   err: null - if no error
     *        { msg: "Enrollment.remove_user(): user_id DNE" } - if error (in this case user_id not in enrolled_users)
     *   data: null - if any error
-    *         { msg: "Enrollment.remove_user(): remove success: } - if no error */
+    *         { msg: "Enrollment.remove_user(): remove success" } - if no error */
     remove_user(user_id, callback){
 
     }
