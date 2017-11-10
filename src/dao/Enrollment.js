@@ -6,7 +6,7 @@ import firebase from 'firebase';
 class Enrollment {
 
     course_id;
-    enrolled_users; /* Stores hashed user_id's in an array*/
+    enrolled_users; /* Stores hashed user_id's in an list*/
 
     constructor(course, user_list) {
         this.course_id = course;
