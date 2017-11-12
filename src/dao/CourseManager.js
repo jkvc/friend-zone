@@ -1,7 +1,7 @@
 import Course from './Course'
 import firebase from 'firebase';
 
-/* precise lookup by id, callback list of json */
+/* precise lookup by id, callback list of Course */
 export function lookup_course_by_code(course_code, callback){
     let db = firebase.database().ref();
     db.child("Catalog").orderByChild("course_code").equalTo(course_code)
@@ -22,12 +22,11 @@ export function lookup_course_by_code(course_code, callback){
                 ))
             });
 
-
             callback(null, ret);
         });
 }
 
-/* fuzzy lookup. NEED IMPROVEMENT dont use this for now */
+/* fuzzy lookup. BUGGY dont use this for now */
 export function lookup_course_code_prefix(prefix, callback){
     let db = firebase.database().ref();
     db.child("Catalog").orderByChild("course_code")
@@ -44,7 +43,7 @@ export function lookup_course_code_prefix(prefix, callback){
         })
 }
 
-/* precise lookup by instructor, callback list of json */
+/* precise lookup by instructor, callback list of Course */
 export function lookup_course_by_instructor(instructor, callback){
     let db = firebase.database().ref();
     db.child("Catalog").orderByChild("instructor").equalTo(instructor)
@@ -70,7 +69,7 @@ export function lookup_course_by_instructor(instructor, callback){
 }
 
 
-/* combine lookup by code and by instructor, callback list of Course objects */
+/* combine lookup by code and by instructor, callback list of Course  */
 export function lookup_course(keyword, callback){
     var by_code_result = [];
     var by_instructor_result = [];
@@ -79,6 +78,7 @@ export function lookup_course(keyword, callback){
     lookup_course_by_code(keyword, function(err,data){
         by_code_result = data;
         done += 1;
+        /*does not callback until the other lookup is done*/
         if (done === 2)
             callback(null, by_code_result.concat(by_instructor_result));
     });
@@ -86,6 +86,7 @@ export function lookup_course(keyword, callback){
     lookup_course_by_instructor(keyword, function(err,data){
         by_instructor_result = data;
         done += 1;
+        /*does not callback until the other lookup is done*/
         if (done === 2)
             callback(null, by_code_result.concat(by_instructor_result));
     });

@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import {lookup_course_by_code, lookup_course_by_instructor, lookup_course} from '../dao/CourseManager';
 import React, {Component} from 'react';
 
@@ -30,7 +31,7 @@ class TestCourseManager extends Component{
                     <label>lookup_course</label>
                     <input type={"text"} value={this.state.search_key}
                            onChange={function(e){
-                               this.setState({search_key:e.target.value});
+                               this.setState({search_key: e.target.value});
                                this.lookup(e.target.value);
                            }.bind(this)}/>
                 </form>
@@ -40,7 +41,7 @@ class TestCourseManager extends Component{
                         <div>
                             <br/>
                             <h2>{entry.course_code} [{entry.section}]: {entry.course_name}</h2>
-                            <h5>{entry.instructor} | {entry.days} {entry.time} | {entry.location}</h5>
+                            <h5>{entry.instructor} | {entry.days} | {entry.time} | {entry.location}</h5>
                         </div>
                     )
                 })}

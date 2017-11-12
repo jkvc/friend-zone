@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
 import Login from './Login';
 
-import TestCourseManager from '../test/TestCourseManager'
+import TestCourseManager from '../TempViews/TestCourseManager'
 
 
 class Main extends Component{
