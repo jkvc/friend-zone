@@ -1,8 +1,8 @@
-import most_popular_in_list from '../api/MostPopularInList';
+import {most_popular_in_list} from '../api/MostPopularInList';
 import UnitTest from './UnitTest'
 
 /* todo add more test cases */
-export default function test_most_popular_in_list() {
+export function test_most_popular_in_list() {
     var param = {
         "count": 5,
         "list": [

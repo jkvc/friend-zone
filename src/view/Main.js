@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
 import Login from './Login';
 
+import TestCourseManager from '../test/TestCourseManager'
+
 
 class Main extends Component{
 
@@ -19,6 +21,10 @@ class Main extends Component{
         ReactDOM.render(<Login />, document.getElementById('root'));
     }
 
+    goto_test_course_search(){
+        ReactDOM.render(<TestCourseManager/>, document.getElementById('root'));
+    }
+
     render(){
         return (
             <div align={"center"}>
@@ -33,6 +39,11 @@ class Main extends Component{
                 <br/>
                 <form>
                     <button onClick={this.goto_login.bind(this)}>Login</button>
+                </form>
+
+                <br/>
+                <form>
+                    <button onClick={this.goto_test_course_search.bind(this)}>Goto course search test</button>
                 </form>
 
             </div>

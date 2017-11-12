@@ -5,7 +5,7 @@ import Main from './view/Main';
 import firebase from 'firebase';
 import UserProfile from './view/UserProfile';
 import registerServiceWorker from './registerServiceWorker';
-import test_most_popular_in_list from './test/TestMostPopularInList'
+import {test_most_popular_in_list} from './test/TestMostPopularInList'
 
 /* firebase config and setup */
 let config = {
@@ -28,7 +28,6 @@ firebase.auth().onAuthStateChanged((user) => {
     else
         ReactDOM.render(<Main/>, document.getElementById('root'));
 });
-
 
 /*
 * TODO: Yiming: comment out line 25-30, uncomment line 36, npm start, press F12 in chrome and look at console to see Unit test result

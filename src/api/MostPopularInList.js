@@ -22,7 +22,7 @@
 *   2. param doesnt contain lists
 *   3. etc
 */
-export default function most_popular_in_list(param, callback){
+export function most_popular_in_list(param, callback){
 
     /*handle some error*/
 
