@@ -24,7 +24,6 @@ class TestCourseManager extends Component{
     render(){
         return(
             <div>
-
                 <br/>
 
                 <form >

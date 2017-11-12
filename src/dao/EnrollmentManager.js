@@ -1,5 +1,9 @@
 import Enrollment from './Enrollment'
 
+export function lookup_enrollment_by_id(course_id, callback){
+
+}
+
 /*
 * add_user(user_id, course_id);
 * where user_id is the user to add to the course
