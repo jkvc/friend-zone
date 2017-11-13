@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 import UserProfile from './UserProfile';
 import SignUp from './SignUp';
-
+import './MainLoginSignup.css'
+import './Login.css'
+import facebook_icon from '../image/FacebookIcon.png'
+import gmail_icon from '../image/GmailIcon.png'
+import blue_line from '../image/BlueLine.png'
 
 class Login extends Component{
 
@@ -11,8 +15,8 @@ class Login extends Component{
         super(props);
         this.title = "Login.js";
         this.state = {
-            user_email:'put user_email here',
-            password:'put password here',
+            user_email:'',
+            password:'',
             err_msg: "",
             success_msg:""
         };
@@ -48,35 +52,89 @@ class Login extends Component{
 
     render(){
         return(
-            <div align={'center'}>
-                <img src={"https://res.cloudinary.com/teepublic/image/private/s--8-dGDDZg--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1470902298/production/designs/627022_1.jpg"}
-                     alt={""} width={"300"}/>
-                <h1>{this.title}</h1>
 
-                <form >
-                    <label>user_email </label>
-                    <input type={"text"} value={this.state.user_email}
-                           onChange={e=> this.setState({user_email: e.target.value})}/>
-                    <label>{this.state.err_msg}</label>
-                </form>
+            <div className="body">
+                <div className="mid-container">
 
-                <form>
-                    <label>password </label>
-                    <input type={"text"} value={this.state.password}
-                           onChange={ e=> this.setState({password: e.target.value})}/>
-                    <label>{this.state.success_msg}</label>
-                </form>
-                <br/>
+                    <div className="mid-column-left">
+                        <img className="image-strip"
+                             src="https://umad.com/img/2015/7/city-light-blur-wallpaper-background-2709-2855-hd-wallpapers.jpg"
+                             alt="left-strip"/>
+                    </div>
 
-                <form>
-                    <button onClick={this.handle_login_button.bind(this)}>login</button>
-                </form>
-                <br/>
-                <form>
-                    <button onClick={this.goto_signup.bind(this)}>go to signup instead</button>
-                </form>
+                    <div className="mid-column-right">
+                        <div className="right-middle" align={"center"}>
 
+
+                            <div className="logo"> FriendZone </div>
+                            <br/>
+
+
+                            <div className="subtitle-text">
+                                Use your email and password to <br/> log in to FriendZone.
+                            </div>
+                            <br/>
+                            <br/>
+
+
+
+                            <div className="email-password-container">
+                                <div className="email-password-left" align={"right"}>
+                                    <text className="label-text"> Email </text>
+                                    <br/>
+                                    <br/>
+                                    <text className="label-text"> Password </text>
+                                </div>
+
+                                <div className="email-password-right" align={"left"}>
+                                    <input className="transparent-text-box" type="text"
+                                           value={this.state.user_email}
+                                           onChange={e=> this.setState({user_email: e.target.value})}/>
+                                    <br/>
+                                    <br/>
+                                    <input className="transparent-text-box" type={"password"}
+                                           value={this.state.password}
+                                           onChange={ e=> this.setState({password: e.target.value})}/>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <text className="button-text"
+                                  onClick={this.handle_login_button.bind(this)}>
+                                Log in
+                            </text>
+                            <br/>
+                            <img src={blue_line} alt=""/>
+                            <br/>
+                            <br/>
+
+                            <div className="subtitle-text">Or, log in with</div>
+                            <br/>
+                            <img src={gmail_icon} alt=""/> 
+                            <img src={facebook_icon} alt=""/>
+                            <br/>
+                            <br/>
+
+                            <text className="button-text"
+                                  onClick={this.goto_signup.bind(this)}>
+                                Have an account? Log in here.
+                            </text>
+                            <br/>
+                            <img src={blue_line} alt="" width="30%"/>
+
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
         )
     }
 }

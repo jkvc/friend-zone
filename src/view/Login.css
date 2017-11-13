@@ -1,0 +1,26 @@
+
+.email-password-container{
+    width:100%;
+}
+
+.email-password-left{
+    margin-top: 1%;
+    width:25%;
+    float: left;
+}
+
+.email-password-right{
+    width:75%;
+    float: left;
+}
+
+.transparent-text-box{
+    margin-left: 3%;
+    width:90%;
+    font-family: "Biko", sans-serif;
+    font-size: x-large;
+    border:none;
+    background-color: transparent;
+    border-bottom: solid 1px grey;
+    color: dimgrey;
+}
