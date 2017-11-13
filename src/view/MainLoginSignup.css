@@ -58,30 +58,32 @@
 
 .logo{
     font-family: "Harlow Solid Italic", sans-serif;
-    font-size: 600%;
+    font-size: 400%;
 }
 
 .subtitle-text{
     font-family: "Calibri Light", sans-serif;
-    font-size: x-large;
+    font-size: medium;
     color: grey;
 }
 
 .button-text{
     font-family: "Biko", sans-serif;
-    font-size: x-large;
+    font-size: medium;
     cursor: pointer;
     color: #2f5597;
+    background: transparent;
+    border: transparent;
 }
 
 .separator{
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 5px;
 }
 
 .label-text{
     font-family: "Biko", sans-serif;
-    font-size: x-large;
+    font-size: medium;
     font-style: italic;
 }
 

@@ -49,11 +49,11 @@ class Main extends Component {
                             <br/>
                             <br/>
 
-                            <text className="button-text" onClick={this.goto_signup.bind(this)}>Sign up</text>
+                            <button className="button-text" onClick={this.goto_signup.bind(this)}>Sign up</button>
                             <br/>
-                            <img src={blue_line} alt=""/>
+                            <img className="separator" src={blue_line} alt=""/>
                             <br/>
-                            <text className="button-text" onClick={this.goto_login.bind(this)}>Log in</text>
+                            <button className="button-text" onClick={this.goto_login.bind(this)}>Log in</button>
                             <br/>
 
 

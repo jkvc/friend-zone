@@ -5,20 +5,20 @@
 
 .email-password-left{
     margin-top: 1%;
-    width:25%;
+    width:30%;
     float: left;
 }
 
 .email-password-right{
-    width:75%;
+    width:70%;
     float: left;
 }
 
 .transparent-text-box{
-    margin-left: 3%;
-    width:90%;
+    margin-left: 5%;
+    width:70%;
     font-family: "Biko", sans-serif;
-    font-size: x-large;
+    font-size: medium;
     border:none;
     background-color: transparent;
     border-bottom: solid 1px grey;

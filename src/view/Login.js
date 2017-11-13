@@ -71,9 +71,8 @@ class Login extends Component{
 
 
                             <div className="subtitle-text">
-                                Use your email and password to <br/> log in to FriendZone.
+                                Use your email and password to log in to FriendZone.
                             </div>
-                            <br/>
                             <br/>
 
 
@@ -102,31 +101,26 @@ class Login extends Component{
                             <br/>
                             <br/>
                             <br/>
-                            <br/>
-                            <br/>
 
-                            <text className="button-text"
+                            <button className="button-text"
                                   onClick={this.handle_login_button.bind(this)}>
                                 Log in
-                            </text>
+                            </button>
                             <br/>
-                            <img src={blue_line} alt=""/>
-                            <br/>
+                            <img className="separator" src={blue_line} alt=""/>
                             <br/>
 
                             <div className="subtitle-text">Or, log in with</div>
-                            <br/>
-                            <img src={gmail_icon} alt=""/> 
+                            <img src={gmail_icon} alt=""/>
                             <img src={facebook_icon} alt=""/>
                             <br/>
                             <br/>
 
-                            <text className="button-text"
+                            <button className="button-text"
                                   onClick={this.goto_signup.bind(this)}>
                                 Have an account? Log in here.
-                            </text>
+                            </button>
                             <br/>
-                            <img src={blue_line} alt="" width="30%"/>
 
 
 
