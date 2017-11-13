@@ -18,7 +18,6 @@ class UserFriends extends Component{
                      alt={""} width={"300"}/>
                 <h1>{this.title}</h1>
 
-                <NavBar tab="friends"/>
                 <h4>うまるの友達!</h4>
 
 

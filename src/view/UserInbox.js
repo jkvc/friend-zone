@@ -18,7 +18,6 @@ class UserInbox extends Component{
                      alt={""} width={"300"}/>
                 <h1>{this.title}</h1>
 
-                <NavBar tab="inbox"/>
                 <h4>うまるの受信トレイ</h4>
 
 

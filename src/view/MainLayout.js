@@ -9,7 +9,7 @@ import UserProfile from './UserProfile';
 import Main from './Main';
 import './MainLayout.css'
 
-class NavBar extends Component{
+class MainLayout extends Component{
 
     /* set prop to state, must check all props, and give it a default value if prop not passed in */
     constructor(props){
@@ -21,19 +21,19 @@ class NavBar extends Component{
     }
 
     goto_schedule(){
-        ReactDOM.render(<UserSchedule />, document.getElementById('root'));
+        ReactDOM.render(<UserSchedule />, document.getElementById('main-layout'));
     }
 
     goto_friends(){
-        ReactDOM.render(<UserFriends />, document.getElementById('root'));
+        ReactDOM.render(<UserFriends />, document.getElementById('main-layout'));
     }
 
     goto_inbox(){
-        ReactDOM.render(<UserInbox />, document.getElementById('root'));
+        ReactDOM.render(<UserInbox />, document.getElementById('main-layout'));
     }
 
     goto_profile(){
-        ReactDOM.render(<UserProfile />, document.getElementById('root'));
+        ReactDOM.render(<UserProfile />, document.getElementById('main-layout'));
     }
 
     logout(){
@@ -53,9 +53,38 @@ class NavBar extends Component{
 
                 <div className="nav-bar">
 
+                    <div className="logo-main">FriendZone</div>
+
+                    <button className="button-nav-bar"
+                            onClick={this.goto_schedule.bind(this)}>
+                        Schedule
+                    </button>
+                    <button className="button-nav-bar"
+                            onClick={this.goto_friends.bind(this)}>
+                        Friends
+                    </button>
+                    <button className="button-nav-bar"
+                            onClick={this.goto_inbox.bind(this)}>
+                        Inbox
+                    </button>
+                    <button className="button-nav-bar"
+                            onClick={this.goto_profile.bind(this)}>
+                        Profile
+                    </button>
+
+                    <button className="logout-button"
+                            onClick={this.logout.bind(this)}>
+                        Log out
+                    </button>
+
                 </div>
 
-                <div className="middle-panel    ">
+
+                {/* EVERYTHING SHOULD BE RENDERED WITHIN THIS ID, use
+                    ReactDOM.render(<SomeComponent />, document.getElementById('main-layout'));
+                    this default renders the profile page */}
+                <div id="main-layout" className="middle-panel">
+                    <UserProfile/>
                 </div>
 
             </div>
@@ -104,4 +133,4 @@ class NavBar extends Component{
     }
 }
 
-export default NavBar;
+export default MainLayout;
