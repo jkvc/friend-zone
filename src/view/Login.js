@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
+import FacebookLogin from 'react-facebook-login';
 import UserProfile from './UserProfile';
 import SignUp from './SignUp';
 import './MainLoginSignup.css'
@@ -23,7 +24,7 @@ class Login extends Component{
     }
 
 
-    goto_signup(){
+    static goto_signup(){
         ReactDOM.render(<SignUp />, document.getElementById('root'));
     }
 
@@ -103,30 +104,40 @@ class Login extends Component{
                             <br/>
                             <br/>
                             <br/>
-                            <br/>
 
                             <text className="button-text"
                                   onClick={this.handle_login_button.bind(this)}>
                                 Log in
                             </text>
                             <br/>
-                            <img src={blue_line} alt=""/>
+                            <img src={blue_line} alt="" />
                             <br/>
                             <br/>
 
                             <div className="subtitle-text">Or, log in with</div>
                             <br/>
-                            <img src={gmail_icon} alt=""/> 
+
+                            <img src={gmail_icon} alt=""/>
                             <img src={facebook_icon} alt=""/>
                             <br/>
                             <br/>
 
+                            <FacebookLogin
+                                appId="189873098255878"
+                                autoLoad={true}
+                                fields="name,email,picture"
+                                callback={responseFacebook}
+                                css="kep-login-facebook"
+                            />
+
+                            <br/>
+                            <br/>
                             <text className="button-text"
                                   onClick={this.goto_signup.bind(this)}>
-                                Have an account? Log in here.
+                                Don't have an account? Sign up here.
                             </text>
                             <br/>
-                            <img src={blue_line} alt="" width="30%"/>
+                            <img src={blue_line} alt="" />
 
 
 
@@ -138,5 +149,9 @@ class Login extends Component{
         )
     }
 }
+
+const responseFacebook = (response) => {
+    console.log(response);
+};
 
 export default Login;
