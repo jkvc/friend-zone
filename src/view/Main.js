@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
 import Login from './Login';
+import './Main.css'
 
 import TestCourseManager from '../TempViews/TestCourseManager'
 
@@ -27,26 +28,45 @@ class Main extends Component{
 
     render(){
         return (
-            <div align={"center"}>
-                <img src={"https://res.cloudinary.com/teepublic/image/private/s--8-dGDDZg--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1470902298/production/designs/627022_1.jpg"}
-                     alt={""} width={"300"}/>
 
-                <h1>{this.title}</h1>
+            <div className="body">
+                <div className="mid-container">
 
-                <form>
-                    <button onClick={this.goto_signup.bind(this)}>Sign Up</button>
-                </form>
-                <br/>
-                <form>
-                    <button onClick={this.goto_login.bind(this)}>Login</button>
-                </form>
+                    <div className="mid-column-left">
+                        <img className="image-strip" src="https://umad.com/img/2015/7/city-light-blur-wallpaper-background-2709-2855-hd-wallpapers.jpg" alt="Geisel"/>
+                    </div>
 
-                <br/>
-                <form>
-                    <button onClick={this.goto_test_course_search.bind(this)}>Goto course search test</button>
-                </form>
+                    <div className="mid-column-right">
+                        <div className="right-middle" align={"center"}>
 
+                            <br/>
+                            <h1>FriendZone</h1>
+                            <h5>Sign up or log in to make friends in your classes.</h5>
+
+                            <h4 className="button-text" onClick={this.goto_signup.bind(this)}>Sign up</h4>
+                            <h4 className="button-text" onClick={this.goto_login.bind(this)}>Log in</h4>
+
+                        </div>
+                    </div>
+                </div>
             </div>
+            //
+            // <div align={"center"}>
+            //
+            //     <form>
+            //         <button onClick={this.goto_signup.bind(this)}>Sign Up</button>
+            //     </form>
+            //     <br/>
+            //     <form>
+            //         <button onClick={this.goto_login.bind(this)}>Login</button>
+            //     </form>
+            //
+            //     <br/>
+            //     <form>
+            //         <button onClick={this.goto_test_course_search.bind(this)}>Goto course search test</button>
+            //     </form>
+            //
+            // </div>
         );
     }
 }

@@ -1,0 +1,46 @@
+html, body {height: 100%;}
+
+.body{
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+}
+
+.mid-container{
+    margin-left: 15%;
+    margin-right: 20%;
+    height: 100%;
+}
+
+.mid-column-left{
+    box-shadow: 0 0 80px 20px grey;
+    overflow-x: hidden;
+    float: left;
+    margin-left: 0;
+    height: 100%;
+    width:50%;
+}
+
+.mid-column-right{
+    float: left;
+    margin-left: 0;
+    height: 100%;
+    width:50%;
+}
+
+.image-strip{
+    height: 100%;
+    float: left;
+}
+
+.right-middle{
+    margin-top: 40%;
+    height:400px;
+    width: 100%;
+}
+
+.button-text{
+    cursor: pointer;
+}
