@@ -5,9 +5,8 @@
   "dependencies": {
     "firebase": "^4.6.0",
     "md5": "^2.2.1",
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2",
-    "react-facebook-login": "^3.6.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-scripts": "1.0.16"
   },
   "scripts": {
