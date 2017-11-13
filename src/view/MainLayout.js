@@ -18,6 +18,7 @@ class MainLayout extends Component{
         this.state = {
             tab: props.tab || "profile" /* must be one from ["schedule","friends","inbox","profile"] */
         }
+        this.initialized = false;
     }
 
     goto_schedule(){
