@@ -49,7 +49,7 @@ class NavBar extends Component{
     render(){
 
         return(
-            <div className="body">
+            <div className="body-main-layout">
 
                 <div className="nav-bar">
 

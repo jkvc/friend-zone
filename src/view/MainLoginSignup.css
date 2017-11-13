@@ -30,7 +30,7 @@
 }
 
 .mid-column-left{
-    box-shadow: 0 0 80px 20px grey;
+    box-shadow: 0 0 100px 4px black;
     overflow-x: hidden;
     float: left;
     margin-left: 0;
