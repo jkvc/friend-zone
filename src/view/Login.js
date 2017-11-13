@@ -24,7 +24,7 @@ class Login extends Component{
     }
 
 
-    static goto_signup(){
+    goto_signup(){
         ReactDOM.render(<SignUp />, document.getElementById('root'));
     }
 
