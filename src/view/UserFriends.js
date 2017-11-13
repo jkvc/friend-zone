@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NavBar from '../viewcomponent/NavBar'
+import NavBar from './MainLayout'
 
 class UserFriends extends Component{
 

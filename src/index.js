@@ -4,7 +4,7 @@ import './index.css';
 import Main from './view/Main';
 import Login from './view/Login';
 import firebase from 'firebase';
-import UserProfile from './view/UserProfile';
+import MainLayout from './view/MainLayout';
 import registerServiceWorker from './registerServiceWorker';
 import {test_most_popular_in_list} from './test/TestMostPopularInList'
 
@@ -25,7 +25,7 @@ registerServiceWorker();
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user)
-        ReactDOM.render(<UserProfile/>, document.getElementById('root'));
+        ReactDOM.render(<MainLayout/>, document.getElementById('root'));
     else
         ReactDOM.render(<Main/>, document.getElementById('root'));
 });
