@@ -4,7 +4,25 @@ import firebase from 'firebase';
 
 /* callback (true, null) if dne or (null, Profile) */
 export function lookup_profile_by_user_id(user_id, callback){
-    callback(true, null);
+    let db = firebase.database();
+    db.ref('Profile/'+user_id).once('value').then(function(snapshot){
+
+        let content = snapshot.val();
+        if (content === null)
+            callback(true, null);
+        else
+            callback(
+                null, new Profile(
+                    user_id,
+                    content.first_name,
+                    content.last_name,
+                    content.major,
+                    content.current_year,
+                    content.profile_pic,
+                    content.description
+                )
+            )
+    })
 }
 
 

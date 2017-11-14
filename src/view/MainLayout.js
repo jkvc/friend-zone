@@ -9,6 +9,7 @@ import UserProfile from './profile/UserProfile';
 import Main from './credentials/Main';
 import './MainLayout.css'
 
+
 class MainLayout extends Component{
 
     /* set prop to state, must check all props, and give it a default value if prop not passed in */
