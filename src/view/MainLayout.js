@@ -84,8 +84,10 @@ class MainLayout extends Component{
                 {/* EVERYTHING SHOULD BE RENDERED WITHIN THIS ID, use
                     ReactDOM.render(<SomeComponent />, document.getElementById('main-layout'));
                     this default renders the profile page */}
-                <div id="main-layout" className="middle-panel">
-                    <UserProfile/>
+                <div className="below-nav-bar">
+                    <div id="main-layout" className="middle-panel">
+                        <UserProfile/>
+                    </div>
                 </div>
 
             </div>

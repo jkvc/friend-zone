@@ -34,10 +34,18 @@
     box-shadow: 0 0 40px 3px black;
 }
 
+.below-nav-bar{
+    float: top;
+    height: calc(100% - 55px);
+    width: 100%;
+    overflow-y: auto;
+}
+
+
 .middle-panel{
     margin-top: 2%;
     width: 750px;
-    height: 600px;
+    min-height: 600px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 0 40px 3px black;
