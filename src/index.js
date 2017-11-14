@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Main from './view/credentials/Main';
-import Login from './view/credentials/Login';
 import firebase from 'firebase';
 import MainLayout from './view/MainLayout';
 import registerServiceWorker from './registerServiceWorker';
+
+// eslint-disable-next-line
 import {test_most_popular_in_list} from './test/TestMostPopularInList'
 
 /* firebase config and setup */

@@ -1,4 +1,4 @@
-import {lookup_course_by_code, lookup_course_by_instructor, lookup_course} from '../../dao/CourseManager';
+import {lookup_course} from '../../dao/CourseManager';
 import React, {Component} from 'react';
 
 class AddCourse extends Component{
