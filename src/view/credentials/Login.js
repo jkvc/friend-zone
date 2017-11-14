@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
-import UserProfile from './UserProfile';
+import UserProfile from '../profile/UserProfile';
 import SignUp from './SignUp';
 import './MainLoginSignup.css'
 import './Login.css'
-import facebook_icon from '../image/FacebookIcon.png'
-import gmail_icon from '../image/GmailIcon.png'
-import blue_line from '../image/BlueLine.png'
+import facebook_icon from '../../image/FacebookIcon.png'
+import gmail_icon from '../../image/GmailIcon.png'
+import blue_line from '../../image/BlueLine.png'
 
 class Login extends Component{
 
@@ -100,7 +100,8 @@ class Login extends Component{
                             <br/>
                             <br/>
                             <br/>
-                            <br/>
+
+                            <div className="error-message">{this.state.err_msg}</div>
 
                             <button className="button-text"
                                   onClick={this.handle_login_button.bind(this)}>

@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import NavBar from './MainLayout'
 
-class UserInbox extends Component{
+class UserProfile extends Component{
 
     constructor(props){
         super(props);
-        this.title = "UserInbox.js";
+        this.title = "UserProfile.js";
     }
-
 
     render(){
         return(
@@ -17,8 +15,7 @@ class UserInbox extends Component{
                 <img src={"https://res.cloudinary.com/teepublic/image/private/s--8-dGDDZg--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1470902298/production/designs/627022_1.jpg"}
                      alt={""} width={"300"}/>
                 <h1>{this.title}</h1>
-
-                <h4>うまるの受信トレイ</h4>
+                <h4>これがうまるのプロファイルだ！</h4>
 
 
             </div>
@@ -27,4 +24,4 @@ class UserInbox extends Component{
     }
 }
 
-export default UserInbox;
+export default UserProfile;
