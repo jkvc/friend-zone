@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import NavBar from './MainLayout'
 
-class UserFriends extends Component{
+class UserInbox extends Component{
 
     constructor(props){
         super(props);
-        this.title = "UserFriends.js";
+        this.title = "UserInbox.js";
     }
 
 
@@ -18,7 +17,7 @@ class UserFriends extends Component{
                      alt={""} width={"300"}/>
                 <h1>{this.title}</h1>
 
-                <h4>うまるの友達!</h4>
+                <h4>うまるの受信トレイ</h4>
 
 
             </div>
@@ -27,4 +26,4 @@ class UserFriends extends Component{
     }
 }
 
-export default UserFriends;
+export default UserInbox;

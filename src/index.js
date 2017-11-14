@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Main from './view/Main';
-import Login from './view/Login';
+import Main from './view/credentials/Main';
+import Login from './view/credentials/Login';
 import firebase from 'firebase';
 import MainLayout from './view/MainLayout';
 import registerServiceWorker from './registerServiceWorker';

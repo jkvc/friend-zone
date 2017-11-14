@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 
-import UserSchedule from './UserSchedule';
-import UserInbox from './UserInbox';
-import UserFriends from './UserFriends';
-import UserProfile from './UserProfile';
-import Main from './Main';
+import UserSchedule from './schedule/UserSchedule';
+import UserInbox from './social/UserInbox';
+import UserFriends from './social/UserFriends';
+import UserProfile from './profile/UserProfile';
+import Main from './credentials/Main';
 import './MainLayout.css'
 
 class MainLayout extends Component{

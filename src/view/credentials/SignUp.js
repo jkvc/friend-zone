@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
 import ReactDOM from 'react-dom';
-import UserProfile from './UserProfile';
+import UserProfile from '../profile/UserProfile';
 import Login from './Login';
 
 

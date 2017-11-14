@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
 import Login from './Login';
 import './MainLoginSignup.css'
-import blue_line from '../image/BlueLine.png'
+import blue_line from '../../image/BlueLine.png'
 
-import TestCourseManager from '../TempViews/TestCourseManager'
+import TestCourseManager from '../../TempViews/TestCourseManager'
 
 
 class Main extends Component {
