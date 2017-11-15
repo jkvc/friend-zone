@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 // This component will require 'events' to be passed in
 // The list object should contain a list of 'Event' Object
 // A valid 'Event' Object is one that contains the following keys
-//  1. hours (pairs of 5letter strings) i.e. [ ["10:30", "11:30"], ["00:00", "01:10"] ]
+//  1. hours (pairs of 5letter strings) i.e. ["10:30", "11:30" ]
 //  2. days (A single concatenated string) i.e. "MWF" or "TuTh" or "SaSu"
 //  3. title (A short string for description of the event) i.e. "CSE110 LE"
 //  4. (optional) description (A short to medium string providing additional information) i.e. "G.Gillspie"
