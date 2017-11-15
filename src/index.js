@@ -9,6 +9,9 @@ import registerServiceWorker from './registerServiceWorker';
 // eslint-disable-next-line
 import {test_most_popular_in_list} from './test/TestMostPopularInList'
 
+// eslint-disable-next-line
+import CalendarHelper from './api/CalendarHelper'
+
 /* firebase config and setup */
 let config = {
     apiKey: "AIzaSyABmBOMLTEGtBLrjkwcDu9ab0ExE208R-4",
@@ -32,6 +35,16 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 /*
-* TODO: Yiming: comment out line 25-30, uncomment line 36, npm start, press F12 in chrome and look at console to see Unit test result
+* TODO: Yiming: comment out line 15-35, uncomment line 36, npm start, press F12 in chrome and look at console to see Unit test result
 * */
 // test_most_popular_in_list();
+
+/*
+* TODO: To test the calendar, comment out Line 15-35, uncomment out the following lines of code
+ */
+/*
+var events = [
+    {"days":"MWF", "hours":["11:30", "12:30"], "title":"CSE11" }
+];
+ReactDOM.render(<CalendarHelper events={events}/>);
+*/
