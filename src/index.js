@@ -7,10 +7,13 @@ import MainLayout from './view/MainLayout';
 import registerServiceWorker from './registerServiceWorker';
 
 // eslint-disable-next-line
-import {test_most_popular_in_list} from './test/TestMostPopularInList'
+import {test_most_popular_in_list} from './test/TestMostPopularInList';
 
 // eslint-disable-next-line
-import CalendarHelper from './api/CalendarHelper'
+import CalendarHelper from './api/CalendarHelper';
+
+// eslint-disable-next-line
+import {test_time_helper} from "./test/TestTimeHelper";
 
 /* firebase config and setup */
 let config = {
@@ -39,14 +42,15 @@ firebase.auth().onAuthStateChanged((user) => {
 * */
 // test_most_popular_in_list();
 
+/* TODO: Run this function to check for the correctness of the TimeHelper functions */
+//test_time_helper();
+
 /*
 * TODO: To test the calendar, comment out Line 15-35, uncomment out the following lines of code
  */
-/*
-var events = [
-    {"days":"MWF", "hours":["11:30", "12:30"], "title":"CSE11" },
-    {"days":"TuTh", "hours":["10:20", "11:20"], "title":"CSE100"},
-    {"days":"MWTu", "hours":["00:10", "11:00"], "title":"Chilling"}
-];
-ReactDOM.render(<CalendarHelper events={events}/>, document.getElementById('root'));
-*/
+// var events = [
+//     {"days":"MWF", "hours":["11:30", "12:30"], "title":"CSE11" },
+//     {"days":"TuTh", "hours":["10:20", "11:20"], "title":"CSE100"},
+//     {"days":"MWTu", "hours":["00:10", "11:00"], "title":"Chilling"}
+// ];
+// ReactDOM.render(<CalendarHelper events={events}/>, document.getElementById('root'));
