@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Main from './view/credentials/Main';
+import Welcome from './view/credentials/Welcome';
 import firebase from 'firebase';
 import MainLayout from './view/MainLayout';
 import registerServiceWorker from './registerServiceWorker';
@@ -28,7 +28,7 @@ firebase.auth().onAuthStateChanged((user) => {
     if (user)
         ReactDOM.render(<MainLayout/>, document.getElementById('root'));
     else
-        ReactDOM.render(<Main/>, document.getElementById('root'));
+        ReactDOM.render(<Welcome/>, document.getElementById('root'));
 });
 
 /*
