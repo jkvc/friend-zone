@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+/*
+ * @author: Yiming Cai
+ */
 
 // This class is intended to serve as a prototype to create and render a calendar object
 // This component will require 'events' to be passed in
