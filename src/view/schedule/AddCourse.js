@@ -1,5 +1,8 @@
 import {lookup_course} from '../../dao/CourseManager';
+import {add_course_to_profile} from "../../dao/ProfileManager";
 import React, {Component} from 'react';
+import firebase from 'firebase';
+
 
 class AddCourse extends Component{
 
@@ -8,7 +11,8 @@ class AddCourse extends Component{
         this.title = "AddCourse.js";
         this.state = {
             result: [],
-            search_key: ""
+            search_key: "",
+            course_to_add: ""
         };
     }
 
@@ -18,6 +22,10 @@ class AddCourse extends Component{
 
     callback_lookup_result(err, data){
         this.setState({result:data});
+    }
+
+    handle_add_course(){
+        add_course_to_profile(firebase.auth().currentUser.uid, this.state.course_to_add);
     }
 
     render(){
@@ -41,9 +49,18 @@ class AddCourse extends Component{
                             <br/>
                             <h2>{entry.course_code} [{entry.section}]: {entry.course_name}</h2>
                             <h5>{entry.instructor} | {entry.days} {entry.time} | {entry.location}</h5>
+
+                            <button onClick={()=> {
+
+                                this.setState({course_to_add: entry.course_id}, ()=>{
+                                    this.handle_add_course();
+                                })
+
+                            }} >Add this course</button>
+
                         </div>
                     )
-                })}
+                }.bind(this))}
 
                 <br/>
                 Raw JSON:

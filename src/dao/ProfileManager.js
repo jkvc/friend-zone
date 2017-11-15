@@ -10,22 +10,34 @@ export function lookup_profile_by_user_id(user_id, callback){
         let content = snapshot.val();
         if (content === null)
             callback(true, null);
-        else
-            callback(
-                null, new Profile(
-                    user_id,
-                    content.first_name,
-                    content.last_name,
-                    content.major,
-                    content.current_year,
-                    content.profile_pic,
-                    content.description
-                )
-            )
+        else{
+            let profile = new Profile(
+                user_id,
+                content.first_name,
+                content.last_name,
+                content.major,
+                content.current_year,
+                content.profile_pic,
+                content.description
+            );
+            profile.enrolled_courses = content.enrolled_courses ||{};
+            profile.friend_list = content.friend_list ||{};
+            profile.outgoing_request = content.outgoing_request ||{};
+            profile.incoming_request = content.incoming_request ||{};
+            callback(null, profile);
+        }
     })
 }
 
 
+export function add_course_to_profile(user_id, course_id){
+    lookup_profile_by_user_id(user_id, function(err, profile){
+        if (!err) {
+            profile.enrolled_courses[course_id] = true;
+            profile.push();
+        }
+    })
+}
 
 
 

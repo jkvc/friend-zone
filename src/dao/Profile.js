@@ -11,6 +11,13 @@ class Profile {
     profile_pic;
     description;
 
+    /*the following fields are not required to initialize with constructor because
+    * they can be null(empty) upon creating this new entry */
+    enrolled_courses;
+    friend_list;
+    outgoing_request;
+    incoming_request;
+
     constructor(user_id, first_name, last_name, major, current_year, profile_pic, description){
         this.user_id = user_id;
         this.first_name = first_name;
@@ -19,6 +26,11 @@ class Profile {
         this.current_year = current_year;
         this.profile_pic = profile_pic;
         this.description = description;
+
+        this.enrolled_courses = {};
+        this.friend_list = {};
+        this.outgoing_request = {};
+        this.incoming_request = {};
     }
 
 
@@ -31,7 +43,11 @@ class Profile {
             major: this.major,
             current_year: this.current_year,
             profile_pic: this.profile_pic,
-            description: this.description
+            description: this.description,
+            enrolled_courses: this.enrolled_courses,
+            friend_list: this.friend_list,
+            outgoing_request: this.outgoing_request,
+            incoming_request: this.incoming_request
         });
     }
 
