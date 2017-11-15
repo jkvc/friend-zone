@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+/*
+ * @author: Yiming Cai
+ */
 
 // This class is intended to serve as a prototype to create and render a calendar object
 // This component will require 'events' to be passed in
@@ -33,7 +36,7 @@ class CalendarHelper extends Component
             var s_days = events[i].days;
 
             // For each letter in the days string
-            for (j=0; j < s_days.toString(); j++)
+            for (j=0; j < s_days.length; j++)
             {
                 if (s_days[j] === 'M')
                 {
@@ -76,7 +79,7 @@ class CalendarHelper extends Component
 
         for (i = 0; i < this.weekdays.length; i++)
         {
-            this.calendardays.push(  <CalendarDay day={this.weekdays[i]} events={dayArray[i]}/> );
+            this.calendardays.push( <CalendarDay day={this.weekdays[i]} events={dayArray[i]}/> );
         }
 
     }
@@ -113,17 +116,18 @@ class CalendarDay extends Component
         for (i = 0; i < events.length; i++)
         {
             this.calendarEvents.push( <CalendarEvent event={events[i]}/> );
+            console.log(events[i].title);
         }
     }
 
     render()
     {
         this.initialize(this.events);
-        console.log(this.calendarEvents.toString());
+
         return <div>
-            <div> {this.day}:{ (this.calendarEvents.map((FormField, i) =>
-                <div> Test </div>
-            ) ) } </div>
+            <div> {this.day}: {this.calendarEvents.map((Item,i) =>
+                <div key={i}> {Item} </div>
+            ) } </div>
         </div>
     }
 }
@@ -134,14 +138,14 @@ class CalendarEvent extends Component
     {
         super(props);
         this.title = "CalendarEvent Class";
-        this.event = null;
+        this.key = props.key;
+        this.event = props.event;
     }
 
     render()
     {
-        return <div>
-            <div>{this.event.time[0]} to {this.event.time[1]} in {this.event.title + "\t"} </div>
-        </div>
+        return <div> {this.event.hours[0]} to {this.event.hours[1]} in {this.event.title + "\t"} </div>
+
     }
 }
 
