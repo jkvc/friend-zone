@@ -7,6 +7,7 @@ import './Login.css'
 import facebook_icon from '../../image/FacebookIcon.png'
 import gmail_icon from '../../image/GmailIcon.png'
 import blue_line from '../../image/BlueLine.png'
+import UserSchedule from "../schedule/UserSchedule";
 
 class Login extends Component{
 
@@ -46,6 +47,54 @@ class Login extends Component{
                     err_msg:error.message
                 });
             }.bind(this));
+    }
+
+    handle_facebook_login() {
+
+        var provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().useDeviceLanguage();
+        firebase.auth().signInWithRedirect(provider);
+        firebase.auth().getRedirectResult().then(function(result) {
+
+            // This gives you a Facebook access token. you can use it to access the facebook api.
+            //var token = result.credential.accessToken; // result.credential is null
+
+            // the signed-in user info.
+            var user = result.user;
+
+            if (user != null) {
+                alert("user.providerData: " + user.providerData);
+                user.providerData.forEach(function (profile) {
+                    alert("Sign-in provider: "+profile.providerId);
+                    alert("  Provider-specific UID: "+profile.uid);
+                    alert("  Name: "+profile.displayName);
+                    alert("  Email: "+profile.email);
+                    alert("  Photo URL: "+profile.photoURL);
+                });
+            } else {
+                alert("user is null");
+            }
+
+            ReactDOM.render(<UserSchedule />, document.getElementById('root'));
+        }.bind(this)).catch(function(error) {
+            throw error;
+            /*
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                alert('Wrong password.');
+            } else {
+                alert(errorMessage);
+            }
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+            */
+        }.bind(this));
+
     }
 
     render(){
@@ -111,7 +160,9 @@ class Login extends Component{
 
                             <div className="subtitle-text">Or, log in with</div>
                             <img src={gmail_icon} alt=""/>
-                            <img src={facebook_icon} alt=""/>
+                            <button onClick={this.handle_facebook_login.bind(this)}>
+                                <img src={facebook_icon} alt=""/>
+                            </button>
                             <br/>
                             <br/>
 
