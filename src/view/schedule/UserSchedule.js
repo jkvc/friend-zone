@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import AddCourse from './AddCourse'
 import ReactDOM from 'react-dom';
 import CalendarHelper from '../../api/CalendarHelper';
+import RecommendedFriends from "../social/RecommendedFriends";
 
 class UserSchedule extends Component{
 
@@ -13,6 +14,10 @@ class UserSchedule extends Component{
 
     goto_AddCourse(){
         ReactDOM.render(<AddCourse />, document.getElementById('main-layout'));
+    }
+
+    goto_RecommendedFriends(){
+        ReactDOM.render(<RecommendedFriends />, document.getElementById('main-layout'));
     }
 
     initialize_events()
@@ -38,6 +43,7 @@ class UserSchedule extends Component{
                 <h1>{this.title}</h1>
 
                 <button onClick={this.goto_AddCourse.bind(this)}>Add course</button>
+                <button onClick={this.goto_RecommendedFriends.bind(this)}>Recommended Friends</button>
 
                 <br/>
 
