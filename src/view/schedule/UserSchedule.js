@@ -1,19 +1,34 @@
 import React, {Component} from 'react';
 import AddCourse from './AddCourse'
 import ReactDOM from 'react-dom';
+import CalendarHelper from '../../api/CalendarHelper';
 
 class UserSchedule extends Component{
 
     constructor(props){
         super(props);
         this.title = "UserSchedule.js";
+        this.events = null;
     }
 
     goto_AddCourse(){
         ReactDOM.render(<AddCourse />, document.getElementById('main-layout'));
     }
 
+    initialize_events()
+    {
+        var events = [
+            {"days":"MWF", "hours":["1130", "1230"], "title":"CSE11" },
+            {"days":"TuTh", "hours":["1020", "1120"], "title":"CSE100"},
+            {"days":"MWTu", "hours":["0010", "1100"], "title":"Chilling"}
+        ];
+        this.events = events;
+    }
+
     render(){
+
+        this.initialize_events();
+
         return(
 
             <div align={'center'}>
@@ -23,6 +38,10 @@ class UserSchedule extends Component{
                 <h1>{this.title}</h1>
 
                 <button onClick={this.goto_AddCourse.bind(this)}>Add course</button>
+
+                <br/>
+
+                <CalendarHelper events={this.events}/>
 
                 <h4>いつでもダラダラしたいなぁ...</h4>
                 <h4>いつでもダラダラしたいなぁ...</h4>

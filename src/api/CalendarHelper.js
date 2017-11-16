@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {get_time_percentage, get_weekday_array} from './TimeHelper';
 /*
  * @author: Yiming Cai
  */
@@ -17,84 +18,87 @@ class CalendarHelper extends Component
     {
         super(props);
         this.title = "CalendarHelper Class";
-        this.weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        this.weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        // The events passed in, in the form of a list of dictionaries
         this.events = props.events;
-        this.calendardays = [];
+
+        // These variables will be initialized only after initialize(this.events) is called.
+        this.calendardays = []; // calendarDays is the array of CalendarDay objects. There will be 7 of them
+        this.startT = null;     // startT indicates the earliest time found in all the events
+        this.endT = null;       // endT indicates the latest time found in all the events
     }
 
 
     initialize(events)
     {
-        var i =0, j = 0;
+        let i =0, j = 0;
 
         // Initialize 7 empty lists
-        var dayArray = [ [], [], [], [], [], [], [] ];
+        let dayArray = [ [], [], [], [], [], [], [] ];
+
+        let start_time = "0000";
+        let end_time = "2359";
+        if (events.length > 0)
+        {
+            start_time = events[0].hours[0];
+            end_time = events[0].hours[1];
+        }
 
         // For each event
         for (i = 0; i < events.length; i++)
         {
-            var s_days = events[i].days;
-
-            // For each letter in the days string
-            for (j=0; j < s_days.length; j++)
+            if ( parseInt(events[i].hours[0]) < start_time )
             {
-                if (s_days[j] === 'M')
-                {
-                    dayArray[0].push(events[i]);
-                }
-                else if (s_days[j] === 'T')
-                {
-                    j++;
-                    if (s_days[j] === 'u')
-                    {
-                        dayArray[1].push(events[i]);
-                    }
-                    else if (s_days[j] === 'h')
-                    {
-                        dayArray[3].push(events[i]);
-                    }
-                }
-                else if (s_days[j] === 'W')
-                {
-                    dayArray[2].push(events[i]);
-                }
-                else if (s_days[j] === 'F')
-                {
-                    dayArray[4].push(events[i]);
-                }
-                else if (s_days[j] === 'S')
-                {
-                    j++;
-                    if (s_days[j] === 'a')
-                    {
-                        dayArray[5].push(events[i]);
-                    }
-                    else if (s_days[j] === 'u')
-                    {
-                        dayArray[6].push(events[i]);
-                    }
+                start_time = events[i].hours[0];
+            }
+
+            if (parseInt(events[i].hours[1]) > end_time)
+            {
+                end_time = events[i].hours[1];
+            }
+
+            // Find the days in which the event should be added
+            let s_days = events[i].days;
+            let v_days = get_weekday_array(s_days);
+
+            for (let j = 0; j < v_days.length; j++)
+            {
+                if (v_days[j]) {
+                    dayArray[j].push(events[i]);
                 }
             }
         }
 
+        this.startT = start_time;
+        this.endT = end_time;
+
         for (i = 0; i < this.weekdays.length; i++)
         {
-            this.calendardays.push( <CalendarDay day={this.weekdays[i]} events={dayArray[i]}/> );
+            this.calendardays.push( <CalendarDay day={this.weekdays[i]}
+                                                 events={dayArray[i]}
+                                                 startT={this.startT}
+                                                 endT={this.endT}/> );
         }
 
     }
 
     render()
     {
+        // Initialize all the calendar days
         this.initialize(this.events);
+
+        // Render each CalendarDay component in a table
         return <div>
-            <div> {this.calendardays[0]} </div>
-            <div> {this.calendardays[1]} </div>
-            <div> {this.calendardays[2]} </div>
-            <div> {this.calendardays[3]} </div>
-            <div> {this.calendardays[4]} </div>
-            <div> {this.calendardays[5]} </div>
-            <div> {this.calendardays[6]} </div>
+            <table>
+                <tr> {this.calendardays[0]} </tr> {/* Sunday*/ }
+                <tr> {this.calendardays[1]} </tr> {/* Monday*/ }
+                <tr> {this.calendardays[2]} </tr> {/* Tuesday*/ }
+                <tr> {this.calendardays[3]} </tr> {/* Wednesday*/ }
+                <tr> {this.calendardays[4]} </tr> {/* Thursday*/ }
+                <tr> {this.calendardays[5]} </tr> {/* Friday*/ }
+                <tr> {this.calendardays[6]} </tr> {/* Saturday*/ }
+            </table>
         </div>
     }
 }
@@ -108,15 +112,16 @@ class CalendarDay extends Component
         this.day = props.day;
         this.events = props.events;
         this.calendarEvents = [];
+        this.startT = props.startT;
+        this.endT = props.endT;
     }
 
     initialize(events)
     {
-        var i = 0;
+        let i = 0;
         for (i = 0; i < events.length; i++)
         {
-            this.calendarEvents.push( <CalendarEvent event={events[i]}/> );
-            console.log(events[i].title);
+            this.calendarEvents.push( <CalendarEvent event={events[i]} startT={this.startT} endT={this.endT}/> );
         }
     }
 
@@ -124,10 +129,13 @@ class CalendarDay extends Component
     {
         this.initialize(this.events);
 
+        /* This will render a list of CalendarEvent components within this calendar day*/
         return <div>
-            <div> {this.day}: {this.calendarEvents.map((Item,i) =>
-                <div key={i}> {Item} </div>
-            ) } </div>
+
+            {this.day} starting {this.startT} to {this.endT}: {this.calendarEvents.map((Item,i) =>
+                <div key={i}> {Item} </div >
+            ) }
+
         </div>
     }
 }
@@ -140,10 +148,37 @@ class CalendarEvent extends Component
         this.title = "CalendarEvent Class";
         this.key = props.key;
         this.event = props.event;
+        this.startT = props.startT;
+        this.endT = props.endT;
+
+        // stores the ratio of time (between 0 and 1) of the event on the calendar
+        //
+        // Example: startT = 0800 and endT = 1600
+        //       event.hours[0] = 1000 and event.hours[1] = 1200
+        // then startRatio = (1000-0800)/(1600-0800) = 2/8 = 0.25
+        //      endRatio = (1200-0800)/(1600-0800) = 4/8 = 0.5
+        //
+        // This can be used to determine which area of the CalendarDay row
+        //      should be rendered. If the CalendarDay row position is
+        //      ( x1 , y1, x2, y2 ), then the event should be rendered in position
+        //      ( x1 + (x2-x1) * startRatio, y1, x1 + (x2-x1) * endRatio, y2 )
+        this.startRatio = null;
+        this.endRatio = null;
+
+    }
+
+    initialize()
+    {
+        // Note that this can also be processed in the CalendarDay class if the values
+        //  have to computed before the creation of this component
+        this.startRatio = get_time_percentage(this.event.hours[0], this.startT, this.endT);
+        this.endRatio = get_time_percentage(this.event.hours[1], this.startT, this.endT);
     }
 
     render()
     {
+        this.initialize();
+
         return <div> {this.event.hours[0]} to {this.event.hours[1]} in {this.event.title + "\t"} </div>
 
     }
