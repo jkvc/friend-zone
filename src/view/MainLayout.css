@@ -43,8 +43,9 @@
 
 
 .middle-panel{
-    margin-top: 2%;
-    width: 750px;
+    margin-top: 1%;
+    min-width:500px;
+    width: 60%;
     min-height: 600px;
     margin-left: auto;
     margin-right: auto;

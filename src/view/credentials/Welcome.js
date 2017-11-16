@@ -8,11 +8,11 @@ import blue_line from '../../image/BlueLine.png'
 import TestCourseManager from '../../TempViews/TestCourseManager'
 
 
-class Main extends Component {
+class Welcome extends Component {
 
     constructor(props) {
         super(props);
-        this.title = "Main.js";
+        this.title = "Welcome.js";
     }
 
     goto_signup() {
@@ -73,4 +73,4 @@ class Main extends Component {
 }
 
 
-export default Main;
+export default Welcome;
