@@ -91,13 +91,13 @@ class CalendarHelper extends Component
         // Render each CalendarDay component in a table
         return <div>
             <table>
-                <tr> {this.calendardays[0]} </tr> {/* Monday*/ }
-                <tr> {this.calendardays[1]} </tr> {/* Tuesday*/ }
-                <tr> {this.calendardays[2]} </tr> {/* Wednesday*/ }
-                <tr> {this.calendardays[3]} </tr> {/* Thursday*/ }
-                <tr> {this.calendardays[4]} </tr> {/* Friday*/ }
-                <tr> {this.calendardays[5]} </tr> {/* Saturday*/ }
-                <tr> {this.calendardays[6]} </tr> {/* Sunday*/ }
+                <tr> {this.calendardays[0]} </tr> {/* Sunday*/ }
+                <tr> {this.calendardays[1]} </tr> {/* Monday*/ }
+                <tr> {this.calendardays[2]} </tr> {/* Tuesday*/ }
+                <tr> {this.calendardays[3]} </tr> {/* Wednesday*/ }
+                <tr> {this.calendardays[4]} </tr> {/* Thursday*/ }
+                <tr> {this.calendardays[5]} </tr> {/* Friday*/ }
+                <tr> {this.calendardays[6]} </tr> {/* Saturday*/ }
             </table>
         </div>
     }
