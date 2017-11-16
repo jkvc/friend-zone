@@ -17,7 +17,7 @@ export function handle_facebook_login(callback) {
         var user = result.user;
         callback(null, user);
 
-    }.bind(this)).catch(function(error) {
+    }).catch(function(error) {
         callback(error);
     });
 }

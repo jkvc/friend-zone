@@ -84,7 +84,7 @@ class SignUp extends Component {
                // TODO somehow the website render<UserSchedule/> automatically without the following
                //ReactDOM.render(<UserSchedule/>, document.getElementById('root'));
            }
-        }.bind(this));
+        });
     }
 
     render() {

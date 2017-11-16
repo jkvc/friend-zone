@@ -7,7 +7,6 @@ import './Login.css'
 import facebook_icon from '../../image/FacebookIcon.png'
 import gmail_icon from '../../image/GmailIcon.png'
 import blue_line from '../../image/BlueLine.png'
-import UserSchedule from "../schedule/UserSchedule";
 import {handle_facebook_login} from '../credentials/thirdparty/HandleFacebook'
 
 class Login extends Component {
