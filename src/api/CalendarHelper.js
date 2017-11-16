@@ -109,13 +109,58 @@ class CalendarDay extends Component
         this.title = "CalendarDay Class";
         this.day = props.day;
         this.events = props.events;
-        this.calendarEvents = [];
         this.startT = props.startT;
         this.endT = props.endT;
+
+        this.calendarEvents = [];
+
     }
 
     initialize(events)
     {
+        let time_collision = [];
+
+        for (let t = 0; t < 24*60; t++)
+        {
+            // push an empty array
+            time_collision.push("");
+        }
+
+        for (let e = 0; e < events.length; e++)
+        {
+            let t_start = parseInt(events[e].hours[0].substr(0,2),10)*60 + parseInt(events[e].hours[0].substr(2,4),10) ;
+            let t_end = parseInt(events[e].hours[1].substr(0,2),10)*60 + parseInt(events[e].hours[0].substr(2,4),10) ;
+            for (let u = t_start; u < t_end; u++)
+            {
+                time_collision[u] += e + ",";
+            }
+        }
+
+        let unique_group = new Set(time_collision);
+        let collisions = [];
+        for (let g of unique_group)
+        {
+            g = g.substr(0, g.length-1);
+            if (g.length > 1)
+            {
+                let groups = g.split(",");
+                collisions.push([])
+                for (let h = 0; h < groups.length; h++)
+                {
+                    collisions[collisions.length-1].push( events[parseInt(groups[h], 10)] );
+                }
+            }
+        }
+
+        for (let c = 0; c < collisions.length; c++)
+        {
+            let print = "Collision detected on " + this.day + ": " ;
+            for (let ci = 0; ci < collisions[c].length; ci++) {
+                print += collisions[c][ci].title + "\t";
+            }
+            console.log(print);
+        }
+
         let i = 0;
         for (i = 0; i < events.length; i++)
         {
