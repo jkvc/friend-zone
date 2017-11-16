@@ -23,7 +23,8 @@ class UserProfile extends Component{
             } else {
                 this.setState({profile_obj:data})
             }
-        })
+        });
+
     }
 
     handle_edit_profile(){
@@ -43,8 +44,8 @@ class UserProfile extends Component{
                 <h4>これがうまるのプロファイルだ！</h4>
 
                 <br/>
-                profile_obj:
-                <pre>{JSON.stringify(this.state.profile_obj,null,2)}</pre>
+                state:
+                <pre>{JSON.stringify(this.state,null,2)}</pre>
 
 
                 <button onClick={this.handle_edit_profile.bind(this)} >Edit profile</button>

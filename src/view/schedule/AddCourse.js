@@ -1,5 +1,6 @@
 import {lookup_course} from '../../dao/CourseManager';
 import {add_course_to_profile} from "../../dao/ProfileManager";
+import {add_user_to_enrollment} from "../../dao/EnrollmentManager";
 import React, {Component} from 'react';
 import firebase from 'firebase';
 
@@ -12,7 +13,7 @@ class AddCourse extends Component{
         this.state = {
             result: [],
             search_key: "",
-            course_to_add: ""
+            course_id_to_add: ""
         };
     }
 
@@ -25,7 +26,8 @@ class AddCourse extends Component{
     }
 
     handle_add_course(){
-        add_course_to_profile(firebase.auth().currentUser.uid, this.state.course_to_add);
+        add_course_to_profile(firebase.auth().currentUser.uid, this.state.course_id_to_add);
+        add_user_to_enrollment(firebase.auth().currentUser.uid, this.state.course_id_to_add)
     }
 
     render(){
@@ -52,7 +54,7 @@ class AddCourse extends Component{
 
                             <button onClick={()=> {
 
-                                this.setState({course_to_add: entry.course_id}, ()=>{
+                                this.setState({course_id_to_add: entry.course_id}, ()=>{
                                     this.handle_add_course();
                                 })
 
