@@ -32,7 +32,7 @@ class CalendarHelper extends Component
 
     initialize(events)
     {
-        let i =0, j = 0;
+        let i =0;
 
         // Initialize 7 empty lists
         let dayArray = [ [], [], [], [], [], [], [] ];
@@ -48,12 +48,12 @@ class CalendarHelper extends Component
         // For each event
         for (i = 0; i < events.length; i++)
         {
-            if ( parseInt(events[i].hours[0]) < start_time )
+            if ( parseInt(events[i].hours[0], 10) < start_time )
             {
                 start_time = events[i].hours[0];
             }
 
-            if (parseInt(events[i].hours[1]) > end_time)
+            if (parseInt(events[i].hours[1], 10) > end_time)
             {
                 end_time = events[i].hours[1];
             }
@@ -89,16 +89,14 @@ class CalendarHelper extends Component
         this.initialize(this.events);
 
         // Render each CalendarDay component in a table
-        return <div>
-            <table>
-                <tr> {this.calendardays[0]} </tr> {/* Sunday*/ }
-                <tr> {this.calendardays[1]} </tr> {/* Monday*/ }
-                <tr> {this.calendardays[2]} </tr> {/* Tuesday*/ }
-                <tr> {this.calendardays[3]} </tr> {/* Wednesday*/ }
-                <tr> {this.calendardays[4]} </tr> {/* Thursday*/ }
-                <tr> {this.calendardays[5]} </tr> {/* Friday*/ }
-                <tr> {this.calendardays[6]} </tr> {/* Saturday*/ }
-            </table>
+        return <div class="CalendarHelper">
+            {this.calendardays[0]} {/* Sunday*/ }
+            {this.calendardays[1]} {/* Monday*/ }
+            {this.calendardays[2]} {/* Tuesday*/ }
+            {this.calendardays[3]} {/* Wednesday*/ }
+            {this.calendardays[4]} {/* Thursday*/ }
+            {this.calendardays[5]} {/* Friday*/ }
+            {this.calendardays[6]} {/* Saturday*/ }
         </div>
     }
 }
@@ -111,13 +109,71 @@ class CalendarDay extends Component
         this.title = "CalendarDay Class";
         this.day = props.day;
         this.events = props.events;
-        this.calendarEvents = [];
         this.startT = props.startT;
         this.endT = props.endT;
+
+        this.calendarEvents = [];
+
     }
 
     initialize(events)
     {
+        let time_collision = [];
+
+        // let each minute be a unique collision slot
+        for (let t = 0; t < 24*60; t++)
+        {
+            // push an empty array
+            time_collision.push("");
+        }
+
+        // for each event, hash each minute of the event time into its slot, separated by comma
+        for (let e = 0; e < events.length; e++)
+        {
+            let t_start = parseInt(events[e].hours[0].substr(0,2),10)*60 + parseInt(events[e].hours[0].substr(2,4),10) ;
+            let t_end = parseInt(events[e].hours[1].substr(0,2),10)*60 + parseInt(events[e].hours[0].substr(2,4),10) ;
+            for (let u = t_start; u < t_end; u++)
+            {
+                time_collision[u] += e + ",";
+            }
+        }
+
+        // make a unique set of the hash collision slots
+        let unique_group = new Set(time_collision);
+
+        // to store the collision
+        let collisions = [];
+
+        // for each group of unique time slot
+        for (let g of unique_group)
+        {
+            // trim off the last comma
+            if (g.length > 0) g = g.substr(0, g.length-1);
+
+            // If the group has more than 1 event
+            if (g.length > 1)
+            {
+                let groups = g.split(",");
+
+                // push each event into a new array in collisions
+                collisions.push([])
+                for (let h = 0; h < groups.length; h++)
+                {
+                    collisions[collisions.length-1].push( events[parseInt(groups[h], 10)] );
+                }
+            }
+        }
+
+        // print out the collisions found onto the console
+        for (let c = 0; c < collisions.length; c++)
+        {
+            let print = "Collision detected on " + this.day + ": " ;
+            for (let ci = 0; ci < collisions[c].length; ci++) {
+                print += collisions[c][ci].title + "\t";
+            }
+            console.log(print);
+        }
+
         let i = 0;
         for (i = 0; i < events.length; i++)
         {
@@ -130,10 +186,10 @@ class CalendarDay extends Component
         this.initialize(this.events);
 
         /* This will render a list of CalendarEvent components within this calendar day*/
-        return <div>
+        return <div class="CalendarDay">
 
             {this.day} starting {this.startT} to {this.endT}: {this.calendarEvents.map((Item,i) =>
-                <div key={i}> {Item} </div >
+                <div class="CalendarEvent" key={i}> {Item} </div >
             ) }
 
         </div>
@@ -179,7 +235,7 @@ class CalendarEvent extends Component
     {
         this.initialize();
 
-        return <div> {this.event.hours[0]} to {this.event.hours[1]} in {this.event.title + "\t"} </div>
+        return <div class="Event"> {this.event.hours[0]} to {this.event.hours[1]} in {this.event.title + "\t"} </div>
 
     }
 }
