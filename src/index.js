@@ -5,6 +5,8 @@ import Welcome from './view/credentials/Welcome';
 import firebase from 'firebase';
 import MainLayout from './view/MainLayout';
 import registerServiceWorker from './registerServiceWorker';
+import {lookup_profile_by_user_id} from "./dao/ProfileManager";
+import InitProfile from './view/profile/InitProfile'
 
 // eslint-disable-next-line
 import {test_most_popular_in_list} from './test/TestMostPopularInList';
@@ -31,8 +33,15 @@ registerServiceWorker();
 // process of getting the user, user is null even though user has signed in.
 
 firebase.auth().onAuthStateChanged((user) => {
-    if (user)
-        ReactDOM.render(<MainLayout/>, document.getElementById('root'));
+    if (user){
+        lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err,data)=>{
+            if (err){
+                ReactDOM.render(<InitProfile/>, document.getElementById('root')); /*force user to create a profile before doing anything*/
+            }else{
+                ReactDOM.render(<MainLayout/>, document.getElementById('root')); /*user already has a profil in our db, go to schedule*/
+            }
+        })
+    }
     else
         ReactDOM.render(<Welcome/>, document.getElementById('root'));
 });

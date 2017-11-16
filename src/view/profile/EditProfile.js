@@ -61,6 +61,7 @@ class EditProfile extends Component{
 
             <div>
                 <br/>
+                <h1>{this.title}</h1>
 
                 first_name:<input type="text" value={this.state.first_name}
                                   onChange={e=> this.setState({first_name:e.target.value})} />

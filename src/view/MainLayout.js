@@ -87,7 +87,9 @@ class MainLayout extends Component{
                     this default renders the profile page */}
                 <div className="below-nav-bar">
                     <div id="main-layout" className="middle-panel">
-                        <UserSchedule/>
+
+                        <UserSchedule />
+
                     </div>
                 </div>
 

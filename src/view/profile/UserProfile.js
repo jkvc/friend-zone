@@ -4,6 +4,7 @@ import EditProfile from './EditProfile'
 import Profile from '../../dao/Profile'
 import {lookup_profile_by_user_id} from '../../dao/ProfileManager'
 import firebase from 'firebase';
+import InitProfile from "./InitProfile";
 
 class UserProfile extends Component{
 
@@ -15,6 +16,14 @@ class UserProfile extends Component{
             profile_obj: new Profile("","","","","","","")
         };
         this.initialized = false;
+        lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err,data)=>{
+            if (err){
+                /*in case user does not have a profile yet, force them to sign up for one*/
+                ReactDOM.render(<InitProfile />, document.getElementById('main-layout'));
+            } else {
+                this.setState({profile_obj:data})
+            }
+        })
     }
 
     handle_edit_profile(){
@@ -23,21 +32,6 @@ class UserProfile extends Component{
 
     render(){
 
-        if (!this.initialized){
-            let user_id = firebase.auth().currentUser.uid;
-            lookup_profile_by_user_id(user_id, function(err,data){
-
-                if (err)
-                    this.handle_edit_profile();
-                else{
-                    this.initialized = true;
-                    this.setState({
-                        profile_obj: data
-                    });
-                }
-
-            }.bind(this))
-        }
 
         return(
 

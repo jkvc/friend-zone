@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
 import ReactDOM from 'react-dom';
-import UserProfile from '../profile/UserProfile';
 import Login from './Login';
+import InitProfile from "../profile/InitProfile";
 
 
 class SignUp extends Component {
@@ -35,7 +35,7 @@ class SignUp extends Component {
                     success_msg:"signup success!",
                     err_msg:""
                 });
-                ReactDOM.render(<UserProfile />, document.getElementById('root'))
+                ReactDOM.render(<InitProfile />, document.getElementById('root'))
 
             }.bind(this) )
 
