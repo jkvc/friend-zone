@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {get_time_percentage} from './TimeHelper';
 /*
  * @author: Yiming Cai
  */
@@ -106,14 +107,20 @@ class CalendarHelper extends Component
 
         for (i = 0; i < this.weekdays.length; i++)
         {
-            this.calendardays.push( <CalendarDay day={this.weekdays[i]} events={dayArray[i]} startT={this.startT} endT={this.endT}/> );
+            this.calendardays.push( <CalendarDay day={this.weekdays[i]}
+                                                 events={dayArray[i]}
+                                                 startT={this.startT}
+                                                 endT={this.endT}/> );
         }
 
     }
 
     render()
     {
+        // Initialize all the calendar days
         this.initialize(this.events);
+
+        // Render each CalendarDay component in a table
         return <div>
             <table>
                 <tr> {this.calendardays[0]} </tr> {/* Monday*/ }
@@ -146,8 +153,7 @@ class CalendarDay extends Component
         let i = 0;
         for (i = 0; i < events.length; i++)
         {
-            this.calendarEvents.push( <CalendarEvent event={events[i]}/> );
-            console.log(events[i].title);
+            this.calendarEvents.push( <CalendarEvent event={events[i]} startT={this.startT} endT={this.endT}/> );
         }
     }
 
@@ -174,15 +180,37 @@ class CalendarEvent extends Component
         this.title = "CalendarEvent Class";
         this.key = props.key;
         this.event = props.event;
+        this.startT = props.startT;
+        this.endT = props.endT;
+
+        // stores the ratio of time (between 0 and 1) of the event on the calendar
+        //
+        // Example: startT = 0800 and endT = 1600
+        //       event.hours[0] = 1000 and event.hours[1] = 1200
+        // then startRatio = (1000-0800)/(1600-0800) = 2/8 = 0.25
+        //      endRatio = (1200-0800)/(1600-0800) = 4/8 = 0.5
+        //
+        // This can be used to determine which area of the CalendarDay row
+        //      should be rendered. If the CalendarDay row position is
+        //      ( x1 , y1, x2, y2 ), then the event should be rendered in position
+        //      ( x1 + (x2-x1) * startRatio, y1, x1 + (x2-x1) * endRatio, y2 )
+        this.startRatio = null;
+        this.endRatio = null;
+
     }
 
     initialize()
     {
-
+        // Note that this can also be processed in the CalendarDay class if the values
+        //  have to computed before the creation of this component
+        this.startRatio = get_time_percentage(this.event.hours[0], this.startT, this.endT);
+        this.endRatio = get_time_percentage(this.event.hours[1], this.startT, this.endT);
     }
 
     render()
     {
+        this.initialize();
+
         return <div> {this.event.hours[0]} to {this.event.hours[1]} in {this.event.title + "\t"} </div>
 
     }
