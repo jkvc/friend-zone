@@ -77,7 +77,7 @@ class Login extends Component{
             }
 
             ReactDOM.render(<UserSchedule />, document.getElementById('root'));
-        }).bind(this).catch(function(error) {
+        }.bind(this)).catch(function(error) {
             throw error;
             /*
             // Handle Errors here.
@@ -94,7 +94,7 @@ class Login extends Component{
             var credential = error.credential;
             // ...
             */
-        }).bind(this);
+        }.bind(this));
 
     }
 
