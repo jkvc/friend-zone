@@ -35,8 +35,6 @@ class SignUp extends Component {
                     success_msg:"signup success!",
                     err_msg:""
                 });
-                ReactDOM.render(<InitProfile />, document.getElementById('root'))
-
             }.bind(this) )
 
             /* handle create failure, show err message */

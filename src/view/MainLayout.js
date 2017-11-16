@@ -88,54 +88,16 @@ class MainLayout extends Component{
                 <div className="below-nav-bar">
                     <div id="main-layout" className="middle-panel">
 
-                        <UserSchedule />
 
                     </div>
                 </div>
 
             </div>
         )
+    }
 
-        // /* decide whether each tab button is either orange, or clickable */
-        // var schedule_element = (<th onClick={this.goto_schedule.bind(this)}>Schedule</th>);
-        // if (this.state.tab === "schedule")
-        //     schedule_element = (<th bgcolor={"orange"}>Schedule</th>);
-        //
-        // var friends_element = (<th onClick={this.goto_friends.bind(this)}>Friends</th>);
-        // if (this.state.tab === "friends")
-        //     friends_element = (<th bgcolor={"orange"}>Friends</th>);
-        //
-        // var inbox_element = (<th onClick={this.goto_inbox.bind(this)}>Inbox</th>);
-        // if (this.state.tab === "inbox")
-        //     inbox_element = (<th bgcolor={"orange"}>Inbox</th>);
-        //
-        // var profile_element = (<th onClick={this.goto_profile.bind(this)}>Profile</th>);
-        // if (this.state.tab === "profile")
-        //     profile_element = (<th bgcolor={"orange"}>Profile</th>);
-        //
-        // return(
-        //     <div>
-        //
-        //         <table>
-        //
-        //             <tr>
-        //                 {schedule_element}
-        //                 {friends_element}
-        //                 {inbox_element}
-        //                 {profile_element}
-        //
-        //                 <form>
-        //                     <button onClick={this.logout.bind(this)}>Logout</button>
-        //                 </form>
-        //             </tr>
-        //
-        //             <tr id={"temptr"}>
-        //
-        //             </tr>
-        //
-        //         </table>
-        //     </div>
-        // )
+    componentDidMount(){
+        ReactDOM.render(<UserSchedule />, document.getElementById('main-layout'));
     }
 }
 
