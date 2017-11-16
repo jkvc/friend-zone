@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
-import UserProfile from '../profile/UserProfile';
 import SignUp from './SignUp';
 import './MainLoginSignup.css'
 import './Login.css'
 import facebook_icon from '../../image/FacebookIcon.png'
 import gmail_icon from '../../image/GmailIcon.png'
 import blue_line from '../../image/BlueLine.png'
+import UserSchedule from "../schedule/UserSchedule";
 
 class Login extends Component{
 
@@ -39,7 +39,7 @@ class Login extends Component{
                    success_msg:"login success!",
                    err_msg:""
                 });
-                ReactDOM.render(<UserProfile />, document.getElementById('root'))
+                ReactDOM.render(<UserSchedule />, document.getElementById('root'));
             }.bind(this))
 
             /* handles failure, show err message*/
@@ -51,7 +51,6 @@ class Login extends Component{
     }
 
     handle_facebook_login() {
-
 
         var provider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().useDeviceLanguage();
@@ -77,7 +76,8 @@ class Login extends Component{
                 alert("user is null");
             }
 
-        }).catch(function(error) {
+            ReactDOM.render(<UserSchedule />, document.getElementById('root'));
+        }).bind(this).catch(function(error) {
             throw error;
             /*
             // Handle Errors here.
@@ -94,7 +94,7 @@ class Login extends Component{
             var credential = error.credential;
             // ...
             */
-        });
+        }).bind(this);
 
     }
 
