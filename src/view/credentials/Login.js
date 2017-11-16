@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
-import UserProfile from '../profile/UserProfile';
 import SignUp from './SignUp';
 import './MainLoginSignup.css'
 import './Login.css'

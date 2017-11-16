@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import firebase from 'firebase';
 import ReactDOM from 'react-dom';
 import Login from './Login';
-import InitProfile from "../profile/InitProfile";
 
 
 class SignUp extends Component {
