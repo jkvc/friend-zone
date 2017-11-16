@@ -18,22 +18,46 @@ class CalendarHelper extends Component
         super(props);
         this.title = "CalendarHelper Class";
         this.weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+        // The events passed in, in the form of a list of dictionaries
         this.events = props.events;
-        this.calendardays = [];
+
+        // These variables will be initialized only after initialize(this.events) is called.
+        this.calendardays = []; // calendarDays is the array of CalendarDay objects. There will be 7 of them
+        this.startT = null;     // startT indicates the earliest time found in all the events
+        this.endT = null;       // endT indicates the latest time found in all the events
     }
 
 
     initialize(events)
     {
-        var i =0, j = 0;
+        let i =0, j = 0;
 
         // Initialize 7 empty lists
-        var dayArray = [ [], [], [], [], [], [], [] ];
+        let dayArray = [ [], [], [], [], [], [], [] ];
+
+        let start_time = "0000";
+        let end_time = "2359";
+        if (events.length > 0)
+        {
+            start_time = events[0].hours[0];
+            end_time = events[0].hours[1];
+        }
 
         // For each event
         for (i = 0; i < events.length; i++)
         {
-            var s_days = events[i].days;
+            if ( parseInt(events[i].hours[0]) < start_time )
+            {
+                start_time = events[i].hours[0];
+            }
+
+            if (parseInt(events[i].hours[1]) > end_time)
+            {
+                end_time = events[i].hours[1];
+            }
+
+            let s_days = events[i].days;
 
             // For each letter in the days string
             for (j=0; j < s_days.length; j++)
@@ -77,9 +101,12 @@ class CalendarHelper extends Component
             }
         }
 
+        this.startT = start_time;
+        this.endT = end_time;
+
         for (i = 0; i < this.weekdays.length; i++)
         {
-            this.calendardays.push( <CalendarDay day={this.weekdays[i]} events={dayArray[i]}/> );
+            this.calendardays.push( <CalendarDay day={this.weekdays[i]} events={dayArray[i]} startT={this.startT} endT={this.endT}/> );
         }
 
     }
@@ -88,13 +115,15 @@ class CalendarHelper extends Component
     {
         this.initialize(this.events);
         return <div>
-            <div> {this.calendardays[0]} </div> {/* Monday*/ }
-            <div> {this.calendardays[1]} </div> {/* Tuesday*/ }
-            <div> {this.calendardays[2]} </div> {/* Wednesday*/ }
-            <div> {this.calendardays[3]} </div> {/* Thursday*/ }
-            <div> {this.calendardays[4]} </div> {/* Friday*/ }
-            <div> {this.calendardays[5]} </div> {/* Saturday*/ }
-            <div> {this.calendardays[6]} </div> {/* Sunday*/ }
+            <table>
+                <tr> {this.calendardays[0]} </tr> {/* Monday*/ }
+                <tr> {this.calendardays[1]} </tr> {/* Tuesday*/ }
+                <tr> {this.calendardays[2]} </tr> {/* Wednesday*/ }
+                <tr> {this.calendardays[3]} </tr> {/* Thursday*/ }
+                <tr> {this.calendardays[4]} </tr> {/* Friday*/ }
+                <tr> {this.calendardays[5]} </tr> {/* Saturday*/ }
+                <tr> {this.calendardays[6]} </tr> {/* Sunday*/ }
+            </table>
         </div>
     }
 }
@@ -108,11 +137,13 @@ class CalendarDay extends Component
         this.day = props.day;
         this.events = props.events;
         this.calendarEvents = [];
+        this.startT = props.startT;
+        this.endT = props.endT;
     }
 
     initialize(events)
     {
-        var i = 0;
+        let i = 0;
         for (i = 0; i < events.length; i++)
         {
             this.calendarEvents.push( <CalendarEvent event={events[i]}/> );
@@ -124,10 +155,13 @@ class CalendarDay extends Component
     {
         this.initialize(this.events);
 
+        /* This will render a list of CalendarEvent components within this calendar day*/
         return <div>
-            <div> {this.day}: {this.calendarEvents.map((Item,i) =>
-                <div key={i}> {Item} </div>
-            ) } </div>
+
+            {this.day} starting {this.startT} to {this.endT}: {this.calendarEvents.map((Item,i) =>
+                <div key={i}> {Item} </div >
+            ) }
+
         </div>
     }
 }

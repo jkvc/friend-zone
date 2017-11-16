@@ -18,9 +18,9 @@ class UserSchedule extends Component{
     initialize_events()
     {
         var events = [
-            {"days":"MWF", "hours":["11:30", "12:30"], "title":"CSE11" },
-            {"days":"TuTh", "hours":["10:20", "11:20"], "title":"CSE100"},
-            {"days":"MWTu", "hours":["00:10", "11:00"], "title":"Chilling"}
+            {"days":"MWF", "hours":["1130", "1230"], "title":"CSE11" },
+            {"days":"TuTh", "hours":["1020", "1120"], "title":"CSE100"},
+            {"days":"MWTu", "hours":["0010", "1100"], "title":"Chilling"}
         ];
         this.events = events;
     }
