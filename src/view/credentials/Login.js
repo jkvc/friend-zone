@@ -40,7 +40,6 @@ class Login extends Component {
                    success_msg:"login success!",
                    err_msg:""
                 });
-                ReactDOM.render(<UserSchedule />, document.getElementById('root'));
             }.bind(this))
 
             /* handles failure, show err message*/

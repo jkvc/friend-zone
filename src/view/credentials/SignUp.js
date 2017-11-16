@@ -32,13 +32,12 @@ class SignUp extends Component {
         firebase.auth().createUserWithEmailAndPassword(this.state.user_email, this.state.password) /*create account*/
 
             /* handle create success, log in, go to profile */
-            .then( function(){
+            .then( function() {
                 this.setState({
                     success_msg:"signup success!",
                     err_msg:""
                 });
-                ReactDOM.render(<InitProfile />, document.getElementById('root'))
-
+                ReactDOM.render(<InitProfile />, document.getElementById('root'));
             }.bind(this) )
 
             /* handle create failure, show err message */
