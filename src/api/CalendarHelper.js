@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {get_time_percentage} from './TimeHelper';
+import {get_time_percentage, get_weekday_array} from './TimeHelper';
 /*
  * @author: Yiming Cai
  */
@@ -18,7 +18,7 @@ class CalendarHelper extends Component
     {
         super(props);
         this.title = "CalendarHelper Class";
-        this.weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        this.weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
         // The events passed in, in the form of a list of dictionaries
         this.events = props.events;
@@ -58,46 +58,14 @@ class CalendarHelper extends Component
                 end_time = events[i].hours[1];
             }
 
+            // Find the days in which the event should be added
             let s_days = events[i].days;
+            let v_days = get_weekday_array(s_days);
 
-            // For each letter in the days string
-            for (j=0; j < s_days.length; j++)
+            for (let j = 0; j < v_days.length; j++)
             {
-                if (s_days[j] === 'M')
-                {
-                    dayArray[0].push(events[i]);
-                }
-                else if (s_days[j] === 'T')
-                {
-                    j++;
-                    if (s_days[j] === 'u')
-                    {
-                        dayArray[1].push(events[i]);
-                    }
-                    else if (s_days[j] === 'h')
-                    {
-                        dayArray[3].push(events[i]);
-                    }
-                }
-                else if (s_days[j] === 'W')
-                {
-                    dayArray[2].push(events[i]);
-                }
-                else if (s_days[j] === 'F')
-                {
-                    dayArray[4].push(events[i]);
-                }
-                else if (s_days[j] === 'S')
-                {
-                    j++;
-                    if (s_days[j] === 'a')
-                    {
-                        dayArray[5].push(events[i]);
-                    }
-                    else if (s_days[j] === 'u')
-                    {
-                        dayArray[6].push(events[i]);
-                    }
+                if (v_days[j]) {
+                    dayArray[j].push(events[i]);
                 }
             }
         }
