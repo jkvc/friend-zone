@@ -120,12 +120,14 @@ class CalendarDay extends Component
     {
         let time_collision = [];
 
+        // let each minute be a unique collision slot
         for (let t = 0; t < 24*60; t++)
         {
             // push an empty array
             time_collision.push("");
         }
 
+        // for each event, hash each minute of the event time into its slot, separated by comma
         for (let e = 0; e < events.length; e++)
         {
             let t_start = parseInt(events[e].hours[0].substr(0,2),10)*60 + parseInt(events[e].hours[0].substr(2,4),10) ;
@@ -136,14 +138,24 @@ class CalendarDay extends Component
             }
         }
 
+        // make a unique set of the hash collision slots
         let unique_group = new Set(time_collision);
+
+        // to store the collision
         let collisions = [];
+
+        // for each group of unique time slot
         for (let g of unique_group)
         {
-            g = g.substr(0, g.length-1);
+            // trim off the last comma
+            if (g.length > 0) g = g.substr(0, g.length-1);
+
+            // If the group has more than 1 event
             if (g.length > 1)
             {
                 let groups = g.split(",");
+
+                // push each event into a new array in collisions
                 collisions.push([])
                 for (let h = 0; h < groups.length; h++)
                 {
@@ -152,6 +164,7 @@ class CalendarDay extends Component
             }
         }
 
+        // print out the collisions found onto the console
         for (let c = 0; c < collisions.length; c++)
         {
             let print = "Collision detected on " + this.day + ": " ;
