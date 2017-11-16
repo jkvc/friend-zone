@@ -61,16 +61,16 @@ export function get_time_percentage(time, range_begin, range_end)
         throw new Error("Param passed in get_time_percentage is not a String", 22);
     }
 
-    var timeh = parseInt(time.substring(0,2), 10);
-    var timem = parseInt(time.substring(2,4), 10);
-    var beginh = parseInt(range_begin.substring(0,2), 10);
-    var beginm = parseInt(range_begin.substring(2,4), 10);
-    var endh = parseInt(range_end.substring(0,2), 10);
-    var endm = parseInt(range_end.substring(2,4), 10);
+    let timeh = parseInt(time.substring(0,2), 10);
+    let timem = parseInt(time.substring(2,4), 10);
+    let beginh = parseInt(range_begin.substring(0,2), 10);
+    let beginm = parseInt(range_begin.substring(2,4), 10);
+    let endh = parseInt(range_end.substring(0,2), 10);
+    let endm = parseInt(range_end.substring(2,4), 10);
 
-    var beginVal = beginh * 60 + beginm;
-    var endVal = endh * 60 + endm;
-    var timeVal = timeh * 60 + timem;
+    let beginVal = beginh * 60 + beginm;
+    let endVal = endh * 60 + endm;
+    let timeVal = timeh * 60 + timem;
 
     if (beginVal > timeVal || timeVal > endVal)
     {
@@ -93,13 +93,13 @@ export function get_time_numeric(timestring)
         throw new Error("Param passed in get_time_numeric is not a String", 24);
     }
 
-    var s_time = timestring;
-    var hour = ""
-    var min = ""
-    var pm = false;
-    var is_min = false;
+    let s_time = timestring;
+    let hour = "";
+    let min = "";
+    let pm = false;
+    let is_min = false;
 
-    for (var i = 0; i < s_time.length; i++)
+    for (let i = 0; i < s_time.length; i++)
     {
         if (s_time[i] >= '0' && s_time[i] <= '9')
         {
@@ -127,8 +127,8 @@ export function get_time_numeric(timestring)
         }
     }
 
-    var n_hour = parseInt(hour,10);
-    var n_min = parseInt(min,10);
+    let n_hour = parseInt(hour,10);
+    let n_min = parseInt(min,10);
     if (pm)
     {
         // avoid 12pm -> 24
@@ -137,7 +137,7 @@ export function get_time_numeric(timestring)
     }
     if (!pm)
     {
-        if (n_hour == 12)
+        if (n_hour === 12)
         {
             n_hour = 0;
         }

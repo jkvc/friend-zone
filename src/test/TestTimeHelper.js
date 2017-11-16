@@ -1,5 +1,4 @@
 import {get_weekday_array, get_time_percentage,get_time_numeric} from '../api/TimeHelper'
-import UnitTest from './UnitTest'
 
 // Writing testers manually here, view console for outputs
 export function test_time_helper()

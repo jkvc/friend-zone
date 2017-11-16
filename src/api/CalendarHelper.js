@@ -32,7 +32,7 @@ class CalendarHelper extends Component
 
     initialize(events)
     {
-        let i =0, j = 0;
+        let i =0;
 
         // Initialize 7 empty lists
         let dayArray = [ [], [], [], [], [], [], [] ];
@@ -48,12 +48,12 @@ class CalendarHelper extends Component
         // For each event
         for (i = 0; i < events.length; i++)
         {
-            if ( parseInt(events[i].hours[0]) < start_time )
+            if ( parseInt(events[i].hours[0], 10) < start_time )
             {
                 start_time = events[i].hours[0];
             }
 
-            if (parseInt(events[i].hours[1]) > end_time)
+            if (parseInt(events[i].hours[1], 10) > end_time)
             {
                 end_time = events[i].hours[1];
             }
@@ -89,16 +89,14 @@ class CalendarHelper extends Component
         this.initialize(this.events);
 
         // Render each CalendarDay component in a table
-        return <div>
-            <table>
-                <tr> {this.calendardays[0]} </tr> {/* Sunday*/ }
-                <tr> {this.calendardays[1]} </tr> {/* Monday*/ }
-                <tr> {this.calendardays[2]} </tr> {/* Tuesday*/ }
-                <tr> {this.calendardays[3]} </tr> {/* Wednesday*/ }
-                <tr> {this.calendardays[4]} </tr> {/* Thursday*/ }
-                <tr> {this.calendardays[5]} </tr> {/* Friday*/ }
-                <tr> {this.calendardays[6]} </tr> {/* Saturday*/ }
-            </table>
+        return <div class="CalendarHelper">
+            {this.calendardays[0]} {/* Sunday*/ }
+            {this.calendardays[1]} {/* Monday*/ }
+            {this.calendardays[2]} {/* Tuesday*/ }
+            {this.calendardays[3]} {/* Wednesday*/ }
+            {this.calendardays[4]} {/* Thursday*/ }
+            {this.calendardays[5]} {/* Friday*/ }
+            {this.calendardays[6]} {/* Saturday*/ }
         </div>
     }
 }
@@ -130,10 +128,10 @@ class CalendarDay extends Component
         this.initialize(this.events);
 
         /* This will render a list of CalendarEvent components within this calendar day*/
-        return <div>
+        return <div class="CalendarDay">
 
             {this.day} starting {this.startT} to {this.endT}: {this.calendarEvents.map((Item,i) =>
-                <div key={i}> {Item} </div >
+                <div class="CalendarEvent" key={i}> {Item} </div >
             ) }
 
         </div>
@@ -179,7 +177,7 @@ class CalendarEvent extends Component
     {
         this.initialize();
 
-        return <div> {this.event.hours[0]} to {this.event.hours[1]} in {this.event.title + "\t"} </div>
+        return <div class="Event"> {this.event.hours[0]} to {this.event.hours[1]} in {this.event.title + "\t"} </div>
 
     }
 }
