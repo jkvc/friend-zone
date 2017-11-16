@@ -88,13 +88,13 @@ class CalendarHelper extends Component
     {
         this.initialize(this.events);
         return <div>
-            <div> {this.calendardays[0]} </div>
-            <div> {this.calendardays[1]} </div>
-            <div> {this.calendardays[2]} </div>
-            <div> {this.calendardays[3]} </div>
-            <div> {this.calendardays[4]} </div>
-            <div> {this.calendardays[5]} </div>
-            <div> {this.calendardays[6]} </div>
+            <div> {this.calendardays[0]} </div> {/* Monday*/ }
+            <div> {this.calendardays[1]} </div> {/* Tuesday*/ }
+            <div> {this.calendardays[2]} </div> {/* Wednesday*/ }
+            <div> {this.calendardays[3]} </div> {/* Thursday*/ }
+            <div> {this.calendardays[4]} </div> {/* Friday*/ }
+            <div> {this.calendardays[5]} </div> {/* Saturday*/ }
+            <div> {this.calendardays[6]} </div> {/* Sunday*/ }
         </div>
     }
 }
@@ -140,6 +140,11 @@ class CalendarEvent extends Component
         this.title = "CalendarEvent Class";
         this.key = props.key;
         this.event = props.event;
+    }
+
+    initialize()
+    {
+
     }
 
     render()

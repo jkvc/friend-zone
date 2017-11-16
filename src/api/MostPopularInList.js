@@ -1,4 +1,6 @@
-
+/*
+ * @author: Yiming Cai and Kevin Chen
+ */
 /* Done
 * given a list of lists of user_id's, return the most popular user_id in these lists, sorted descending by popularity
 * params: param
