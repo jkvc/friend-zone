@@ -119,7 +119,7 @@ class Login extends Component{
 
                             <button className="button-text"
                                   onClick={this.goto_signup.bind(this)}>
-                                Have an account? Log in here.
+                                Don't have an account? Sign up here.
                             </button>
                             <br/>
 
