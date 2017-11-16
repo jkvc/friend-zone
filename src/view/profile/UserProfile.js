@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import EditProfile from './EditProfile'
+import InitProfile from './InitProfile'
 import Profile from '../../dao/Profile'
 import {lookup_profile_by_user_id} from '../../dao/ProfileManager'
 import firebase from 'firebase';
@@ -28,7 +29,7 @@ class UserProfile extends Component{
             lookup_profile_by_user_id(user_id, function(err,data){
 
                 if (err)
-                    this.handle_edit_profile();
+                    ReactDOM.render(<InitProfile />, document.getElementById('main-layout'));
                 else{
                     this.initialized = true;
                     this.setState({
