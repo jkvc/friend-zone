@@ -1,5 +1,5 @@
 
-/* TODO
+/* Done
 * given a list of lists of user_id's, return the most popular user_id in these lists, sorted descending by popularity
 * params: param
 *   {
@@ -47,6 +47,15 @@ export function most_popular_in_list(param, callback){
         return;
     }
 
+    for (var i = 0; i < param.list.length; i++)
+    {
+        if (typeof param.list[i] !== 'object' || param.list.constructor !== Array)
+        {
+            callback( err = new Error("an elemenet in param.list is not an array!", 16), null);
+            console.log(err);
+        }
+    }
+
     if (param.count < 1 || param.list.length <= 0)
     {
         callback( err = new Error("Invalid Inputs to most_popular_in_list", 11), null);
@@ -64,7 +73,7 @@ export function most_popular_in_list(param, callback){
     /*do something with result*/
 
     // For each list
-    for (var i = 0; i < list.length; i++)
+    for (i = 0; i < list.length; i++)
     {
         // For each list in the list
         for (var j = 0; j < list[i].length; j++)
@@ -73,13 +82,13 @@ export function most_popular_in_list(param, callback){
             // Add a new student into the list, with count of 1
             if ( ! (list[i][j] in dict) )
             {
-                dict [list[i][j]] = 1;
+                dict[ list[i][j] ] = 1;
             }
 
             // Increment the student count by 1 if he is already added
             else
             {
-                dict [list[i][j]] += 1;
+                dict[ list[i][j] ] += 1;
             }
         }
     }
@@ -96,7 +105,7 @@ export function most_popular_in_list(param, callback){
     //  2. their studentName in increasing alphabetical order
     array.sort(function(a, b)
     {
-        if (a[0] == b[0])
+        if (a[0] === b[0])
         {
             // Note that when comparing names/IDs for sorting order, it will be changed to lowercase first
             return a[1].toLowerCase() > b[1].toLowerCase();
@@ -105,7 +114,7 @@ export function most_popular_in_list(param, callback){
     });
 
     // Push the student names onto the list based on the count specified
-    for (var i = 0; i < count; i++)
+    for (i = 0; i < count; i++)
     {
         if (array.length <= i) break;
         result.push(array[i][1]);

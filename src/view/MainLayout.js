@@ -6,7 +6,7 @@ import UserSchedule from './schedule/UserSchedule';
 import UserInbox from './social/UserInbox';
 import UserFriends from './social/UserFriends';
 import UserProfile from './profile/UserProfile';
-import Main from './credentials/Main';
+import Main from './credentials/Welcome';
 import './MainLayout.css'
 
 
@@ -87,7 +87,7 @@ class MainLayout extends Component{
                     this default renders the profile page */}
                 <div className="below-nav-bar">
                     <div id="main-layout" className="middle-panel">
-                        <UserProfile/>
+                        <UserSchedule/>
                     </div>
                 </div>
 
