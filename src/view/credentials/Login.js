@@ -8,8 +8,9 @@ import facebook_icon from '../../image/FacebookIcon.png'
 import gmail_icon from '../../image/GmailIcon.png'
 import blue_line from '../../image/BlueLine.png'
 import UserSchedule from "../schedule/UserSchedule";
+import {handle_facebook_login} from '../credentials/thirdparty/HandleFacebook'
 
-class Login extends Component{
+class Login extends Component {
 
     constructor(props){
         super(props);
@@ -28,7 +29,7 @@ class Login extends Component{
     }
 
 
-    handle_login_button(event){
+    handle_login_button(event) {
         event.preventDefault(); /* to make react happy */
 
         firebase.auth().signInWithEmailAndPassword(this.state.user_email, this.state.password) /* login with firebase */
@@ -48,57 +49,57 @@ class Login extends Component{
                     err_msg:error.message
                 });
             }.bind(this));
+
     }
 
-    handle_facebook_login() {
+    handle_facebook(event) {
+        event.preventDefault();
 
-        var provider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().useDeviceLanguage();
-        firebase.auth().signInWithRedirect(provider);
-        firebase.auth().getRedirectResult().then(function(result) {
-
-            // This gives you a Facebook access token. you can use it to access the facebook api.
-            //var token = result.credential.accessToken; // result.credential is null
-
-            // the signed-in user info.
-            var user = result.user;
-
-            if (user != null) {
-                alert("user.providerData: " + user.providerData);
-                user.providerData.forEach(function (profile) {
-                    alert("Sign-in provider: "+profile.providerId);
-                    alert("  Provider-specific UID: "+profile.uid);
-                    alert("  Name: "+profile.displayName);
-                    alert("  Email: "+profile.email);
-                    alert("  Photo URL: "+profile.photoURL);
+        handle_facebook_login( function(error, user) {
+            if (error) {
+                alert("user is null, message: " + error.message);
+                this.setState({
+                    err_msg:error.message
                 });
-            } else {
-                alert("user is null");
-            }
+                /*
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                if (errorCode === 'auth/wrong-password') {
+                    alert('Wrong password.');
+                } else {
+                    alert(errorMessage);
+                }
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+                */
 
-            ReactDOM.render(<UserSchedule />, document.getElementById('root'));
-        }.bind(this)).catch(function(error) {
-            throw error;
-            /*
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorCode === 'auth/wrong-password') {
-                alert('Wrong password.');
+                // TODO somehow this chunk still execute when there is an error
             } else {
-                alert(errorMessage);
+
+                alert("Logging in... user.providerData: " + user.providerData);
+                user.providerData.forEach(function (profile) {
+                    alert("Sign-in provider: " + profile.providerId + "Provider-specific UID: " + profile.uid
+                        + "  Name: " + profile.displayName
+                        + "  Email: " + profile.email
+                        + "  Photo URL: " + profile.photoURL);
+                });
+
+                this.setState({
+                    success_msg:"login success!",
+                    err_msg:""
+                });
+
+                // TODO somehow the website render<UserSchedule/> automatically without the following
+                //ReactDOM.render(<UserSchedule/>, document.getElementById('root'));
             }
-            // The email of the user's account used.
-            var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            var credential = error.credential;
-            // ...
-            */
         }.bind(this));
-
     }
 
-    render(){
+    render() {
         return(
 
             <div className="body">
@@ -161,7 +162,7 @@ class Login extends Component{
 
                             <div className="subtitle-text">Or, log in with</div>
                             <img src={gmail_icon} alt=""/>
-                            <button onClick={this.handle_facebook_login.bind(this)}>
+                            <button onClick={this.handle_facebook.bind(this)}>
                                 <img src={facebook_icon} alt=""/>
                             </button>
                             <br/>
