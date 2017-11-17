@@ -12,9 +12,22 @@ class UserInbox extends Component{
             incoming_request: [],
             incoming_profiles: []
         }
+
+
     }
 
     componentWillMount(){
+
+        this.get_incoming_requests();
+
+        /*add listener to refresh data, after user clicks accept or reject to kill an entry*/
+        var db_ref = firebase.database().ref('Profile/'+firebase.auth().currentUser.uid)
+        db_ref.on('child_changed', ()=>{
+            this.get_incoming_requests()
+        });
+    }
+
+    get_incoming_requests(){
         lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err,profile_obj)=>{
             var incoming_request = Object.keys(profile_obj.incoming_request);
             this.setState({incoming_request:incoming_request});
