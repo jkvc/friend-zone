@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {accept_friend_request, lookup_profile_by_user_id} from "../../dao/ProfileManager";
+import {accept_friend_request, decline_friend_request, lookup_profile_by_user_id} from "../../dao/ProfileManager";
 import firebase from 'firebase';
 
 
@@ -43,9 +43,16 @@ class UserInbox extends Component{
                         return(
                             <div key={"incoming-friend-request-"+incoming_profile.user_id}>
                                 Incoming friend request: {incoming_profile.first_name} {incoming_profile.last_name}
+
                                 <button onClick={ ()=>{
-                                    accept_friend_request(incoming_profile.user_id,firebase.auth().currentUser.uid)
+                                    accept_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid)
                                 } }> accept </button>
+
+                                <button onClick={ ()=>{
+                                    decline_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid)
+                                } }> decline </button>
+
+
                             </div>
                         )
                     })
