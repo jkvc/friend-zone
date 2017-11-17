@@ -8,7 +8,7 @@ import {get_time_percentage, get_weekday_array} from './TimeHelper';
 // This component will require 'events' to be passed in
 // The list object should contain a list of 'Event' Object
 // A valid 'Event' Object is one that contains the following keys
-//  1. hours (pairs of 5letter strings) i.e. ["10:30", "11:30" ]
+//  1. hours (pairs of 5letter strings) i.e. ["1030", "1130" ]
 //  2. days (A single concatenated string) i.e. "MWF" or "TuTh" or "SaSu"
 //  3. title (A short string for description of the event) i.e. "CSE110 LE"
 //  4. (optional) description (A short to medium string providing additional information) i.e. "G.Gillspie"
@@ -112,8 +112,33 @@ class CalendarDay extends Component
         this.startT = props.startT;
         this.endT = props.endT;
 
+        // calendarEvents is the array of CalendarEvent components that will
+        // be created after initialize() is called
         this.calendarEvents = [];
 
+        // this.collisions is the array of collision(s) detected on this calendar day
+        // It will be initialized after initialize(this.events) is called in render
+        //
+        // Each collision is defined as the an array of events, so this.collisions is
+        //      an array of arrays.
+        //
+        // example: [ [A, B],
+        //            [A, B, C],
+        //            [B, C ] ]
+        // ^^^ This happens if there's a time slot when Event A and B have a collision
+        //      at some time slot, Event B and C has a collision at some other time slot,
+        //      and all Event A, B and C have a collision in a common time slot
+        //
+        // col:-----------xyyyzz----------
+        //  A: -----------||||------------
+        //  B: --------|||||||||----------
+        //  C: ------------||||||---------
+        // [A,B] defined by x, [A,B,C] defined by y, [B,C] defined by z
+        //
+        // Note that a time slot is defined by a minute in a day, so there's 60*24 unique time slots
+        // This means that the collision detection is accurate to the minutes unit
+        // But only unique collisions (no duplicate) will be found in this.collisions
+        this.collisions = null;
     }
 
     initialize(events)
@@ -156,7 +181,7 @@ class CalendarDay extends Component
                 let groups = g.split(",");
 
                 // push each event into a new array in collisions
-                collisions.push([])
+                collisions.push([]);
                 for (let h = 0; h < groups.length; h++)
                 {
                     collisions[collisions.length-1].push( events[parseInt(groups[h], 10)] );
@@ -164,15 +189,17 @@ class CalendarDay extends Component
             }
         }
 
-        // print out the collisions found onto the console
-        for (let c = 0; c < collisions.length; c++)
-        {
-            let print = "Collision detected on " + this.day + ": " ;
-            for (let ci = 0; ci < collisions[c].length; ci++) {
-                print += collisions[c][ci].title + "\t";
-            }
-            console.log(print);
-        }
+        // print out the collisions found onto the console, comment this out later
+        // for (let c = 0; c < collisions.length; c++)
+        // {
+        //     let print = "Collision detected on " + this.day + ": " ;
+        //     for (let ci = 0; ci < collisions[c].length; ci++) {
+        //         print += collisions[c][ci].title + "\t";
+        //     }
+        //     console.log(print);
+        // }
+
+        this.collisions = collisions;
 
         let i = 0;
         for (i = 0; i < events.length; i++)
