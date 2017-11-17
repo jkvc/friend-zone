@@ -34,7 +34,9 @@ class UserSchedule extends Component {
     }
 
 
+    // This function will initialize all the events (classes) of the user
     initialize_events() {
+
         lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err, profile_obj) => {
             let enrolled_obj = profile_obj.enrolled_courses;
             let course_list = Object.keys(enrolled_obj);
@@ -43,8 +45,6 @@ class UserSchedule extends Component {
 
             course_list.forEach((course_id) => {
 
-                // It is currently returning all the courses with the same course code (CSE30)
-                // Should replace this with course_id (CSE30_B00)
                 lookup_course_by_id(course_id, (err, course_obj) => {
 
                     let event = {
@@ -60,11 +60,13 @@ class UserSchedule extends Component {
         });
     }
 
+
     render() {
 
         // Wait till all the events are loaded
         if (this.state.numOfEvents !== this.state.events.length)
         {
+            // Try to make the Loading more stylistic?
             return <div> Loading... </div>
         }
 
