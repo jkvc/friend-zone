@@ -47,13 +47,56 @@ class UserSchedule extends Component {
 
                 lookup_course_by_id(course_id, (err, course_obj) => {
 
-                    let event = {
-                        "title": course_obj.course_id,
-                        "days": course_obj.days,
-                        "hours": [get_time_numeric(course_obj.time.split(' - ')[0])
-                            , get_time_numeric(course_obj.time.split(' - ')[1])]
-                    };
+                    // prelim check of error
+                    if (err || course_obj === null)
+                    {
+                        console.log(err);
+                        return;
+                    }
+
+                    // is_error is used to see if the get_time_numeric function has returned an error
+                    let is_error = false;
+                    let event = null;
+                    if (course_obj.time !== null && course_obj.days !== null && course_obj.title !== null) {
+                        event = {
+                            "title": course_obj.course_id,
+                            "days": course_obj.days,
+                            "hours":
+                                [get_time_numeric(course_obj.time.split(' - ')[0], function (err) {
+                                    if (err) {
+                                        console.log(err);
+                                        is_error = true;
+                                    }
+                                }), get_time_numeric(course_obj.time.split(' - ')[1], function (err) {
+                                    if (err) {
+                                        console.log(err);
+                                        is_error = true;
+                                    }
+
+                                })]
+                        };
+                    }
+
+                    // If invalid course_obj is detected
+                    else
+                    {
+                        event = {
+                            "title": "undefined states in Course Obj is detected",
+                            "days": "MTWThF",
+                            "hours": ["0000","2359"]
+                        };
+                    }
+
+                    // If get_time_numeric returns an error, return some random time
+                    if (is_error)
+                    {
+                        event.hours = ["0000", "2359"];
+                    }
+
+                    // push the event into the events list
                     events.push(event);
+
+                    // set the state of UserSchedule
                     this.setState({events : events});
                 });
             });

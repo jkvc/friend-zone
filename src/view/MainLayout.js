@@ -8,6 +8,7 @@ import UserFriends from './social/UserFriends';
 import UserProfile from './profile/UserProfile';
 import Main from './credentials/Welcome';
 import './MainLayout.css'
+import ChatView from "../chat/ChatPortalView";
 
 /**
  * Main Layout is the outer body for the pages after user logged in. It consists of the navigation bar, the
@@ -39,6 +40,10 @@ class MainLayout extends Component{
 
     goto_profile(){
         ReactDOM.render(<UserProfile />, document.getElementById('main-layout'));
+    }
+
+    goto_chat(){
+        ReactDOM.render(<ChatView />, document.getElementById('main-layout'));
     }
 
     logout(){
@@ -76,6 +81,10 @@ class MainLayout extends Component{
                             onClick={this.goto_profile.bind(this)}>
                         Profile
                     </button>
+                    <button className="button-nav-bar"
+                            onClick={this.goto_chat.bind(this)}>
+                        Chat
+                    </button>
 
                     <button className="logout-button"
                             onClick={this.logout.bind(this)}>
@@ -97,7 +106,7 @@ class MainLayout extends Component{
     }
 
     componentDidMount(){
-        this.goto_schedule();
+        ReactDOM.render(<ChatView />, document.getElementById('main-layout'));
     }
 }
 
