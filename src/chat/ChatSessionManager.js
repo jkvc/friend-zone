@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import md5 from 'md5';
-import {create_portal} from "./PortalManager";
+import {create_portal} from "./ChatPortalManager";
 
 export function create_chat_session(initializer_name, participant_ids, chat_title){
 
@@ -18,6 +18,7 @@ export function create_chat_session(initializer_name, participant_ids, chat_titl
         message: {}
     };
     chat_session.message[now_millis] = {
+        time: now_millis,
         sender: initializer_name,
         msg: "Chat started at " + now_millis
     };
@@ -29,3 +30,15 @@ export function create_chat_session(initializer_name, participant_ids, chat_titl
     })
 }
 
+export function add_message(session_id, sender_name, message){
+    var now_millis = Date.now();
+    var message_obj = {
+        time: now_millis,
+        sender: sender_name,
+        msg: message
+    };
+
+    firebase.database().ref('ChatSession/'+session_id+'/message')
+        .child(now_millis).set(message_obj);
+
+}
