@@ -28,7 +28,6 @@ class DropCourse extends Component{
 
                 <br/>
 
-                List of classes:
                 {
                     //get full schedule of user
                     lookup_profile_by_user_id(firebase.auth().currentUser.uid, function (err, profile) {
@@ -38,26 +37,31 @@ class DropCourse extends Component{
 
                 }
 
-
+                <table>
+                    <tr>
+                        <th>Course Name</th>
+                        <th></th>
+                    </tr>
                 {   //print each class with drop button
                     this.state.courses_list.map(function( entry){
                         return (
-                            <div key={"course-search-result"+entry}>
-                                <br />
-                                <h2> {entry} </h2>
+                            <tr key={"course-search-result"+entry}>
 
-                                <button onClick={()=> {
+                                <td> {entry} </td>
+                                <td>
+                                    <button onClick={()=> {
 
-                                    this.setState({course_id_to_drop: entry}, ()=>{
-                                        this.handle_drop_course();
-                                })
+                                        this.setState({course_id_to_drop: entry}, ()=>{
+                                            this.handle_drop_course();
+                                        })
 
-                            }} >Drop this course</button>
+                                    }} >Drop this course</button>
+                                </td>
 
-                            </div>
+                            </tr>
                         )
                     }.bind(this))}
-
+                </table>
 
 
                 <br/>
