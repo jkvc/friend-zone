@@ -10,10 +10,11 @@
 //                               Su M  Th W  Th F  Sa
 export function get_weekday_array(weekday_string)
 {
-    if (typeof weekday_string !== 'string')
-    {
-        throw new Error("Param passed in get_weekday_array is not a String", 21);
-    }
+    // if (typeof weekday_string !== 'string')
+    // {
+    //     callback(new Error("Param passed in get_weekday_array is not a String", 21));
+    //     return null;
+    // }
 
     var s_days = weekday_string;
     var dayArray = [false, false, false, false, false, false, false];
@@ -51,6 +52,7 @@ export function get_weekday_array(weekday_string)
         }
     }
 
+    //callback(null);
     return dayArray;
 }
 
@@ -58,10 +60,11 @@ export function get_weekday_array(weekday_string)
 // return (time-range_begin)/(range_end-range_begin) percentage (between 0 and 1)
 export function get_time_percentage(time, range_begin, range_end)
 {
-    if (typeof time !== 'string' || typeof range_begin !== 'string' || typeof range_end !== 'string')
-    {
-        throw new Error("Param passed in get_time_percentage is not a String", 22);
-    }
+    // if (typeof time !== 'string' || typeof range_begin !== 'string' || typeof range_end !== 'string')
+    // {
+    //     callback(new Error("Param passed in get_time_percentage is not a String", 22));
+    //     return null;
+    // }
 
     let timeh = parseInt(time.substring(0,2), 10);
     let timem = parseInt(time.substring(2,4), 10);
@@ -74,11 +77,13 @@ export function get_time_percentage(time, range_begin, range_end)
     let endVal = endh * 60 + endm;
     let timeVal = timeh * 60 + timem;
 
-    if (beginVal > timeVal || timeVal > endVal)
-    {
-        throw new Error("get_time_percentage: time is not between range_begin and range_end", 23);
-    }
+    // if (beginVal > timeVal || timeVal > endVal)
+    // {
+    //     callback(new Error("get_time_percentage: time is not between range_begin and range_end", 23));
+    //     return null;
+    // }
 
+    // callback(null);
     return (timeVal-beginVal)/(endVal - beginVal);
 }
 
@@ -88,11 +93,12 @@ export function get_time_percentage(time, range_begin, range_end)
 //      and that if it after 1159 there will be a 'pm' (case insensitive) somewhere in the string
 // Note that "12:xx PM" is converted to 12xx
 // and that "12:xx AM" is converted to 00xx
-export function get_time_numeric(timestring)
+export function get_time_numeric(timestring, callback)
 {
     if (typeof timestring !== 'string')
     {
-        throw new Error("Param passed in get_time_numeric is not a String", 24);
+        callback(new Error("Param passed in get_time_numeric is not a String", 24));
+        return null;
     }
 
     let s_time = timestring;
@@ -163,5 +169,6 @@ export function get_time_numeric(timestring)
         min = n_min.toString();
     }
 
+    callback(null);
     return hour+min;
 }

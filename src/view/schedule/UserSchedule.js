@@ -46,13 +46,30 @@ class UserSchedule extends Component {
             course_list.forEach((course_id) => {
 
                 lookup_course_by_id(course_id, (err, course_obj) => {
-
+                    let is_error = false;
                     let event = {
                         "title": course_obj.course_id,
                         "days": course_obj.days,
-                        "hours": [get_time_numeric(course_obj.time.split(' - ')[0])
-                            , get_time_numeric(course_obj.time.split(' - ')[1])]
+                        "hours":
+                            [get_time_numeric(course_obj.time.split(' - ')[0], function(err){
+                            if (err)
+                            {
+                                console.log(err);
+                                is_error = true;
+                            }
+                            }),get_time_numeric(course_obj.time.split(' - ')[1], function(err){
+                                if (err)
+                                {
+                                    console.log(err);
+                                    is_error = true;
+                                }
+
+                            })]
                     };
+                    if (is_error)
+                    {
+                        event.hours = ["0000", "2359"];
+                    }
                     events.push(event);
                     this.setState({events : events});
                 });
