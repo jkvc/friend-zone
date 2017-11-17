@@ -30,7 +30,7 @@ class ChatView extends Component{
     }
 
     get_portal_list(snapshot){
-        var portals_obj = snapshot.val();
+        var portals_obj = snapshot.val() || {};
         var portal_keys = Object.keys(portals_obj);
         var portals_list = [];
         for (var i=0; i<portal_keys.length; i+=1){
