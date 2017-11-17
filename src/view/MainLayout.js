@@ -9,7 +9,10 @@ import UserProfile from './profile/UserProfile';
 import Main from './credentials/Welcome';
 import './MainLayout.css'
 
-
+/**
+ * Main Layout is the outer body for the pages after user logged in. It consists of the navigation bar, the
+ * background image, and the div id="main-layout" where all the user pages should render upon.
+ */
 class MainLayout extends Component{
 
     /* set prop to state, must check all props, and give it a default value if prop not passed in */
@@ -87,17 +90,14 @@ class MainLayout extends Component{
                     this default renders the profile page */}
                 <div className="below-nav-bar">
                     <div id="main-layout" className="middle-panel">
-
-
                     </div>
                 </div>
-
             </div>
         )
     }
 
     componentDidMount(){
-        ReactDOM.render(<UserSchedule />, document.getElementById('main-layout'));
+        this.goto_schedule();
     }
 }
 

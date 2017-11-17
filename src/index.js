@@ -29,21 +29,25 @@ let config = {
 firebase.initializeApp(config);
 registerServiceWorker();
 
-// Using a callback method (observer) avoids the issue that when web are in
+// Using a callback method (observer) avoids the issue that, when web are in
 // process of getting the user, user is null even though user has signed in.
 
 firebase.auth().onAuthStateChanged((user) => {
-    if (user){
+    if (user) {
         lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err,data)=>{
+
+            /*force user to create a profile before doing anything*/
             if (err){
-                ReactDOM.render(<InitProfile/>, document.getElementById('root')); /*force user to create a profile before doing anything*/
+                ReactDOM.render(<InitProfile/>, document.getElementById('root'));
+
+             /*user already has a profile in our db, go to schedule*/
             }else{
-                ReactDOM.render(<MainLayout/>, document.getElementById('root')); /*user already has a profil in our db, go to schedule*/
+                ReactDOM.render(<MainLayout/>, document.getElementById('root'));
             }
-        })
-    }
-    else
+        });
+    } else {
         ReactDOM.render(<Welcome/>, document.getElementById('root'));
+    }
 });
 
 /*
