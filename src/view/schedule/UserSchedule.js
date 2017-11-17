@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import AddCourse from './AddCourse'
 import DropCourse from './DropCourse';
 import ReactDOM from 'react-dom';
-import CalendarHelper from './CalendarHelper';
+import CalendarHelper from '../../api/CalendarHelper';
 import RecommendedFriends from "../social/RecommendedFriends";
 import {lookup_profile_by_user_id} from "../../dao/ProfileManager";
 import {lookup_course_by_id} from "../../dao/CourseManager";
@@ -19,6 +19,7 @@ class UserSchedule extends Component {
             numOfEvents : -1
         };
 
+        this.initialize_events();
     }
 
     goto_AddCourse() {
@@ -53,19 +54,22 @@ class UserSchedule extends Component {
                             , get_time_numeric(course_obj.time.split(' - ')[1])]
                     };
                     events.push(event);
-                    this.setState({events : events}, ()=>{
-                        ReactDOM.render(<CalendarHelper events={this.state.events}/>, document.getElementById('calendar-container'));
-                    });
+                    this.setState({events : events});
                 });
             });
         });
     }
 
-    componentWillMount(){
-        this.initialize_events();
-    }
 
     render() {
+
+        // Wait till all the events are loaded
+        if (this.state.numOfEvents !== this.state.events.length)
+        {
+            // Try to make the Loading more stylistic?
+            return <div> Loading... </div>
+        }
+
         return (
 
             <div align={'center'}>
@@ -81,12 +85,14 @@ class UserSchedule extends Component {
 
                 <br/>
 
-                <div id="calendar-container"> </div>
+                <CalendarHelper events={this.state.events}/>
 
                 <h4>いつでもダラダラしたいなぁ...</h4>
                 <h4> うまるちゃん！遊びやめてください、手伝いましょう </h4>
 
+
             </div>
+
         )
     }
 }
