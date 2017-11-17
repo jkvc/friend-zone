@@ -64,6 +64,8 @@ class UserSchedule extends Component{
 
     render(){
 
+
+
         this.initialize_events();
 
         return(

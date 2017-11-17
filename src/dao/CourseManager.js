@@ -1,6 +1,27 @@
 import Course from './Course'
 import firebase from 'firebase';
 
+export function lookup_course_by_id(course_id, callback){
+    firebase.database().ref('Catalog/'+course_id).once('value').then((snapshot)=>{
+        if (snapshot.val()===null){
+            callback({"msg":"course not found"},null);
+        } else {
+            callback(null, new Course(
+                snapshot.val().course_id,
+                snapshot.val().course_code,
+                snapshot.val().course_name,
+                snapshot.val().section,
+                snapshot.val().days,
+                snapshot.val().time,
+                snapshot.val().location,
+                snapshot.val().instructor
+            ))
+        }
+    })
+
+}
+
+
 /* precise lookup by id, callback list of Course */
 export function lookup_course_by_code(course_code, callback){
     let db = firebase.database().ref();

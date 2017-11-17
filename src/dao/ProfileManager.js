@@ -39,7 +39,14 @@ export function add_course_to_profile(user_id, course_id){
     })
 }
 
-
+export function remove_course_from_profile( user_id, course_id ){
+    lookup_profile_by_user_id( user_id, function( err,profile){
+        if(!err){
+            profile.enrolled_courses[course_id] = null;
+            profile.push();
+        }
+    })
+}
 export function create_friend_request(from_id, to_id) {
 
     lookup_profile_by_user_id(from_id, (err, from_profile)=>{
