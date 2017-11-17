@@ -8,6 +8,7 @@ import UserFriends from './social/UserFriends';
 import UserProfile from './profile/UserProfile';
 import Main from './credentials/Welcome';
 import './MainLayout.css'
+import ChatView from "../chat/ChatPortalView";
 
 
 class MainLayout extends Component{
@@ -36,6 +37,10 @@ class MainLayout extends Component{
 
     goto_profile(){
         ReactDOM.render(<UserProfile />, document.getElementById('main-layout'));
+    }
+
+    goto_chat(){
+        ReactDOM.render(<ChatView />, document.getElementById('main-layout'));
     }
 
     logout(){
@@ -73,6 +78,10 @@ class MainLayout extends Component{
                             onClick={this.goto_profile.bind(this)}>
                         Profile
                     </button>
+                    <button className="button-nav-bar"
+                            onClick={this.goto_chat.bind(this)}>
+                        Chat
+                    </button>
 
                     <button className="logout-button"
                             onClick={this.logout.bind(this)}>
@@ -88,7 +97,6 @@ class MainLayout extends Component{
                 <div className="below-nav-bar">
                     <div id="main-layout" className="middle-panel">
 
-
                     </div>
                 </div>
 
@@ -97,7 +105,7 @@ class MainLayout extends Component{
     }
 
     componentDidMount(){
-        ReactDOM.render(<UserSchedule />, document.getElementById('main-layout'));
+        ReactDOM.render(<ChatView />, document.getElementById('main-layout'));
     }
 }
 

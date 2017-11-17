@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
-import {create_chat_session} from "./ChatSessionManager";
+import ReactDOM from 'react-dom';
+import StartNewChatView from "./StartNewChatView";
 
 class ChatView extends Component{
 
@@ -12,8 +13,6 @@ class ChatView extends Component{
             active_chat: null,
             session_obj: null
         }
-
-
     }
 
     /*happens before render*/
@@ -29,10 +28,16 @@ class ChatView extends Component{
         });
     }
 
+    goto_start_chat(){
+        ReactDOM.render(<StartNewChatView />, document.getElementById('main-layout'));
+    }
+
     render(){
         return(
-
             <div>
+
+                <button onClick={this.goto_start_chat}> start new chat </button>
+
                 <pre>{JSON.stringify(this.state,null,2)}</pre>
             </div>
 

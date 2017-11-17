@@ -1,16 +1,12 @@
 import firebase from 'firebase';
 
-export function create_portal(user_id, session_id, participant_names){
-
-    var participant_name_obj = {};
-    for (var j=0; j<participant_names.length; j+=1)
-        participant_name_obj[participant_names[j]] = true;
+export function create_portal(user_id, session_id, chat_title){
 
     var now_millis = Date.now();
 
     let portal_obj = {
         session_id: session_id,
-        participant_names: participant_name_obj,
+        title: chat_title,
         unread: false,
         most_recent: now_millis
     };
