@@ -41,7 +41,7 @@ class RecommendedFriends extends Component{
                     /*query most_popular_in_list once after finish loading*/
                     if (aggregated_ids.length === course_list.length){
                         var query = {
-                            count: 10,
+                            count: 5,
                             list: this.state.all_classmates
                         };
 
@@ -62,19 +62,32 @@ class RecommendedFriends extends Component{
                                 })
                             }
 
-                        })
+                        }) /*end of callback from most popular in list*/
                     }
 
-                })
-            })
+                }) /*end of callback from lookup enrollment by id */
 
-        })
+            }) /*end of for each course_id in this user's profile*/
+
+        }) /*end of callback from looking up this user's profile*/
     }
 
     render(){
         return(
 
             <div>
+
+                {
+                    this.state.recommendation_profiles.map((profile)=>{
+                        return(
+                            <div key={"recommended-friend-"+profile.user_id}>
+                                <br/>
+                                Friend name: {profile.first_name} {profile.last_name}
+                                <button>Send friend request</button>
+                            </div>
+                        )
+                    })
+                }
 
                 <pre>{JSON.stringify(this.state,null,2)}</pre>
 
