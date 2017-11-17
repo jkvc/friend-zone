@@ -1,8 +1,11 @@
-import Profile from './Profile'
+import Profile from './Profile';
 import firebase from 'firebase';
 
 
-/* callback (true, null) if dne or (null, Profile) */
+/**
+ * Return the user profile by user id.
+ * callback (true, null) if does not exist (dne),
+ * otherwise, callback (null, Profile) */
 export function lookup_profile_by_user_id(user_id, callback){
     let db = firebase.database();
     db.ref('Profile/'+user_id).once('value').then(function(snapshot){
