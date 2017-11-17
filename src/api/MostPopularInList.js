@@ -29,7 +29,7 @@ export function most_popular_in_list(param, callback){
     /*handle some error, each error message will be printed out to the console*/
     /*comment out 'console.log' if error messages are not desired */
     var err = null;
-    if ( !("count" in param && "list" in param) ) {
+    if ( !("count" in param && "list" in param) ) { 
         callback(err = new Error("Missing states in param to most_popular_in_list", 9), null);
         console.log(err);
         return;

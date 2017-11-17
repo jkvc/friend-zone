@@ -19,9 +19,10 @@ class UserSchedule extends Component{
     {
         // Replace this with a DB get and parse the data into this format
         var events = [
-            {"days":"MWF", "hours":["1130", "1230"], "title":"CSE11" },
-            {"days":"TuTh", "hours":["1020", "1120"], "title":"CSE100"},
-            {"days":"MWTu", "hours":["0010", "1100"], "title":"Chilling"}
+            {"days":"MWF", "hours":["1130", "1230"], "title":"A" },
+            {"days":"TuTh", "hours":["1020", "1120"], "title":"B"},
+            {"days":"MWTu", "hours":["0010", "1100"], "title":"C"},
+            {"days":"MTu", "hours":["1030","1800"], "title":"D"}
         ];
         this.events = events;
     }
