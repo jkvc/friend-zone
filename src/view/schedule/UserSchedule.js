@@ -33,8 +33,8 @@ class UserSchedule extends Component {
         ReactDOM.render(<DropCourse />, document.getElementById('main-layout'));
     }
 
-    initialize_events() {
 
+    initialize_events() {
         lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err, profile_obj) => {
             let enrolled_obj = profile_obj.enrolled_courses;
             let course_list = Object.keys(enrolled_obj);

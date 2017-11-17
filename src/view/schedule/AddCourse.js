@@ -17,8 +17,10 @@ class AddCourse extends Component{
         };
     }
 
-    lookup(course_code){
-        lookup_course(course_code, this.callback_lookup_result.bind(this));
+    lookup(search_key){
+        if (search_key.length > 2) lookup_course(search_key, this.callback_lookup_result.bind(this));
+        else this.setState({result: []})
+
     }
 
     callback_lookup_result(err, data){
