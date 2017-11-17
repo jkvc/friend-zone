@@ -40,28 +40,41 @@ export function add_course_to_profile(user_id, course_id){
 }
 
 
+export function create_friend_request(from_id, to_id) {
 
-// /*first time edit the user data
-//   no callback fucntion since there should not be duplcate insertion so no error*/
-// export function writeUserInfo(user_id, firstname, lastname, major, currentyear, profileURL, mydescription) {
-//   firebase.database().ref('Profile/' + user_id).set({
-//     first_name: firstname,
-//     last_name: lastname,
-//     major: major,
-//     current_year: currentyear,
-//     profile_pic: profileURL,
-//     user_description: mydescription
-//   });
-// }
-//
-// /*updating userInfo*/
-// export function updateUserInfo(user_id, Field, Content){
-//
-//   var userToUpdate = usersRef.child("user_id");
-//   userToUpdate.update({
-//     Field: Content
-//   });
-//
-// }
-//
-// /*delete user info, might be called when deleting a specific user? not likely though*/
+    lookup_profile_by_user_id(from_id, (err, from_profile)=>{
+        from_profile.outgoing_request[to_id] = true;
+        from_profile.push();
+    });
+    lookup_profile_by_user_id(to_id, (err, to_profile)=>{
+        to_profile.incoming_request[from_id] = true;
+        to_profile.push();
+    })
+}
+
+export function accept_friend_request(from_id, to_id){
+
+    lookup_profile_by_user_id(to_id, (err, to_object)=>{
+        to_object.incoming_request[from_id] = null;
+        to_object.friend_list[from_id] = true;
+        to_object.push();
+    });
+    lookup_profile_by_user_id(from_id, (err, from_object)=>{
+        from_object.outgoing_request[to_id] = null;
+        from_object.friend_list[to_id] = true;
+        from_object.push();
+    })
+}
+
+export function decline_friend_request(from_id, to_id){
+
+    lookup_profile_by_user_id(to_id, (err, to_object)=>{
+        to_object.incoming_request[from_id] = null;
+        to_object.push();
+    });
+    lookup_profile_by_user_id(from_id, (err, from_object)=>{
+        from_object.outgoing_request[to_id] = null;
+        from_object.push();
+    })
+}
+
