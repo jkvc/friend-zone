@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {get_time_percentage, get_weekday_array} from './TimeHelper';
+import {get_time_percentage, get_weekday_array} from '../../api/TimeHelper';
 /*
  * @author: Yiming Cai
  */

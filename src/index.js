@@ -12,7 +12,7 @@ import InitProfile from './view/profile/InitProfile'
 import {test_most_popular_in_list} from './test/TestMostPopularInList';
 
 // eslint-disable-next-line
-import CalendarHelper from './api/CalendarHelper';
+import CalendarHelper from './view/schedule/CalendarHelper';
 
 // eslint-disable-next-line
 import {test_time_helper} from "./test/TestTimeHelper";
