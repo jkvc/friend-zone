@@ -27,6 +27,9 @@ class CalendarHelper extends Component
         this.calendardays = []; // calendarDays is the array of CalendarDay objects. There will be 7 of them
         this.startT = null;     // startT indicates the earliest time found in all the events
         this.endT = null;       // endT indicates the latest time found in all the events
+
+        // Initialize all the calendar days
+        this.initialize(this.events);
     }
 
 
@@ -85,8 +88,6 @@ class CalendarHelper extends Component
 
     render()
     {
-        // Initialize all the calendar days
-        this.initialize(this.events);
 
         // Render each CalendarDay component in a table
         return <div class="CalendarHelper">
@@ -139,6 +140,8 @@ class CalendarDay extends Component
         // This means that the collision detection is accurate to the minutes unit
         // But only unique collisions (no duplicate) will be found in this.collisions
         this.collisions = null;
+
+        this.initialize(this.events);
     }
 
     initialize(events)
@@ -210,7 +213,6 @@ class CalendarDay extends Component
 
     render()
     {
-        this.initialize(this.events);
 
         /* This will render a list of CalendarEvent components within this calendar day*/
         return <div class="CalendarDay">
@@ -248,6 +250,7 @@ class CalendarEvent extends Component
         this.startRatio = null;
         this.endRatio = null;
 
+        this.initialize();
     }
 
     initialize()
@@ -260,7 +263,6 @@ class CalendarEvent extends Component
 
     render()
     {
-        this.initialize();
 
         return <div class="Event"> {this.event.hours[0]} to {this.event.hours[1]} in {this.event.title + "\t"} </div>
 

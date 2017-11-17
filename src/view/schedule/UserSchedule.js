@@ -14,7 +14,12 @@ class UserSchedule extends Component {
     constructor(props) {
         super(props);
         this.title = "UserSchedule.js";
-        this.events = [];
+        this.state = {
+            events : [],
+            numOfEvents : -1
+        };
+
+        this.initialize_events();
     }
 
     goto_AddCourse() {
@@ -29,9 +34,12 @@ class UserSchedule extends Component {
     }
 
     initialize_events() {
+
         lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err, profile_obj) => {
             let enrolled_obj = profile_obj.enrolled_courses;
             let course_list = Object.keys(enrolled_obj);
+            this.setState({numOfEvents : course_list.length});
+            let events = [];
 
             course_list.forEach((course_id) => {
 
@@ -45,27 +53,20 @@ class UserSchedule extends Component {
                         "hours": [get_time_numeric(course_obj.time.split(' - ')[0])
                             , get_time_numeric(course_obj.time.split(' - ')[1])]
                     };
-                    this.events.push(event);
-                    console.log(event.title);
-
+                    events.push(event);
+                    this.setState({events : events});
                 });
             });
         });
-
-        // Replace this with a DB get and parse the data into this format
-        // let events = [
-        //     {"days":"MWF", "hours":["1130", "1230"], "title":"A" },
-        //     {"days":"TTh", "hours":["1020", "1120"], "title":"B"},
-        //     {"days":"MWT", "hours":["0010", "1100"], "title":"C"},
-        //     {"days":"MT", "hours":["1030","1800"], "title":"D"}
-        // ];
-        // this.events = events;
     }
 
     render() {
 
-
-        this.initialize_events();
+        // Wait till all the events are loaded
+        if (this.state.numOfEvents !== this.state.events.length)
+        {
+            return <div> Loading... </div>
+        }
 
         return (
 
@@ -82,7 +83,7 @@ class UserSchedule extends Component {
 
                 <br/>
 
-                <CalendarHelper events={this.events}/>
+                <CalendarHelper events={this.state.events}/>
 
                 <h4>いつでもダラダラしたいなぁ...</h4>
                 <h4> うまるちゃん！遊びやめてください、手伝いましょう </h4>
