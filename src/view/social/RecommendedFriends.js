@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
-import {lookup_profile_by_user_id} from "../../dao/ProfileManager";
+import {create_friend_request, lookup_profile_by_user_id} from "../../dao/ProfileManager";
 import {lookup_enrollment_by_id} from "../../dao/EnrollmentManager";
 import {most_popular_in_list} from "../../api/MostPopularInList";
 
@@ -83,7 +83,10 @@ class RecommendedFriends extends Component{
                             <div key={"recommended-friend-"+profile.user_id}>
                                 <br/>
                                 Friend name: {profile.first_name} {profile.last_name}
-                                <button>Send friend request</button>
+
+                                <button onClick={()=> {create_friend_request(firebase.auth().currentUser.uid,profile.user_id);} }>
+                                    Send friend request</button>
+
                             </div>
                         )
                     })
