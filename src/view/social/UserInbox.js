@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {accept_friend_request, decline_friend_request, lookup_profile_by_user_id} from "../../dao/ProfileManager";
 import firebase from 'firebase';
-import ReactDOM from 'react-dom';
 
 
 class UserInbox extends Component{

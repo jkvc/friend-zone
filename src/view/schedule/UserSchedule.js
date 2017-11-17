@@ -26,31 +26,31 @@ class UserSchedule extends Component{
 
     initialize_events()
     {
-        lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err, profile_obj)=> {
-            let enrolled_obj = profile_obj.enrolled_courses;
-            let course_list = Object.keys(enrolled_obj);
-
-            course_list.forEach((course_id)=>{
-
-                // It is currently returning all the courses with the same course code (CSE30)
-                // Should replace this with course_id (CSE30_B00)
-                lookup_course_by_code(course_id.split('_')[0], (err, course_obj) =>{
-                    for (let j in course_obj)
-                    {
-                        if (course_obj[j].course_id === course_id) {
-                            let event = {
-                                "title":course_obj[j].course_id,
-                                "days":course_obj[j].days,
-                                "hours": [ get_time_numeric(course_obj[j].time.split(' - ')[0])
-                                    , get_time_numeric(course_obj[j].time.split(' - ')[1]) ]
-                            };
-                            this.events.push(event);
-                            console.log(event.title);
-                        }
-                    }
-                });
-            });
-        });
+        // lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err, profile_obj)=> {
+        //     let enrolled_obj = profile_obj.enrolled_courses;
+        //     let course_list = Object.keys(enrolled_obj);
+        //
+        //     course_list.forEach((course_id)=>{
+        //
+        //         // It is currently returning all the courses with the same course code (CSE30)
+        //         // Should replace this with course_id (CSE30_B00)
+        //         lookup_course_by_code(course_id.split('_')[0], (err, course_obj) =>{
+        //             for (let j in course_obj)
+        //             {
+        //                 if (course_obj[j].course_id === course_id) {
+        //                     let event = {
+        //                         "title":course_obj[j].course_id,
+        //                         "days":course_obj[j].days,
+        //                         "hours": [ get_time_numeric(course_obj[j].time.split(' - ')[0])
+        //                             , get_time_numeric(course_obj[j].time.split(' - ')[1]) ]
+        //                     };
+        //                     this.events.push(event);
+        //                     console.log(event.title);
+        //                 }
+        //             }
+        //         });
+        //     });
+        // });
 
         // Replace this with a DB get and parse the data into this format
         // let events = [
