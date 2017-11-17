@@ -25,11 +25,13 @@ export function get_weekday_array(weekday_string)
         }
         else if (s_days[j] === 'T') {
             j++;
-            if (s_days[j] === 'u') {
-                dayArray[2]= true;
-            }
-            else if (s_days[j] === 'h') {
+            if (s_days[j] === 'h') {
                 dayArray[4]= true;
+            }
+            else
+            {
+                j--;
+                dayArray[2]= true;
             }
         }
         else if (s_days[j] === 'W') {
