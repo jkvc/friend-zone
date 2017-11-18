@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-export function create_portal(user_id, session_id, chat_title){
+export function create_portal(self_id, session_id, chat_title){
 
     var now_millis = Date.now();
 
@@ -8,8 +8,26 @@ export function create_portal(user_id, session_id, chat_title){
         session_id: session_id,
         title: chat_title,
         unread: false,
-        most_recent: now_millis
+        time: now_millis
     };
 
-    firebase.database().ref('ChatPortal/'+user_id ).child(session_id).set(portal_obj)
+    firebase.database().ref('ChatPortal/'+self_id ).child(session_id).set(portal_obj)
+}
+
+export function read_portal(self_id, session_id){
+    firebase.database().ref('ChatPortal/'+self_id+'/'+session_id ).child('unread').set(false);
+}
+
+export function unread_portal(self_id, session_id){
+    firebase.database().ref('ChatPortal/'+self_id+'/'+session_id ).child('unread').set(true);
+}
+
+export function update_timestamp(self_id, session_id, timestamp) {
+    firebase.database().ref('ChatPortal/'+self_id+'/'+session_id ).child('time').set(timestamp);
+}
+
+export function sort_portal_by_time(a,b){
+    if (a.time>b.time) return -1;
+    if (a.time<b.time) return 1;
+    return 0;
 }

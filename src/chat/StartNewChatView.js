@@ -12,7 +12,7 @@ class StartNewChatView extends Component {
         super(props);
         this.state = {
             profile_obj: null,
-            friend_profiles: [],
+            friend_profiles: {},
             selected_friend_id: [],
             selected_friend_name: [],
             chat_title: ""
@@ -30,11 +30,11 @@ class StartNewChatView extends Component {
     /*called after getting this users profile*/
     get_friend_profiles() {
         var friend_id_list = Object.keys(this.state.profile_obj.friend_list);
-        var aggregated_friend_profiles = [];
+        var aggregated_friend_profiles = {};
         friend_id_list.forEach((friend_id) => {
             lookup_profile_by_user_id(friend_id, (err, data) => {
                 if (!err) {
-                    aggregated_friend_profiles.push(data);
+                    aggregated_friend_profiles[friend_id] = data;
                     this.setState({
                         friend_profiles: aggregated_friend_profiles
                     })
@@ -43,7 +43,7 @@ class StartNewChatView extends Component {
         })
     }
 
-    /*add selection to start a chat*/
+    /*add to selected_friends*/
     add_select(friend_id, friend_name) {
         let new_id_list = this.state.selected_friend_id;
         new_id_list.push(friend_id);
@@ -54,11 +54,27 @@ class StartNewChatView extends Component {
         this.setState({selected_friend_name: new_name_list})
     }
 
+    /*remove from selected friends*/
+    remove_select(index){
+        var friend_id_list = this.state.selected_friend_id;
+        var friend_name_list = this.state.selected_friend_name;
+
+        friend_id_list.splice(index,1);
+        friend_name_list.splice(index,1);
+
+        this.setState({
+            selected_friend_id: friend_id_list,
+            selected_friend_name: friend_name_list
+        })
+    }
+
     start_chat() {
         var my_name = this.state.profile_obj.first_name + " " + this.state.profile_obj.last_name;
-        var participants = this.state.selected_friend_id;
-        participants.push(firebase.auth().currentUser.uid);
-        create_chat_session(my_name, participants, this.state.chat_title, (session_id)=>{
+
+        var participant_ids = this.state.selected_friend_id;
+        participant_ids.push(firebase.auth().currentUser.uid);
+
+        create_chat_session(my_name, participant_ids, this.state.chat_title, (session_id) => {
             ReactDOM.render(<ChatSessionView session_id={session_id}/>, document.getElementById('session-container'));
         })
     }
@@ -76,20 +92,24 @@ class StartNewChatView extends Component {
                            onChange={e => this.setState({chat_title: e.target.value})}/>
 
                     <button className="start_chat_button"
-                            onClick={this.start_chat.bind(this)}>start chat
+                            onClick={this.start_chat.bind(this)}
+                            disabled={this.state.selected_friend_id.length===0 || this.state.chat_title.length === 0}>
+                        start chat
                     </button>
-
                 </div>
 
 
                 <div className="selected_friend_bar">
                     Selected: <br/>
                     {
-                        this.state.selected_friend_name.map((friend_name) => {
+                        this.state.selected_friend_name.map((friend_name, index) => {
                             return (
                                 <div className="selected_friend_entry"
-                                    key={"friend-selected-" + friend_name}>
+                                     key={"friend-selected-" + index}>
                                     {friend_name}
+
+                                    <button onClick={()=>{this.remove_select(index)}}>
+                                        remove</button>
                                 </div>
                             )
                         })
@@ -99,17 +119,18 @@ class StartNewChatView extends Component {
 
                 <div className="potential_friend_container">
                     {
-                        this.state.friend_profiles.map((friend_profile) => {
+                        Object.keys(this.state.friend_profiles).map((friend_profile_key, index) => {
+                            var friend_profile = this.state.friend_profiles[friend_profile_key]
                             return (
                                 <div className="potential_friend_entry"
-                                    key={"friend-profile-" + friend_profile.user_id}>
+                                     key={"friend-profile-" + index}>
                                     Friend: {friend_profile.first_name} {friend_profile.last_name}
 
-                                    <button onClick={() => {
-                                        this.add_select(friend_profile.user_id, friend_profile.first_name + friend_profile.last_name)
+                                    <button disabled={this.state.selected_friend_id.indexOf(friend_profile.user_id)!==-1}
+                                        onClick={() => {
+                                        this.add_select(friend_profile.user_id, friend_profile.first_name + " " + friend_profile.last_name)
                                     }}> select
                                     </button>
-
                                 </div>
                             )
                         })
@@ -118,7 +139,7 @@ class StartNewChatView extends Component {
                 </div>
 
 
-                {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
+                <pre>{JSON.stringify(this.state, null, 2)}</pre>
             </div>
 
         )

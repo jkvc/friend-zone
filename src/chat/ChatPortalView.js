@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import StartNewChatView from "./StartNewChatView";
 import ChatSessionView from "./ChatSessionView";
 import "./ChatPortalView.css"
+import {read_portal, sort_portal_by_time} from "./ChatPortalManager";
 
 class ChatPortalView extends Component {
 
@@ -13,7 +14,8 @@ class ChatPortalView extends Component {
         this.state = {
             portals: [],
             active_chat: null,
-            session_obj: null
+            session_obj: null,
+            friend_profiles: {}
         };
     }
 
@@ -23,37 +25,53 @@ class ChatPortalView extends Component {
         var ref = firebase.database().ref('ChatPortal/' + uid);
 
         ref.on('child_changed', (snapshot) => {
-            this.get_portal_list(snapshot)
+            var updated_portal = snapshot.val();
+            var portal_list = this.state.portals;
+
+            /*remove the portal from its original position and put it in the beginning*/
+            for (var i = 0; i < portal_list.length; i += 1) {
+                if (portal_list[i].session_id === updated_portal.session_id) {
+                    portal_list.splice(i,1);
+                    portal_list.unshift(updated_portal);
+                    break;
+                }
+            }
+            this.setState({portals: portal_list});
         });
 
         ref.on('child_added', (snapshot) => {
             var new_portal = snapshot.val();
             var portal_list = this.state.portals;
-            portal_list.push(new_portal);
-            this.setState({portals:portal_list})
+            /*put this new portal at the BEGINNING of list*/
+            portal_list.unshift(new_portal);
+            this.setState({portals: portal_list})
         });
 
         ref.once('value').then((snapshot) => {
-            this.get_portal_list(snapshot)
+            var portals_obj = snapshot.val() || {};
+            var portal_keys = Object.keys(portals_obj);
+            var portals_list = [];
+            for (var i = 0; i < portal_keys.length; i += 1) {
+                portals_list.push(portals_obj[portal_keys[i]])
+            }
+            /*sort it by time*/
+            portals_list.sort(sort_portal_by_time);
+            this.setState({portals: portals_list});
         });
+
     }
 
-    get_portal_list(snapshot) {
-        var portals_obj = snapshot.val() || {};
-        var portal_keys = Object.keys(portals_obj);
-        var portals_list = [];
-        for (var i = 0; i < portal_keys.length; i += 1) {
-            portals_list.push(portals_obj[portal_keys[i]])
-        }
-        this.setState({portals: portals_list});
-    }
+
+
 
     goto_start_chat() {
         ReactDOM.render(<StartNewChatView/>, document.getElementById('session-container'));
     }
 
     goto_chat_session(session_id) {
-        ReactDOM.render(<ChatSessionView session_id={session_id}/>, document.getElementById('session-container'));
+        read_portal(firebase.auth().currentUser.uid, session_id);
+        ReactDOM.render(<ChatSessionView session_id={session_id}
+                                         key={"chat_session-" + session_id}/>, document.getElementById('session-container'));
     }
 
     render() {
@@ -80,13 +98,19 @@ class ChatPortalView extends Component {
                     <div className="below_search_chat_bar">
                         {
                             this.state.portals.map((portal, index) => {
+
+                                var portal_class = "portal_entry";
+                                if (portal.unread) portal_class = "portal_entry_unread";
+
                                 return (
 
-                                    <div className="portal_entry"
+                                    <div className={portal_class}
+
                                          key={"portal-" + index} onClick={() => {
                                         this.goto_chat_session(portal.session_id)
                                     }}>
-                                        ChatTitle: {portal.title}
+                                        ChatTitle: {portal.title} <br/>
+                                        Time: {portal.time}
 
                                     </div>
 
@@ -98,7 +122,7 @@ class ChatPortalView extends Component {
                 </div>
 
 
-                {/*<pre>{JSON.stringify(this.state,null,2)}</pre>*/}
+                {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
             </div>
 
         )

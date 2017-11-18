@@ -4,6 +4,7 @@ import {add_message} from "./ChatSessionManager";
 import {lookup_profile_by_user_id} from "../dao/ProfileManager";
 
 import './ChatSessionView.css'
+import {read_portal} from "./ChatPortalManager";
 
 class ChatSessionView extends Component {
 
@@ -43,7 +44,6 @@ class ChatSessionView extends Component {
         lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err, profile_obj) => {
             this.setState({my_name: profile_obj.first_name + " " + profile_obj.last_name})
         })
-
     }
 
 
@@ -53,12 +53,16 @@ class ChatSessionView extends Component {
     }
 
     handle_input_key_press(e) {
-        if (e.key === 'Enter') {
-            add_message(this.state.session_id, this.state.my_name, this.state.input);
-            this.setState({input: ""})
+        if (e.key === 'Enter' && this.state.input.length > 0) {
+            this.send_message();
+            read_portal(firebase.auth().currentUser.uid, this.state.session_id);
         }
     }
 
+    send_message(){
+        add_message(this.state.session_id, this.state.my_name, this.state.input);
+        this.setState({input: ""})
+    }
 
     render() {
         return (
