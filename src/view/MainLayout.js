@@ -8,7 +8,7 @@ import UserFriends from './social/UserFriends';
 import UserProfile from './profile/UserProfile';
 import Main from './credentials/Welcome';
 import './MainLayout.css'
-import ChatView from "../chat/ChatPortalView";
+import ChatView from "../chat/ChatView";
 
 
 class MainLayout extends Component{
