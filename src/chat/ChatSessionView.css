@@ -1,6 +1,6 @@
 .message_container{
     background-color: lightcoral;
-    height: calc(80vh - 50px);;
+    height: calc(85vh - 80px);;
     overflow-y: auto;
     width: 95% ;
     margin-left: auto;
@@ -13,6 +13,7 @@
     width: 100%;
     margin-bottom: 2px;
     font-size: smaller;
+    overflow-wrap: break-word;
 }
 
 .message_input{

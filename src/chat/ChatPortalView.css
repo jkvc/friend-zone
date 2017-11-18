@@ -59,3 +59,15 @@
     font-size: smaller;
     font-weight: bolder;
 }
+
+.portal_entry_active{
+    background-color: #2f5597;
+    color: white;
+    margin-bottom: 2px;
+    float: top;
+    width: 100%;
+    cursor: pointer;
+    vertical-align: middle;
+    font-size: smaller;
+    font-weight: bolder;
+}

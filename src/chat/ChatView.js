@@ -27,7 +27,7 @@ class ChatView extends Component{
 
 
     componentDidMount(){
-        ReactDOM.render(<ChatPortalView />, document.getElementById('portal-container'));
+        ReactDOM.render(<ChatPortalView id='chat-portal-view'/>, document.getElementById('portal-container'));
 
     }
 

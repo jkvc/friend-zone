@@ -13,9 +13,9 @@ class ChatPortalView extends Component {
 
         this.state = {
             portals: [],
-            active_chat: null,
+            active_chat: props.active,
             session_obj: null,
-            friend_profiles: {}
+            friend_profiles: {},
         };
     }
 
@@ -28,14 +28,14 @@ class ChatPortalView extends Component {
             var updated_portal = snapshot.val();
             var portal_list = this.state.portals;
 
-            /*remove the portal from its original position and put it in the beginning*/
+            /*update this portal in its original position then sort again*/
             for (var i = 0; i < portal_list.length; i += 1) {
                 if (portal_list[i].session_id === updated_portal.session_id) {
-                    portal_list.splice(i,1);
-                    portal_list.unshift(updated_portal);
-                    break;
+                    portal_list[i] = updated_portal;
+                    break
                 }
             }
+            portal_list.sort(sort_portal_by_time);
             this.setState({portals: portal_list});
         });
 
@@ -45,6 +45,7 @@ class ChatPortalView extends Component {
             /*put this new portal at the BEGINNING of list*/
             portal_list.unshift(new_portal);
             this.setState({portals: portal_list})
+
         });
 
         ref.once('value').then((snapshot) => {
@@ -61,14 +62,17 @@ class ChatPortalView extends Component {
 
     }
 
-
-
+    update_active(session_id){
+        this.setState({active_chat:session_id});
+    }
 
     goto_start_chat() {
-        ReactDOM.render(<StartNewChatView/>, document.getElementById('session-container'));
+        this.setState({active_chat:""});
+        ReactDOM.render(<StartNewChatView callback={this.update_active.bind(this)}/>, document.getElementById('session-container'));
     }
 
     goto_chat_session(session_id) {
+        this.setState({active_chat:session_id});
         read_portal(firebase.auth().currentUser.uid, session_id);
         ReactDOM.render(<ChatSessionView session_id={session_id}
                                          key={"chat_session-" + session_id}/>, document.getElementById('session-container'));
@@ -101,6 +105,7 @@ class ChatPortalView extends Component {
 
                                 var portal_class = "portal_entry";
                                 if (portal.unread) portal_class = "portal_entry_unread";
+                                if (portal.session_id === this.state.active_chat) portal_class = "portal_entry_active";
 
                                 return (
 

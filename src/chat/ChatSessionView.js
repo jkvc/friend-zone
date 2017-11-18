@@ -76,9 +76,9 @@ class ChatSessionView extends Component {
 
                                 <div key={'message-' + index}
                                      className="message_entry">
-                                    time: {message.time} <br/>
-                                    sender: {message.sender} <br/>
-                                    message: {message.msg} <br/>
+                                    {message.sender} @
+                                    {message.time} <br/>
+                                    &nbsp;&nbsp; {message.msg}
                                     <br/>
                                 </div>
 

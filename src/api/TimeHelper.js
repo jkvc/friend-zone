@@ -172,3 +172,4 @@ export function get_time_numeric(timestring, callback)
     callback(null);
     return hour+min;
 }
+
