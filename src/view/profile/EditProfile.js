@@ -50,7 +50,7 @@ class EditProfile extends Component{
         this.profile_obj.major = this.state.major;
         this.profile_obj.current_year = this.state.current_year;
         this.profile_obj.first_name = this.state.first_name;
-        this.profile_obj.profile_pic = "";
+        this.profile_obj.profile_pic = this.state.profile_pic;
         this.profile_obj.description = this.state.description;
         this.profile_obj.push();
     }
