@@ -79,7 +79,7 @@ class UserInbox extends Component{
                     })
                 }
 
-                <pre>{JSON.stringify(this.state,null,2)}</pre>
+                {/*<pre>{JSON.stringify(this.state,null,2)}</pre>*/}
 
             </div>
 
