@@ -50,7 +50,7 @@ class EditProfile extends Component{
         this.profile_obj.major = this.state.major;
         this.profile_obj.current_year = this.state.current_year;
         this.profile_obj.first_name = this.state.first_name;
-        this.profile_obj.profile_pic = this.state.profile_pic;
+        this.profile_obj.profile_pic = "";
         this.profile_obj.description = this.state.description;
         this.profile_obj.push();
     }
@@ -106,10 +106,6 @@ class EditProfile extends Component{
                 description:<input type="text" value={this.state.description}
                                     onChange={e=> this.setState({description:e.target.value})} />
 
-                <br/>
-                uploadFile:<input type="file" name="myImage" accept="image/*"
-                               onChange={e=> this.upload_image(e)} />
-                
 
                 <br/>
                 <button onClick={this.handle_update.bind(this)}> Update </button>
@@ -117,6 +113,19 @@ class EditProfile extends Component{
 
                 <br/>
 
+                <br/>
+                <br/>
+
+                {/*NOTED: issue with the upload image, you have to first update the profile and seperately submit
+                the profile picture in another button to change it, it should not be put into the update profile
+                form all together*/}
+                <br/>
+
+                submit Picture:<input type="file" name="myImage" accept="image/*"
+                               onChange={e=> this.upload_image(e)} />
+                
+                <br/>
+                <br/>
                 state:
                 <pre>{JSON.stringify(this.state, null, 2)}</pre>
 
