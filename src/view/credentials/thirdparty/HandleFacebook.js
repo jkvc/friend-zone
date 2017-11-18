@@ -6,18 +6,20 @@ export function handle_facebook_login(callback) {
     var provider = new firebase.auth.FacebookAuthProvider();
     firebase.auth().useDeviceLanguage();
 
-    firebase.auth().signInWithRedirect(provider);
-    // TODO need to seperate these two methods by moving getRedirectResult outside of hadnle_facebook_login
-    firebase.auth().getRedirectResult().then(function(result) {
+    firebase.auth().signInWithRedirect(provider).then( () => {
 
-        // This gives you a Facebook access token. you can use it to access the facebook api.
-        //var token = result.credential.accessToken; // result.credential is null
+        // TODO need to seperate these two methods by moving getRedirectResult outside of hadnle_facebook_login
+        firebase.auth().getRedirectResult().then(function(result) {
 
-        // the signed-in user info.
-        var user = result.user;
-        callback(null, user);
+            // This gives you a Facebook access token. you can use it to access the facebook api.
+            //var token = result.credential.accessToken; // result.credential is null
 
-    }).catch(function(error) {
-        callback(error);
+            // the signed-in user info.
+            var user = result.user;
+            callback(null, user);
+
+        }).catch(function(error) {
+            callback(error);
+        });
     });
 }

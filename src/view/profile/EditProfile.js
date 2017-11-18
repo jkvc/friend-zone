@@ -21,6 +21,7 @@ class EditProfile extends Component{
             profile_pic: "",
             description: ""
         };
+
         this.initialized = false;
     }
 
@@ -54,6 +55,33 @@ class EditProfile extends Component{
         this.profile_obj.push();
     }
 
+
+    upload_image(e) {
+        e.preventDefault();
+        var file = e.target.files[0];
+        // upload the profile picture to firebase storage
+        var storageRef = firebase.storage().ref('profile_pic/' + file.name);
+        var uploadTask = storageRef.put(file);
+
+        uploadTask.on('state_changed', function(snapshot){
+
+        }, function(error) {
+        // Handle unsuccessful uploads
+        }, function() {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        var downloadURL = uploadTask.snapshot.downloadURL;
+
+        //handle update the url inside the user here
+        firebase.database().ref('Profile').child(firebase.auth().currentUser.uid)
+        .update({ "profile_pic": downloadURL});
+
+        });
+
+
+
+    }
+
     render(){
         if (!this.initialized) this.initialize();
 
@@ -77,12 +105,27 @@ class EditProfile extends Component{
                 <br/>
                 description:<input type="text" value={this.state.description}
                                     onChange={e=> this.setState({description:e.target.value})} />
+
+
                 <br/>
                 <button onClick={this.handle_update.bind(this)}> Update </button>
 
 
                 <br/>
 
+                <br/>
+                <br/>
+
+                {/*NOTED: issue with the upload image, you have to first update the profile and seperately submit
+                the profile picture in another button to change it, it should not be put into the update profile
+                form all together*/}
+                <br/>
+
+                submit Picture:<input type="file" name="myImage" accept="image/*"
+                               onChange={e=> this.upload_image(e)} />
+                
+                <br/>
+                <br/>
                 state:
                 <pre>{JSON.stringify(this.state, null, 2)}</pre>
 

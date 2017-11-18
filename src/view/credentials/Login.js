@@ -59,23 +59,8 @@ class Login extends Component {
                 this.setState({
                     err_msg:error.message
                 });
-                /*
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                if (errorCode === 'auth/wrong-password') {
-                    alert('Wrong password.');
-                } else {
-                    alert(errorMessage);
-                }
-                // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential;
-                // ...
-                */
 
-                // TODO somehow this chunk still execute when there is an error
+            // TODO somehow this chunk still execute when there is an error
             } else {
 
                 alert("Logging in... user.providerData: " + user.providerData);
@@ -112,17 +97,13 @@ class Login extends Component {
                     <div className="mid-column-right">
                         <div className="right-middle" align={"center"}>
 
-
                             <div className="logo"> FriendZone </div>
                             <br/>
-
 
                             <div className="subtitle-text">
                                 Use your email and password to log in to FriendZone.
                             </div>
                             <br/>
-
-
 
                             <div className="email-password-container">
                                 <div className="email-password-left" align={"right"}>
@@ -171,8 +152,6 @@ class Login extends Component {
                                 Don't have an account? Sign up here.
                             </button>
                             <br/>
-
-
 
                         </div>
                     </div>

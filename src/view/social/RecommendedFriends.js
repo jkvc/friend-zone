@@ -41,7 +41,7 @@ class RecommendedFriends extends Component{
                     /*query most_popular_in_list once after finish loading*/
                     if (aggregated_ids.length === course_list.length){
                         var query = {
-                            count: 5,
+                            count: 15,
                             list: this.state.all_classmates
                         };
 
