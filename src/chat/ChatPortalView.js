@@ -25,12 +25,20 @@ class ChatPortalView extends Component {
         ref.on('child_changed', (snapshot) => {
             this.get_portal_list(snapshot)
         });
+
+        ref.on('child_added', (snapshot) => {
+            var new_portal = snapshot.val();
+            var portal_list = this.state.portals;
+            portal_list.push(new_portal);
+            this.setState({portals:portal_list})
+        });
+
         ref.once('value').then((snapshot) => {
             this.get_portal_list(snapshot)
         });
     }
 
-    get_portal_list(snapshot){
+    get_portal_list(snapshot) {
         var portals_obj = snapshot.val() || {};
         var portal_keys = Object.keys(portals_obj);
         var portals_list = [];
@@ -41,7 +49,7 @@ class ChatPortalView extends Component {
     }
 
     goto_start_chat() {
-        ReactDOM.render(<StartNewChatView/>, document.getElementById('main-layout'));
+        ReactDOM.render(<StartNewChatView/>, document.getElementById('session-container'));
     }
 
     goto_chat_session(session_id) {
@@ -61,7 +69,10 @@ class ChatPortalView extends Component {
                         <input type="text" className="portal-search-box"
                                placeholder=" Search chat"/>
 
-                        <button className="portal-new-chat-button"> New chat</button>
+                        <button className="portal-new-chat-button"
+                                onClick={this.goto_start_chat.bind(this)}>
+                            New chat
+                        </button>
 
                     </div>
 

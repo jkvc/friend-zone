@@ -2,7 +2,8 @@ import firebase from 'firebase';
 import md5 from 'md5';
 import {create_portal} from "./ChatPortalManager";
 
-export function create_chat_session(initializer_name, participant_ids, chat_title){
+/*callback a session_id*/
+export function create_chat_session(initializer_name, participant_ids, chat_title, callback){
 
     var participant_id_obj = {};
     for (var i=0; i<participant_ids.length; i+=1)
@@ -23,7 +24,8 @@ export function create_chat_session(initializer_name, participant_ids, chat_titl
         msg: "Chat started at " + now_millis
     };
 
-    firebase.database().ref('ChatSession').child(session_id).set(chat_session);
+    firebase.database().ref('ChatSession').child(session_id).set(chat_session)
+        .then(callback(session_id));
 
     participant_ids.forEach((user_id)=>{
         create_portal(user_id, session_id, chat_title);

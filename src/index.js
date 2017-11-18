@@ -17,6 +17,8 @@ import CalendarHelper from './api/CalendarHelper';
 // eslint-disable-next-line
 import {test_time_helper} from "./test/TestTimeHelper";
 
+document.title = "FriendZone";
+
 /* firebase config and setup */
 let config = {
     apiKey: "AIzaSyABmBOMLTEGtBLrjkwcDu9ab0ExE208R-4",

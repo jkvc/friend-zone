@@ -1,6 +1,6 @@
 .message_container{
     background-color: lightcoral;
-    height: 70vh;
+    height: calc(80vh - 50px);;
     overflow-y: auto;
     width: 95% ;
     margin-left: auto;

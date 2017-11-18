@@ -4,13 +4,13 @@
     margin-right: auto;
     margin-top: 15px;
     width: 90%;
-    height: 75vh;
+    height: calc(85vh - 50px);
 }
 
 .search_box_new_chat_bar {
     background-color: brown;
     width: 100%;
-    height: 50px;
+    height: 40px;
 }
 
 .portal-search-box {
@@ -18,7 +18,7 @@
     margin-top: 9px;
     width: 60%;
     font-family: "Biko", sans-serif;
-    font-size: medium;
+    font-size: smaller;
     background-color: lightgoldenrodyellow;
     color: dimgrey;
 }
@@ -28,7 +28,7 @@
     margin-top: 9px;
     margin-left: 10%;
     font-family: "Biko", sans-serif;
-    font-size: medium;
+    font-size: smaller;
 }
 
 .below_search_chat_bar {

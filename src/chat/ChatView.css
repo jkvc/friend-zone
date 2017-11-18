@@ -3,7 +3,7 @@
     min-width:500px;
     width: 100%;
     /*min-height: 500px;*/
-    height: 80vh;
+    height: calc(90vh - 50px);
     background-color: blueviolet;
     margin-left: auto;
     margin-right: auto;
