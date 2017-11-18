@@ -23,7 +23,7 @@ let config = {
     authDomain: "friend-zone-9219b.firebaseapp.com",
     databaseURL: "https://friend-zone-9219b.firebaseio.com",
     projectId: "friend-zone-9219b",
-    storageBucket: "",
+    storageBucket: "gs://friend-zone-9219b.appspot.com",
     messagingSenderId: "1002501074461"
 };
 firebase.initializeApp(config);
