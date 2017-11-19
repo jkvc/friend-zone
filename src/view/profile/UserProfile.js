@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import EditProfile from './EditProfile'
-import Profile from '../../dao/Profile'
-import {lookup_profile_by_user_id} from '../../dao/ProfileManager'
-import firebase from 'firebase';
-import InitProfile from "./InitProfile";
+import {get_self_profile} from "../../api/StaticData";
 
 class UserProfile extends Component{
 
@@ -13,17 +10,8 @@ class UserProfile extends Component{
         super(props);
         this.title = "UserProfile.js";
         this.state = {
-            profile_obj: new Profile("","","","","","","")
+            profile_obj: get_self_profile()
         };
-        this.initialized = false;
-        lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err,data)=>{
-            if (err){
-                /*in case user does not have a profile yet, force them to sign up for one*/
-                ReactDOM.render(<InitProfile />, document.getElementById('main-layout'));
-            } else {
-                this.setState({profile_obj:data})
-            }
-        });
 
     }
 

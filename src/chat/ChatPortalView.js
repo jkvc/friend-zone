@@ -5,9 +5,9 @@ import StartNewChatView from "./StartNewChatView";
 import ChatSessionView from "./ChatSessionView";
 import "./ChatPortalView.css"
 import {read_portal, sort_portal_by_time} from "./ChatPortalManager";
-import {lookup_profile_by_user_id} from "../dao/ProfileManager";
 import default_profile_pic from "../image/DefaultProfilePic.jpg"
 import default_group_chat_pic from "../image/DefaultGroupChatPic.jpg"
+import {get_friend_profiles} from "../api/StaticData";
 
 class ChatPortalView extends Component {
 
@@ -17,8 +17,8 @@ class ChatPortalView extends Component {
         this.state = {
             portals: [],
             active_chat: props.active,
-            friend_profiles: {},
-            initialized: false
+            friend_profiles: get_friend_profiles(),
+            initialized: true
         };
     }
 
@@ -65,23 +65,6 @@ class ChatPortalView extends Component {
             portals_list.sort(sort_portal_by_time);
             this.setState({portals: portals_list})
         });
-
-
-        /*get all friends profiles for rendering name and profile pic*/
-        var aggregated_friend_profile = {};
-        lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err, self_profile) => {
-            var friend_list = Object.keys(self_profile.friend_list);
-
-            friend_list.forEach((friend_id) => {
-                lookup_profile_by_user_id(friend_id, (err, friend_profile) => {
-                    aggregated_friend_profile[friend_profile.user_id] = friend_profile;
-                    this.setState({friend_profiles: aggregated_friend_profile}, () => {
-                        if (Object.keys(aggregated_friend_profile).length === friend_list.length)
-                            this.setState({initialized: true})
-                    });
-                })
-            })
-        })
 
     }
 
@@ -168,7 +151,7 @@ class ChatPortalView extends Component {
                 </div>
 
 
-                {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
+                <pre>{JSON.stringify(this.state, null, 2)}</pre>
             </div>
 
         )

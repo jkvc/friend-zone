@@ -121,7 +121,7 @@ class StartNewChatView extends Component {
                     <button className="start_chat_button"
                             onClick={this.start_chat.bind(this)}
                             disabled={this.state.selected_friend_id.length === 0 ||
-                            this.state.chat_title.length === 0 && this.state.selected_friend_id.length > 1}>
+                            (this.state.chat_title.length === 0 && this.state.selected_friend_id.length > 1)}>
                         start chat
                     </button>
                 </div>

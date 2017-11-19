@@ -1,4 +1,4 @@
-import {add_event_to_profile, lookup_profile_by_user_id} from "../../dao/ProfileManager";
+import {add_event_to_profile} from "../../dao/ProfileManager";
 import React, {Component} from 'react';
 import firebase from 'firebase';
 
