@@ -59,7 +59,7 @@ class EditProfile extends Component{
     upload_image(e) {
         e.preventDefault();
         var file = e.target.files[0];
-        var reader = new FileReader();
+        // var reader = new FileReader();
         // upload the profile picture to firebase storage
         var storageRef = firebase.storage().ref('profile_pic/' + file.name);
         var uploadTask = storageRef.put(file);
