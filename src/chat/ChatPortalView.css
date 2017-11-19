@@ -39,10 +39,15 @@
 
 .below_search_chat_bar {
     float: top;
-    height: calc(100% - 55px);
+    height: calc(100% - 40px);
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
 }
 
 .chat_icon_container {

@@ -99,7 +99,6 @@ class ChatPortalView extends Component {
         if (!this.state.initialized) return (<div>loading</div>)
 
         return (
-            <div>
 
                 <div className="chat_portal_inner">
 
@@ -165,7 +164,6 @@ class ChatPortalView extends Component {
                         }
                     </div>
 
-                </div>
 
 
                 {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}

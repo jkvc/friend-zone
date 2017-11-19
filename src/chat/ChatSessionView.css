@@ -39,7 +39,7 @@
 .bubble_left {
     background: linear-gradient(to right, #ebebeb, transparent);
     max-width: 70%;
-    min-height: 25px;
+    min-height: 20px;
     padding-left: 10px;
     padding-top: 4px;
     padding-bottom: 3px;
@@ -51,7 +51,7 @@
     max-width: 70%;
     text-align: right;
     margin-left: 30%;
-    min-height: 25px;
+    min-height: 20px;
     padding-right: 10px;
     padding-top: 4px;
     padding-bottom: 3px;
