@@ -49,7 +49,7 @@ class ChatSessionView extends Component {
 
     scroll_message_container_to_bottom() {
         var message_container = document.getElementById("message-container");
-        message_container.scrollTop = message_container.scrollHeight;
+        if (message_container) message_container.scrollTop = message_container.scrollHeight;
     }
 
     handle_input_key_press(e) {
@@ -72,14 +72,17 @@ class ChatSessionView extends Component {
                     {
                         this.state.messages.map((message, index) => {
 
+                            var sender = message.sender === this.state.my_name ? "" : message.sender;
+                            var message_bubble_style = message.sender === this.state.my_name ? "bubble_right" : "bubble_left";
+
                             return (
 
                                 <div key={'message-' + index}
                                      className="message_entry">
-                                    {message.sender} @
-                                    {message.time} <br/>
-                                    &nbsp;&nbsp; {message.msg}
-                                    <br/>
+
+                                    <div className="sender">{sender}</div>
+
+                                    <div className={message_bubble_style}>{message.msg}</div>
                                 </div>
 
                             )

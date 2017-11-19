@@ -4,26 +4,24 @@
     width: 100%;
     /*min-height: 500px;*/
     height: calc(90vh - 50px);
-    background-color: blueviolet;
     margin-left: auto;
     margin-right: auto;
 }
 
 .portal_container{
-    background-color: lightblue;
     float: left;
-    width: 30%;
+    width: 29%;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
 .session_container{
-    background-color: lightsalmon;
     position: relative;
     float: left;
     width: 70%;
     height: 100%;
     overflow-y: auto;
+    border-left: solid 1px lightgrey;
 }
 

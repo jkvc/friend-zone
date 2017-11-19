@@ -1,73 +1,104 @@
 .chat_portal_inner {
-    background-color: darkcyan;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
-    width: 90%;
+    width: 100%;
     height: calc(85vh - 50px);
 }
 
-.search_box_new_chat_bar {
-    background-color: brown;
+.search_box_bar {
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     height: 40px;
+    border-bottom: solid 1px lightgrey;
 }
 
 .portal-search-box {
-    float: left;
-    margin-top: 9px;
-    width: 60%;
+    margin-left: 20px;
+    width: calc(100% - 90px);
+    height: 25px;
     font-family: "Biko", sans-serif;
     font-size: smaller;
-    background-color: lightgoldenrodyellow;
+    background-color: #ebebeb;
     color: dimgrey;
+    border: none;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .portal-new-chat-button {
-    float: left;
-    margin-top: 9px;
-    margin-left: 10%;
+    margin-left: 5px;
+    height: 25px;
     font-family: "Biko", sans-serif;
     font-size: smaller;
+    border: none;
+    background: transparent;
+    color: #2f5597;
 }
 
 .below_search_chat_bar {
     float: top;
-    height: calc(100% - 50px);
+    height: calc(100% - 55px);
     width: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.portal_entry{
-    background-color: azure;
-    margin-bottom: 2px;
+.chat_icon_container {
+    float: left;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 1px #ebebeb;
+    margin-left: 10px;
+}
+
+.chat_icon {
+    float: left;
+    width: 100%;
+}
+
+.portal_text_container {
+    float: left;
+    width: calc(100% - 80px);
+    margin-left: 15px;
+    margin-top: 5px;
+    font-family: "Biko", sans-serif;
+}
+
+.portal_entry {
+    height: 60px;
     float: top;
     width: 100%;
+    padding: 5px;
     cursor: pointer;
-    vertical-align: middle;
     font-size: smaller;
 }
 
-
-.portal_entry_unread{
-    background-color: red;
-    margin-bottom: 2px;
+.portal_entry_unread {
+    height: 60px;
     float: top;
     width: 100%;
+    padding: 5px;
     cursor: pointer;
-    vertical-align: middle;
     font-size: smaller;
     font-weight: bolder;
 }
 
-.portal_entry_active{
-    background-color: #2f5597;
-    color: white;
-    margin-bottom: 2px;
+.portal_entry_active {
+    background-color: #ebebeb;
+    height: 60px;
     float: top;
     width: 100%;
+    padding: 5px;
     cursor: pointer;
-    vertical-align: middle;
     font-size: smaller;
-    font-weight: bolder;
+}
+
+.portal_time {
+    color: grey;
+    font-size: xx-small;
 }

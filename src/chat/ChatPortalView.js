@@ -85,6 +85,15 @@ class ChatPortalView extends Component {
                                          key={"chat_session-" + session_id}/>, document.getElementById('session-container'));
     }
 
+    get_timestring(millis) {
+        let time = new Date();
+        time.setTime(millis);
+        var hr = time.getHours()
+        var min = time.getMinutes()
+        var sec = time.getSeconds()
+        return "" + hr + ":" + min + ":" + sec;
+    }
+
     render() {
 
         if (!this.state.initialized) return (<div>loading</div>)
@@ -94,14 +103,15 @@ class ChatPortalView extends Component {
 
                 <div className="chat_portal_inner">
 
-                    <div className="search_box_new_chat_bar">
+                    <div className="search_box_bar">
 
                         <input type="text" className="portal-search-box"
-                               placeholder=" Search chat"/>
+                               placeholder="Search chat"/>
+
 
                         <button className="portal-new-chat-button"
                                 onClick={this.goto_start_chat.bind(this)}>
-                            New chat
+                            New
                         </button>
 
                     </div>
@@ -111,6 +121,8 @@ class ChatPortalView extends Component {
                         {
                             this.state.portals.map((portal, index) => {
 
+                                var unread = portal.unread ? " (!) " : "";
+
                                 var portal_class = "portal_entry";
                                 if (portal.unread) portal_class = "portal_entry_unread";
                                 if (portal.session_id === this.state.active_chat) portal_class = "portal_entry_active";
@@ -119,7 +131,7 @@ class ChatPortalView extends Component {
                                 var profile_pic = default_group_chat_pic;
 
                                 /*handle if is a single chat and replace the name*/
-                                var participant_ids = Object.keys(portal.participant_ids);
+                                var participant_ids = Object.keys(portal.participant_ids || {});
                                 if (participant_ids.length === 2) {
                                     var self_id = firebase.auth().currentUser.uid;
                                     var other_id = participant_ids[0] === self_id ? participant_ids[1] : participant_ids[0];
@@ -136,10 +148,15 @@ class ChatPortalView extends Component {
                                         this.goto_chat_session(portal.session_id)
                                     }}>
 
-                                        <img src={profile_pic} alt="profile_image" width='50px'/>
-                                        <br/>
-                                        ChatTitle: {title} <br/>
-                                        Time: {portal.time}
+                                        <div className="chat_icon_container">
+                                            <img src={profile_pic} alt="profile_image" className="chat_icon"/>
+                                        </div>
+
+                                        <div className="portal_text_container">
+                                            {unread} {title}
+                                            <br/>
+                                            <div className="portal_time">{this.get_timestring(portal.time)}</div>
+                                        </div>
 
                                     </div>
 
@@ -151,7 +168,7 @@ class ChatPortalView extends Component {
                 </div>
 
 
-                <pre>{JSON.stringify(this.state, null, 2)}</pre>
+                {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
             </div>
 
         )
