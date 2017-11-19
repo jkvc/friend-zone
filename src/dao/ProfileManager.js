@@ -50,6 +50,26 @@ export function remove_course_from_profile( user_id, course_id ){
         }
     })
 }
+
+export function add_event_to_profile(user_id, event_name){
+    lookup_profile_by_user_id( user_id, function(err, profile){
+        if(!err){
+            profile.upcoming_events[event_name] = true;
+            profile.push();
+        }
+    })
+}
+
+export function remove_event_from_profile(user_id, event_name){
+    lookup_profile_by_user_id( user_id, function(err, profile){
+        if(!err){
+            profile.upcoming_events[event_name] = null;
+            profile.push();
+        }
+    })
+}
+
+
 export function create_friend_request(from_id, to_id) {
 
     lookup_profile_by_user_id(from_id, (err, from_profile)=>{

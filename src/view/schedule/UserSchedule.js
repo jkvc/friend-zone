@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AddCourse from './AddCourse'
 import DropCourse from './DropCourse';
+import AddEvent from './AddEvent'
 import ReactDOM from 'react-dom';
 import CalendarHelper from '../../api/CalendarHelper';
 import RecommendedFriends from "../social/RecommendedFriends";
@@ -31,6 +32,9 @@ class UserSchedule extends Component {
     }
     goto_DropCourse(){
         ReactDOM.render(<DropCourse />, document.getElementById('main-layout'));
+    }
+    goto_AddEvent(){
+        ReactDOM.render(<AddEvent />, document.getElementById('main-layout'));
     }
 
 
@@ -124,8 +128,8 @@ class UserSchedule extends Component {
 
                 <button onClick={this.goto_AddCourse.bind(this)}>Add course</button>
                 <button onClick={this.goto_DropCourse.bind(this)}>Drop course</button>
+                <button onClick={this.goto_AddEvent.bind(this)}>Add Event</button>
                 <button onClick={this.goto_RecommendedFriends.bind(this)}>Recommended Friends</button>
-
                 <br/>
 
                 <CalendarHelper events={this.state.events}/>
