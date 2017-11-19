@@ -5,13 +5,12 @@ list where we store the user given the sheer amount of events possible
  */
 class Event {
 
-
     event_name; /*CSES GBM*/
     day; /*M*/
     time; /*4:00 PM - 4:50 PM*/
     location; /*WLH 2001*/
 
-    constructor(event_name,  days, time, location ){
+    constructor( event_name,  day, time, location ){
         this.event_name = event_name;
         this.day = day;
         this.time = time;
@@ -22,11 +21,11 @@ class Event {
      *we probably are not making users search events but just add them to their schedule*/
 
     push(){
-        firebase.database().ref('Catalog').child(this.event_name).set({
+        firebase.database().ref('Profile').child(firebase.auth().currentUser.uid).upcoming_events.event_id.set({
             event_name: this.event_name,
             day: this.day,
             time: this.time,
-            location: this.location,
+            location: this.location
         });
     }
 

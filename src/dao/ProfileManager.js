@@ -1,5 +1,6 @@
 import Profile from './Profile';
 import firebase from 'firebase';
+import Event from './Event'
 
 
 /**
@@ -27,6 +28,7 @@ export function lookup_profile_by_user_id(user_id, callback){
             profile.friend_list = content.friend_list ||{};
             profile.outgoing_request = content.outgoing_request ||{};
             profile.incoming_request = content.incoming_request ||{};
+            profile.upcoming_events = content.upcoming_events ||{};
             callback(null, profile);
         }
     })
@@ -51,10 +53,10 @@ export function remove_course_from_profile( user_id, course_id ){
     })
 }
 
-export function add_event_to_profile(user_id, event_name){
+export function add_event_to_profile(user_id, event_name, event_day , event_time, event_location){
     lookup_profile_by_user_id( user_id, function(err, profile){
         if(!err){
-            profile.upcoming_events[event_name] = true;
+            profile.upcoming_events[event_name] = new Event( event_name, event_day, event_time, event_location);
             profile.push();
         }
     })
