@@ -19,7 +19,10 @@ class AddEvent extends Component{
     }
 
     handle_add_event(){
-        add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name);
+        add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.time, this.state.location);
+        //lookup_profile_by_user_id(firebase.auth().currentUser.uid, function(err,profile){
+         //   alert(JSON.stringify(profile.upcoming_events));
+        //} )
     }
     render(){
         return(
@@ -63,8 +66,9 @@ class AddEvent extends Component{
                     this.handle_add_event();
                 }} > Add Event</button>
 
-
-
+                <br />
+                Raw JSON:
+                <pre>{JSON.stringify(this.state,null,2)}</pre>
 
             </div>
         )
