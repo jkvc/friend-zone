@@ -59,6 +59,7 @@ class EditProfile extends Component{
     upload_image(e) {
         e.preventDefault();
         var file = e.target.files[0];
+        var reader = new FileReader();
         // upload the profile picture to firebase storage
         var storageRef = firebase.storage().ref('profile_pic/' + file.name);
         var uploadTask = storageRef.put(file);
@@ -70,16 +71,9 @@ class EditProfile extends Component{
         }, function() {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        var downloadURL = uploadTask.snapshot.downloadURL;
-
-        //handle update the url inside the user here
-        firebase.database().ref('Profile').child(firebase.auth().currentUser.uid)
-        .update({ "profile_pic": downloadURL});
-
-        });
-
-
-
+          var downloadURL = uploadTask.snapshot.downloadURL;
+          this.setState({profile_pic:downloadURL});          
+        }.bind(this));
     }
 
     render(){
