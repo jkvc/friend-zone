@@ -43,7 +43,7 @@ export function create_chat_session(initializer_name, participant_ids, chat_titl
                 .then(callback(session_id));
 
             participant_ids.forEach((user_id)=>{
-                create_portal(user_id, session_id, chat_title);
+                create_portal(user_id, session_id, chat_title, participant_id_obj);
             })
 
         }

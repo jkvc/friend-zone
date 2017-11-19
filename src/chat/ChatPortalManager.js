@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-export function create_portal(self_id, session_id, chat_title){
+export function create_portal(self_id, session_id, chat_title, participant_id_obj){
 
     var now_millis = Date.now();
 
@@ -8,7 +8,8 @@ export function create_portal(self_id, session_id, chat_title){
         session_id: session_id,
         title: chat_title,
         unread: false,
-        time: now_millis
+        time: now_millis,
+        participant_ids: participant_id_obj
     };
 
     firebase.database().ref('ChatPortal/'+self_id ).child(session_id).set(portal_obj)
