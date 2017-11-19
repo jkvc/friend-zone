@@ -20,9 +20,8 @@ class AddEvent extends Component{
 
     handle_add_event(){
         add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.time, this.state.location);
-        //lookup_profile_by_user_id(firebase.auth().currentUser.uid, function(err,profile){
-         //   alert(JSON.stringify(profile.upcoming_events));
-        //} )
+         alert(JSON.stringify(this.state.event_name + " was successfully added to your schedule!"));
+
     }
     render(){
         return(
