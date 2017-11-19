@@ -12,7 +12,7 @@
 .portal_container{
     background-color: lightblue;
     float: left;
-    width: 40%;
+    width: 30%;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -22,7 +22,7 @@
     background-color: lightsalmon;
     position: relative;
     float: left;
-    width: 60%;
+    width: 70%;
     height: 100%;
     overflow-y: auto;
 }

@@ -140,9 +140,14 @@ class Login extends Component {
                             <br/>
 
                             <div className="subtitle-text">Or, log in with</div>
-                            <img src={gmail_icon} alt=""/>
-                            <button onClick={this.handle_facebook.bind(this)}>
-                                <img src={facebook_icon} alt=""/>
+
+                            <img src={gmail_icon} alt="" width='40px'/>
+
+                            &nbsp;
+
+                            <button className="third-party-button"
+                                onClick={this.handle_facebook.bind(this)}>
+                                <img src={facebook_icon} alt="" width='40px'/>
                             </button>
                             <br/>
                             <br/>
