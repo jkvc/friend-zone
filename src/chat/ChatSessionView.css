@@ -1,24 +1,60 @@
-.message_container{
-    background-color: lightcoral;
-    height: calc(85vh - 80px);;
+.message_container {
+    height: calc(85vh - 100px);;
     overflow-y: auto;
-    width: 95% ;
+    width: 95%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
 }
 
-.message_entry{
-    background-color: darkseagreen;
-    width: 100%;
-    margin-bottom: 2px;
-    font-size: smaller;
-    overflow-wrap: break-word;
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
 }
 
-.message_input{
-    width: 94%;
+.message_entry {
+    font-family: "Biko", sans-serif;
+    width: 100%;
+    font-size: smaller;
+    overflow-wrap: break-word;
+    margin-bottom: 5px;
+}
+
+.message_input {
+    width: 90%;
     margin-left: 2.5%;
     margin-right: auto;
     margin-top: 10px;
+    border: solid 1px lightgrey;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sender {
+    font-size: xx-small;
+    color: grey;
+}
+
+.bubble_left {
+    background: linear-gradient(to right, #ebebeb, transparent);
+    max-width: 70%;
+    min-height: 20px;
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 3px;
+    border-radius: 10px;
+}
+
+.bubble_right {
+    background: linear-gradient(to right, transparent, #93ede2);
+    max-width: 70%;
+    text-align: right;
+    margin-left: 30%;
+    min-height: 20px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 3px;
+    border-radius: 10px;
+
 }

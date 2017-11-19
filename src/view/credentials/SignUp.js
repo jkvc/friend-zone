@@ -13,8 +13,8 @@ class SignUp extends Component {
         super(props);
 
         this.state = {
-            user_email:'put user_email here',
-            password:'put password here',
+            user_email:'',
+            password:'',
             err_msg: "",
             success_msg:""
         };
@@ -97,13 +97,13 @@ class SignUp extends Component {
                 <h1>{this.title}</h1>
                 <form >
                     <label>user_email </label>
-                    <input type={"text"} value={this.state.user_email}
+                    <input type={"text"} placeholder="put user email here" value={this.state.user_email}
                            onChange={e=> this.setState({user_email: e.target.value})}/>
                     <label>{this.state.err_msg}</label>
                 </form>
                 <form>
                     <label>password </label>
-                    <input type={"text"} value={this.state.password}
+                    <input type={"text"} placeholder="put password here" value={this.state.password}
                            onChange={ e=> this.setState({password: e.target.value})}/>
                     <label>{this.state.success_msg}</label>
                 </form>

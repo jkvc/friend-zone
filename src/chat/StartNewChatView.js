@@ -59,12 +59,12 @@ class StartNewChatView extends Component {
     }
 
     /*remove from selected friends*/
-    remove_select(index){
+    remove_select(index) {
         var friend_id_list = this.state.selected_friend_id;
         var friend_name_list = this.state.selected_friend_name;
 
-        friend_id_list.splice(index,1);
-        friend_name_list.splice(index,1);
+        friend_id_list.splice(index, 1);
+        friend_name_list.splice(index, 1);
 
         this.setState({
             selected_friend_id: friend_id_list,
@@ -93,14 +93,14 @@ class StartNewChatView extends Component {
         this.setState({search_key: search_key});
         var filtered_profile = {};
 
-        Object.keys(this.state.friend_profiles).forEach((key)=>{
+        Object.keys(this.state.friend_profiles).forEach((key) => {
             var friend_profile = this.state.friend_profiles[key];
             var friend_name = friend_profile.first_name + " " + friend_profile.last_name;
 
             if (friend_name.toLowerCase().startsWith(search_key.toLowerCase())) {
                 filtered_profile[friend_profile.user_id] = friend_profile;
             }
-            this.setState({filtered_friend_profiles:filtered_profile})
+            this.setState({filtered_friend_profiles: filtered_profile})
 
         })
     }
@@ -115,11 +115,13 @@ class StartNewChatView extends Component {
                     <input type="text" className="chat_title_box"
                            placeholder={"Name your new chat"}
                            value={this.state.chat_title}
+                           disabled={this.state.selected_friend_id.length <= 1}
                            onChange={e => this.setState({chat_title: e.target.value})}/>
 
                     <button className="start_chat_button"
                             onClick={this.start_chat.bind(this)}
-                            disabled={this.state.selected_friend_id.length===0 || this.state.chat_title.length === 0}>
+                            disabled={this.state.selected_friend_id.length === 0 ||
+                            (this.state.chat_title.length === 0 && this.state.selected_friend_id.length > 1)}>
                         start chat
                     </button>
                 </div>
@@ -134,19 +136,24 @@ class StartNewChatView extends Component {
                                      key={"friend-selected-" + index}>
                                     {friend_name}
 
-                                    <button onClick={()=>{this.remove_select(index)}}>
-                                        remove</button>
+                                    <button onClick={() => {
+                                        this.remove_select(index)
+                                    }}>
+                                        remove
+                                    </button>
                                 </div>
                             )
                         })
                     }
                 </div>
 
-                <div className="chat_title_bar" >
+                <div className="chat_title_bar">
                     <input type="text" className="chat_title_box"
                            placeholder="Search friends"
                            value={this.state.search_key}
-                           onChange={e=>{this.handle_friend_filter(e.target.value)}}
+                           onChange={e => {
+                               this.handle_friend_filter(e.target.value)
+                           }}
                     />
                 </div>
 
@@ -160,10 +167,11 @@ class StartNewChatView extends Component {
                                      key={"friend-profile-" + index}>
                                     Friend: {friend_profile.first_name} {friend_profile.last_name}
 
-                                    <button disabled={this.state.selected_friend_id.indexOf(friend_profile.user_id)!==-1}
+                                    <button
+                                        disabled={this.state.selected_friend_id.indexOf(friend_profile.user_id) !== -1}
                                         onClick={() => {
-                                        this.add_select(friend_profile.user_id, friend_profile.first_name + " " + friend_profile.last_name)
-                                    }}> select
+                                            this.add_select(friend_profile.user_id, friend_profile.first_name + " " + friend_profile.last_name)
+                                        }}> select
                                     </button>
                                 </div>
                             )

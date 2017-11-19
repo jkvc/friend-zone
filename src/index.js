@@ -5,7 +5,6 @@ import Welcome from './view/credentials/Welcome';
 import firebase from 'firebase';
 import MainLayout from './view/MainLayout';
 import registerServiceWorker from './registerServiceWorker';
-import {lookup_profile_by_user_id} from "./dao/ProfileManager";
 import InitProfile from './view/profile/InitProfile'
 
 // eslint-disable-next-line
@@ -16,6 +15,7 @@ import CalendarHelper from './api/CalendarHelper';
 
 // eslint-disable-next-line
 import {test_time_helper} from "./test/TestTimeHelper";
+import {init_data} from "./api/StaticData";
 
 document.title = "FriendZone";
 
@@ -36,10 +36,10 @@ registerServiceWorker();
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err,data)=>{
+        init_data((profile)=>{
 
             /*force user to create a profile before doing anything*/
-            if (err){
+            if (!profile){
                 ReactDOM.render(<InitProfile/>, document.getElementById('root'));
 
              /*user already has a profile in our db, go to schedule*/

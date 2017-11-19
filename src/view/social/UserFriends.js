@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {lookup_profile_by_user_id} from "../../dao/ProfileManager";
-import firebase from 'firebase';
+import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
 
 
 class UserFriends extends Component{
@@ -9,37 +8,11 @@ class UserFriends extends Component{
         super(props);
         this.title = "UserFriends.js";
         this.state = {
-            profile_obj: {},
-            friend_profiles: []
+            profile_obj: get_self_profile(),
+            friend_profiles: get_friend_profiles()
         }
     }
 
-
-    componentWillMount(){
-        lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err, profile_obj) =>{
-            this.setState({
-                profile_obj: profile_obj
-            }, this.get_friend_profiles.bind(this));
-        })
-    }
-
-    /*called after getting this users profile*/
-    get_friend_profiles(){
-        var friend_id_list = Object.keys(this.state.profile_obj.friend_list);
-
-        var aggregated_friend_profiles = [];
-
-        friend_id_list.forEach((friend_id)=>{
-            lookup_profile_by_user_id(friend_id, (err,data)=>{
-                if (!err){
-                    aggregated_friend_profiles.push(data);
-                    this.setState({
-                        friend_profiles: aggregated_friend_profiles
-                    })
-                }
-            })
-        })
-    }
 
     render(){
         return(
@@ -53,10 +26,12 @@ class UserFriends extends Component{
                 <h4>うまるの友達!</h4>
 
                 {
-                    this.state.friend_profiles.map((friend_profile)=>{
+                    Object.keys(this.state.friend_profiles).map((friend_id, index)=>{
                         return(
-                            <div key={"friend-profile-"+friend_profile.user_id}>
-                                Friend: {friend_profile.first_name} {friend_profile.last_name}
+                            <div key={"friend-profile-"+index}>
+                                Friend:
+                                {this.state.friend_profiles[friend_id].first_name}
+                                {this.state.friend_profiles[friend_id].last_name}
                             </div>
                         )
                     })
