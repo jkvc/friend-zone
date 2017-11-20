@@ -47,8 +47,8 @@ export function init_friend_profiles(callback){
     friend_ids.forEach((friend_id)=>{
         lookup_profile_by_user_id(friend_id, (err,friend_profile)=>{
 
-            if (!err)
-                other_profiles[friend_id] = friend_profile;
+            if (err) return;
+            other_profiles[friend_id] = friend_profile;
 
             profile_loaded += 1;
             if (profile_loaded === friend_ids.length && callback) callback();
