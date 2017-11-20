@@ -115,7 +115,7 @@ class StartNewChatView extends Component {
                     <input type="text" className="chat_title_box"
                            placeholder={"Name your new chat"}
                            value={this.state.chat_title}
-                           disabled={this.state.selected_friend_id.length <= 1}
+                           disabled={this.state.selected_friend_id.length < 1}
                            onChange={e => this.setState({chat_title: e.target.value})}/>
 
                     <button className="start_chat_button"
