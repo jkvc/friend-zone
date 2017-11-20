@@ -75,6 +75,7 @@ class ChatSessionView extends Component {
                             var sender = message.sender === this.state.my_name ? "" : message.sender;
                             var message_bubble_style = message.sender === this.state.my_name ? "bubble_right" : "bubble_left";
 
+
                             return (
 
                                 <div key={'message-' + index}

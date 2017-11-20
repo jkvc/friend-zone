@@ -14,19 +14,6 @@
     border-top: solid 1px lightgrey;
 }
 
-::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-}
-
-.message_entry {
-    font-family: "Biko", sans-serif;
-    width: 100%;
-    font-size: smaller;
-    overflow-wrap: break-word;
-    margin-bottom: 5px;
-}
-
 .message_input {
     width: 95%;
     padding-left: 10px;
@@ -35,32 +22,48 @@
     overflow: scroll;
     border: transparent;
     font-size: small;
+    font-family: sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.message_entry {
+    float: left;
+    width: 100%;
+    font-size: smaller;
+    overflow-wrap: break-word;
+    margin-bottom: 3px;
 }
 
 .sender {
+    float: left;
+    width: 100%;
     font-size: xx-small;
     color: grey;
+    margin-bottom: 1px;
+    margin-left: 3px;
 }
 
 .bubble_left {
-    background: linear-gradient(to right, #ebebeb, transparent);
+    float: left;
+    background-color: #ebebeb;
     max-width: 70%;
-    min-height: 20px;
-    padding-left: 10px;
-    padding-top: 4px;
-    padding-bottom: 3px;
+    padding: 4px 10px 3px;
     border-radius: 10px;
+    min-height: 20px;
 }
 
 .bubble_right {
-    background: linear-gradient(to right, transparent, #ebebeb);
+    float: right;
     max-width: 70%;
+    background-color: #95e7f9;
     text-align: right;
     margin-left: 30%;
     min-height: 20px;
-    padding-right: 10px;
-    padding-top: 4px;
-    padding-bottom: 3px;
+    padding: 4px 10px 3px;
     border-radius: 10px;
 
 }
