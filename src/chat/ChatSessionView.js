@@ -59,7 +59,7 @@ class ChatSessionView extends Component {
         }
     }
 
-    send_message(){
+    send_message() {
         add_message(this.state.session_id, this.state.my_name, this.state.input);
         this.setState({input: ""})
     }
@@ -92,14 +92,18 @@ class ChatSessionView extends Component {
                 </div>
 
 
-                <input type="text" className="message_input"
-                       value={this.state.input}
-                       onChange={(e) => {
-                           this.setState({input: e.target.value})
-                       }}
-                       onKeyPress={this.handle_input_key_press.bind(this)}
-                />
+                <div className="input_holder">
 
+
+                    <textarea type="text" className="message_input"
+                              value={this.state.input}
+                              placeholder="Your message here, return to send"
+                              onChange={(e) => {
+                                  this.setState({input: e.target.value})
+                              }}
+                              onKeyPress={this.handle_input_key_press.bind(this)}
+                    />
+                </div>
 
             </div>
         )
