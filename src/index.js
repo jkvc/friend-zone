@@ -35,8 +35,10 @@ registerServiceWorker();
 // process of getting the user, user is null even though user has signed in.
 
 firebase.auth().onAuthStateChanged((user) => {
+
     if (user) {
         init_data((profile)=>{
+
 
             /*force user to create a profile before doing anything*/
             if (!profile){
