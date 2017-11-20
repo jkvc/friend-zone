@@ -1,0 +1,12 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "Catalog": {
+      ".indexOn": [
+        "instructor",
+        "course_code"
+      ]
+    }
+  }
+}

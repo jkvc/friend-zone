@@ -34,28 +34,30 @@ registerServiceWorker();
 // Using a callback method (observer) avoids the issue that, when web are in
 // process of getting the user, user is null even though user has signed in.
 
-// firebase.auth().onAuthStateChanged((user) => {
-//     if (user) {
-//         init_data((profile)=>{
-//
-//             /*force user to create a profile before doing anything*/
-//             if (!profile){
-//                 ReactDOM.render(<InitProfile/>, document.getElementById('root'));
-//
-//              /*user already has a profile in our db, go to schedule*/
-//             }else{
-//                 ReactDOM.render(<MainLayout/>, document.getElementById('root'));
-//             }
-//         });
-//     } else {
-//         ReactDOM.render(<Welcome/>, document.getElementById('root'));
-//     }
-// });
+firebase.auth().onAuthStateChanged((user) => {
+
+    if (user) {
+        init_data((profile)=>{
+
+
+            /*force user to create a profile before doing anything*/
+            if (!profile){
+                ReactDOM.render(<InitProfile/>, document.getElementById('root'));
+
+             /*user already has a profile in our db, go to schedule*/
+            }else{
+                ReactDOM.render(<MainLayout/>, document.getElementById('root'));
+            }
+        });
+    } else {
+        ReactDOM.render(<Welcome/>, document.getElementById('root'));
+    }
+});
 
 /*
 * TODO: Yiming: comment out line 15-35, uncomment line 36, npm start, press F12 in chrome and look at console to see Unit test result
 * */
-test_most_popular_in_list();
+//test_most_popular_in_list();
 
 /* TODO: Run this function to check for the correctness of the TimeHelper functions */
 //test_time_helper();
