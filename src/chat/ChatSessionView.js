@@ -53,13 +53,14 @@ class ChatSessionView extends Component {
     }
 
     handle_input_key_press(e) {
+        if (e.key === 'Enter') e.preventDefault();
         if (e.key === 'Enter' && this.state.input.length > 0) {
             this.send_message();
             read_portal(firebase.auth().currentUser.uid, this.state.session_id);
         }
     }
 
-    send_message(){
+    send_message() {
         add_message(this.state.session_id, this.state.my_name, this.state.input);
         this.setState({input: ""})
     }
@@ -74,6 +75,7 @@ class ChatSessionView extends Component {
 
                             var sender = message.sender === this.state.my_name ? "" : message.sender;
                             var message_bubble_style = message.sender === this.state.my_name ? "bubble_right" : "bubble_left";
+
 
                             return (
 
@@ -92,14 +94,18 @@ class ChatSessionView extends Component {
                 </div>
 
 
-                <input type="text" className="message_input"
-                       value={this.state.input}
-                       onChange={(e) => {
-                           this.setState({input: e.target.value})
-                       }}
-                       onKeyPress={this.handle_input_key_press.bind(this)}
-                />
+                <div className="input_holder">
 
+
+                    <textarea type="text" className="message_input"
+                              value={this.state.input}
+                              placeholder="Your message here, return to send"
+                              onChange={(e) => {
+                                  this.setState({input: e.target.value})
+                              }}
+                              onKeyPress={this.handle_input_key_press.bind(this)}
+                    />
+                </div>
 
             </div>
         )

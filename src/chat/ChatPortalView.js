@@ -123,8 +123,12 @@ class ChatPortalView extends Component {
                                 var unread = portal.unread ? " (!) " : "";
 
                                 var portal_class = "portal_entry";
+                                var chat_icon_class = "chat_icon_container"
                                 if (portal.unread) portal_class = "portal_entry_unread";
-                                if (portal.session_id === this.state.active_chat) portal_class = "portal_entry_active";
+                                if (portal.session_id === this.state.active_chat) {
+                                    portal_class = "portal_entry_active";
+                                    chat_icon_class= "chat_icon_container_active"
+                                }
 
                                 var title = portal.title;
                                 var profile_pic = default_group_chat_pic;
@@ -147,7 +151,7 @@ class ChatPortalView extends Component {
                                         this.goto_chat_session(portal.session_id)
                                     }}>
 
-                                        <div className="chat_icon_container">
+                                        <div className={chat_icon_class}>
                                             <img src={profile_pic} alt="profile_image" className="chat_icon"/>
                                         </div>
 

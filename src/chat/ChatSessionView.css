@@ -1,10 +1,28 @@
 .message_container {
-    height: calc(85vh - 100px);;
-    overflow-y: auto;
+    max-height: 80%;
+    height: calc(90vh - 120px);
+    overflow-y: scroll;
     width: 95%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
+}
+
+.input_holder {
+    width: 100%;
+    height: 7vh;
+    border-top: solid 1px lightgrey;
+}
+
+.message_input {
+    width: 90%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    overflow: scroll;
+    border: transparent;
+    font-size: small;
+    font-family: sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -13,48 +31,39 @@
 }
 
 .message_entry {
-    font-family: "Biko", sans-serif;
+    float: left;
     width: 100%;
     font-size: smaller;
     overflow-wrap: break-word;
-    margin-bottom: 5px;
-}
-
-.message_input {
-    width: 90%;
-    margin-left: 2.5%;
-    margin-right: auto;
-    margin-top: 10px;
-    border: solid 1px lightgrey;
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    margin-bottom: 3px;
 }
 
 .sender {
+    float: left;
+    width: 100%;
     font-size: xx-small;
     color: grey;
+    margin-bottom: 1px;
+    margin-left: 3px;
 }
 
 .bubble_left {
-    background: linear-gradient(to right, #ebebeb, transparent);
+    float: left;
+    background-color: #ebebeb;
     max-width: 70%;
-    min-height: 20px;
-    padding-left: 10px;
-    padding-top: 4px;
-    padding-bottom: 3px;
+    padding: 4px 10px 3px;
     border-radius: 10px;
+    min-height: 20px;
 }
 
 .bubble_right {
-    background: linear-gradient(to right, transparent, #93ede2);
+    float: right;
     max-width: 70%;
+    background-color: #95e7f9;
     text-align: right;
     margin-left: 30%;
     min-height: 20px;
-    padding-right: 10px;
-    padding-top: 4px;
-    padding-bottom: 3px;
+    padding: 4px 10px 3px;
     border-radius: 10px;
 
 }
