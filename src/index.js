@@ -57,7 +57,7 @@ firebase.auth().onAuthStateChanged((user) => {
 /*
 * TODO: Yiming: comment out line 15-35, uncomment line 36, npm start, press F12 in chrome and look at console to see Unit test result
 * */
-// test_most_popular_in_list();
+//test_most_popular_in_list();
 
 /* TODO: Run this function to check for the correctness of the TimeHelper functions */
 //test_time_helper();

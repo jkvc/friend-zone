@@ -47,9 +47,9 @@ class DropCourse extends Component{
                         <th></th>
                     </tr>
                 {   //print each class with drop button
-                    this.state.courses_list.map(function( entry){
+                    this.state.courses_list.map(function(entry) {
                         return (
-                            <tr key={"course-search-result"+entry}>
+                            <tr key={"course-search-result" + entry}>
 
                                 <td> {entry} </td>
                                 <td>

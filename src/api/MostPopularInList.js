@@ -22,13 +22,16 @@
 * document all error handling here:
 *   1. param doesnt contain count
 *   2. param doesnt contain lists
-*   3. etc
+*   3. count is not a number
+*   4. list is not an array
+*   5. any object in list is not an array
+*   6. if count is less than 0 or list is empty
 */
 export function most_popular_in_list(param, callback){
 
     /*handle some error, each error message will be printed out to the console*/
     /*comment out 'console.log' if error messages are not desired */
-    var err = null;
+    let err = null;
     if ( !("count" in param && "list" in param) ) { 
         callback(err = new Error("Missing states in param to most_popular_in_list", 9), null);
         console.log(err);
@@ -58,7 +61,7 @@ export function most_popular_in_list(param, callback){
         }
     }
 
-    if (param.count < 1 || param.list.length <= 0)
+    if (param.count < 0 || param.list.length <= 0)
     {
         callback( err = new Error("Invalid Inputs to most_popular_in_list", 11), null);
         console.log(err);
@@ -116,11 +119,116 @@ export function most_popular_in_list(param, callback){
     });
 
     // Push the student names onto the list based on the count specified
-    for (i = 0; i < count; i++)
+    let c = 0;
+    if (count === 0)
+    {
+        c = array.length;
+    }
+    else
+    {
+        c = count;
+    }
+
+    for (i = 0; i < c; i++)
     {
         if (array.length <= i) break;
         result.push(array[i][1]);
     }
 
     callback(err, result);
+}
+
+/*
+* given a list of lists of user_id's, return the most popular user_id in the class param, sorted by
+*   the popularity
+* params: param
+*   {
+*       "count": 5,
+*       "list":    [
+*                       [ "a","b","c","d","e"],
+*                       [ "a","b","c","d","f"],
+*                       [ "a","b","c","d","f","g"]
+*                   ]
+*       "class":    [ "a", "b", "c", "d", "e" ]
+*   }
+*
+* given this param, this function should call the callback function with:
+*   err = null,
+*   data = ["a","b","c","d","e" ]   //because f is not in 'class' even though its more popular
+*
+* handle errors accordingly by calling callback function with:
+*   err = {"msg": "some error message explaining why" }
+*   data = null
+* document all error handling here:
+*   1. param doesnt contain count
+*   2. param doesnt contain lists
+*   3. param doesnt contain class
+*   4. count is not a number
+*   5. list is not an array
+*   6. class is not an array
+*   7. any object in list is not an array
+*   8. if count is less than 0 or list is empty
+*/
+export function most_popular_in_class(param, callback){
+
+    let err = null;
+
+    // Initial error checkings
+    if ( !("count" in param && "class" in param) ) {
+        callback(err = new Error("Missing states in param to most_popular_in_list", 9), null);
+        console.log(err);
+        return;
+    }
+
+    if (typeof param.class !== 'object' || param.class.constructor !== Array)
+    {
+        callback( err = new Error("param.class is not an array!", 15), null);
+        console.log(err);
+        return;
+    }
+
+    if (typeof param.count !== 'number')
+    {
+        callback( err = new Error("param.count is not a number!", 13), null);
+        console.log(err);
+        return;
+    }
+
+    if (param.count < 0)
+    {
+        callback( err = new Error("Invalid param.count value to most_popular_in_class", 11), null);
+        console.log(err);
+        return;
+    }
+
+    // Find the list of most popular students
+    let delegateParam = { "count":0, "list":param.list };
+
+    most_popular_in_list(delegateParam, function(err, data)
+    {
+        let c = 0;
+        let result = [];
+
+        let dict = {};
+        for (let u = 0; u < param.class.length; u++)
+        {
+            dict[param.class[u]] = true;
+        }
+
+        for (let i = 0; i < data.length; i++)
+        {
+            if (data[i] in dict)
+            {
+                result.push(data[i]);
+                c += 1;
+            }
+
+            if (c >= param.count)
+            {
+                break;
+            }
+        }
+
+        callback(err, result);
+    });
 }
