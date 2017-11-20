@@ -5,9 +5,9 @@ import SignUp from './SignUp';
 import './MainLoginSignup.css'
 import './Login.css'
 import facebook_icon from '../../image/FacebookIcon.png'
-import gmail_icon from '../../image/GmailIcon.png'
+import google_icon from '../../image/GoogleIcon.png'
 import blue_line from '../../image/BlueLine.png'
-import {handle_facebook_login} from '../credentials/thirdparty/HandleFacebook'
+import {handle_third_party_auth} from '../credentials/thirdparty/HandleThirdParty'
 
 class Login extends Component {
 
@@ -41,7 +41,7 @@ class Login extends Component {
                 });
             }.bind(this))
 
-            /* handles failure, show err message*/
+            /* handles failure, show err message */
             .catch(function(error){
                 this.setState({
                     err_msg:error.message
@@ -50,12 +50,11 @@ class Login extends Component {
 
     }
 
-    handle_facebook(event) {
-        event.preventDefault();
+    handle_third_party(authProvider) {
 
-        handle_facebook_login( function(error, user) {
+        handle_third_party_auth(authProvider, function(error, user) {
             if (error) {
-                alert("user is null, message: " + error.message);
+                alert("error: " + error.message);
                 this.setState({
                     err_msg:error.message
                 });
@@ -76,8 +75,7 @@ class Login extends Component {
                     err_msg:""
                 });
 
-                // TODO somehow the website render<UserSchedule/> automatically without the following
-                //ReactDOM.render(<UserSchedule/>, document.getElementById('root'));
+                // no need to ReactDOM render since index.js can somehow detect onAuthStateChanged
             }
         }.bind(this));
     }
@@ -141,12 +139,15 @@ class Login extends Component {
 
                             <div className="subtitle-text">Or, log in with</div>
 
-                            <img src={gmail_icon} alt="" width='40px'/>
+                            <button className="third-party-button"
+                                onClick={(e) => (e.preventDefault(), this.handle_third_party("google"))}>
+                                <img src={google_icon} alt="" width='40px'/>
+                            </button>
 
                             &nbsp;
 
                             <button className="third-party-button"
-                                onClick={this.handle_facebook.bind(this)}>
+                                onClick={(e) => (e.preventDefault(), this.handle_third_party("facebook"))}>
                                 <img src={facebook_icon} alt="" width='40px'/>
                             </button>
                             <br/>
