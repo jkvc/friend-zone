@@ -17,7 +17,7 @@
 .portal-search-box {
     border-radius: 15px;
     margin-left: 20px;
-    width: calc(100% - 90px);
+    width: calc(100% - 120px);
     height: 25px;
     font-size: smaller;
     background-color: #ebebeb;
