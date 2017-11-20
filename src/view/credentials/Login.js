@@ -140,14 +140,14 @@ class Login extends Component {
                             <div className="subtitle-text">Or, log in with</div>
 
                             <button className="third-party-button"
-                                onClick={(e) => (e.preventDefault(), this.handle_third_party("google"))}>
+                                onClick={(e) => {e.preventDefault(); this.handle_third_party("google")}}>
                                 <img src={google_icon} alt="" width='40px'/>
                             </button>
 
                             &nbsp;
 
                             <button className="third-party-button"
-                                onClick={(e) => (e.preventDefault(), this.handle_third_party("facebook"))}>
+                                onClick={(e) => {e.preventDefault(); this.handle_third_party("facebook")}}>
                                 <img src={facebook_icon} alt="" width='40px'/>
                             </button>
                             <br/>
