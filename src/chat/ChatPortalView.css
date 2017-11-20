@@ -15,7 +15,7 @@
 }
 
 .portal-search-box {
-    border-radius: 10px;
+    border-radius: 15px;
     margin-left: 20px;
     width: calc(100% - 90px);
     height: 25px;
@@ -44,11 +44,6 @@
     overflow-x: hidden;
 }
 
-::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-}
-
 .chat_icon_container {
     float: left;
     width: 40px;
@@ -73,7 +68,7 @@
 
 .chat_icon {
     float: left;
-    width: 100%;
+    height: 100%;
 }
 
 .portal_text_container {
@@ -85,7 +80,7 @@
 }
 
 .portal_entry {
-    height: 50px;
+    height: 40px;
     float: top;
     width: 100%;
     padding: 5px;

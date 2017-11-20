@@ -5,6 +5,9 @@ import {lookup_profile_by_user_id} from "../dao/ProfileManager";
 
 import './ChatSessionView.css'
 import {read_portal} from "./ChatPortalManager";
+import {get_friend_profiles} from "../api/StaticData";
+
+import default_profile_pic from "../image/DefaultProfilePic.jpg"
 
 class ChatSessionView extends Component {
 
@@ -66,6 +69,10 @@ class ChatSessionView extends Component {
     }
 
     render() {
+        var friend_profiles = get_friend_profiles();
+        var prev_sender = "";
+        /*keep track of who sent the previous message, and not show icon and name on the next one */
+
         return (
             <div>
 
@@ -73,21 +80,69 @@ class ChatSessionView extends Component {
                     {
                         this.state.messages.map((message, index) => {
 
-                            var sender = message.sender === this.state.my_name ? "" : message.sender;
-                            var message_bubble_style = message.sender === this.state.my_name ? "bubble_right" : "bubble_left";
+                            // var sender = message.sender === this.state.my_name ? "" : message.sender;
+                            // var message_bubble_style = message.sender === this.state.my_name ? "bubble_right" : "bubble_left";
+                            //
+                            //
+                            // return (
+                            //
+                            //     <div key={'message-' + index}
+                            //          className="message_row">
+                            //
+                            //         <div className="sender">{sender}</div>
+                            //
+                            //         <div className={message_bubble_style}>{message.msg}</div>
+                            //     </div>
+                            //
+                            // )
 
+                            /* self message */
+                            if (message.sender_id === firebase.auth().currentUser.uid) {
+                                prev_sender = message.sender_id;
+                                return (
+                                    <div key={'message-' + index}
+                                         className="message_row">
+                                        <div className="bubble_right">{message.msg}</div>
+                                    </div>
+                                )
+                            }
 
-                            return (
+                            /*message from others*/
+                            else {
 
-                                <div key={'message-' + index}
-                                     className="message_entry">
+                                /*get the profile pic*/
+                                var sender_profile = friend_profiles[message.sender_id] || {};
+                                var profile_pic = sender_profile.profile_pic;
+                                if (profile_pic === null || profile_pic === "" || profile_pic === undefined)
+                                    profile_pic = default_profile_pic;
+                                var chat_icon_div = (<div className="sender_icon_container">
+                                    <img className="sender_icon" src={profile_pic} alt="Sender"/>
+                                </div>);
 
-                                    <div className="sender">{sender}</div>
+                                var sender_name_div = (<div className="sender"> {message.sender}</div>);
 
-                                    <div className={message_bubble_style}>{message.msg}</div>
-                                </div>
+                                /*hide profile pic and sender name if equal to last messages sender*/
+                                if (message.sender_id === prev_sender) {
+                                    chat_icon_div = (<div className="sender_icon_container_invisible"></div>);
+                                    sender_name_div = (<div></div>);
+                                }
 
-                            )
+                                prev_sender = message.sender_id;
+
+                                return (
+                                    <div key={'message-' + index}
+                                         className="message_row">
+
+                                        {chat_icon_div}
+
+                                        <div className="sender_message_container">
+                                            {sender_name_div}
+                                            <div className="bubble_left">{message.msg}</div>
+                                        </div>
+
+                                    </div>
+                                )
+                            }
 
                         })
                     }

@@ -120,7 +120,6 @@ class ChatPortalView extends Component {
                         {
                             this.state.portals.map((portal, index) => {
 
-                                var unread = portal.unread ? " (!) " : "";
 
                                 var portal_class = "portal_entry";
                                 var chat_icon_class = "chat_icon_container"
@@ -156,7 +155,7 @@ class ChatPortalView extends Component {
                                         </div>
 
                                         <div className="portal_text_container">
-                                            {unread} {title}
+                                            {title}
                                             <br/>
                                             <div className="portal_time">{this.get_timestring(portal.time)}</div>
                                         </div>

@@ -5,17 +5,18 @@
     width: 95%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .input_holder {
     width: 100%;
-    height: 7vh;
+    height: 13vh;
     border-top: solid 1px lightgrey;
 }
 
 .message_input {
     width: 90%;
+    height: 100%;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
@@ -23,6 +24,7 @@
     border: transparent;
     font-size: small;
     font-family: sans-serif;
+    resize: none;
 }
 
 ::-webkit-scrollbar {
@@ -30,7 +32,7 @@
     background: transparent;
 }
 
-.message_entry {
+.message_row {
     float: left;
     width: 100%;
     font-size: smaller;
@@ -47,23 +49,51 @@
     margin-left: 3px;
 }
 
+.sender_icon_container {
+    float: left;
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 1px #ebebeb;
+    margin-right: 10px;
+}
+
+.sender_icon {
+    float: left;
+    height: 100%;
+}
+
+.sender_icon_container_invisible {
+    float: left;
+    width: 37px;
+    height: 1px;
+    margin-right: 10px;
+}
+
+.sender_message_container {
+    float: left;
+    width: calc(70% - 50px);
+
+}
+
 .bubble_left {
     float: left;
     background-color: #ebebeb;
-    max-width: 70%;
-    padding: 4px 10px 3px;
-    border-radius: 10px;
+    border-radius: 15px;
     min-height: 20px;
+    padding: 4px 10px 3px;
+
 }
 
 .bubble_right {
     float: right;
     max-width: 70%;
     background-color: #95e7f9;
-    text-align: right;
-    margin-left: 30%;
+    text-align: left;
     min-height: 20px;
     padding: 4px 10px 3px;
-    border-radius: 10px;
-
+    border-radius: 15px;
+    margin-right: 5%;
 }
