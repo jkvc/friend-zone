@@ -53,6 +53,7 @@ class ChatSessionView extends Component {
     }
 
     handle_input_key_press(e) {
+        if (e.key === 'Enter') e.preventDefault();
         if (e.key === 'Enter' && this.state.input.length > 0) {
             this.send_message();
             read_portal(firebase.auth().currentUser.uid, this.state.session_id);
