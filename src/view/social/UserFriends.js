@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
-import OtherProfile from "../profile/OtherProfile";
+import OtherProfile from "../profile/FriendProfile";
 import ReactDOM from 'react-dom';
 import {delete_friend} from "../../dao/ProfileManager";
 

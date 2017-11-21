@@ -114,7 +114,7 @@ class ChatPortalView extends Component {
                            placeholder="Search chat"/>
 
 
-                    <svg className="portal-new-chat-button" id="i-compose" viewBox="0 0 32 32" width="25" height="25"
+                    <svg className="portal-new-chat-button" id="i-compose" viewBox="0 0 32 32" width="20" height="20"
                          fill="none" stroke="currentcolor"
                          strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"
                          onClick={this.goto_start_chat.bind(this)}>
@@ -155,7 +155,7 @@ class ChatPortalView extends Component {
                             if (this.state.active_chat === portal.session_id)
                                 chat_detail_button = (
                                     <button className="chat_detail_button">
-                                        <svg id="i-settings" viewBox="0 0 32 32" width="25" height="25" fill="none"
+                                        <svg id="i-settings" viewBox="0 0 32 32" width="20" height="20" fill="none"
                                              stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round"
                                              strokeWidth="1.5">
                                             <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24" />

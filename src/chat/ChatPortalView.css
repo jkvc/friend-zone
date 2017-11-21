@@ -30,8 +30,8 @@
 }
 
 .portal-new-chat-button {
-    float: left;
-    margin-left: 5%;
+    float: right;
+    margin-right: 13px;
     margin-top: 12px;
     border: none;
     background: transparent;
@@ -103,7 +103,6 @@
     color: #2f5597;
     cursor: pointer;
     outline: none;
-    padding-right: 13px;
 }
 
 .portal_entry {

@@ -9,7 +9,7 @@ import {read_portal} from "./ChatPortalManager";
 import {get_friend_profiles} from "../api/StaticData";
 
 import default_profile_pic from "../image/DefaultProfilePic.jpg"
-import OtherProfile from "../view/profile/OtherProfile";
+import OtherProfile from "../view/profile/FriendProfile";
 
 class ChatSessionView extends Component {
 

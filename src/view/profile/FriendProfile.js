@@ -3,11 +3,11 @@ import {get_friend_profiles} from "../../api/StaticData";
 import {lookup_profile_by_user_id} from "../../dao/ProfileManager";
 
 
-class OtherProfile extends Component {
+class FriendProfile extends Component {
 
     constructor(props) {
         super(props);
-        this.title = "OtherProfile.js"
+        this.title = "FriendProfile.js"
         this.state = {
             user_id: props.user_id,
             profile_obj: get_friend_profiles()[props.user_id]
@@ -35,4 +35,4 @@ class OtherProfile extends Component {
 }
 
 
-export default OtherProfile;
+export default FriendProfile;

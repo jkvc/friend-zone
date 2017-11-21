@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {accept_friend_request, decline_friend_request, lookup_profile_by_user_id} from "../../dao/ProfileManager";
 import firebase from 'firebase';
 import {get_self_profile} from "../../api/StaticData";
+import PageTitle from "../components/PageTitle";
 
+import './UserInbox.css'
 
 class UserInbox extends Component {
 
@@ -46,36 +48,37 @@ class UserInbox extends Component {
     render() {
         return (
 
-            <div>
+            <div className="user_inbox">
 
-                <h1>{this.title}</h1>
+                <PageTitle title="Inbox"/>
 
-                <h4>うまるの受信トレイ</h4>
+                <div className="inbox_entry_container" align="center">
+                    {
+                        this.state.incoming_profiles.map((incoming_profile) => {
 
-                {
-                    this.state.incoming_profiles.map((incoming_profile) => {
+                            return (
+                                <div key={"incoming-friend-request-" + incoming_profile.user_id}>
+                                    Incoming friend request: {incoming_profile.first_name} {incoming_profile.last_name}
 
-                        return (
-                            <div key={"incoming-friend-request-" + incoming_profile.user_id}>
-                                Incoming friend request: {incoming_profile.first_name} {incoming_profile.last_name}
+                                    <button onClick={() => {
+                                        accept_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid);
+                                        this.remove_request(incoming_profile.user_id)
+                                    }}> accept
+                                    </button>
 
-                                <button onClick={() => {
-                                    accept_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid);
-                                    this.remove_request(incoming_profile.user_id)
-                                }}> accept
-                                </button>
-
-                                <button onClick={() => {
-                                    decline_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid);
-                                    this.remove_request(incoming_profile.user_id)
-                                }}> decline
-                                </button>
+                                    <button onClick={() => {
+                                        decline_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid);
+                                        this.remove_request(incoming_profile.user_id)
+                                    }}> decline
+                                    </button>
 
 
-                            </div>
-                        )
-                    })
-                }
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
 
                 {/*<pre>{JSON.stringify(this.state,null,2)}</pre>*/}
 
