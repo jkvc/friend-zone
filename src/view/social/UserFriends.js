@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
 import OtherProfile from "../profile/OtherProfile";
 import ReactDOM from 'react-dom';
+import {delete_friend} from "../../dao/ProfileManager";
 
 
 class UserFriends extends Component {
@@ -18,6 +19,16 @@ class UserFriends extends Component {
     goto_other_profile(friend_id) {
         ReactDOM.render(<OtherProfile user_id={friend_id}/>, document.getElementById('main-layout'));
     }
+
+    /*    This function should result in removing the friend from the list and
+ block all communication with the friend such as chat, sending another friend request, showing up
+ for recommended friends
+  */
+    block_friend(friend_id) {
+        delete_friend(this.state.profile_obj.user_id, friend_id);
+
+    }
+
 
     render() {
         return (
@@ -40,19 +51,27 @@ class UserFriends extends Component {
                             return (
                                 <tr key={"friend-profile-" + index}>
                                     <td>
-                                    {this.state.friend_profiles[friend_id].first_name}
-                                    {this.state.friend_profiles[friend_id].last_name}
+                                        {this.state.friend_profiles[friend_id].first_name}
+                                        {this.state.friend_profiles[friend_id].last_name}
                                     </td>
                                     <td>
-                                    <button onClick={() => {
-                                        this.goto_other_profile(friend_id);
-                                    }}>
-                                        goto profile</button>
+                                        <button onClick={() => {
+                                            this.goto_other_profile(friend_id);
+                                        }}>
+                                            goto profile
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => {
+                                            this.block_friend(friend_id);
+                                        }}>
+                                            Block friend
+                                        </button>
                                     </td>
                                 </tr>
                             )
                         })
-                }
+                    }
                 </table>
 
                 <pre>{JSON.stringify(this.state, null, 2)}</pre>
@@ -60,7 +79,8 @@ class UserFriends extends Component {
             </div>
 
         )
+
     }
 }
 
-export default UserFriends;
+    export default UserFriends;

@@ -110,3 +110,7 @@ export function decline_friend_request(from_id, to_id){
     })
 }
 
+export function delete_friend(self_id, friend_id){
+
+}
+
