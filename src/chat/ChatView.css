@@ -9,7 +9,7 @@
 
 .portal_container {
     float: left;
-    width: 300px;
+    width: 30%;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -17,7 +17,7 @@
 
 .session_container {
     float: left;
-    width: calc(100% - 301px);
+    width: calc(70% - 1px);
     height: 100%;
     border-left: solid 1px lightgrey;
 }

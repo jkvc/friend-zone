@@ -1,20 +1,20 @@
 .chat_portal_inner {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px;
     width: 100%;
-    height: calc(85vh - 50px);
+    height: 100%;
 }
 
 .search_box_bar {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    height: 40px;
+    height: 50px;
     border-bottom: solid 1px lightgrey;
 }
 
 .portal-search-box {
+    margin-top: 12px;
     border-radius: 15px;
     margin-left: 20px;
     width: calc(100% - 120px);
@@ -28,17 +28,19 @@
 }
 
 .portal-new-chat-button {
-    margin-left: 5px;
+    margin-left: 5%;
+    margin-top: 12px;
     height: 25px;
     font-size: smaller;
     border: none;
     background: transparent;
     color: #2f5597;
+    cursor: pointer;
 }
 
 .below_search_chat_bar {
     float: top;
-    height: calc(100% - 20px);
+    height: calc(100% - 51px);
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -55,7 +57,7 @@
     margin-left: 10px;
 }
 
-.chat_icon_container_active{
+.chat_icon_container_active {
     float: left;
     width: 55px;
     height: 55px;
@@ -72,15 +74,27 @@
 }
 
 .portal_text_container {
-    float: left;
-    width: calc(100% - 100px);
-    margin-left: 15px;
+    width: calc(100% - 80px);
+    margin-left: 50px;
     margin-top: 5px;
     font-size: smaller;
+    overflow-x: hidden;
+}
+
+.portal_title {
+    margin-left: 5%;
+    width: 95%
+}
+
+.portal_time {
+    color: grey;
+    margin-left: 5%;
+    margin-top: 2px;
+    font-size: xx-small;
 }
 
 .portal_entry {
-    height: 40px;
+    min-height: 40px;
     float: top;
     width: 100%;
     padding: 5px;
@@ -89,7 +103,7 @@
 }
 
 .portal_entry_unread {
-    height: 40px;
+    min-height: 40px;
     float: top;
     width: 100%;
     padding: 5px;
@@ -100,7 +114,7 @@
 
 .portal_entry_active {
     background-color: #ebebeb;
-    height: 60px;
+    min-height: 60px;
     float: top;
     width: 100%;
     padding: 5px;
@@ -108,7 +122,3 @@
     border-bottom: solid 1px lightgrey;
 }
 
-.portal_time {
-    color: grey;
-    font-size: xx-small;
-}

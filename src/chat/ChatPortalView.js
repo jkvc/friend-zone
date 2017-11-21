@@ -155,8 +155,7 @@ class ChatPortalView extends Component {
                                         </div>
 
                                         <div className="portal_text_container">
-                                            {title}
-                                            <br/>
+                                            <div className="portal_title"> {title}</div>
                                             <div className="portal_time">{this.get_timestring(portal.time)}</div>
                                         </div>
 
