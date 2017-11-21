@@ -93,6 +93,15 @@
     font-size: xx-small;
 }
 
+.chat_detail_button{
+    float: right;
+    font-size: smaller;
+    border: none;
+    background: transparent;
+    color: #2f5597;
+    cursor: pointer;
+}
+
 .portal_entry {
     min-height: 40px;
     float: top;
@@ -110,6 +119,7 @@
     cursor: pointer;
     border-bottom: solid 1px lightgrey;
     font-weight: bolder;
+    font-style: italic;
 }
 
 .portal_entry_active {

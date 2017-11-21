@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import firebase from 'firebase';
 import {add_message} from "./ChatSessionManager";
 import {lookup_profile_by_user_id} from "../dao/ProfileManager";
+import ReactDOM from 'react-dom';
 
 import './ChatSessionView.css'
 import {read_portal} from "./ChatPortalManager";
 import {get_friend_profiles} from "../api/StaticData";
 
 import default_profile_pic from "../image/DefaultProfilePic.jpg"
+import OtherProfile from "../view/profile/OtherProfile";
 
 class ChatSessionView extends Component {
 
@@ -55,6 +57,10 @@ class ChatSessionView extends Component {
         if (message_container) message_container.scrollTop = message_container.scrollHeight;
     }
 
+    goto_other_profile(user_id) {
+        ReactDOM.render(<OtherProfile user_id={user_id}/>, document.getElementById('main-layout'));
+    }
+
     handle_input_key_press(e) {
         if (e.key === 'Enter') e.preventDefault();
         if (e.key === 'Enter' && this.state.input.length > 0) {
@@ -76,25 +82,11 @@ class ChatSessionView extends Component {
         return (
             <div>
 
+
                 <div className="message_container" id="message-container">
                     {
                         this.state.messages.map((message, index) => {
 
-                            // var sender = message.sender === this.state.my_name ? "" : message.sender;
-                            // var message_bubble_style = message.sender === this.state.my_name ? "bubble_right" : "bubble_left";
-                            //
-                            //
-                            // return (
-                            //
-                            //     <div key={'message-' + index}
-                            //          className="message_row">
-                            //
-                            //         <div className="sender">{sender}</div>
-                            //
-                            //         <div className={message_bubble_style}>{message.msg}</div>
-                            //     </div>
-                            //
-                            // )
 
                             /* self message */
                             if (message.sender_id === firebase.auth().currentUser.uid) {
@@ -115,16 +107,17 @@ class ChatSessionView extends Component {
                                 var profile_pic = sender_profile.profile_pic;
                                 if (profile_pic === null || profile_pic === "" || profile_pic === undefined)
                                     profile_pic = default_profile_pic;
-                                var chat_icon_div = (<div className="sender_icon_container">
-                                    <img className="sender_icon" src={profile_pic} alt="Sender"/>
-                                </div>);
+                                var chat_icon_div = (
+                                    <div className="sender_icon_container" onClick={()=>{this.goto_other_profile(message.sender_id)}}>
+                                        <img className="sender_icon" src={profile_pic} alt="Sender"/>
+                                    </div>);
 
                                 var sender_name_div = (<div className="sender"> {message.sender}</div>);
 
                                 /*hide profile pic and sender name if equal to last messages sender*/
                                 if (message.sender_id === prev_sender) {
-                                    chat_icon_div = (<div className="sender_icon_container_invisible"></div>);
-                                    sender_name_div = (<div></div>);
+                                    chat_icon_div = (<div className="sender_icon_container_invisible"> </div>);
+                                    sender_name_div = (<div> </div>);
                                 }
 
                                 prev_sender = message.sender_id;

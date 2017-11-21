@@ -88,9 +88,15 @@ class ChatPortalView extends Component {
     get_timestring(millis) {
         let time = new Date();
         time.setTime(millis);
+
         var hr = time.getHours()
         var min = time.getMinutes()
         var sec = time.getSeconds()
+
+        if (hr<10) hr = "0"+hr;
+        if (min<10) min = "0"+min;
+        if (sec<10) sec = "0"+sec;
+
         return "" + hr + ":" + min + ":" + sec;
     }
 
@@ -142,6 +148,12 @@ class ChatPortalView extends Component {
                                     profile_pic = friend_profile.profile_pic === "" ? default_profile_pic : friend_profile.profile_pic;
                                 }
 
+                                var chat_detail_button = (<div> </div>);
+                                if (this.state.active_chat === portal.session_id)
+                                    chat_detail_button = (
+                                        <button className="chat_detail_button"> Chat detail >> </button>
+                                    );
+
 
                                 return (
 
@@ -157,6 +169,8 @@ class ChatPortalView extends Component {
                                         <div className="portal_text_container">
                                             <div className="portal_title"> {title}</div>
                                             <div className="portal_time">{this.get_timestring(portal.time)}</div>
+
+                                            {chat_detail_button}
                                         </div>
 
                                     </div>
