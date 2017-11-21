@@ -30,24 +30,30 @@ class UserFriends extends Component {
                 <h1>{this.title}</h1>
 
                 <h4>うまるの友達!</h4>
-
-                {
-                    Object.keys(this.state.friend_profiles).map((friend_id, index) => {
-                        return (
-                            <div key={"friend-profile-" + index}>
-                                Friend:
-                                {this.state.friend_profiles[friend_id].first_name}
-                                {this.state.friend_profiles[friend_id].last_name}
-
-                                <button onClick={() => {
-                                    this.goto_other_profile(friend_id);
-                                }}>
-                                    goto profile
-                                </button>
-                            </div>
-                        )
-                    })
+                <table>
+                    <tr>
+                        <th>Friends</th>
+                        <th></th>
+                    </tr>
+                    {
+                        Object.keys(this.state.friend_profiles).map((friend_id, index) => {
+                            return (
+                                <tr key={"friend-profile-" + index}>
+                                    <td>
+                                    {this.state.friend_profiles[friend_id].first_name}
+                                    {this.state.friend_profiles[friend_id].last_name}
+                                    </td>
+                                    <td>
+                                    <button onClick={() => {
+                                        this.goto_other_profile(friend_id);
+                                    }}>
+                                        goto profile</button>
+                                    </td>
+                                </tr>
+                            )
+                        })
                 }
+                </table>
 
                 <pre>{JSON.stringify(this.state, null, 2)}</pre>
 

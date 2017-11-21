@@ -56,7 +56,6 @@ class MainLayout extends Component{
                     alert(error.message);
                 });
         }
-        
     }
 
     render(){
