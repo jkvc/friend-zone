@@ -47,13 +47,16 @@ class MainLayout extends Component{
     }
 
     logout(){
-        firebase.auth().signOut()
-            .then(function() {
-                ReactDOM.render(<Main />, document.getElementById('root'));
-            })
-            .catch(function(error){
-                alert(error.message);
-            });
+        if(  window.confirm("Are you sure?")) {
+            firebase.auth().signOut()
+                .then(function () {
+                    ReactDOM.render(<Main/>, document.getElementById('root'));
+                })
+                .catch(function (error) {
+                    alert(error.message);
+                });
+        }
+        
     }
 
     render(){
