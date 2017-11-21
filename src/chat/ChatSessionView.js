@@ -139,6 +139,9 @@ class ChatSessionView extends Component {
 
                         })
                     }
+
+                    <div className="message_container_bottom_padding"> </div>
+
                 </div>
 
 

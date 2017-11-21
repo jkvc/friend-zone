@@ -14,10 +14,10 @@
 }
 
 .portal-search-box {
-    margin-top: 12px;
+    float: left;
     border-radius: 15px;
     margin-left: 20px;
-    width: calc(100% - 120px);
+    width: calc(100% - 100px);
     height: 25px;
     font-size: smaller;
     background-color: #ebebeb;
@@ -25,17 +25,19 @@
     border: none;
     padding-left: 10px;
     padding-right: 10px;
+    margin-top: 12px;
+
 }
 
 .portal-new-chat-button {
+    float: left;
     margin-left: 5%;
     margin-top: 12px;
-    height: 25px;
-    font-size: smaller;
     border: none;
     background: transparent;
     color: #2f5597;
     cursor: pointer;
+    outline: none;
 }
 
 .below_search_chat_bar {
@@ -93,13 +95,15 @@
     font-size: xx-small;
 }
 
-.chat_detail_button{
+.chat_detail_button {
     float: right;
     font-size: smaller;
     border: none;
     background: transparent;
     color: #2f5597;
     cursor: pointer;
+    outline: none;
+    padding-right: 13px;
 }
 
 .portal_entry {
@@ -131,4 +135,3 @@
     cursor: pointer;
     border-bottom: solid 1px lightgrey;
 }
-
