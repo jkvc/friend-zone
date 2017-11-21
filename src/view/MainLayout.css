@@ -10,8 +10,8 @@
 }
 
 @font-face {
-    font-family: "Biko";
-    src: url("../font/Biko.otf")
+    font-family: "Helvetica";
+    src: url("../font/Helvetica.ttf")
 }
 
 .body-main-layout{
@@ -58,7 +58,7 @@
     font-family: "Harlow Solid Italic",serif;
     font-size: 150%;
     margin-left: 20%;
-    margin-top: 7px;
+    margin-top: 3px;
     margin-right: 1%;
 }
 
