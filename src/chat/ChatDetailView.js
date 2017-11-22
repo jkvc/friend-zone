@@ -12,6 +12,8 @@ class ChatDetailView extends Component {
         this.state = {
             session_id: props.session_id,
             session_pic: null,
+            change_name_visible: false,
+            new_name: "",
             participant_ids: [],
             participant_profile_obj: {}
         }
@@ -22,7 +24,7 @@ class ChatDetailView extends Component {
         get_chat_pic_by_id(this.state.session_id, (err, pic_url) => {
             if (!err)
                 this.setState({session_pic: pic_url});
-        })
+        });
 
         get_chat_participant_by_id(this.state.session_id, (err, session_participants) => {
             this.setState({participant_ids: Object.keys(session_participants)}, () => {

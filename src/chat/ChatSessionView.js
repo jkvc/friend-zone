@@ -27,16 +27,16 @@ class ChatSessionView extends Component {
     componentWillMount() {
         var ref = firebase.database().ref('ChatSession/' + this.state.session_id);
 
-        ref.once('value').then((snapshot) => {
-            var msg_list = [];
-            var msg_keys = Object.keys(snapshot.val().message);
-            for (var i = 0; i < msg_keys.length; i++) {
-                msg_list.push(snapshot.val().message[msg_keys[i]])
-            }
-            this.setState({messages: msg_list}, () => {
-                this.scroll_message_container_to_bottom();
-            })
-        });
+        // ref.once('value').then((snapshot) => {
+        //     var msg_list = [];
+        //     var msg_keys = Object.keys(snapshot.val().message);
+        //     for (var i = 0; i < msg_keys.length; i++) {
+        //         msg_list.push(snapshot.val().message[msg_keys[i]])
+        //     }
+        //     this.setState({messages: msg_list}, () => {
+        //         this.scroll_message_container_to_bottom();
+        //     })
+        // });
 
         ref.child('message').on('child_added', (snapshot) => {
             var msg_list = this.state.messages;
@@ -92,7 +92,7 @@ class ChatSessionView extends Component {
                             if (message.sender_id === firebase.auth().currentUser.uid) {
                                 prev_sender = message.sender_id;
                                 return (
-                                    <div key={'message-' + index}
+                                    <div key={'message    cursor: pointer;\n-' + index}
                                          className="message_row">
                                         <div className="bubble_right">{message.msg}</div>
                                     </div>
@@ -105,12 +105,17 @@ class ChatSessionView extends Component {
                                 /*get the profile pic*/
                                 var sender_profile = friend_profiles[message.sender_id] || {};
                                 var profile_pic = sender_profile.profile_pic;
+
                                 if (profile_pic === null || profile_pic === "" || profile_pic === undefined)
                                     profile_pic = default_profile_pic;
+
+
                                 var chat_icon_div = (
                                     <div className="sender_icon_container" onClick={()=>{this.goto_other_profile(message.sender_id)}}>
                                         <img className="sender_icon" src={profile_pic} alt="Sender"/>
                                     </div>);
+
+
 
                                 var sender_name_div = (<div className="sender"> {message.sender}</div>);
 
