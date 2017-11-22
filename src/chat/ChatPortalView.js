@@ -8,6 +8,7 @@ import {read_portal, sort_portal_by_time} from "./ChatPortalManager";
 import default_profile_pic from "../image/DefaultProfilePic.jpg"
 import default_group_chat_pic from "../image/DefaultGroupChatPic.jpg"
 import {get_friend_profiles} from "../api/StaticData";
+import ChatDetail from "./ChatDetailView";
 
 class ChatPortalView extends Component {
 
@@ -85,6 +86,11 @@ class ChatPortalView extends Component {
                                          key={"chat_session-" + session_id}/>, document.getElementById('session-container'));
     }
 
+    goto_session_detail(session_id) {
+        ReactDOM.render(<ChatDetail session_id={session_id}
+                                    key={"chat_detail" + session_id}/>, document.getElementById('session-container'));
+    }
+
     get_timestring(millis) {
         let time = new Date();
         time.setTime(millis);
@@ -154,11 +160,14 @@ class ChatPortalView extends Component {
                             var chat_detail_button = (<div></div>);
                             if (this.state.active_chat === portal.session_id)
                                 chat_detail_button = (
-                                    <button className="chat_detail_button">
+                                    <button className="chat_detail_button"
+                                            onClick={(e) => {
+                                                this.goto_session_detail(portal.session_id);
+                                            }}>
                                         <svg id="i-settings" viewBox="0 0 32 32" width="20" height="20" fill="none"
                                              stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round"
                                              strokeWidth="1.5">
-                                            <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24" />
+                                            <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24"/>
                                         </svg>
                                     </button>
                                 );
@@ -167,9 +176,11 @@ class ChatPortalView extends Component {
                             return (
 
                                 <div className={portal_class}
-                                     key={"portal-" + index} onClick={() => {
-                                    this.goto_chat_session(portal.session_id)
-                                }}>
+                                     key={"portal-" + index}
+                                     onClick={() => {
+                                         if (portal.session_id !== this.state.active_chat)
+                                             this.goto_chat_session(portal.session_id);
+                                     }}>
 
                                     <div className={chat_icon_class}>
                                         <img src={profile_pic} alt="profile_image" className="chat_icon"/>

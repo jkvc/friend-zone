@@ -1,0 +1,4 @@
+.chat-detail-container{
+    height: 100%;
+    overflow-y: scroll;
+}

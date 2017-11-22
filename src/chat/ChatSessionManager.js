@@ -6,6 +6,26 @@ export function hash_session_id(participant_ids) {
     return md5(participant_ids.sort().join(''));
 }
 
+export function get_chat_pic_by_id(session_id, callback) {
+
+    firebase.database().ref('ChatSession/' + session_id + '/session_pic').once('value').then((snapshot) => {
+        if (snapshot.val() === null)
+            callback({msg: "session not found"}, null);
+        else
+            callback(null, snapshot.val());
+    })
+}
+
+export function get_chat_participant_by_id(session_id, callback) {
+
+    firebase.database().ref('ChatSession/' + session_id + '/participant_ids').once('value').then((snapshot) => {
+        if (snapshot.val() === null)
+            callback({msg: "session not found"}, null);
+        else
+            callback(null, snapshot.val());
+    })
+}
+
 
 /*callback a session id
 * if the same session with the same people already existed, callback the id of existing session
