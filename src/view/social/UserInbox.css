@@ -33,3 +33,12 @@
     margin-top: 10px;
     margin-right: 5px;
 }
+
+.goto_rec_friend_button{
+    cursor: pointer;
+    background: transparent;
+    border: transparent;
+    font-size: medium;
+    font-style: italic;
+    color: #2f5597;
+}

@@ -3,8 +3,12 @@ import {accept_friend_request, decline_friend_request, lookup_profile_by_user_id
 import firebase from 'firebase';
 import {get_self_profile} from "../../api/StaticData";
 import PageTitle from "../components/PageTitle";
+import ReactDOM from 'react-dom';
+
 
 import './UserInbox.css'
+import empty_inbox_img from "../../image/EmptyInboxImg.png"
+import RecommendedFriends from "./RecommendedFriends";
 
 class UserInbox extends Component {
 
@@ -46,14 +50,20 @@ class UserInbox extends Component {
         })
     }
 
+    goto_recommended_friend(){
+        ReactDOM.render(<RecommendedFriends/>, document.getElementById('main-layout'));
+    }
+
     render() {
 
         var content = (<div align={"center"} className="empty_inbox_container">
             <br/><br/><br/><br/>
-            <img src="http://i0.kym-cdn.com/photos/images/original/001/050/209/b01.png" alt=""
-                 width="400px"/>
+            <img src={empty_inbox_img} alt=""
+                 width="300px"/>
             <br/>
-            You have no incoming friend requests.
+            You have no incoming friend requests. <br/>
+            Find some friends
+            <button className="goto_rec_friend_button" onClick={this.goto_recommended_friend}>here.</button>
         </div>);
 
         if (this.state.incoming_request.length !== 0) {

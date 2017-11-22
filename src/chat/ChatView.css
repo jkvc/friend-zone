@@ -2,7 +2,7 @@
 .chat_view_container {
     min-width: 500px;
     width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 95px);
     margin-left: auto;
     margin-right: auto;
 }

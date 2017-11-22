@@ -14,7 +14,7 @@
 
 .input_holder {
     width: 100%;
-    height: 11vh;
+    height: calc(11vh - 15px);
     border-top: solid 1px lightgrey;
 }
 
@@ -26,7 +26,7 @@
     padding-top: 5px;
     overflow: scroll;
     border: transparent;
-    font-size: small;
+    font-size: smaller;
     font-family: sans-serif;
     resize: none;
     outline: none;
