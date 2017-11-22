@@ -53,10 +53,10 @@ export function remove_course_from_profile( user_id, course_id ){
     })
 }
 
-export function add_event_to_profile(user_id, event_name, event_day , event_time, event_location){
+export function add_event_to_profile(user_id, event_name, event_day , start_time, end_time, event_location){
     lookup_profile_by_user_id( user_id, function(err, profile){
         if(!err){
-            profile.upcoming_events[event_name] = new Event( event_name, event_day, event_time, event_location);
+            profile.upcoming_events[event_name] = new Event( event_name, event_day, start_time, end_time, event_location);
             profile.push();
         }
     })

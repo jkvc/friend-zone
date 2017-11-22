@@ -17,6 +17,7 @@ class UserSchedule extends Component {
         this.title = "UserSchedule.js";
         this.state = {
             events: [],
+            other_events: []
         };
 
         this.initialize_events();
@@ -45,12 +46,35 @@ class UserSchedule extends Component {
     // This function will initialize all the events (classes) of the user
     initialize_events() {
 
-        var profile_obj = get_self_profile();
+        let profile_obj = get_self_profile();
 
         let enrolled_obj = profile_obj.enrolled_courses;
         let course_list = Object.keys(enrolled_obj);
         let events = [];
 
+        // This is used to parsed all the other user added events
+        let raw_other_events = profile_obj.upcoming_events;
+        console.log(raw_other_events);
+        let other_events = [];
+
+        for (let event_id in raw_other_events)
+        {
+            let curr_event = raw_other_events[event_id];
+
+            // A backward compatibility check, making sure start_time and end_time are in event
+            if (! ("start_time" in curr_event) || !("end_time" in curr_event) )
+            {
+                continue;
+            }
+            let parsed_event = { "title":"", "start":null, "end":null };
+            parsed_event["title"] = curr_event.event_name + " at " + curr_event.location;
+            parsed_event["start"] = new Date( curr_event.day + "T" + curr_event.start_time );
+            parsed_event["end"] = new Date( curr_event.day + "T" + curr_event.end_time );
+            other_events.push(parsed_event);
+        }
+        this.state.other_events = other_events;
+
+        // This is used to parse all the other events
         course_list.forEach((course_id) => {
 
             lookup_course_by_id(course_id, (err, course_obj) => {
@@ -104,7 +128,8 @@ class UserSchedule extends Component {
                 // set the state of UserSchedule
                 this.setState({events: events});
                 ReactDOM.render(<CalendarHelper events={this.state.events}
-                                                key={"calendar-" + this.state.events.length}/>,
+                                                other_events={this.state.other_events}
+                                                key={"calendar-" + (this.state.events.length + this.state.other_events.length) }/>,
                     document.getElementById('calendar-helper-container')
                 )
             });
@@ -112,9 +137,16 @@ class UserSchedule extends Component {
 
     }
 
+    // In case the user did not have any classes
+    componentDidMount()
+    {
+        ReactDOM.render(<CalendarHelper events={this.state.events}
+                                        other_events={this.state.other_events}
+                                        key={"calendar-" + (this.state.events.length + this.state.other_events.length) }/>,
+            document.getElementById('calendar-helper-container') );
+    }
 
     render() {
-
 
         return (
 

@@ -12,14 +12,15 @@ class AddEvent extends Component{
             //result: [],
             event_name: "",
             day: "",
-            time: "",
+            start_time: "",
+            end_time: "",
             location: ""
         };
 
     }
 
     handle_add_event(){
-        add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.time, this.state.location);
+        add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.start_time, this.state.end_time, this.state.location);
          alert(JSON.stringify(this.state.event_name + " was successfully added to your schedule!"));
 
     }
@@ -39,17 +40,25 @@ class AddEvent extends Component{
 
                 <form>
                     <label>Day:</label>
-                    <input type={"text"} value={this.state.day}
+                    <input type={"date"} value={this.state.day}
                            onChange={function(e){
                                this.setState({day:e.target.value})
                            }.bind(this)}/>
                 </form>
 
                 <form>
-                    <label>Time:</label>
-                    <input type={"text"} value={this.state.time}
+                    <label>Start Time:</label>
+                    <input type={"time"} value={this.state.start_time}
                            onChange={function(e){
-                               this.setState({time:e.target.value})
+                               this.setState({start_time:e.target.value})
+                           }.bind(this)}/>
+                </form>
+
+                <form>
+                    <label>End Time:</label>
+                    <input type={"time"} value={this.state.end_time}
+                           onChange={function(e){
+                               this.setState({end_time:e.target.value})
                            }.bind(this)}/>
                 </form>
 
