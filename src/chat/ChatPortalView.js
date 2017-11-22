@@ -51,20 +51,8 @@ class ChatPortalView extends Component {
             var portal_list = this.state.portals;
             /*put this new portal at the BEGINNING of list*/
             portal_list.unshift(new_portal);
+            portal_list.sort(sort_portal_by_time);
             this.setState({portals: portal_list})
-
-        });
-
-        ref.once('value').then((snapshot) => {
-            var portals_obj = snapshot.val() || {};
-            var portal_keys = Object.keys(portals_obj);
-            var portals_list = [];
-            for (var i = 0; i < portal_keys.length; i += 1) {
-                portals_list.push(portals_obj[portal_keys[i]])
-            }
-            /*sort it by time*/
-            portals_list.sort(sort_portal_by_time);
-            this.setState({portals: portals_list})
         });
 
     }
@@ -122,7 +110,7 @@ class ChatPortalView extends Component {
 
                     <svg className="portal-new-chat-button" id="i-compose" viewBox="0 0 32 32" width="20" height="20"
                          fill="none" stroke="currentcolor"
-                         strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"
+                         strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                          onClick={this.goto_start_chat.bind(this)}>
                         <path
                             d="M27 15 L27 30 2 30 2 5 17 5 M30 6 L26 2 9 19 7 25 13 23 Z M22 6 L26 10 Z M9 19 L13 23 Z"/>
@@ -145,9 +133,9 @@ class ChatPortalView extends Component {
                             }
 
                             var title = portal.title;
-                            var profile_pic = default_group_chat_pic;
+                            var profile_pic = portal.portal_pic || default_group_chat_pic;
 
-                            /*handle if is a single chat and replace the name*/
+                            /*handle if is a single chat and replace the name and profile pic*/
                             var participant_ids = Object.keys(portal.participant_ids || {});
                             if (participant_ids.length === 2) {
                                 var self_id = firebase.auth().currentUser.uid;
@@ -166,7 +154,7 @@ class ChatPortalView extends Component {
                                             }}>
                                         <svg id="i-settings" viewBox="0 0 32 32" width="20" height="20" fill="none"
                                              stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round"
-                                             strokeWidth="1.5">
+                                             strokeWidth="2">
                                             <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24"/>
                                         </svg>
                                     </button>
@@ -201,7 +189,7 @@ class ChatPortalView extends Component {
                 </div>
 
 
-                {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
+                <pre>{JSON.stringify(this.state, null, 2)}</pre>
             </div>
 
         )

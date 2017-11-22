@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import md5 from 'md5';
-import {create_portal, unread_portal, update_timestamp} from "./ChatPortalManager";
+import {create_portal, unread_portal, update_portal_pic, update_timestamp} from "./ChatPortalManager";
 
 export function hash_session_id(participant_ids) {
     return md5(participant_ids.sort().join(''));
@@ -23,6 +23,18 @@ export function get_chat_participant_by_id(session_id, callback) {
             callback({msg: "session not found"}, null);
         else
             callback(null, snapshot.val());
+    })
+}
+
+export function update_session_pic(session_id, image_url) {
+    firebase.database().ref('ChatSession/' + session_id).child('session_pic').set(image_url);
+    get_chat_participant_by_id(session_id, (err, particippant_ids) => {
+        if (!err) {
+            var participant_list = Object.keys(particippant_ids);
+            participant_list.forEach((participant_id) => {
+                update_portal_pic(participant_id, session_id, image_url);
+            })
+        }
     })
 }
 
