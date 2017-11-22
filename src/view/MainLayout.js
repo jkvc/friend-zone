@@ -108,7 +108,7 @@ class MainLayout extends Component{
     }
 
     componentDidMount(){
-        ReactDOM.render(<ChatView />, document.getElementById('main-layout'));
+        ReactDOM.render(<UserInbox />, document.getElementById('main-layout'));
     }
 }
 

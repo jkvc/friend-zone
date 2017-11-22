@@ -11,8 +11,9 @@ class UserInbox extends Component {
     constructor(props) {
         super(props);
         this.title = "UserInbox.js";
+
         this.state = {
-            incoming_request: Object.keys(get_self_profile().incoming_request),
+            incoming_request: Object.keys((get_self_profile().incoming_request) || {}),
             incoming_profiles: []
         }
     }
@@ -46,38 +47,63 @@ class UserInbox extends Component {
     }
 
     render() {
+
+        var content = (<div align={"center"} className="empty_inbox_container">
+            <br/><br/><br/><br/>
+            <img src="http://i0.kym-cdn.com/photos/images/original/001/050/209/b01.png" alt=""
+                 width="400px"/>
+            <br/>
+            You have no incoming friend requests.
+        </div>);
+
+        if (this.state.incoming_request.length !== 0) {
+            content = (<div className="inbox_entry_container">
+                {
+
+                    this.state.incoming_profiles.map((incoming_profile) => {
+
+                        return (
+                            <div className="inbox_entry"
+                                 key={"incoming-friend-request-" + incoming_profile.user_id}>
+
+                                <div className="inbox_entry_text">
+                                    {incoming_profile.first_name} {incoming_profile.last_name}
+
+                                </div>
+
+                                <button className="inbox_entry_button"
+                                        onClick={() => {
+                                            decline_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid);
+                                            this.remove_request(incoming_profile.user_id)
+                                        }}> Decline
+                                </button>
+
+                                <button className="inbox_entry_button"
+                                        onClick={() => {
+                                            accept_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid);
+                                            this.remove_request(incoming_profile.user_id)
+                                        }}> Accept
+                                </button>
+
+                                <button className="inbox_entry_button">
+                                    View profile
+                                </button>
+
+
+                            </div>
+                        )
+                    })
+                }
+            </div>)
+        }
+
         return (
 
             <div className="user_inbox">
 
                 <PageTitle title="Inbox"/>
 
-                <div className="inbox_entry_container" align="center">
-                    {
-                        this.state.incoming_profiles.map((incoming_profile) => {
-
-                            return (
-                                <div key={"incoming-friend-request-" + incoming_profile.user_id}>
-                                    Incoming friend request: {incoming_profile.first_name} {incoming_profile.last_name}
-
-                                    <button onClick={() => {
-                                        accept_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid);
-                                        this.remove_request(incoming_profile.user_id)
-                                    }}> accept
-                                    </button>
-
-                                    <button onClick={() => {
-                                        decline_friend_request(incoming_profile.user_id, firebase.auth().currentUser.uid);
-                                        this.remove_request(incoming_profile.user_id)
-                                    }}> decline
-                                    </button>
-
-
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+                {content}
 
 
                 {/*<pre>{JSON.stringify(this.state,null,2)}</pre>*/}

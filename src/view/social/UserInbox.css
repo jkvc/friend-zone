@@ -3,9 +3,33 @@
     min-height: 600px;
 }
 
-.inbox_entry_container{
-    background-color: green;
+.empty_inbox_container{
+    color: grey;
+}
+
+.inbox_entry_container {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.inbox_entry {
+    min-height: 50px;
+    border-bottom: solid 1px lightgrey;
+}
+
+.inbox_entry_text {
+    width: calc(90% - 250px);
+    margin-top: 10px;
+    float: left;
+}
+
+.inbox_entry_button {
+    float: right;
+    border: transparent;
+    background: transparent;
+    color: #2f5597;
+    font-size: small;
+    margin-top: 10px;
+    margin-right: 5px;
 }

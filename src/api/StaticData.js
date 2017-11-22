@@ -40,9 +40,10 @@ export function init_friend_profiles(callback) {
     var profile_loaded = 0;
 
     /*callback immediately when you dont have friends*/
-    if (friend_ids.length === 0)
+    if (friend_ids.length === 0) {
         if (callback) callback(self_profile);
-
+        other_profiles = {};
+    }
 
     friend_ids.forEach((friend_id) => {
         lookup_profile_by_user_id(friend_id, (err, friend_profile) => {
