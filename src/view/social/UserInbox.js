@@ -41,6 +41,7 @@ class UserInbox extends Component {
         var new_incoming_request = this.state.incoming_request;
         var new_incoming_profile = this.state.incoming_profiles;
 
+
         new_incoming_request.splice(index, 1);
         new_incoming_profile.splice(index, 1);
 

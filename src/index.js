@@ -15,7 +15,7 @@ import CalendarHelper from './api/CalendarHelper';
 
 // eslint-disable-next-line
 import {test_time_helper} from "./test/TestTimeHelper";
-import {init_data} from "./api/StaticData";
+import {clear_profiles, init_data} from "./api/StaticData";
 
 document.title = "FriendZone";
 
@@ -50,6 +50,7 @@ firebase.auth().onAuthStateChanged((user) => {
             }
         });
     } else {
+        clear_profiles();
         ReactDOM.render(<Welcome/>, document.getElementById('root'));
     }
 });

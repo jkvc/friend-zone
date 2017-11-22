@@ -77,3 +77,8 @@ export function get_friend_profiles() {
 export function get_self_profile() {
     return self_profile;
 }
+
+export function clear_profiles(){
+    self_profile = null;
+    other_profiles = {};
+}
