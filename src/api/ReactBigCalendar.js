@@ -27,20 +27,17 @@ let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 // For source code example, go to https://github.com/intljusticemission/react-big-calendar
 class BasicCalendar extends Component{
 
+    constructor(props)
+    {
+        super(props);
+        this.events = props.events;
+    }
+
     render(){
         return (
             <BigCalendar
                 {...this.props}
-                events={  [{
-                        'title': 'Late Night Event',
-                        'start':new Date(2017, 11, 21, 19, 30, 0),
-                        'end': new Date(2017, 11, 21, 22, 0, 0)
-                    },
-                    {
-                        'title': 'Another',
-                        'start': new Date(2017, 11, 21, 20, 0, 0),
-                        'end': new Date(2017, 11, 21, 23, 0, 0)
-                    }] }
+                events={this.events}
                 views={allViews}
                 step={60}
                 // Be default this should return current date

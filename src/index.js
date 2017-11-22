@@ -71,4 +71,4 @@ firebase.auth().onAuthStateChanged((user) => {
 //     {"days":"TuTh", "hours":["10:20", "11:20"], "title":"CSE100"},
 //     {"days":"MWTu", "hours":["00:10", "11:00"], "title":"Chilling"}
 // ];
-// ReactDOM.render(<CalendarHelper events={events}/>, document.getElementById('root'));
+// ReactDOM.render(<ClassScheduleHelper events={events}/>, document.getElementById('root'));
