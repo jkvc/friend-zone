@@ -91,14 +91,18 @@ class RecommendedFriends extends Component {
         return (
 
             <div>
-
+                <table>
+                    <tr>
+                        <th>Recommended Friends</th><th></th>
+                    </tr>
                 {
                     this.state.recommendation_profiles.map((profile) => {
                         return (
-                            <div key={"recommended-friend-" + profile.user_id}>
-                                <br/>
+                            <tr key={"recommended-friend-" + profile.user_id}>
+                                <td>
                                 Friend name: {profile.first_name} {profile.last_name}
-
+                                </td>
+                                <td>
                                 {profile.user_id in this.state.sent_requests ? (
                                     <button onClick={() => {
                                         cancel_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err,data)=>
@@ -119,10 +123,12 @@ class RecommendedFriends extends Component {
                                     </button>
                                 )
                                 }
-                            </div>
+                                </td>
+                            </tr>
                         )
                     })
                 }
+                </table>
 
                 <pre>{JSON.stringify(this.state, null, 2)}</pre>
 
