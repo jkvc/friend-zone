@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
-import {create_friend_request, lookup_profile_by_user_id, decline_friend_request} from "../../dao/ProfileManager";
+import {cancel_friend_request, create_friend_request, lookup_profile_by_user_id, decline_friend_request} from "../../dao/ProfileManager";
 import {lookup_enrollment_by_id} from "../../dao/EnrollmentManager";
 import {most_popular_in_list} from "../../api/MostPopularInList";
-import {get_self_profile} from "../../api/StaticData";
+import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
 
 const recommendation_count = 100;
 
@@ -17,7 +17,9 @@ class RecommendedFriends extends Component {
             courses_enrolled: Object.keys(get_self_profile().enrolled_courses),
             all_classmates: [],
             self_profile: get_self_profile(),
-            sent_requests : get_self_profile().outgoing_request
+            sent_requests : get_self_profile().outgoing_request,
+            friend_list : Object.keys(get_friend_profiles()),
+            blocked_list : get_self_profile().blocked_user
         }
     }
 
@@ -46,7 +48,9 @@ class RecommendedFriends extends Component {
                 if (aggregated_ids.length === course_list.length) {
                     var query = {
                         count: recommendation_count,
-                        list: this.state.all_classmates
+                        list: this.state.all_classmates,
+                        blocked_list : this.state.blocked_list,
+                        friend_list : this.state.friend_list
                     };
 
                     most_popular_in_list(query, (err, data) => {
@@ -94,20 +98,25 @@ class RecommendedFriends extends Component {
                                 <br/>
                                 Friend name: {profile.first_name} {profile.last_name}
 
-                                {(!profile.user_id in this.state.sent_requests) &&
+                                {profile.user_id in this.state.sent_requests ? (
                                     <button onClick={() => {
-                                        create_friend_request(firebase.auth().currentUser.uid, profile.user_id);
-                                    }}>
-                                        Send friend request
-                                    </button>
-                                }
-
-                                {profile.user_id in this.state.sent_requests &&
-                                    <button onClick={() => {
-                                        decline_friend_request(profile.user_id, firebase.auth().currentUser.uid);
+                                        cancel_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err,data)=>
+                                        {
+                                            this.setState( {sent_requests:data} )
+                                        });
                                     }}>
                                         Cancel friend request
                                         </button>
+                                ) : (
+                                    <button onClick={() => {
+                                        create_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err,data)=>
+                                        {
+                                            this.setState( {sent_requests:data} )
+                                        });
+                                    }}>
+                                        Send friend request
+                                    </button>
+                                )
                                 }
                             </div>
                         )

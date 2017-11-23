@@ -11,6 +11,8 @@
 *                       [ "a","b","c","d","f"],
 *                       [ "a","b","c","d","f","g"]
 *                   ]
+*       "blocked_list": { "a" }    // NOTE: optional; not an array, but associative array
+*       "friend_list": { "b" }     // NOTE; optional; not an array, but associative array
 *   }
 * given this param, this function should call the callback function with:
 *   err = null,
@@ -28,6 +30,9 @@
 *   6. if count is less than 0 or list is empty
 */
 export function most_popular_in_list(param, callback){
+
+    let checkBlock = ("blocked_list" in param);
+    let checkFriend = ("friend_list" in param);
 
     /*handle some error, each error message will be printed out to the console*/
     /*comment out 'console.log' if error messages are not desired */
@@ -120,7 +125,7 @@ export function most_popular_in_list(param, callback){
 
     // Push the student names onto the list based on the count specified
     let c = 0;
-    if (count === 0)
+    if (count === 0 || count > array.length)
     {
         c = array.length;
     }
@@ -131,7 +136,16 @@ export function most_popular_in_list(param, callback){
 
     for (i = 0; i < c; i++)
     {
-        if (array.length <= i) break;
+        if (checkBlock)
+        {
+            if (array[i][1] in param.blocked_list) continue;
+        }
+
+        if (checkFriend)
+        {
+            if (array[i][1] in param.friend_list) continue;
+        }
+
         result.push(array[i][1]);
     }
 
@@ -150,11 +164,13 @@ export function most_popular_in_list(param, callback){
 *                       [ "a","b","c","d","f","g"]
 *                   ]
 *       "class":    [ "a", "b", "c", "d", "e" ]
+*       "blocked_list": { "a" }    // NOTE: not an array, but associative array
+*       "friend_list": { "b" }     // NOTE; not an array, but associative array
 *   }
 *
 * given this param, this function should call the callback function with:
 *   err = null,
-*   data = ["a","b","c","d","e" ]   //because f is not in 'class' even though its more popular
+*   data = ["b","c","d","e" ]   //because f is not in 'class' even though its more popular
 *
 * handle errors accordingly by calling callback function with:
 *   err = {"msg": "some error message explaining why" }
@@ -172,6 +188,7 @@ export function most_popular_in_list(param, callback){
 export function most_popular_in_class(param, callback){
 
     let err = null;
+
 
     // Initial error checkings
     if ( !("count" in param && "class" in param) ) {

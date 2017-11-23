@@ -87,11 +87,11 @@ export function remove_event_from_profile(user_id, event_id){
 }
 
 
-export function create_friend_request(from_id, to_id) {
+export function create_friend_request(from_id, to_id, callback) {
 
     lookup_profile_by_user_id(from_id, (err, from_profile)=>{
         from_profile.outgoing_request[to_id] = true;
-        from_profile.push();
+        from_profile.push().then(callback(err,from_profile.outgoing_request));
     });
     lookup_profile_by_user_id(to_id, (err, to_profile)=>{
         to_profile.incoming_request[from_id] = true;
@@ -99,17 +99,29 @@ export function create_friend_request(from_id, to_id) {
     })
 }
 
-export function accept_friend_request(from_id, to_id){
+export function accept_friend_request(from_id, to_id, callback){
 
     lookup_profile_by_user_id(to_id, (err, to_object)=>{
-        to_object.incoming_request[from_id] = null;
+        delete to_object.incoming_request[from_id];
         to_object.friend_list[from_id] = true;
         to_object.push();
     });
     lookup_profile_by_user_id(from_id, (err, from_object)=>{
-        from_object.outgoing_request[to_id] = null;
         from_object.friend_list[to_id] = true;
-        from_object.push();
+        delete from_object.outgoing_request[to_id];
+        from_object.push().then(callback(err,from_object.outgoing_request));
+    })
+}
+
+export function cancel_friend_request(from_id, to_id, callback){
+
+    lookup_profile_by_user_id(to_id, (err, to_object)=>{
+        delete to_object.incoming_request[from_id];
+        to_object.push();
+    });
+    lookup_profile_by_user_id(from_id, (err, from_object)=>{
+        delete from_object.outgoing_request[to_id];
+        from_object.push().then(callback(err,from_object.outgoing_request));
     })
 }
 
