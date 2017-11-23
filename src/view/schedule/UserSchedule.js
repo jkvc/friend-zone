@@ -67,7 +67,12 @@ class UserSchedule extends Component {
                 continue;
             }
             let parsed_event = { "title":"", "start":null, "end":null };
-            parsed_event["title"] = curr_event.event_name + " at " + curr_event.location;
+
+            if (curr_event.location !== "")
+                parsed_event["title"] = curr_event.event_name + " at " + curr_event.location;
+            else
+                parsed_event["title"] = curr_event.event_name;
+
             parsed_event["start"] = new Date( curr_event.day + "T" + curr_event.start_time );
             parsed_event["end"] = new Date( curr_event.day + "T" + curr_event.end_time );
             other_events.push(parsed_event);
