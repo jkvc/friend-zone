@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
+import {init_data, get_friend_profiles, get_self_profile} from "../../api/StaticData";
 import OtherProfile from "../profile/FriendProfile";
 import ReactDOM from 'react-dom';
-import {delete_friend} from "../../dao/ProfileManager";
+import {unblock_friend, delete_friend, block_friend} from "../../dao/ProfileManager";
 
 
 class UserFriends extends Component {
@@ -20,17 +20,41 @@ class UserFriends extends Component {
         ReactDOM.render(<OtherProfile user_id={friend_id}/>, document.getElementById('main-layout'));
     }
 
-    /*    This function should result in removing the friend from the list and
- block all communication with the friend such as chat, sending another friend request, showing up
- for recommended friends
-  */
-    block_friend(friend_id) {
-        delete_friend(this.state.profile_obj.user_id, friend_id);
+    // This function simply sets the
+    //      profile_obj.friend_list[friend_id] = false;
+    // In order to check whether or not the friend is blocked,
+    // you will have to manually check if friend_list[friend_list] === false;
+    block_a_friend(friend_id) {
+        block_friend(this.state.profile_obj.user_id, friend_id, (err, data) =>
+        {
+            this.setState({profile_obj: data});
+        });
+    }
+
+    // This function will remove the friend_id from the user's friend_list
+    // and remove the user_id from friends' friend_list
+    delete_a_friend(friend_id)
+    {
+        delete_friend(this.state.profile_obj.user_id, friend_id, (err, data) =>
+        {
+            this.setState({profile_obj: data, friend_profiles:get_friend_profiles()});
+        });
 
     }
 
+    // Simply does the opposite of block
+    unblock_a_friend(friend_id)
+    {
+        unblock_friend(this.state.profile_obj.user_id, friend_id, (err,data) =>
+        {
+            this.setState({profile_obj: data});
+        });
+    }
 
     render() {
+
+
+
         return (
 
             <div>
@@ -62,11 +86,32 @@ class UserFriends extends Component {
                                                 goto profile
                                             </button>
                                         </td>
+
+                                        {this.state.profile_obj.friend_list[friend_id] ? ( // render block button here
+                                                <td>
+                                                    <button onClick={() => {
+                                                        this.block_a_friend(friend_id);
+                                                    }}>
+                                                        Block friend
+                                                    </button>
+                                                </td>
+                                            )
+                                            : (  // render unblock button here
+                                                <td>
+                                                    <button onClick={() => {
+                                                        this.unblock_a_friend(friend_id);
+                                                    }}>
+                                                        Unblock friend
+                                                    </button>
+                                                </td>
+                                            )
+                                        }
+
                                         <td>
                                             <button onClick={() => {
-                                                this.block_friend(friend_id);
+                                                this.delete_a_friend(friend_id);
                                             }}>
-                                                Block friend
+                                                Delete friend
                                             </button>
                                         </td>
                                     </tr>
@@ -85,4 +130,4 @@ class UserFriends extends Component {
     }
 }
 
-    export default UserFriends;
+export default UserFriends;

@@ -34,6 +34,8 @@ export function init_data(callback) {
             init_friend_profiles();
         });
     });
+
+    callback();
 }
 
 export function init_friend_profiles(callback) {
