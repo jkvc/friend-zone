@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
-import {cancel_friend_request, create_friend_request, lookup_profile_by_user_id, decline_friend_request} from "../../dao/ProfileManager";
+import {cancel_friend_request, create_friend_request, lookup_profile_by_user_id} from "../../dao/ProfileManager";
 import {lookup_enrollment_by_id} from "../../dao/EnrollmentManager";
 import {most_popular_in_list} from "../../api/MostPopularInList";
 import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
@@ -87,6 +87,7 @@ class RecommendedFriends extends Component {
     }
 
     render() {
+
         return (
 
             <div>
@@ -102,7 +103,7 @@ class RecommendedFriends extends Component {
                                     <button onClick={() => {
                                         cancel_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err,data)=>
                                         {
-                                            this.setState( {sent_requests:data} )
+                                            this.setState( {sent_requests:data.outgoing_request} )
                                         });
                                     }}>
                                         Cancel friend request
@@ -111,7 +112,7 @@ class RecommendedFriends extends Component {
                                     <button onClick={() => {
                                         create_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err,data)=>
                                         {
-                                            this.setState( {sent_requests:data} )
+                                            this.setState( {sent_requests:data.outgoing_request} )
                                         });
                                     }}>
                                         Send friend request

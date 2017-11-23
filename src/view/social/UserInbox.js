@@ -17,9 +17,10 @@ class UserInbox extends Component {
         this.title = "UserInbox.js";
 
         this.state = {
+            blocked_user : get_self_profile().blocked_user,
             incoming_request: Object.keys((get_self_profile().incoming_request) || {}),
             incoming_profiles: []
-        }
+        };
     }
 
     componentWillMount() {
@@ -57,23 +58,22 @@ class UserInbox extends Component {
 
     render() {
 
-        var content = (<div align={"center"} className="empty_inbox_container">
-            <br/><br/><br/><br/><br/>
-            <img src={empty_inbox_img} alt=""
-                 width="300px"/>
-            <br/>
-            You have no incoming friend requests. <br/>
-            Find some friends
-            <button className="goto_rec_friend_button" onClick={this.goto_recommended_friend}>here.</button>
-        </div>);
+        var content = [];
+        var added = false;
 
         if (this.state.incoming_request.length !== 0) {
             content = (<div className="inbox_entry_container">
                 {
 
                     this.state.incoming_profiles.map((incoming_profile) => {
-
+                        if ( (incoming_profile.user_id in this.state.blocked_user) )
+                        {
+                            return null;
+                        }
+                        else added = true;
                         return (
+
+
                             <div className="inbox_entry"
                                  key={"incoming-friend-request-" + incoming_profile.user_id}>
 
@@ -106,6 +106,19 @@ class UserInbox extends Component {
                     })
                 }
             </div>)
+        }
+
+        if (!added)
+        {
+            content = (<div align={"center"} className="empty_inbox_container">
+                <br/><br/><br/><br/><br/>
+                <img src={empty_inbox_img} alt=""
+                     width="300px"/>
+                <br/>
+                You have no incoming friend requests. <br/>
+                Find some friends
+                <button className="goto_rec_friend_button" onClick={this.goto_recommended_friend}>here.</button>
+            </div>);
         }
 
         return (

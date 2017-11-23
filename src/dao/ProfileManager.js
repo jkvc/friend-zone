@@ -36,20 +36,30 @@ export function lookup_profile_by_user_id(user_id, callback){
 }
 
 
-export function add_course_to_profile(user_id, course_id){
+export function add_course_to_profile(user_id, course_id, callback){
     lookup_profile_by_user_id(user_id, function(err, profile){
         if (!err) {
             profile.enrolled_courses[course_id] = true;
-            profile.push();
+            if(callback && typeof callback === "function") {
+                profile.push().then( callback(err,profile) );
+            }
+            else {
+                profile.push();
+            }
         }
     })
 }
 
-export function remove_course_from_profile( user_id, course_id ){
+export function remove_course_from_profile( user_id, course_id, callback ){
     lookup_profile_by_user_id( user_id, function( err,profile){
         if(!err){
             profile.enrolled_courses[course_id] = null;
-            profile.push();
+            if(callback && typeof callback === "function") {
+                profile.push().then( callback(err,profile) );
+            }
+            else {
+                profile.push();
+            }
         }
     })
 }
@@ -77,11 +87,16 @@ export function add_event_to_profile(user_id, event_name, event_day , start_time
     })
 }
 
-export function remove_event_from_profile(user_id, event_id){
+export function remove_event_from_profile(user_id, event_id, callback){
     lookup_profile_by_user_id( user_id, function(err, profile){
         if(!err){
             profile.upcoming_events[event_id] = null;
-            profile.push();
+            if(callback && typeof callback === "function") {
+                profile.push().then( callback(err,profile) );
+            }
+            else {
+                profile.push();
+            }
         }
     })
 }
@@ -91,7 +106,13 @@ export function create_friend_request(from_id, to_id, callback) {
 
     lookup_profile_by_user_id(from_id, (err, from_profile)=>{
         from_profile.outgoing_request[to_id] = true;
-        from_profile.push().then(callback(err,from_profile.outgoing_request));
+        if(callback && typeof callback === "function") {
+            from_profile.push().then( callback(err,from_profile) );
+        }
+        else {
+            from_profile.push();
+        }
+
     });
     lookup_profile_by_user_id(to_id, (err, to_profile)=>{
         to_profile.incoming_request[from_id] = true;
@@ -109,7 +130,12 @@ export function accept_friend_request(from_id, to_id, callback){
     lookup_profile_by_user_id(from_id, (err, from_object)=>{
         from_object.friend_list[to_id] = true;
         delete from_object.outgoing_request[to_id];
-        from_object.push().then(callback(err,from_object.outgoing_request));
+        if(callback && typeof callback === "function") {
+            from_object.push().then( callback(err,from_object) );
+        }
+        else {
+            from_object.push();
+        }
     })
 }
 
@@ -121,11 +147,16 @@ export function cancel_friend_request(from_id, to_id, callback){
     });
     lookup_profile_by_user_id(from_id, (err, from_object)=>{
         delete from_object.outgoing_request[to_id];
-        from_object.push().then(callback(err,from_object.outgoing_request));
+        if(callback && typeof callback === "function") {
+            from_object.push().then( callback(err,from_object) );
+        }
+        else {
+            from_object.push();
+        }
     })
 }
 
-export function decline_friend_request(from_id, to_id){
+export function decline_friend_request(from_id, to_id, callback){
 
     lookup_profile_by_user_id(to_id, (err, to_object)=>{
         to_object.incoming_request[from_id] = null;
@@ -133,7 +164,12 @@ export function decline_friend_request(from_id, to_id){
     });
     lookup_profile_by_user_id(from_id, (err, from_object)=>{
         from_object.outgoing_request[to_id] = null;
-        from_object.push();
+        if(callback && typeof callback === "function") {
+            from_object.push().then( callback(err,from_object) );
+        }
+        else {
+            from_object.push();
+        }
     })
 }
 
@@ -144,7 +180,12 @@ export function delete_friend(self_id, friend_id, callback){
 
         // A friend's set to false, meaning he is blocked
         delete data.friend_list[friend_id];
-        data.push().then(callback(err,data));
+        if(callback && typeof callback === "function") {
+            data.push().then( callback(err,data) );
+        }
+        else {
+            data.push();
+        }
     });
 
     lookup_profile_by_user_id(friend_id, (err, data) =>{
@@ -162,7 +203,12 @@ export function block_friend(self_id, friend_id, callback) {
         // A friend's set to false, meaning he is blocked
         data.friend_list[friend_id] = false;
         data.blocked_user[friend_id] = true;
-        data.push().then(callback(err,data));
+        if(callback && typeof callback === "function") {
+            data.push().then( callback(err,data) );
+        }
+        else {
+            data.push();
+        }
     });
 }
 
@@ -172,7 +218,12 @@ export function unblock_friend(self_id, friend_id, callback) {
         // A friend's set to false, meaning he is blocked
         data.friend_list[friend_id] = true;
         delete data.blocked_user[friend_id];
-        data.push().then(callback(err,data));
+        if(callback && typeof callback === "function") {
+            data.push().then( callback(err,data) );
+        }
+        else {
+            data.push();
+        }
     });
 
 }
