@@ -52,9 +52,22 @@ class UserFriends extends Component {
         });
     }
 
+    // This will simply call block/unblock, since the algorithm for those
+    // functions are exactly the same
+    //      Just treat this as a facade and take it a face value =_=
+    undelete_a_friend(friend_id)
+    {
+        if (friend_id in this.state.profile_obj.blocked_user)
+        {
+            this.block_a_friend(friend_id);
+        }
+        else
+        {
+            this.unblock_a_friend(friend_id);
+        }
+    }
+
     render() {
-
-
 
         return (
 
@@ -124,7 +137,7 @@ class UserFriends extends Component {
                                                 <td>
 
                                                     <button onClick={() => {
-                                                        this.unblock_a_friend(friend_id);
+                                                        this.undelete_a_friend(friend_id);
                                                     }}>
                                                         Undelete friend
                                                     </button>

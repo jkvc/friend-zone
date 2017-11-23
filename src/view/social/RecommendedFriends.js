@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
-import {create_friend_request, lookup_profile_by_user_id} from "../../dao/ProfileManager";
+import {create_friend_request, lookup_profile_by_user_id, decline_friend_request} from "../../dao/ProfileManager";
 import {lookup_enrollment_by_id} from "../../dao/EnrollmentManager";
 import {most_popular_in_list} from "../../api/MostPopularInList";
 import {get_self_profile} from "../../api/StaticData";
@@ -16,8 +16,9 @@ class RecommendedFriends extends Component {
             recommendation_profiles: [],
             courses_enrolled: Object.keys(get_self_profile().enrolled_courses),
             all_classmates: [],
-            self_profile: get_self_profile()
-    }
+            self_profile: get_self_profile(),
+            sent_requests : get_self_profile().outgoing_request
+        }
     }
 
     /* happens before render */
@@ -93,12 +94,21 @@ class RecommendedFriends extends Component {
                                 <br/>
                                 Friend name: {profile.first_name} {profile.last_name}
 
-                                <button onClick={() => {
-                                    create_friend_request(firebase.auth().currentUser.uid, profile.user_id);
-                                }}>
-                                    Send friend request
-                                </button>
+                                {(!profile.user_id in this.state.sent_requests) &&
+                                    <button onClick={() => {
+                                        create_friend_request(firebase.auth().currentUser.uid, profile.user_id);
+                                    }}>
+                                        Send friend request
+                                    </button>
+                                }
 
+                                {profile.user_id in this.state.sent_requests &&
+                                    <button onClick={() => {
+                                        decline_friend_request(profile.user_id, firebase.auth().currentUser.uid);
+                                    }}>
+                                        Cancel friend request
+                                        </button>
+                                }
                             </div>
                         )
                     })

@@ -18,6 +18,7 @@ class Profile {
     outgoing_request;
     incoming_request;
     upcoming_events;
+    blocked_user;
 
     constructor(user_id, first_name, last_name, major, current_year, profile_pic, description){
         this.user_id = user_id;
@@ -33,6 +34,7 @@ class Profile {
         this.outgoing_request = {};
         this.incoming_request = {};
         this.upcoming_events = {};
+        this.blocked_user = {};
     }
 
 
@@ -50,7 +52,8 @@ class Profile {
             friend_list: this.friend_list,
             outgoing_request: this.outgoing_request,
             incoming_request: this.incoming_request,
-            upcoming_events: this.upcoming_events
+            upcoming_events: this.upcoming_events,
+            blocked_user : this.blocked_user
         });
         return;
     }
