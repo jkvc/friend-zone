@@ -7,7 +7,7 @@ class RemoveEvent extends Component{
 
     constructor(props){
         super(props);
-        this.title = "AddEvent.js";
+        this.title = "RemoveEvent.js";
         this.state = {
             //result: [],
             event_name_to_remove: "",
@@ -15,7 +15,14 @@ class RemoveEvent extends Component{
         };
         //get full schedule of user
         lookup_profile_by_user_id(firebase.auth().currentUser.uid, function (err, profile) {
-            this.setState({events_list: Object.getOwnPropertyNames(profile.upcoming_events)})
+
+            // Create a copy of the upcoming events
+            let list = {};
+            for (let id in profile.upcoming_events)
+            {
+                list[id] = profile.upcoming_events[id];
+            }
+            this.setState({events_list: list})
         }.bind(this))
 
     }
@@ -25,44 +32,49 @@ class RemoveEvent extends Component{
 
         /*remove the item once clicked drop*/
         var new_event_list = this.state.events_list;
-        new_event_list.splice(new_event_list.indexOf(this.state.event_name_to_remove),1);
+        delete new_event_list[this.state.event_name_to_remove];
         this.setState({
             courses_list: new_event_list,
             course_id_to_drop: ""
         })
     }
     render(){
+        // This basically uses a table to represent the list
+        // The first row contains the table header
+        // and the second row onwards contain the event name and a button
         return(
             <div>
 
                 <br/>
 
+
                 <table>
-                    <tr>
-                        <th>Event Name</th>
-                        <th></th>
-                    </tr>
-                    {   //print each class with drop button
-                        this.state.events_list.map(function( entry){
-                            return (
-                                <tr key={"event-search-result"+entry}>
+                    <tbody>
+                        <tr>
+                            <th>Event Name</th>
+                            <th></th>
+                        </tr>
+                        {   //print each class with drop button
+                            Object.keys(this.state.events_list).map(function(entry, index){
+                                return (
+                                    <tr key={"event-search-result"+entry}>
 
-                                    <td> {entry} </td>
-                                    <td>
-                                        <button onClick={()=> {
+                                        <td> {this.state.events_list[entry].event_name} </td>
+                                        <td>
+                                            <button onClick={()=> {
 
-                                            this.setState({event_name_to_remove: entry}, ()=>{
-                                                this.handle_remove_event();
-                                            })
+                                                this.setState({event_name_to_remove: entry}, ()=>{
+                                                    this.handle_remove_event();
+                                                })
 
-                                        }} >Drop this Event</button>
-                                    </td>
+                                            }} >Drop this Event</button>
+                                        </td>
 
-                                </tr>
-                            )
-                        }.bind(this))}
+                                    </tr>
+                                )
+                            }.bind(this))}
+                    </tbody>
                 </table>
-
 
                 <br/>
                 Raw JSON:

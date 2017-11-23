@@ -77,7 +77,7 @@ class UserSchedule extends Component {
             parsed_event["end"] = new Date( curr_event.day + "T" + curr_event.end_time );
             other_events.push(parsed_event);
         }
-        this.state.other_events = other_events;
+        this.state.other_events = other_events ;
 
         // This is used to parse all the other events
         course_list.forEach((course_id) => {
