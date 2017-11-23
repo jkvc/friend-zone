@@ -54,8 +54,6 @@ class UserFriends extends Component {
 
     render() {
 
-
-
         return (
 
             <div>

@@ -29,6 +29,7 @@ export function lookup_profile_by_user_id(user_id, callback){
             profile.outgoing_request = content.outgoing_request ||{};
             profile.incoming_request = content.incoming_request ||{};
             profile.upcoming_events = content.upcoming_events ||{};
+            profile.blocked_user = content.blocked_user || {};
             callback(null, profile);
         }
     })
@@ -148,6 +149,7 @@ export function block_friend(self_id, friend_id, callback) {
 
         // A friend's set to false, meaning he is blocked
         data.friend_list[friend_id] = false;
+        data.blocked_user[friend_id] = true;
         data.push().then(callback(err,data));
     });
 }
@@ -157,6 +159,7 @@ export function unblock_friend(self_id, friend_id, callback) {
 
         // A friend's set to false, meaning he is blocked
         data.friend_list[friend_id] = true;
+        delete data.blocked_user[friend_id];
         data.push().then(callback(err,data));
     });
 
