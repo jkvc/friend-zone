@@ -20,6 +20,7 @@ class UserFriends extends Component {
         ReactDOM.render(<OtherProfile user_id={friend_id}/>, document.getElementById('main-layout'));
     }
 
+
     // This function simply sets the
     //      profile_obj.friend_list[friend_id] = false;
     // In order to check whether or not the friend is blocked,

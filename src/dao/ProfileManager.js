@@ -124,6 +124,7 @@ export function decline_friend_request(from_id, to_id){
     })
 }
 
+
 export function delete_friend(self_id, friend_id, callback){
 
     lookup_profile_by_user_id(self_id, (err, data) =>{
@@ -149,7 +150,6 @@ export function block_friend(self_id, friend_id, callback) {
         data.friend_list[friend_id] = false;
         data.push().then(callback(err,data));
     });
-
 }
 
 export function unblock_friend(self_id, friend_id, callback) {
