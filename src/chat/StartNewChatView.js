@@ -17,6 +17,8 @@ class StartNewChatView extends Component {
             selected_friend_id: [],
             selected_friend_name: [],
             chat_title: "",
+            show_chat_title_box: false,
+            show_start_button: false,
             search_key: ""
         };
         this.callback = props.callback;
@@ -56,6 +58,11 @@ class StartNewChatView extends Component {
         let new_name_list = this.state.selected_friend_name;
         new_name_list.push(friend_name);
         this.setState({selected_friend_name: new_name_list})
+
+        if (new_name_list.length > 1) this.setState({show_chat_title_box:true});
+        else this.setState({show_chat_title_box:false});
+        if (new_name_list.length > 0) this.setState({show_start_button:true});
+        else this.setState({show_start_button:false});
     }
 
     /*remove from selected friends*/
@@ -70,6 +77,11 @@ class StartNewChatView extends Component {
             selected_friend_id: friend_id_list,
             selected_friend_name: friend_name_list
         })
+
+        if (friend_name_list.length > 1) this.setState({show_chat_title_box:true});
+        else this.setState({show_chat_title_box:false});
+        if (friend_name_list.length > 0) this.setState({show_start_button:true});
+        else this.setState({show_start_button:false});
     }
 
     /*the start chat button*/
@@ -107,28 +119,44 @@ class StartNewChatView extends Component {
 
 
     render() {
-        return (
-            <div className="start_new_friend_container">
 
+        var chat_title_box = (<div> </div>);
+        if (this.state.show_chat_title_box)
+            chat_title_box = (
+                <input type="text" className="chat_title_box"
+                       placeholder={"Name your group chat"}
+                       value={this.state.chat_title}
+                       disabled={this.state.selected_friend_id.length <= 1}
+                       onChange={e => this.setState({chat_title: e.target.value})}/>
+            );
+
+        var start_button = (<div> </div>);
+        if (this.state.show_start_button)
+            start_button = (
+                <button className="start_chat_button"
+                        onClick={this.start_chat.bind(this)}
+                        disabled={this.state.selected_friend_id.length === 0 ||
+                        (this.state.chat_title.length === 0 && this.state.selected_friend_id.length > 1)}>
+                    start chat with
+                </button>
+            );
+
+
+        return (
+            <div className="start_new_friend_container" align='center'>
+
+                <div className='start-new-chat-title' >Start new chat</div>
+                <div className='start-new-chat-subtitle'>Select a friend to start chatting, or select multiple friends to start a group chat</div>
 
                 <div className="chat_title_bar">
-                    <input type="text" className="chat_title_box"
-                           placeholder={"Name your new chat"}
-                           value={this.state.chat_title}
-                           disabled={this.state.selected_friend_id.length <= 1}
-                           onChange={e => this.setState({chat_title: e.target.value})}/>
 
-                    <button className="start_chat_button"
-                            onClick={this.start_chat.bind(this)}
-                            disabled={this.state.selected_friend_id.length === 0 ||
-                            (this.state.chat_title.length === 0 && this.state.selected_friend_id.length > 1)}>
-                        start chat
-                    </button>
+                    {chat_title_box}
+                    {start_button}
+
                 </div>
 
 
                 <div className="selected_friend_bar">
-                    Selected: <br/>
                     {
                         this.state.selected_friend_name.map((friend_name, index) => {
                             return (
@@ -136,7 +164,8 @@ class StartNewChatView extends Component {
                                      key={"friend-selected-" + index}>
                                     {friend_name}
 
-                                    <button onClick={() => {
+                                    <button className='start_chat_button'
+                                        onClick={() => {
                                         this.remove_select(index)
                                     }}>
                                         remove
@@ -145,6 +174,7 @@ class StartNewChatView extends Component {
                             )
                         })
                     }
+                    <br/>
                 </div>
 
                 <div className="chat_title_bar">
@@ -165,9 +195,9 @@ class StartNewChatView extends Component {
                             return (
                                 <div className="potential_friend_entry"
                                      key={"friend-profile-" + index}>
-                                    Friend: {friend_profile.first_name} {friend_profile.last_name}
+                                    {friend_profile.first_name} {friend_profile.last_name}
 
-                                    <button
+                                    <button className='start_chat_button'
                                         disabled={this.state.selected_friend_id.indexOf(friend_profile.user_id) !== -1}
                                         onClick={() => {
                                             this.add_select(friend_profile.user_id, friend_profile.first_name + " " + friend_profile.last_name)
