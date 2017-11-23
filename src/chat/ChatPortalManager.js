@@ -28,6 +28,10 @@ export function update_portal_pic(user_id, session_id, image_url) {
     firebase.database().ref('ChatPortal/' + user_id + '/' + session_id).child('portal_pic').set(image_url);
 }
 
+export function update_portal_title(user_id, session_id, title){
+    firebase.database().ref('ChatPortal/' + user_id + '/' + session_id).child('title').set(title);
+}
+
 export function read_portal(self_id, session_id) {
     firebase.database().ref('ChatPortal/' + self_id + '/' + session_id).child('unread').set(false);
 }
