@@ -20,8 +20,11 @@ class EditProfile extends Component {
             current_year: "",
             profile_pic: "",
             description: "",
-            upload_status: ""
+            upload_status: "",
+            newPassword : "",
+            repeatPassword : ""
         };
+
 
         this.initialized = false;
     }
@@ -53,9 +56,27 @@ class EditProfile extends Component {
         this.profile_obj.first_name = this.state.first_name;
         this.profile_obj.profile_pic = this.state.profile_pic;
         this.profile_obj.description = this.state.description;
-        this.profile_obj.push();
+        this.profile_obj.push().catch(function(error){
+            alert(error);
+        });
     }
 
+    handle_update_password() {
+        var user = firebase.auth().currentUser;
+        var newPassword = this.state.newPassword;
+        var repeatPassword = this.state.repeatPassword;
+
+        if(newPassword!==repeatPassword){
+            alert("Passwords don't match!")
+        }
+        else{
+            user.updatePassword(newPassword).then(function(){
+                alert("Password Changed Successfully");
+            }).catch(function(error){
+                alert(error);
+            })
+        }
+    }
 
     upload_image(e) {
         e.preventDefault();
@@ -115,15 +136,26 @@ class EditProfile extends Component {
 
 
                 <br/>
-                <button onClick={this.handle_update.bind(this)}> Update</button>
+                <button onClick={this.handle_update.bind(this)}> Update Profile</button>
 
 
                 <br/>
+                <h3> Change Password </h3>
+                New Password<input type="text" value={this.newPassword}
+                                    onChange={e =>this.setState({newPassword: e.target.value})}/>
+                <br />
+                Confirm Password<input type="text" value={this.repeatPassword}
+                                       onChange={e =>this.setState({repeatPassword: e.target.value})}/>
+                <br/>
 
-                <br/>
-                <br/>
-                <br/>
+                <form>
+                    <button type="button" onClick={this.handle_update_password.bind(this)}>Update Password</button>
+                </form>
 
+                <br />
+                <br/>
+                <br/>
+                <h3>Profile Picture</h3>
                 submit Picture:<input type="file" name="myImage" accept="image/*"
                                       onChange={e => this.upload_image(e)}/>
                 upload status : {this.state.upload_status}
