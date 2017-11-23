@@ -10,10 +10,11 @@ class Event {
     time; /*4:00 PM - 4:50 PM*/
     location; /*WLH 2001*/
 
-    constructor( event_name,  day, time, location ){
+    constructor( event_name,  day, start_time, end_time, location ){
         this.event_name = event_name;
         this.day = day;
-        this.time = time;
+        this.start_time = start_time;
+        this.end_time = end_time;
         this.location = location;
     }
 
@@ -24,7 +25,8 @@ class Event {
         firebase.database().ref('Profile').child(firebase.auth().currentUser.uid).upcoming_events.event_id.set({
             event_name: this.event_name,
             day: this.day,
-            time: this.time,
+            start_time: this.start_time,
+            end_time: this.end_time,
             location: this.location
         });
     }

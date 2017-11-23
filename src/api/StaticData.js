@@ -28,6 +28,12 @@ export function init_data(callback) {
             init_friend_profiles();
         });
     });
+    firebase.database().ref('Profile/' + self_id).on('child_removed', () => {
+        lookup_profile_by_user_id(self_id, (err, profile) => {
+            self_profile = profile;
+            init_friend_profiles();
+        });
+    });
 }
 
 export function init_friend_profiles(callback) {

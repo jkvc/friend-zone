@@ -1,9 +1,22 @@
 import firebase from 'firebase';
 import md5 from 'md5';
-import {create_portal, unread_portal, update_timestamp} from "./ChatPortalManager";
+import {
+    create_portal, unread_portal, update_portal_pic, update_portal_title,
+    update_timestamp
+} from "./ChatPortalManager";
 
 export function hash_session_id(participant_ids) {
     return md5(participant_ids.sort().join(''));
+}
+
+export function get_chat_title_by_id(session_id, callback){
+
+    firebase.database().ref('ChatSession/' + session_id + '/title').once('value').then((snapshot) => {
+        if (snapshot.val() === null)
+            callback({msg: "session not found"}, null);
+        else
+            callback(null, snapshot.val());
+    })
 }
 
 export function get_chat_pic_by_id(session_id, callback) {
@@ -24,6 +37,31 @@ export function get_chat_participant_by_id(session_id, callback) {
         else
             callback(null, snapshot.val());
     })
+}
+
+export function update_session_pic(session_id, image_url) {
+    firebase.database().ref('ChatSession/' + session_id).child('session_pic').set(image_url);
+    get_chat_participant_by_id(session_id, (err, participant_ids) => {
+        if (!err) {
+            var participant_list = Object.keys(participant_ids);
+            participant_list.forEach((participant_id) => {
+                update_portal_pic(participant_id, session_id, image_url);
+            })
+        }
+    })
+}
+
+export function update_session_title(session_id, title) {
+    firebase.database().ref('ChatSession/' + session_id).child('title').set(title);
+    get_chat_participant_by_id(session_id, (err, participant_ids) => {
+        if (!err) {
+            var participant_list = Object.keys(participant_ids);
+            participant_list.forEach((participant_id) => {
+                update_portal_title(participant_id, session_id, title);
+            })
+        }
+    })
+
 }
 
 

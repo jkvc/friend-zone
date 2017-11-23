@@ -150,7 +150,6 @@ export function get_time_numeric(timestring, callback) {
         min = n_min.toString();
     }
 
-    callback(null);
     return hour + min;
 }
 

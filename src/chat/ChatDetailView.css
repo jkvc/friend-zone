@@ -1,4 +1,49 @@
-.chat-detail-container{
+.chat-detail-container {
     height: 100%;
     overflow-y: scroll;
+}
+
+.chat-pic-container {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 1px #ebebeb;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.chat-pic {
+    float: left;
+    height: 101%;
+}
+
+#chat-pic-upload {
+    display: none;
+}
+
+.chat-edit-button {
+    cursor: pointer;
+    color: #2f5597;
+    font-size: smaller;
+    border: transparent;
+    background: transparent;
+}
+
+.chat-pic-upload-button-container {
+    width: 70%;
+    border-bottom: solid 1px lightgrey;
+    padding: 5px;
+}
+
+.new-chat-title-input-box {
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: solid 1px lightgrey;
+    background: transparent;
+    color: black;
+    width: 20%;
+    font-size: smaller;
 }

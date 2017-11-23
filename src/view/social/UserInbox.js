@@ -51,14 +51,14 @@ class UserInbox extends Component {
         })
     }
 
-    goto_recommended_friend(){
+    goto_recommended_friend() {
         ReactDOM.render(<RecommendedFriends/>, document.getElementById('main-layout'));
     }
 
     render() {
 
         var content = (<div align={"center"} className="empty_inbox_container">
-            <br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/>
             <img src={empty_inbox_img} alt=""
                  width="300px"/>
             <br/>
@@ -78,7 +78,7 @@ class UserInbox extends Component {
                                  key={"incoming-friend-request-" + incoming_profile.user_id}>
 
                                 <div className="inbox_entry_text">
-                                    {incoming_profile.first_name} {incoming_profile.last_name}
+                                    Friend request from: {incoming_profile.first_name} {incoming_profile.last_name}
 
                                 </div>
 

@@ -1,6 +1,6 @@
 import Profile from './Profile';
 import firebase from 'firebase';
-import Event from './Event'
+//import Event from './Event'
 
 
 /**
@@ -53,19 +53,33 @@ export function remove_course_from_profile( user_id, course_id ){
     })
 }
 
-export function add_event_to_profile(user_id, event_name, event_day , event_time, event_location){
+export function add_event_to_profile(user_id, event_name, event_day , start_time, end_time, event_location){
     lookup_profile_by_user_id( user_id, function(err, profile){
         if(!err){
-            profile.upcoming_events[event_name] = new Event( event_name, event_day, event_time, event_location);
-            profile.push();
+            // This will become the event_id:
+            //      event_name@event_day start_time-end_time
+            /*profile.upcoming_events[event_name+"@"+event_day+" "+start_time+"-"+end_time] =
+                new Event( event_name, event_day, start_time, end_time, event_location);
+            profile.push();*/
+
+            // We should be using this instead
+            let db = firebase.database();
+
+            db.ref('Profile/'+user_id).child('upcoming_events').push().set({
+                day: event_day,
+                end_time: end_time,
+                event_name:event_name,
+                location:event_location,
+                start_time: start_time
+            });
         }
     })
 }
 
-export function remove_event_from_profile(user_id, event_name){
+export function remove_event_from_profile(user_id, event_id){
     lookup_profile_by_user_id( user_id, function(err, profile){
         if(!err){
-            profile.upcoming_events[event_name] = null;
+            profile.upcoming_events[event_id] = null;
             profile.push();
         }
     })
