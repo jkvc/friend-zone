@@ -9,7 +9,7 @@ import firebase from 'firebase';
  * otherwise, callback (null, Profile) */
 export function lookup_profile_by_user_id(user_id, callback){
     let db = firebase.database();
-    let verify;
+    let verify = false;
     firebase.auth().onAuthStateChanged(function(user){
         if(user.emailVerified){
             verify = true;
