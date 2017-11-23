@@ -35,7 +35,6 @@ export function init_data(callback) {
         });
     });
 
-    callback();
 }
 
 export function init_friend_profiles(callback) {

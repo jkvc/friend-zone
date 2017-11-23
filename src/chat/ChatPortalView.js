@@ -17,6 +17,7 @@ class ChatPortalView extends Component {
 
         this.state = {
             portals: [],
+            search_key: "",
             active_chat: props.active,
             friend_profiles: get_friend_profiles(),
             initialized: true
@@ -68,7 +69,10 @@ class ChatPortalView extends Component {
     }
 
     goto_chat_session(session_id) {
-        this.setState({active_chat: session_id});
+        this.setState({
+            active_chat: session_id,
+            search_key: ""
+        });
         read_portal(firebase.auth().currentUser.uid, session_id);
         ReactDOM.render(<ChatSessionView session_id={session_id}
                                          key={"chat_session-" + session_id}/>, document.getElementById('session-container'));
@@ -94,9 +98,11 @@ class ChatPortalView extends Component {
         return "" + hr + ":" + min + ":" + sec;
     }
 
+
     render() {
 
-        if (!this.state.initialized) return (<div>loading</div>)
+        if (!this.state.initialized) return (<div>loading</div>);
+
 
         return (
 
@@ -105,8 +111,11 @@ class ChatPortalView extends Component {
                 <div className="search_box_bar">
 
                     <input type="text" className="portal-search-box"
-                           placeholder="Search chat"/>
-
+                           placeholder="Search chat" value={this.state.search_key}
+                           onChange={(e) => {
+                               this.setState({search_key: e.target.value});
+                           }}
+                    />
 
                     <svg className="portal-new-chat-button" id="i-compose" viewBox="0 0 32 32" width="20" height="20"
                          fill="none" stroke="currentcolor"
@@ -162,7 +171,8 @@ class ChatPortalView extends Component {
                                 );
 
 
-                            return (
+                            /*filter out render entries*/
+                            if (title.toLowerCase().startsWith(this.state.search_key.toLowerCase())) return (
 
                                 <div className={portal_class}
                                      key={"portal-" + index}
@@ -185,12 +195,14 @@ class ChatPortalView extends Component {
                                 </div>
 
                             )
+
+                            else return(<div> </div>)
                         })
                     }
                 </div>
 
 
-                <pre>{JSON.stringify(this.state, null, 2)}</pre>
+                {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
             </div>
 
         )

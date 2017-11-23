@@ -47,3 +47,36 @@
     width: 20%;
     font-size: smaller;
 }
+
+.participant-entry-container{
+    margin-top: 9px;
+    width: 40%;
+    min-height: 40px;
+    overflow-x: hidden;
+    cursor: pointer;
+    border-bottom: solid 1px lightgrey;
+}
+
+.participant-icon-container {
+    float: left;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 1px #ebebeb;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.participant-icon {
+    float: left;
+    height: 100%;
+}
+
+.participant-name{
+    padding: 10px;
+    float: right;
+    font-size: smaller;
+}
