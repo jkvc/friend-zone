@@ -58,9 +58,20 @@ export function add_event_to_profile(user_id, event_name, event_day , start_time
         if(!err){
             // This will become the event_id:
             //      event_name@event_day start_time-end_time
-            profile.upcoming_events[event_name+"@"+event_day+" "+start_time+"-"+end_time] =
+            /*profile.upcoming_events[event_name+"@"+event_day+" "+start_time+"-"+end_time] =
                 new Event( event_name, event_day, start_time, end_time, event_location);
-            profile.push();
+            profile.push();*/
+
+            // trying out to see if this works --by mengying
+            let db = firebase.database();
+
+            db.ref('Profile/'+user_id).child('upcoming_events').push().set({
+                day: event_day,
+                end_time: end_time,
+                event_name:event_name,
+                location:event_location,
+                start_time: start_time
+            });
         }
     })
 }
