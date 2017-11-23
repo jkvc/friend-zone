@@ -1,6 +1,6 @@
 import Profile from './Profile';
 import firebase from 'firebase';
-import Event from './Event'
+//import Event from './Event'
 
 
 /**
@@ -62,7 +62,7 @@ export function add_event_to_profile(user_id, event_name, event_day , start_time
                 new Event( event_name, event_day, start_time, end_time, event_location);
             profile.push();*/
 
-            // trying out to see if this works --by mengying
+            // We should be using this instead
             let db = firebase.database();
 
             db.ref('Profile/'+user_id).child('upcoming_events').push().set({
