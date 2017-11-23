@@ -110,7 +110,11 @@ export function decline_friend_request(from_id, to_id){
     })
 }
 
-export function delete_friend(self_id, friend_id){
-
+export function flag_friend(self_id, friend_id){
+    lookup_profile_by_user_id(self_id, (err, profile)=>{
+        profile.friend_list[friend_id] = false;
+        profile.push();
+        })
+    /* Remove user from friend's list */
 }
 

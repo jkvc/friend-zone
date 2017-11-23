@@ -25,7 +25,7 @@ class UserFriends extends Component {
  for recommended friends
   */
     block_friend(friend_id) {
-        delete_friend(this.state.profile_obj.user_id, friend_id);
+        flag_friend(this.state.profile_obj.user_id, friend_id);
 
     }
 
