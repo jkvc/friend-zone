@@ -52,7 +52,9 @@ class UserFriends extends Component {
         });
     }
 
-    // Allows a user to undelete a blocked user properly, but only before he refreshed
+    // This will simply call block/unblock, since the algorithm for those
+    // functions are exactly the same
+    //      Just treat this as a facade and take it a face value =_=
     undelete_a_friend(friend_id)
     {
         if (friend_id in this.state.profile_obj.blocked_user)
