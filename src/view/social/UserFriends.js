@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {init_data, get_friend_profiles, get_self_profile} from "../../api/StaticData";
+import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
 import OtherProfile from "../profile/FriendProfile";
 import ReactDOM from 'react-dom';
 import {unblock_friend, delete_friend, block_friend} from "../../dao/ProfileManager";
@@ -88,7 +88,8 @@ class UserFriends extends Component {
                                             </button>
                                         </td>
 
-                                        {this.state.profile_obj.friend_list[friend_id] ? ( // render block button here
+                                        {   friend_id in this.state.profile_obj.friend_list &&
+                                            this.state.profile_obj.friend_list[friend_id] && ( // render block button here
                                                 <td>
                                                     <button onClick={() => {
                                                         this.block_a_friend(friend_id);
@@ -97,24 +98,40 @@ class UserFriends extends Component {
                                                     </button>
                                                 </td>
                                             )
-                                            : (  // render unblock button here
+                                        }
+
+                                        {   friend_id in this.state.profile_obj.friend_list &&
+                                            !this.state.profile_obj.friend_list[friend_id] && ( // render block button here
+                                                    <td>
+                                                        <button onClick={() => {
+                                                            this.unblock_a_friend(friend_id);
+                                                        }}>
+                                                            Unblock friend
+                                                        </button>
+                                                    </td>
+                                            )
+                                        }
+
+                                        {friend_id in this.state.profile_obj.friend_list ? (
                                                 <td>
+                                                    <button onClick={() => {
+                                                        this.delete_a_friend(friend_id);
+                                                    }}>
+                                                        Delete friend
+                                                    </button>
+                                                </td>
+                                            ) : ( // Note that the undelete button is a trick, since unblock does the same
+                                                <td>
+
                                                     <button onClick={() => {
                                                         this.unblock_a_friend(friend_id);
                                                     }}>
-                                                        Unblock friend
+                                                        Undelete friend
                                                     </button>
                                                 </td>
                                             )
                                         }
 
-                                        <td>
-                                            <button onClick={() => {
-                                                this.delete_a_friend(friend_id);
-                                            }}>
-                                                Delete friend
-                                            </button>
-                                        </td>
                                     </tr>
                                 )
                             })
