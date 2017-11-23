@@ -146,7 +146,8 @@ class ChatPortalView extends Component {
                             }
 
                             var chat_detail_button = (<div></div>);
-                            if (this.state.active_chat === portal.session_id)
+                            if (this.state.active_chat === portal.session_id &&
+                                Object.keys(portal.participant_ids).length > 2)
                                 chat_detail_button = (
                                     <button className="chat_detail_button"
                                             onClick={(e) => {

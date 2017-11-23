@@ -6,7 +6,6 @@ import {
 import {get_friend_profiles} from "../api/StaticData";
 import {lookup_profile_by_user_id} from "../dao/ProfileManager";
 import default_group_chat_pic from '../image/DefaultGroupChatPic.jpg'
-import default_profile_pic from '../image/DefaultProfilePic.jpg'
 import firebase from 'firebase';
 
 import './ChatDetailView.css'
@@ -19,7 +18,6 @@ class ChatDetailView extends Component {
             session_id: props.session_id,
             chat_title: "",
             session_pic: default_group_chat_pic,
-            allow_edit: false,
             new_name: "",
             participant_ids: [],
             participant_profile_obj: {}
@@ -40,20 +38,6 @@ class ChatDetailView extends Component {
         get_chat_participant_by_id(this.state.session_id, (err, session_participants) => {
 
             var participant_list = Object.keys(session_participants);
-
-            if (participant_list.length !== 2) {
-                this.setState({allow_edit: true});
-            }
-
-            if (participant_list.length === 2) {
-                var other_id = participant_list[0];
-                if (other_id === firebase.auth().currentUser.uid) other_id = participant_list[1];
-                var other_name = get_friend_profiles()[other_id].first_name + " " + get_friend_profiles()[other_id].last_name;
-                this.setState({
-                    chat_title: other_name,
-                    session_pic: get_friend_profiles()[other_id].profile_pic || default_profile_pic
-                });
-            }
 
             this.setState({participant_ids: participant_list}, () => {
 
@@ -111,9 +95,20 @@ class ChatDetailView extends Component {
 
     render() {
 
-        var update_buttons = (<div className="chat-pic-upload-button-container"></div>);
-        if (this.state.allow_edit) {
-            update_buttons = (
+
+        return (
+            <div className='chat-detail-container' align='center'>
+                <br/>
+
+                <div className='chat-pic-container'>
+                    <img className='chat-pic' src={this.state.session_pic} alt=""/>
+                </div>
+                <br/>
+
+                <div>
+                    {this.state.chat_title}
+                </div>
+
                 <div className='chat-pic-upload-button-container'>
                     <label htmlFor="chat-pic-upload" className='chat-edit-button'>
                         Upload image &nbsp;
@@ -144,23 +139,6 @@ class ChatDetailView extends Component {
 
 
                 </div>
-            )
-        }
-
-        return (
-            <div className='chat-detail-container' align='center'>
-                <br/>
-
-                <div className='chat-pic-container'>
-                    <img className='chat-pic' src={this.state.session_pic} alt=""/>
-                </div>
-                <br/>
-
-                <div>
-                    {this.state.chat_title}
-                </div>
-
-                {update_buttons}
 
 
                 <pre>{JSON.stringify(this.state, null, 2)}</pre>
