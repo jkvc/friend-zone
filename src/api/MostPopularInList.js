@@ -164,8 +164,8 @@ export function most_popular_in_list(param, callback){
 *                       [ "a","b","c","d","f","g"]
 *                   ]
 *       "class":    [ "a", "b", "c", "d", "e" ]
-*       "blocked_list": { "a" }    // NOTE: not an array, but associative array
-*       "friend_list": { "b" }     // NOTE; not an array, but associative array
+*       "blocked_list": { "a" }    // NOTE: optional; not an array, but associative array
+*       "friend_list": { "b" }     // NOTE: optional; not an array, but associative array
 *   }
 *
 * given this param, this function should call the callback function with:
@@ -220,6 +220,14 @@ export function most_popular_in_class(param, callback){
 
     // Find the list of most popular students
     let delegateParam = { "count":0, "list":param.list };
+    if ("blocked_user" in param)
+    {
+        delegateParam["blocked_list"] = param.blocked_list;
+    }
+    if ("friend_list" in param)
+    {
+        delegateParam["friend_list"] = param.friend_list;
+    }
 
     most_popular_in_list(delegateParam, function(err, data)
     {
