@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 import SignUp from './SignUp';
+import PasswordRecovery from './PasswordRecovery';
 import './MainLoginSignup.css'
 import './Login.css'
 import facebook_icon from '../../image/FacebookIcon.png'
@@ -26,7 +27,9 @@ class Login extends Component {
     goto_signup(){
         ReactDOM.render(<SignUp />, document.getElementById('root'));
     }
-
+    goto_password_recovery(){
+        ReactDOM.render(<PasswordRecovery/>, document.getElementById('root'));
+    }
 
     handle_login_button(event) {
         event.preventDefault(); /* to make react happy */
@@ -152,7 +155,11 @@ class Login extends Component {
                             </button>
                             <br/>
                             <br/>
-
+                            <button className="button-text"
+                                    onClick={this.goto_password_recovery.bind(this)}>
+                                Forgot Your Password? Recover it here.
+                            </button>
+                            <br />
                             <button className="button-text"
                                   onClick={this.goto_signup.bind(this)}>
                                 Don't have an account? Sign up here.

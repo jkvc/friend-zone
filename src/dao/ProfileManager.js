@@ -9,6 +9,12 @@ import firebase from 'firebase';
  * otherwise, callback (null, Profile) */
 export function lookup_profile_by_user_id(user_id, callback){
     let db = firebase.database();
+    let verify;
+    firebase.auth().onAuthStateChanged(function(user){
+        if(user.emailVerified){
+            verify = true;
+        }
+    })
     db.ref('Profile/'+user_id).once('value').then(function(snapshot){
 
         let content = snapshot.val();
@@ -22,7 +28,9 @@ export function lookup_profile_by_user_id(user_id, callback){
                 content.major,
                 content.current_year,
                 content.profile_pic,
-                content.description
+                content.description,
+                verify
+
             );
             profile.enrolled_courses = content.enrolled_courses ||{};
             profile.friend_list = content.friend_list ||{};

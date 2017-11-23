@@ -37,6 +37,13 @@ class SignUp extends Component {
                     success_msg:"signup success!",
                     err_msg:""
                 });
+
+                //send email verification
+                firebase.auth().onAuthStateChanged(function(user) {
+                    alert("Confirmation email sent!")
+                    user.sendEmailVerification();
+                });
+
                 ReactDOM.render(<InitProfile />, document.getElementById('root'));
             }.bind(this) )
 
