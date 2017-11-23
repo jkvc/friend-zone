@@ -7,6 +7,7 @@ import {get_friend_profiles} from "../api/StaticData";
 import {lookup_profile_by_user_id} from "../dao/ProfileManager";
 import default_group_chat_pic from '../image/DefaultGroupChatPic.jpg'
 import firebase from 'firebase';
+import default_profile_pic from '../image/DefaultProfilePic.jpg'
 
 import './ChatDetailView.css'
 
@@ -136,12 +137,37 @@ class ChatDetailView extends Component {
                             <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
                         </svg>
                     </button>
-
-
                 </div>
+                <br/>
 
+                <div>
+                    Participants &nbsp; &nbsp;
+                    {/*<button className='chat-edit-button'>*/}
+                        {/*<svg viewBox="0 0 32 32" width="20" height="20"*/}
+                             {/*fill="none" stroke="#2f5597"*/}
+                             {/*strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">*/}
+                            {/*<path d="M16 2 L16 30 M2 16 L30 16" />*/}
+                        {/*</svg>*/}
+                    {/*</button>*/}
+                </div>
+                {
+                    Object.keys(this.state.participant_profile_obj).map((participant_id, index) => {
+                        return (
+                            <div className='participant-entry-container' key={'participant-'+index}>
+                                <div className='participant-icon-container'>
+                                    <img className='participant-icon'
+                                        src={this.state.participant_profile_obj[participant_id].profile_pic || default_profile_pic} alt=""/>
+                                </div>
 
-                <pre>{JSON.stringify(this.state, null, 2)}</pre>
+                                <div className='participant-name' > {this.state.participant_profile_obj[participant_id].first_name + " " +
+                                        this.state.participant_profile_obj[participant_id].last_name} </div>
+                            </div>
+                        )
+                    })
+                }
+
+                <br/><br/>
+                {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
             </div>
         )
     }
