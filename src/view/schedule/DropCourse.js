@@ -42,29 +42,31 @@ class DropCourse extends Component{
 
 
                 <table>
+                    <tbody>
                     <tr>
                         <th>Course Name</th>
                         <th></th>
                     </tr>
-                {   //print each class with drop button
-                    this.state.courses_list.map(function(entry) {
-                        return (
-                            <tr key={"course-search-result" + entry}>
+                        {   //print each class with drop button
+                        this.state.courses_list.map(function(entry) {
+                            return (
+                                <tr key={"course-search-result" + entry}>
 
-                                <td> {entry} </td>
-                                <td>
-                                    <button onClick={()=> {
+                                    <td> {entry} </td>
+                                    <td>
+                                        <button onClick={()=> {
 
-                                        this.setState({course_id_to_drop: entry}, ()=>{
-                                            this.handle_drop_course();
-                                        })
+                                            this.setState({course_id_to_drop: entry}, ()=>{
+                                                this.handle_drop_course();
+                                            })
 
-                                    }} >Drop this course</button>
-                                </td>
+                                        }} >Drop this course</button>
+                                    </td>
 
-                            </tr>
-                        )
-                    }.bind(this))}
+                                </tr>
+                            )
+                        }.bind(this))}
+                    </tbody>
                 </table>
 
 

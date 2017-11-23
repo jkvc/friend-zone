@@ -42,36 +42,38 @@ class UserFriends extends Component {
 
                 <h4>うまるの友達!</h4>
                 <table>
-                    <tr>
-                        <th>Friends</th>
-                        <th></th>
-                    </tr>
-                    {
-                        Object.keys(this.state.friend_profiles).map((friend_id, index) => {
-                            return (
-                                <tr key={"friend-profile-" + index}>
-                                    <td>
-                                        {this.state.friend_profiles[friend_id].first_name}
-                                        {this.state.friend_profiles[friend_id].last_name}
-                                    </td>
-                                    <td>
-                                        <button onClick={() => {
-                                            this.goto_other_profile(friend_id);
-                                        }}>
-                                            goto profile
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => {
-                                            this.block_friend(friend_id);
-                                        }}>
-                                            Block friend
-                                        </button>
-                                    </td>
-                                </tr>
-                            )
-                        })
-                    }
+                    <tbody>
+                        <tr>
+                            <th>Friends</th>
+                            <th></th>
+                        </tr>
+                        {
+                            Object.keys(this.state.friend_profiles).map((friend_id, index) => {
+                                return (
+                                    <tr key={"friend-profile-" + index}>
+                                        <td>
+                                            {this.state.friend_profiles[friend_id].first_name}
+                                            {this.state.friend_profiles[friend_id].last_name}
+                                        </td>
+                                        <td>
+                                            <button onClick={() => {
+                                                this.goto_other_profile(friend_id);
+                                            }}>
+                                                goto profile
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button onClick={() => {
+                                                this.block_friend(friend_id);
+                                            }}>
+                                                Block friend
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
                 </table>
 
                 <pre>{JSON.stringify(this.state, null, 2)}</pre>
