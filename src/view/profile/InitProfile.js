@@ -17,7 +17,8 @@ class InitProfile extends Component{
             major: "",
             current_year: "",
             profile_pic: "",
-            description: ""
+            description: "",
+            verified_email: ""
         };
     }
 
@@ -29,7 +30,8 @@ class InitProfile extends Component{
             this.state.major,
             this.state.current_year,
             this.state.profile_pic,
-            this.state.description
+            this.state.description,
+            this.state.verified_email
         );
         profile.push();
         ReactDOM.render(<MainLayout/>, document.getElementById('root'));
