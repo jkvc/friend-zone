@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Welcome from './view/credentials/Welcome';
+import Loading from './view/credentials/Loading';
 import firebase from 'firebase';
 import MainLayout from './view/MainLayout';
 import registerServiceWorker from './registerServiceWorker';
@@ -17,6 +18,7 @@ import CalendarHelper from './api/CalendarHelper';
 import {test_time_helper} from "./test/TestTimeHelper";
 import {clear_profiles, init_data} from "./api/StaticData";
 
+
 document.title = "FriendZone";
 
 /* firebase config and setup */
@@ -30,6 +32,8 @@ let config = {
 };
 firebase.initializeApp(config);
 registerServiceWorker();
+
+ReactDOM.render(<Loading/>, document.getElementById('root'));
 
 // Using a callback method (observer) avoids the issue that, when web are in
 // process of getting the user, user is null even though user has signed in.
