@@ -16,7 +16,6 @@ class InitProfile extends Component{
             last_name: "",
             major: "",
             current_year: "",
-            profile_pic: "",
             description: "",
             verified_email: ""
         };
@@ -29,7 +28,7 @@ class InitProfile extends Component{
             this.state.last_name,
             this.state.major,
             this.state.current_year,
-            this.state.profile_pic,
+            null,  /*profile pic field should be null*/
             this.state.description,
             this.state.verified_email
         );
@@ -54,9 +53,6 @@ class InitProfile extends Component{
                 <br/>
                 current_year:<input type="text" value={this.state.current_year}
                                     onChange={e=> this.setState({current_year:e.target.value})} />
-                <br/>
-                profile_pic:<input type="text" value={this.state.profile_pic}
-                                   onChange={e=> this.setState({profile_pic:e.target.value})} />
                 <br/>
                 description:<input type="text" value={this.state.description}
                                    onChange={e=> this.setState({description:e.target.value})} />

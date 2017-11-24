@@ -1,0 +1,37 @@
+.friend-profile-pic-container {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 1px #ebebeb;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.friend-profile-pic {
+    float: left;
+    height: 100%;
+}
+
+#friend-detail-table{
+    padding: 5px;
+    font-size: small;
+}
+
+#friend-detail-table td {
+    padding-top: 7px;
+    padding-left: 15px;
+    max-width: 350px;
+    vertical-align: top;
+}
+
+.friend-profile-button {
+    cursor: pointer;
+    color: #2f5597;
+    font-size: smaller;
+    border: transparent;
+    background: transparent;
+}
+
