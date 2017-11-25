@@ -44,7 +44,7 @@ class RecommendedFriends extends Component {
                 /*set it to the state*/
                 this.setState({all_classmates: aggregated_ids});
 
-                /*query most_popular_in_list once after finish loading*/
+                /*query most_popular_in_list once after finish Loading*/
                 if (aggregated_ids.length === course_list.length) {
                     var query = {
                         count: recommendation_count,

@@ -27,23 +27,13 @@ class ChatSessionView extends Component {
     componentWillMount() {
         var ref = firebase.database().ref('ChatSession/' + this.state.session_id);
 
-        // ref.once('value').then((snapshot) => {
-        //     var msg_list = [];
-        //     var msg_keys = Object.keys(snapshot.val().message);
-        //     for (var i = 0; i < msg_keys.length; i++) {
-        //         msg_list.push(snapshot.val().message[msg_keys[i]])
-        //     }
-        //     this.setState({messages: msg_list}, () => {
-        //         this.scroll_message_container_to_bottom();
-        //     })
-        // });
-
         ref.child('message').on('child_added', (snapshot) => {
-            var msg_list = this.state.messages;
-            msg_list.push(snapshot.val());
-            this.setState({messages: msg_list}, () => {
+            var messages = this.state.messages;
+            messages[snapshot.val().time] = snapshot.val();
+            this.setState({messages:messages}, ()=>{
                 this.scroll_message_container_to_bottom();
             });
+
         });
 
         lookup_profile_by_user_id(firebase.auth().currentUser.uid, (err, profile_obj) => {
@@ -85,8 +75,9 @@ class ChatSessionView extends Component {
 
                 <div className="message_container" id="message-container">
                     {
-                        this.state.messages.map((message, index) => {
+                        Object.keys(this.state.messages).map((message_id, index) => {
 
+                            var message = this.state.messages[message_id];
 
                             /* self message */
                             if (message.sender_id === firebase.auth().currentUser.uid) {

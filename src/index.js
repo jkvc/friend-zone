@@ -18,6 +18,7 @@ import CalendarHelper from './api/CalendarHelper';
 import {test_time_helper} from "./test/TestTimeHelper";
 import {clear_profiles, init_data} from "./api/StaticData";
 
+ReactDOM.render(<Loading/>, document.getElementById('root'));
 
 document.title = "FriendZone";
 
@@ -33,7 +34,6 @@ let config = {
 firebase.initializeApp(config);
 registerServiceWorker();
 
-ReactDOM.render(<Loading/>, document.getElementById('root'));
 
 // Using a callback method (observer) avoids the issue that, when web are in
 // process of getting the user, user is null even though user has signed in.

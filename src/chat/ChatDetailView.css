@@ -50,10 +50,11 @@
 
 .participant-entry-container{
     margin-top: 9px;
-    width: 40%;
-    min-height: 40px;
     overflow-x: hidden;
     cursor: pointer;
+}
+
+.participant-entry-container td{
     border-bottom: solid 1px lightgrey;
 }
 
@@ -77,6 +78,5 @@
 
 .participant-name{
     padding: 10px;
-    float: right;
     font-size: smaller;
 }

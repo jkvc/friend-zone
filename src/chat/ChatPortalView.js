@@ -69,6 +69,7 @@ class ChatPortalView extends Component {
     }
 
     goto_chat_session(session_id) {
+
         this.setState({
             active_chat: session_id,
             search_key: ""
@@ -87,6 +88,9 @@ class ChatPortalView extends Component {
         let time = new Date();
         time.setTime(millis);
 
+        var week_array = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        var day = week_array[time.getDay()];
+
         var hr = time.getHours()
         var min = time.getMinutes()
         var sec = time.getSeconds()
@@ -95,7 +99,7 @@ class ChatPortalView extends Component {
         if (min < 10) min = "0" + min;
         if (sec < 10) sec = "0" + sec;
 
-        return "" + hr + ":" + min + ":" + sec;
+        return day + " " + hr + ":" + min + ":" + sec;
     }
 
 

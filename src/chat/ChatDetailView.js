@@ -143,28 +143,42 @@ class ChatDetailView extends Component {
                 <div>
                     Participants &nbsp; &nbsp;
                     {/*<button className='chat-edit-button'>*/}
-                        {/*<svg viewBox="0 0 32 32" width="20" height="20"*/}
-                             {/*fill="none" stroke="#2f5597"*/}
-                             {/*strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">*/}
-                            {/*<path d="M16 2 L16 30 M2 16 L30 16" />*/}
-                        {/*</svg>*/}
+                    {/*<svg viewBox="0 0 32 32" width="20" height="20"*/}
+                    {/*fill="none" stroke="#2f5597"*/}
+                    {/*strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">*/}
+                    {/*<path d="M16 2 L16 30 M2 16 L30 16" />*/}
+                    {/*</svg>*/}
                     {/*</button>*/}
                 </div>
-                {
-                    Object.keys(this.state.participant_profile_obj).map((participant_id, index) => {
-                        return (
-                            <div className='participant-entry-container' key={'participant-'+index}>
-                                <div className='participant-icon-container'>
-                                    <img className='participant-icon'
-                                        src={this.state.participant_profile_obj[participant_id].profile_pic || default_profile_pic} alt=""/>
-                                </div>
 
-                                <div className='participant-name' > {this.state.participant_profile_obj[participant_id].first_name + " " +
+
+                <table className='participant-entry-container'>
+                    <tbody>
+                    {
+                        Object.keys(this.state.participant_profile_obj).map((participant_id, index) => {
+                            return (
+                                <tr key={'participant-' + index}>
+                                    <td>
+                                        <div className='participant-icon-container'>
+                                            <img className='participant-icon'
+                                                 src={this.state.participant_profile_obj[participant_id].profile_pic || default_profile_pic}
+                                                 alt=""/>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div
+                                            className='participant-name'> {this.state.participant_profile_obj[participant_id].first_name + " " +
                                         this.state.participant_profile_obj[participant_id].last_name} </div>
-                            </div>
-                        )
-                    })
-                }
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+
+                    </tbody>
+                </table>
+
 
                 <br/><br/>
                 {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
