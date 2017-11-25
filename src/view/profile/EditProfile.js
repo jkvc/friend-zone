@@ -22,7 +22,8 @@ class EditProfile extends Component {
             description: "",
             upload_status: "",
             newPassword : "",
-            repeatPassword : ""
+            repeatPassword : "",
+            err_msg: ""
         };
 
 
@@ -63,14 +64,65 @@ class EditProfile extends Component {
 
     handle_update_password() {
         var user = firebase.auth().currentUser;
-        var newPassword = this.state.newPassword;
-        var repeatPassword = this.state.repeatPassword;
+        
+        // Check password strength
+        let uppercase_count = 0;
+        let lowercase_count = 0;
+        let numeric = 0;
+        let total = 0;
+        let password = this.state.newPassword;
 
-        if(newPassword!==repeatPassword){
-            alert("Passwords don't match!")
+        for (let i = 0; i < password.length; i++)
+        {
+            if (password[i] >= 'A' && password[i] <= 'Z')
+            {
+                uppercase_count++;
+            }
+            else if (password[i] >= 'a' && password[i] <= 'z')
+            {
+                lowercase_count++;
+            }
+            else if (password[i] >= '0' && password[i] <= '9')
+            {
+                numeric++;
+            }
+            total++;
         }
+
+        // Check if they are valid passwords or not
+        if (uppercase_count < 1)
+        {
+            let error_msg = "There must be at least one uppercase letter in the password";
+            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
+
+        }
+        else if (lowercase_count < 1)
+        {
+            let error_msg = "There must be at least one lowercase letter in the password";
+            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
+
+        }
+        else if (numeric< 1)
+        {
+            let error_msg = "There must be at least one number in the password";
+            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
+
+        }
+        else if (total < 8)
+        {
+            let error_msg = "The password is not long enough";
+            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
+
+        }
+        else if (password !== this.state.repeatPassword)
+        {
+            let error_msg = "The passwords entered do not match each other";
+            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
+        }
+
         else{
-            user.updatePassword(newPassword).then(function(){
+            this.setState({err_msg:"", newPassword:"", repeatPassword:""});
+            user.updatePassword(password).then(function(){
                 alert("Password Changed Successfully");
             }).catch(function(error){
                 alert(error);
@@ -141,11 +193,12 @@ class EditProfile extends Component {
 
                 <br/>
                 <h3> Change Password </h3>
-                New Password<input type="text" value={this.newPassword}
+                New Password<input type="text" value={this.state.newPassword}
                                     onChange={e =>this.setState({newPassword: e.target.value})}/>
                 <br />
-                Confirm Password<input type="text" value={this.repeatPassword}
+                Confirm Password<input type="text" value={this.state.repeatPassword}
                                        onChange={e =>this.setState({repeatPassword: e.target.value})}/>
+                <h3> {this.state.err_msg} </h3>
                 <br/>
 
                 <form>
