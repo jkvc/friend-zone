@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 
 import './ChatSessionView.css'
 import {read_portal} from "./ChatPortalManager";
-import {get_friend_profiles} from "../api/StaticData";
+import {get_friend_profiles, get_self_profile} from "../api/StaticData";
 
 import default_profile_pic from "../image/DefaultProfilePic.jpg"
 import OtherProfile from "../view/profile/FriendProfile";
@@ -17,20 +17,21 @@ class ChatSessionView extends Component {
         super(props);
         this.state = {
             session_id: props.session_id,
-            messages: [],
+            messages: {},
             title: "",
             input: "",
-            my_name: ""
+            my_name: "",
+            show_load_full_button: true
         }
     }
 
     componentWillMount() {
         var ref = firebase.database().ref('ChatSession/' + this.state.session_id);
 
-        ref.child('message').on('child_added', (snapshot) => {
+        ref.child('message').limitToLast(15).on('child_added', (snapshot) => {
             var messages = this.state.messages;
             messages[snapshot.val().time] = snapshot.val();
-            this.setState({messages:messages}, ()=>{
+            this.setState({messages: messages}, () => {
                 this.scroll_message_container_to_bottom();
             });
 
@@ -41,6 +42,15 @@ class ChatSessionView extends Component {
         })
     }
 
+    load_full_history() {
+        var ref = firebase.database().ref('ChatSession/' + this.state.session_id);
+        ref.child('message').once('value').then((snapshot) => {
+            this.setState({
+                messages: snapshot.val(),
+                show_load_full_button: false
+            });
+        })
+    }
 
     scroll_message_container_to_bottom() {
         var message_container = document.getElementById("message-container");
@@ -69,11 +79,26 @@ class ChatSessionView extends Component {
         var prev_sender = "";
         /*keep track of who sent the previous message, and not show icon and name on the next one */
 
+        var load_full_button = "";
+        if (this.state.show_load_full_button)
+            load_full_button = (
+                <div align='center'>
+                    <button className='load-full-history-button'
+                            onClick={this.load_full_history.bind(this)}>
+                        Load full chat history
+                    </button>
+                </div>
+            );
+
         return (
             <div>
 
 
                 <div className="message_container" id="message-container">
+
+                    {load_full_button}
+
+
                     {
                         Object.keys(this.state.messages).map((message_id, index) => {
 
@@ -83,7 +108,7 @@ class ChatSessionView extends Component {
                             if (message.sender_id === firebase.auth().currentUser.uid) {
                                 prev_sender = message.sender_id;
                                 return (
-                                    <div key={'message    cursor: pointer;\n-' + index}
+                                    <div key={'message-' + index}
                                          className="message_row">
                                         <div className="bubble_right">{message.msg}</div>
                                     </div>
@@ -92,6 +117,11 @@ class ChatSessionView extends Component {
 
                             /*message from others*/
                             else {
+
+                                /*filter out blocked sender*/
+                                if (get_self_profile().friend_list[message.sender_id] === false)
+                                    return (<div> </div>)
+
 
                                 /*get the profile pic*/
                                 var sender_profile = friend_profiles[message.sender_id] || {};
@@ -102,18 +132,19 @@ class ChatSessionView extends Component {
 
 
                                 var chat_icon_div = (
-                                    <div className="sender_icon_container" onClick={()=>{this.goto_other_profile(message.sender_id)}}>
+                                    <div className="sender_icon_container" onClick={() => {
+                                        this.goto_other_profile(message.sender_id)
+                                    }}>
                                         <img className="sender_icon" src={profile_pic} alt="Sender"/>
                                     </div>);
-
 
 
                                 var sender_name_div = (<div className="sender"> {message.sender}</div>);
 
                                 /*hide profile pic and sender name if equal to last messages sender*/
                                 if (message.sender_id === prev_sender) {
-                                    chat_icon_div = (<div className="sender_icon_container_invisible"> </div>);
-                                    sender_name_div = (<div> </div>);
+                                    chat_icon_div = (<div className="sender_icon_container_invisible"></div>);
+                                    sender_name_div = (<div></div>);
                                 }
 
                                 prev_sender = message.sender_id;
@@ -136,7 +167,7 @@ class ChatSessionView extends Component {
                         })
                     }
 
-                    <div className="message_container_bottom_padding"> </div>
+                    <div className="message_container_bottom_padding"></div>
 
                 </div>
 

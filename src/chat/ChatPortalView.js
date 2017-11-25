@@ -7,7 +7,7 @@ import "./ChatPortalView.css"
 import {read_portal, sort_portal_by_time} from "./ChatPortalManager";
 import default_profile_pic from "../image/DefaultProfilePic.jpg"
 import default_group_chat_pic from "../image/DefaultGroupChatPic.jpg"
-import {get_friend_profiles} from "../api/StaticData";
+import {get_friend_profiles, get_self_profile} from "../api/StaticData";
 import ChatDetail from "./ChatDetailView";
 
 class ChatPortalView extends Component {
@@ -153,6 +153,10 @@ class ChatPortalView extends Component {
                             if (participant_ids.length === 2) {
                                 var self_id = firebase.auth().currentUser.uid;
                                 var other_id = participant_ids[0] === self_id ? participant_ids[1] : participant_ids[0];
+
+                                /*if the other friend is blocked, do not show this portal*/
+                                if (get_self_profile().friend_list[other_id] === false) return(<div> </div>);
+
                                 var friend_profile = this.state.friend_profiles[other_id];
                                 title = friend_profile.first_name + " " + friend_profile.last_name;
                                 profile_pic = friend_profile.profile_pic === "" ? default_profile_pic : friend_profile.profile_pic;
@@ -175,7 +179,7 @@ class ChatPortalView extends Component {
                                 );
 
 
-                            /*filter out render entries*/
+                            /*filter out the ones that do not match search key*/
                             if (title.toLowerCase().startsWith(this.state.search_key.toLowerCase())) return (
 
                                 <div className={portal_class}
