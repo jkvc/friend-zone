@@ -107,3 +107,11 @@
     margin-right: 2%;
 }
 
+.load-full-history-button{
+    border: transparent;
+    background: transparent;
+    font-style: italic;
+    color: #2f5597;
+    cursor: pointer;
+}
+
