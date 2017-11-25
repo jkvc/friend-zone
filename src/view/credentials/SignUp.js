@@ -16,7 +16,8 @@ class SignUp extends Component {
             user_email:'',
             password:'',
             err_msg: "",
-            success_msg:""
+            success_msg:"",
+            verify_password:""
         };
         this.title = "SignUp.js";
     }
@@ -28,6 +29,62 @@ class SignUp extends Component {
 
     handle_signup_button(event) {
         event.preventDefault(); /* make react happy */
+
+        // Check password strength
+        let uppercase_count = 0;
+        let lowercase_count = 0;
+        let numeric = 0;
+        let total = 0;
+        let password = this.state.password;
+
+        for (let i = 0; i < password.length; i++)
+        {
+            if (password[i] >= 'A' && password[i] <= 'Z')
+            {
+                uppercase_count++;
+            }
+            else if (password[i] >= 'a' && password[i] <= 'z')
+            {
+                lowercase_count++;
+            }
+            else if (password[i] >= '0' && password[i] <= '9')
+            {
+                numeric++;
+            }
+            total++;
+        }
+
+        // Check if they are valid passwords or not
+        if (uppercase_count < 1)
+        {
+            let error_msg = "There must be at least one uppercase letter in the password";
+            this.setState({err_msg:error_msg, password:"", verify_password:""});
+            return;
+        }
+        else if (lowercase_count < 1)
+        {
+            let error_msg = "There must be at least one lowercase letter in the password";
+            this.setState({err_msg:error_msg, password:"", verify_password:""});
+            return;
+        }
+        else if (numeric< 1)
+        {
+            let error_msg = "There must be at least one number in the password";
+            this.setState({err_msg:error_msg, password:"", verify_password:""});
+            return;
+        }
+        else if (total < 8)
+        {
+            let error_msg = "The password is not long enough";
+            this.setState({err_msg:error_msg, password:"", verify_password:""});
+            return;
+        }
+        else if (password !== this.state.verify_password)
+        {
+            let error_msg = "The passwords entered do not match each other";
+            this.setState({err_msg:error_msg, password:"", verify_password:""});
+            return;
+        }
 
         firebase.auth().createUserWithEmailAndPassword(this.state.user_email, this.state.password) /*create account*/
 
@@ -97,7 +154,7 @@ class SignUp extends Component {
                     <label>user_email </label>
                     <input type={"text"} placeholder="put user email here" value={this.state.user_email}
                            onChange={e=> this.setState({user_email: e.target.value})}/>
-                    <label>{this.state.err_msg}</label>
+                    {/*<label>{this.state.err_msg}</label>*/}
                 </form>
                 <form>
                     <label>password </label>
@@ -105,6 +162,15 @@ class SignUp extends Component {
                            onChange={ e=> this.setState({password: e.target.value})}/>
                     <label>{this.state.success_msg}</label>
                 </form>
+                <form>
+                    <label>Verify password </label>
+                    <input type={"text"} placeholder="Type password again" value={this.state.verify_password}
+                           onChange={ e=> this.setState({verify_password: e.target.value})}/>
+                    <label>{this.state.success_msg}</label>
+                </form>
+                <br/>
+                <h4> {this.state.err_msg} </h4>
+
                 <br/>
 
                 <form>
