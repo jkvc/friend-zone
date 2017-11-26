@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
-import {add_message} from "./ChatSessionManager";
+import {add_image_message, add_message} from "./ChatSessionManager";
 import {lookup_profile_by_user_id} from "../dao/ProfileManager";
 import ReactDOM from 'react-dom';
 
@@ -74,6 +74,21 @@ class ChatSessionView extends Component {
         this.setState({input: ""})
     }
 
+    send_image(e) {
+        e.preventDefault();
+        var file = e.target.files[0];
+
+        var storage_ref = firebase.storage().ref('message_pic/' + this.state.session_id + '-' + Date.now());
+        var upload_task = storage_ref.put(file);
+
+        /*only pass in a complete() function*/
+        upload_task.on('state_changed', null, null, () => {
+            var image_url = upload_task.snapshot.downloadURL;
+            add_image_message(this.state.session_id, this.state.my_name, image_url);
+        })
+    }
+
+
     render() {
         var friend_profiles = get_friend_profiles();
         var prev_sender = "";
@@ -104,13 +119,21 @@ class ChatSessionView extends Component {
 
                             var message = this.state.messages[message_id];
 
+                            var message_body = <div>{message.msg}</div>;
+                            if (message.is_image === true) {
+                                message_body = <img src={message.msg} alt=""
+                                                    className='message_img'
+                                                    onLoad={this.scroll_message_container_to_bottom.bind(this)}
+                                />
+                            }
+
                             /* self message */
                             if (message.sender_id === firebase.auth().currentUser.uid) {
                                 prev_sender = message.sender_id;
                                 return (
                                     <div key={'message-' + index}
                                          className="message_row">
-                                        <div className="bubble_right">{message.msg}</div>
+                                        <div className="bubble_right">{message_body}</div>
                                     </div>
                                 )
                             }
@@ -120,7 +143,7 @@ class ChatSessionView extends Component {
 
                                 /*filter out blocked sender*/
                                 if (get_self_profile().friend_list[message.sender_id] === false)
-                                    return (<div> </div>)
+                                    return (<div></div>)
 
 
                                 /*get the profile pic*/
@@ -157,7 +180,7 @@ class ChatSessionView extends Component {
 
                                         <div className="sender_message_container">
                                             {sender_name_div}
-                                            <div className="bubble_left">{message.msg}</div>
+                                            <div className="bubble_left">{message_body}</div>
                                         </div>
 
                                     </div>
@@ -183,11 +206,24 @@ class ChatSessionView extends Component {
                               }}
                               onKeyPress={this.handle_input_key_press.bind(this)}
                     />
+
+                    <label htmlFor="send-image" className='send-img-button'>
+                        <svg viewBox="0 0 32 32" width="20" height="20"
+                             fill="none" stroke="#2f5597"
+                             strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                            <path d="M20 24 L12 16 2 26 2 2 30 2 30 24 M16 20 L22 14 30 22 30 30 2 30 2 24"/>
+                            <circle cx="10" cy="9" r="3"/>
+                        </svg>
+                    </label>
+                    <input id='send-image' type='file' name='Send Image' accept='image/*'
+                           onChange={e => this.send_image(e)}/>
+
                 </div>
 
             </div>
         )
     }
+
 
 
 }

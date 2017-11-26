@@ -122,7 +122,35 @@ export function add_message(session_id, sender_name, message) {
     };
 
     firebase.database().ref('ChatSession/' + session_id + '/message')
-        .child(now_millis).set(message_obj)
+        .child(now_millis).set(message_obj);
+
+    /*set it to unread for all other participants*/
+    firebase.database().ref('ChatSession/' + session_id).once('value').then((snapshot) => {
+        var participant_ids = Object.keys(snapshot.val().participant_ids);
+        var self_id = firebase.auth().currentUser.uid;
+
+        /*set others portals to unread, update all portals timestamp*/
+        participant_ids.forEach((participant_id) => {
+            if (participant_id !== self_id) {
+                unread_portal(participant_id, session_id);
+            }
+            update_timestamp(participant_id, session_id, now_millis);
+        })
+    })
+}
+
+export function add_image_message(session_id, sender_name, url) {
+    var now_millis = Date.now();
+    var message_obj = {
+        time: now_millis,
+        sender: sender_name,
+        sender_id: firebase.auth().currentUser.uid,
+        msg: url,
+        is_image: true
+    };
+
+    firebase.database().ref('ChatSession/' + session_id + '/message')
+        .child(now_millis).set(message_obj);
 
     /*set it to unread for all other participants*/
     firebase.database().ref('ChatSession/' + session_id).once('value').then((snapshot) => {

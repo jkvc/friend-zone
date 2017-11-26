@@ -19,7 +19,7 @@
 }
 
 .message_input {
-    width: 90%;
+    width: calc(95% - 32px);
     height: 100%;
     padding-left: 10px;
     padding-right: 10px;
@@ -30,6 +30,7 @@
     font-family: sans-serif;
     resize: none;
     outline: none;
+    float: left;
 }
 
 ::-webkit-scrollbar {
@@ -93,7 +94,7 @@
     border-radius: 15px;
     min-height: 20px;
     padding: 4px 10px 3px;
-
+    word-break: break-all;
 }
 
 .bubble_right {
@@ -105,9 +106,20 @@
     padding: 4px 10px 3px;
     border-radius: 15px;
     margin-right: 2%;
+    word-break: break-all;
+
 }
 
-.load-full-history-button{
+.message_img {
+    border-radius: 15px;
+    max-width: 300px;
+}
+
+#send-image {
+    display: none;
+}
+
+.load-full-history-button {
     border: transparent;
     background: transparent;
     font-style: italic;
@@ -115,3 +127,8 @@
     cursor: pointer;
 }
 
+.send-img-button {
+    cursor: pointer;
+    float: left;
+    margin-top: 20px;
+}
