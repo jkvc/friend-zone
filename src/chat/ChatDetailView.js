@@ -28,7 +28,10 @@ class ChatDetailView extends Component {
     componentWillMount() {
 
         get_chat_title_by_id(this.state.session_id, (err, title) => {
-            this.setState({chat_title: title});
+            this.setState({
+                chat_title: title,
+                new_name: title
+            });
         });
 
         get_chat_pic_by_id(this.state.session_id, (err, pic_url) => {
@@ -89,7 +92,6 @@ class ChatDetailView extends Component {
         update_session_title(this.state.session_id, this.state.new_name);
         this.setState({
             chat_title: this.state.new_name,
-            new_name: ""
         })
     }
 
