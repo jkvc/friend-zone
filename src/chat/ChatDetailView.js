@@ -19,7 +19,7 @@ class ChatDetailView extends Component {
             session_id: props.session_id,
             chat_title: "",
             session_pic: default_group_chat_pic,
-            new_name: "",
+            new_chat_title: "",
             participant_ids: [],
             participant_profile_obj: {}
         }
@@ -86,11 +86,15 @@ class ChatDetailView extends Component {
     }
 
     change_title() {
-        update_session_title(this.state.session_id, this.state.new_name);
-        this.setState({
-            chat_title: this.state.new_name,
-            new_name: ""
-        })
+        if (this.state.new_chat_title === "") {
+            alert("Chat title cannot be blank!");
+        } else {
+            update_session_title(this.state.session_id, this.state.new_chat_title);
+            this.setState({
+                chat_title: this.state.new_chat_title,
+                new_chat_title: ""
+            })
+        }
     }
 
 
@@ -128,8 +132,8 @@ class ChatDetailView extends Component {
                     <label className='chat-edit-button' onClick={this.change_title.bind(this)}
                     > Change Title &nbsp;</label>
                     <input type="text" placeholder='New title' className='new-chat-title-input-box'
-                           value={this.state.new_name}
-                           onChange={e => this.setState({new_name: e.target.value})}/>
+                           value={this.state.new_chat_title}
+                           onChange={e => this.setState({new_chat_title: e.target.value})}/>
                     <button className='chat-edit-button' onClick={this.change_title.bind(this)}>
                         <svg viewBox="0 0 32 32" width="20" height="20"
                              fill="none" stroke="#2f5597"
