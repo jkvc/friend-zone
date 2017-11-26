@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
 import Login from './Login';
 import './MainLoginSignup.css'
+import './MainLoginSignupbutton.css'
 import blue_line from '../../image/BlueLine.png'
 
 import TestCourseManager from '../../TempViews/TestCourseManager'
@@ -59,13 +60,9 @@ class Welcome extends Component {
 
                             <br/>
                             <form>
-                                <a className="buttonStyle" onClick={this.goto_test_course_search.bind(this)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="25" x="10" y="10">
-                                        <path d="M175,50H25C11.2,50,0,38.8,0,25v0C0,11.2,11.2,0,25,0h150c13.7,0,25,11.2,25,25v0
-	                                    C200,38.8,188.8,50,175,50z" class="path" fill="transparent" stroke="#ffffff"/>
-                                    </svg>
-                                    <p>Go to Search Course</p>
-                                </a>
+                                <button className="buttonStyle" onClick={this.goto_test_course_search.bind(this)}>Search Course
+
+                                </button>
                             </form>
 
                         </div>
