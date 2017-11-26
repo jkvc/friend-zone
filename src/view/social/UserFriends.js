@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import {unblock_friend, delete_friend, block_friend} from "../../dao/ProfileManager";
 
 
+import './UserFriends.css'
 class UserFriends extends Component {
 
     constructor(props) {
@@ -73,28 +74,26 @@ class UserFriends extends Component {
 
             <div>
 
-                <img
-                    src={"https://res.cloudinary.com/teepublic/image/private/s--8-dGDDZg--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1470902298/production/designs/627022_1.jpg"}
-                    alt={""} width={"300"}/>
-                <h1>{this.title}</h1>
-
-                <h4>うまるの友達!</h4>
                 <table>
                     <tbody>
                         <tr>
-                            <th>Friends</th>
+                            <div id="friends">
+                            <a >Friends</a>
+                            </div>
                             <th></th>
                         </tr>
                         {
                             Object.keys(this.state.friend_profiles).map((friend_id, index) => {
                                 return (
+                                    <div id="friendlist">
                                     <tr key={"friend-profile-" + index}>
-                                        <td>
+                                        <img src={this.state.friend_profiles[friend_id].profile_pic} width={"100"}/>
+                                        <td id="friendname">
                                             {this.state.friend_profiles[friend_id].first_name}
                                             {this.state.friend_profiles[friend_id].last_name}
                                         </td>
                                         <td>
-                                            <button onClick={() => {
+                                            <button id="goto_other_profile" onClick={() => {
                                                 this.goto_other_profile(friend_id);
                                             }}>
                                                 goto profile
@@ -104,7 +103,7 @@ class UserFriends extends Component {
                                         {   friend_id in this.state.profile_obj.friend_list &&
                                             this.state.profile_obj.friend_list[friend_id] && ( // render block button here
                                                 <td>
-                                                    <button onClick={() => {
+                                                    <button id="block_a_friend" onClick={() => {
                                                         this.block_a_friend(friend_id);
                                                     }}>
                                                         Block friend
@@ -116,7 +115,7 @@ class UserFriends extends Component {
                                         {   friend_id in this.state.profile_obj.friend_list &&
                                             !this.state.profile_obj.friend_list[friend_id] && ( // render block button here
                                                     <td>
-                                                        <button onClick={() => {
+                                                        <button id="unblock_a_friend" onClick={() => {
                                                             this.unblock_a_friend(friend_id);
                                                         }}>
                                                             Unblock friend
@@ -127,7 +126,7 @@ class UserFriends extends Component {
 
                                         {friend_id in this.state.profile_obj.friend_list ? (
                                                 <td>
-                                                    <button onClick={() => {
+                                                    <button id="delete_a_friend" onClick={() => {
                                                         this.delete_a_friend(friend_id);
                                                     }}>
                                                         Delete friend
@@ -146,13 +145,12 @@ class UserFriends extends Component {
                                         }
 
                                     </tr>
+                                    </div>
                                 )
                             })
                         }
                     </tbody>
                 </table>
-
-                <pre>{JSON.stringify(this.state, null, 2)}</pre>
 
             </div>
 

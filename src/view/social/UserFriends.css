@@ -1,0 +1,47 @@
+#goto_other_profile{
+   background: transparent;
+   border: transparent;
+   font-style: Helvetica;
+   font-size: large;
+   color: #00649F;
+}
+
+#block_a_friend{
+   background: transparent;
+   border: transparent;
+   font-style: Helvetica;
+   font-size: large;
+   color: #00649F;
+}
+
+#unblock_a_friend{
+   background: transparent;
+   border: transparent;
+   font-style: Helvetica;
+   font-size: large;
+   color: #00649F;
+}
+
+#delete_a_friend{
+   background: transparent;
+   border: transparent;
+   font-style: Helvetica;
+   font-size: large;
+   color: #00649F;
+}
+
+#friendlist{
+   text-align: center;
+}
+
+#friendname{
+   font-size: large;
+   font-style: Helvetica;
+}
+
+#friends{
+   text-align: center;
+   font-size: 350%;
+   font-style: Helvetica;
+
+}
