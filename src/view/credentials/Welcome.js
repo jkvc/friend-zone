@@ -45,7 +45,7 @@ class Welcome extends Component {
                             <div className="logo"> FriendZone </div>
                             <br/>
 
-                            <div className="subtitle-text">Sign up or log in to make friends in your classes.</div>
+                            <div className="subtitle-text"><p className="text">Sign up or log in to make friends in your classes.</p></div>
                             <br/>
                             <br/>
 
