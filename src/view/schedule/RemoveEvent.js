@@ -29,9 +29,9 @@ class RemoveEvent extends Component{
 
     handle_remove_event(){
         remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_name_to_remove);
-
         /*remove the item once clicked drop*/
         var new_event_list = this.state.events_list;
+        window.alert("The event \"" + this.state.events_list[this.state.event_name_to_remove].event_name+ "\" was successfully removed to your schedule!")
         delete new_event_list[this.state.event_name_to_remove];
         this.setState({
             courses_list: new_event_list,
@@ -62,7 +62,6 @@ class RemoveEvent extends Component{
                                         <td> {this.state.events_list[entry].event_name} </td>
                                         <td>
                                             <button onClick={()=> {
-
                                                 this.setState({event_name_to_remove: entry}, ()=>{
                                                     this.handle_remove_event();
                                                 })

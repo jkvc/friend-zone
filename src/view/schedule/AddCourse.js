@@ -29,7 +29,8 @@ class AddCourse extends Component{
 
     handle_add_course(){
         add_course_to_profile(firebase.auth().currentUser.uid, this.state.course_id_to_add);
-        add_user_to_enrollment(firebase.auth().currentUser.uid, this.state.course_id_to_add)
+        add_user_to_enrollment(firebase.auth().currentUser.uid, this.state.course_id_to_add);
+        window.alert("The course \""+this.state.course_id_to_add+"\" was successfully added to your schedule!")
     }
 
     render(){

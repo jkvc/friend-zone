@@ -28,6 +28,7 @@ class DropCourse extends Component{
         /*remove the item once clicked drop*/
         var new_course_list = this.state.courses_list;
         new_course_list.splice(new_course_list.indexOf(this.state.course_id_to_drop),1);
+        window.alert("The course \"" + this.state.course_id_to_drop + "\" was successfully removed from your schedule!")
         this.setState({
             courses_list: new_course_list,
             course_id_to_drop: ""
