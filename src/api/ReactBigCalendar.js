@@ -26,6 +26,10 @@ let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 // For more information, go to http://intljusticemission.github.io/react-big-calendar/examples/index.html
 //      and scroll down to find the official documentations
 // For source code example, go to https://github.com/intljusticemission/react-big-calendar
+//
+// If you want to be able to do something with the Calendar when the user clicks on an event, modify the
+//      prop "onSelectEvent={ some_function }, where you pass in a function that tells the program what to do.
+//      For more, read the official documentation on the link provided above.
 class BasicCalendar extends Component{
 
     constructor(props)
@@ -43,6 +47,10 @@ class BasicCalendar extends Component{
                 step={60}
                 // Be default this should return current date
                 defaultDate={new Date()}
+                defaultView={'week'}
+                onSelectEvent={(data)=>{
+                    alert("Selected an event!");
+                }}
             />
         )
     }
