@@ -89,6 +89,8 @@ class ChatDetailView extends Component {
     }
 
     change_title() {
+        if (this.state.new_chat_title.length === 0) return;
+
         update_session_title(this.state.session_id, this.state.new_chat_title);
         this.setState({
             new_chat_title: this.state.new_name,
