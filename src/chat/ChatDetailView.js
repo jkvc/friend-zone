@@ -93,8 +93,8 @@ class ChatDetailView extends Component {
 
         update_session_title(this.state.session_id, this.state.new_chat_title);
         this.setState({
-            new_chat_title: this.state.new_name,
-        })
+            chat_title: this.state.new_chat_title,
+        });
     }
 
 
