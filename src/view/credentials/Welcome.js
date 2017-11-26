@@ -49,18 +49,23 @@ class Welcome extends Component {
                             <br/>
                             <br/>
 
-                            <button className="button-text" onClick={this.goto_signup.bind(this)}>Sign up</button>
+                            <button namme = "Signup" className="button-text" onClick={this.goto_signup.bind(this)}>Sign up</button>
                             <br/>
                             <img className="separator" src={blue_line} alt=""/>
                             <br/>
-                            <button className="button-text" onClick={this.goto_login.bind(this)}>Log in</button>
+                            <button name = "Login" className="button-text" onClick={this.goto_login.bind(this)}>Log in</button>
                             <br/>
 
 
                             <br/>
                             <form>
-                                <button onClick={this.goto_test_course_search.bind(this)}>Goto course search test
-                                </button>
+                                <a className="buttonStyle" onClick={this.goto_test_course_search.bind(this)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="25" x="10" y="10">
+                                        <path d="M175,50H25C11.2,50,0,38.8,0,25v0C0,11.2,11.2,0,25,0h150c13.7,0,25,11.2,25,25v0
+	                                    C200,38.8,188.8,50,175,50z" class="path" fill="transparent" stroke="#ffffff"/>
+                                    </svg>
+                                    <p>Go to Search Course</p>
+                                </a>
                             </form>
 
                         </div>
