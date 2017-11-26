@@ -30,13 +30,13 @@ tr{
     padding: 1px;
 }
 .button_red{
-    border-radius: 50%;
+    border-radius: 100%;
     background-color: #e20049;
     border: 1px solid white;
     color: white;
     padding: 20px 28px;
     text-align: center;
-    width: 200px;
+    width: 100px;
     cursor: pointer;
 }
 
