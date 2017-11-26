@@ -88,7 +88,7 @@ class ChatPortalView extends Component {
         let time = new Date();
         time.setTime(millis);
 
-        var week_array = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        var week_array = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         var day = week_array[time.getDay()];
 
         var hr = time.getHours()
@@ -155,12 +155,12 @@ class ChatPortalView extends Component {
                                 var other_id = participant_ids[0] === self_id ? participant_ids[1] : participant_ids[0];
 
                                 /*if the other friend is blocked, do not show this portal*/
-                                if (get_self_profile().friend_list[other_id] === false) return(<div> </div>);
+                                if (get_self_profile().friend_list[other_id] === false) return (<div></div>);
 
                                 var friend_profile = this.state.friend_profiles[other_id];
                                 /*if the other friend got deleted, do not show this portal */
-                                if(friend_profile === undefined) return(<div> </div>);
-                                
+                                if (friend_profile === undefined) return (<div></div>);
+
                                 title = friend_profile.first_name + " " + friend_profile.last_name;
                                 profile_pic = friend_profile.profile_pic === "" ? default_profile_pic : friend_profile.profile_pic;
                             }
@@ -207,7 +207,7 @@ class ChatPortalView extends Component {
 
                             )
 
-                            else return(<div> </div>)
+                            else return (<div></div>)
                         })
                     }
                 </div>

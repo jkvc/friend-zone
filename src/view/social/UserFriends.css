@@ -1,11 +1,13 @@
-.img{
+.img {
     border-radius: 50%
 }
-.name{
+
+.name {
     font-size: 30px;
 }
-.group .button{
-    background: none!important;
+
+.group .button {
+    background: none !important;
     border: none;
     color: blue;
     padding: 0;
@@ -15,23 +17,9 @@
     border-bottom: 1px solid blue;
     cursor: pointer;
 }
-th{
 
-    border: 0px solid black;
-    padding: 10px;
-}
-td{
-
-    border: 0px solid black;
-    padding: 20px;
-}
-tr{
-
-    border: 0px solid black;
-    padding: 1px;
-}
-.button_red{
-    background:none!important;
+.button_red {
+    background: none !important;
     border: none;
     color: blue;
     padding: 0;
