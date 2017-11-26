@@ -3,9 +3,9 @@ import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
 import OtherProfile from "../profile/FriendProfile";
 import ReactDOM from 'react-dom';
 import {unblock_friend, delete_friend, block_friend} from "../../dao/ProfileManager";
-
-
 import './UserFriends.css'
+import PageTitle from "../components/PageTitle";
+
 class UserFriends extends Component {
 
     constructor(props) {
@@ -72,85 +72,98 @@ class UserFriends extends Component {
 
         return (
 
-            <div>
+            <div align = "center">
 
-                <table>
+                <img
+                    align={"center"}
+                    src={"https://res.cloudinary.com/teepublic/image/private/s--8-dGDDZg--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1470902298/production/designs/627022_1.jpg"}
+                    alt={""} width={"300"}/>
+                <PageTitle title="うまるの友達!我的朋友很少"/>
+
+
+            <table>
                     <tbody>
                         <tr>
-                            <div id="friends">
-                            <a >Friends</a>
-                            </div>
+
                             <th></th>
                         </tr>
                         {
                             Object.keys(this.state.friend_profiles).map((friend_id, index) => {
                                 return (
-                                    <div id="friendlist">
                                     <tr key={"friend-profile-" + index}>
-                                        <img src={this.state.friend_profiles[friend_id].profile_pic} width={"100"}/>
-                                        <td id="friendname">
-                                            {this.state.friend_profiles[friend_id].first_name}
-                                            {this.state.friend_profiles[friend_id].last_name}
+                                        <td>
+                                            <img className={"img"} src={this.state.friend_profiles[friend_id].profile_pic} alt="" width=" 250" height="250"/>
                                         </td>
                                         <td>
-                                            <button id="goto_other_profile" onClick={() => {
+                                            <p className={"name"}>{this.state.friend_profiles[friend_id].first_name}{" "}{this.state.friend_profiles[friend_id].last_name}{" "}SameClasses: {" "}</p>
+                                        </td>
+                                        <td>
+                                            <div className={"group"}>
+                                            <button className={"button"} onClick={() => {
                                                 this.goto_other_profile(friend_id);
                                             }}>
                                                 goto profile
                                             </button>
-                                        </td>
+
 
                                         {   friend_id in this.state.profile_obj.friend_list &&
                                             this.state.profile_obj.friend_list[friend_id] && ( // render block button here
-                                                <td>
-                                                    <button id="block_a_friend" onClick={() => {
+
+                                                    <button className={"button"} onClick={() => {
                                                         this.block_a_friend(friend_id);
                                                     }}>
                                                         Block friend
                                                     </button>
-                                                </td>
+
                                             )
                                         }
 
                                         {   friend_id in this.state.profile_obj.friend_list &&
                                             !this.state.profile_obj.friend_list[friend_id] && ( // render block button here
-                                                    <td>
-                                                        <button id="unblock_a_friend" onClick={() => {
+
+                                                        <button className={"button"} onClick={() => {
                                                             this.unblock_a_friend(friend_id);
                                                         }}>
                                                             Unblock friend
                                                         </button>
-                                                    </td>
+
                                             )
                                         }
+                                            </div>
+                                            </td>
+                                        <td>
+                                                <td>
 
                                         {friend_id in this.state.profile_obj.friend_list ? (
-                                                <td>
-                                                    <button id="delete_a_friend" onClick={() => {
+
+                                                    <button className={"button_red"} onClick={() => {
                                                         this.delete_a_friend(friend_id);
                                                     }}>
                                                         Delete friend
                                                     </button>
-                                                </td>
-                                            ) : ( // Note that the undelete button is a trick, since unblock does the same
-                                                <td>
 
-                                                    <button onClick={() => {
+                                            ) : ( // Note that the undelete button is a trick, since unblock does the same
+
+
+                                                    <button className={"button_red"} onClick={() => {
                                                         this.undelete_a_friend(friend_id);
                                                     }}>
                                                         Undelete friend
                                                     </button>
-                                                </td>
+
                                             )
                                         }
 
+                                                </td>
+                                        </td>
                                     </tr>
-                                    </div>
                                 )
                             })
                         }
                     </tbody>
                 </table>
+
+                <pre>{JSON.stringify(this.state, null, 2)}</pre>
 
             </div>
 

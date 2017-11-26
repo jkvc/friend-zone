@@ -1,0 +1,45 @@
+.button_group {
+    background-color: #40a798;
+    border: 1px solid white;
+    color: white;
+    padding: 20px 28px;
+    text-align: center;
+    display: block;
+    width: 300px;
+    cursor: pointer;
+}
+.press{
+    background-color: #40a798;
+    border: 1px solid white;
+    color: white;
+    padding: 20px 28px;
+    text-align: center;
+    display: block;
+    width: 300px;
+    cursor: pointer;
+}
+
+th{
+
+    border: 0px solid black;
+    padding: 10px;
+}
+td{
+
+    border: 0px solid black;
+    padding: 50px;
+}
+tr{
+
+    border: 0px solid black;
+    padding: 1px;
+}
+.a {
+    width: 100%;
+}
+.name{
+    font-size: 30px;
+}
+.pic{
+    border-radius: 50%;
+}

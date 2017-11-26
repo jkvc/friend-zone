@@ -5,6 +5,9 @@ import {lookup_enrollment_by_id} from "../../dao/EnrollmentManager";
 import {most_popular_in_list} from "../../api/MostPopularInList";
 import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
 
+import './RecommendedFriends.css'
+import PageTitle from "../components/PageTitle";
+
 const recommendation_count = 100;
 
 class RecommendedFriends extends Component {
@@ -90,21 +93,29 @@ class RecommendedFriends extends Component {
 
         return (
 
-            <div>
+            <div align={"center"}>
+                <br/><br/><br/><br/>
+                <PageTitle title ="Whoa! These people have the same classes with you..."/>
+
                 <table>
-                    <tr>
-                        <th>Recommended Friends</th><th></th>
-                    </tr>
+
+
                 {
                     this.state.recommendation_profiles.map((profile) => {
                         return (
                             <tr key={"recommended-friend-" + profile.user_id}>
                                 <td>
-                                Friend name: {profile.first_name} {profile.last_name}
+                                    <img className={"pic"} src={profile.profile_pic} alt="" width=" 250" height="250"/>
                                 </td>
                                 <td>
+                                    <p className={"name"}>{profile.first_name} {profile.last_name}{" "}Same classes: </p>
+                                </td>
+                                <td>
+                                    <td>
+                                        <div className={"button group"}>
                                 {profile.user_id in this.state.sent_requests ? (
-                                    <button onClick={() => {
+
+                                    <button className={"press"} onClick={() => {
                                         cancel_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err,data)=>
                                         {
                                             this.setState( {sent_requests:data.outgoing_request} )
@@ -113,7 +124,7 @@ class RecommendedFriends extends Component {
                                         Cancel friend request
                                         </button>
                                 ) : (
-                                    <button onClick={() => {
+                                    <button className={"press"} onClick={() => {
                                         create_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err,data)=>
                                         {
                                             this.setState( {sent_requests:data.outgoing_request} )
@@ -121,8 +132,11 @@ class RecommendedFriends extends Component {
                                     }}>
                                         Send friend request
                                     </button>
+
                                 )
                                 }
+                                        </div>
+                                    </td>
                                 </td>
                             </tr>
                         )

@@ -1,47 +1,42 @@
-#goto_other_profile{
-   background: transparent;
-   border: transparent;
-   font-style: Helvetica;
-   font-size: large;
-   color: #00649F;
+.img{
+    border-radius: 50%
+}
+.name{
+    font-size: 30px;
+}
+.group .button{
+    background-color: #40a798;
+    border: 1px solid white;
+    color: white;
+    padding: 20px 28px;
+    text-align: center;
+    display: block;
+    width: 200px;
+    cursor: pointer;
+}
+th{
+
+    border: 0px solid black;
+    padding: 10px;
+}
+td{
+
+    border: 0px solid black;
+    padding: 20px;
+}
+tr{
+
+    border: 0px solid black;
+    padding: 1px;
+}
+.button_red{
+    border-radius: 50%;
+    background-color: #e20049;
+    border: 1px solid white;
+    color: white;
+    padding: 20px 28px;
+    text-align: center;
+    width: 200px;
+    cursor: pointer;
 }
 
-#block_a_friend{
-   background: transparent;
-   border: transparent;
-   font-style: Helvetica;
-   font-size: large;
-   color: #00649F;
-}
-
-#unblock_a_friend{
-   background: transparent;
-   border: transparent;
-   font-style: Helvetica;
-   font-size: large;
-   color: #00649F;
-}
-
-#delete_a_friend{
-   background: transparent;
-   border: transparent;
-   font-style: Helvetica;
-   font-size: large;
-   color: #00649F;
-}
-
-#friendlist{
-   text-align: center;
-}
-
-#friendname{
-   font-size: large;
-   font-style: Helvetica;
-}
-
-#friends{
-   text-align: center;
-   font-size: 350%;
-   font-style: Helvetica;
-
-}
