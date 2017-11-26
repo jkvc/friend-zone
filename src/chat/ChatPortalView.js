@@ -158,6 +158,9 @@ class ChatPortalView extends Component {
                                 if (get_self_profile().friend_list[other_id] === false) return(<div> </div>);
 
                                 var friend_profile = this.state.friend_profiles[other_id];
+                                /*if the other friend got deleted, do not show this portal */
+                                if(friend_profile === undefined) return(<div> </div>);
+                                
                                 title = friend_profile.first_name + " " + friend_profile.last_name;
                                 profile_pic = friend_profile.profile_pic === "" ? default_profile_pic : friend_profile.profile_pic;
                             }
