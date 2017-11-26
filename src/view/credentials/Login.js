@@ -130,7 +130,7 @@ class Login extends Component {
                             <br/>
                             <br/>
 
-                            <div className="error-message">{this.state.err_msg}</div>
+                            <div className="error-message">{this.state.password_action_msg}</div>
 
                             <button className="button-text"
                                   onClick={this.handle_login_button.bind(this)}>

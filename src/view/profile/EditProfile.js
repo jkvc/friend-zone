@@ -23,7 +23,7 @@ class EditProfile extends Component {
             upload_status: "",
             newPassword : "",
             repeatPassword : "",
-            err_msg: ""
+            password_action_msg: ""
         };
 
 
@@ -89,45 +89,41 @@ class EditProfile extends Component {
             total++;
         }
 
+        var password_msg;
+
         // Check if they are valid passwords or not
         if (uppercase_count < 1)
         {
-            let error_msg = "There must be at least one uppercase letter in the password";
-            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
-
+            password_msg = "There must be at least one uppercase letter in the password";
         }
         else if (lowercase_count < 1)
         {
-            let error_msg = "There must be at least one lowercase letter in the password";
-            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
-
+            password_msg = "There must be at least one lowercase letter in the password";
         }
-        else if (numeric< 1)
+        else if (numeric < 1)
         {
-            let error_msg = "There must be at least one number in the password";
-            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
-
+            password_msg = "There must be at least one number in the password";
         }
         else if (total < 8)
         {
-            let error_msg = "The password is not long enough";
-            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
-
+            password_msg = "The password is not long enough";
         }
         else if (password !== this.state.repeatPassword)
         {
-            let error_msg = "The passwords entered do not match each other";
-            this.setState({err_msg:error_msg, newPassword:"", repeatPassword:""});
+            password_msg = "The passwords entered do not match each other";
         }
 
         else{
-            this.setState({err_msg:"", newPassword:"", repeatPassword:""});
+
             user.updatePassword(password).then(function(){
-                alert("Password Changed Successfully");
-            }).catch(function(error){
-                alert(error);
-            })
+                password_msg = "Password Changed Successfully";
+                this.setState({password_action_msg:password_msg, newPassword:"", repeatPassword:""});
+            }.bind(this)).catch(function(error){
+                password_msg = "An error has occurred, please try again later";
+                this.setState({password_action_msg:password_msg, newPassword:"", repeatPassword:""});
+            }.bind(this));
         }
+        this.setState({password_action_msg:password_msg, newPassword:"", repeatPassword:""});
     }
 
     upload_image(e) {
@@ -193,12 +189,14 @@ class EditProfile extends Component {
 
                 <br/>
                 <h3> Change Password </h3>
+                (Password must contain uppercase, lowercase letters, number, and be at least 8 chars long)
+                <br />
                 New Password<input type="text" value={this.state.newPassword}
                                     onChange={e =>this.setState({newPassword: e.target.value})}/>
                 <br />
                 Confirm Password<input type="text" value={this.state.repeatPassword}
                                        onChange={e =>this.setState({repeatPassword: e.target.value})}/>
-                <h3> {this.state.err_msg} </h3>
+                <h4> {this.state.password_action_msg} </h4>
                 <br/>
 
                 <form>

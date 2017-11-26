@@ -42,7 +42,7 @@ class PasswordRecovery extends Component {
                     <label>user_email </label>
                     <input type={"text"} placeholder="enter your email" value={this.state.user_email}
                            onChange={e=> this.setState({user_email: e.target.value})}/>
-                    <label>{this.state.err_msg}</label>
+                    <label>{this.state.password_action_msg}</label>
                 </form>
                 <br/>
 
