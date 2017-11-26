@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import EditProfile from './EditProfile'
 import {get_self_profile} from "../../api/StaticData";
+import PageTitle from "../components/PageTitle";
+import default_profile_pic from '../../image/DefaultProfilePic.jpg'
+
+
+
 
 import './UserProfile.css'
 class UserProfile extends Component{
@@ -22,35 +27,44 @@ class UserProfile extends Component{
 
     render(){
 
+        var profile_pic = this.state.profile_obj.profile_pic || default_profile_pic;
+        if (profile_pic === "") profile_pic = default_profile_pic;
+            
 
         return(
 
-            <div id="content">
+                        
+            <div align="center">
 
-                <h1>My Profile</h1>
-                <img src={this.state.profile_obj.profile_pic}
-                     alt={""} width={"250"}/>
-                <h1>{this.title}</h1>
-                <h4>これがうまるのプロファイルだ！</h4>
-
-                <div id="infolist">
-                  <br/>
-                  <a>first name: </a>
-                  <a>{JSON.stringify(this.state.profile_obj.first_name,null,2)}</a>
-                  <br/>
-                  <a>last name: </a>
-                  <a>{JSON.stringify(this.state.profile_obj.last_name,null,2)}</a>
-                  <br/>
-                  <a>major: </a>
-                  <a>{JSON.stringify(this.state.profile_obj.major,null,2)}</a>
-                  <br/>
-                  <a>current year: </a>
-                  <a>{JSON.stringify(this.state.profile_obj.current_year,null,2)}</a>
-                  <br/>
-                  <a>description: </a>
-                  <a>{JSON.stringify(this.state.profile_obj.description,null,2)}</a>
-                  <br/>
+                <PageTitle title="My Profile"/>
+                <br/>
+                <div className='profile-pic-container'>
+                    <img src={profile_pic} alt="" className='profile-pic'/>
                 </div>
+                <br/>
+
+
+                 <table id='infolist'>
+                    <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>{this.state.profile_obj.first_name + " " + this.state.profile_obj.last_name}</td>
+                    </tr>
+                    <tr>
+                        <td>Major</td>
+                        <td>{this.state.profile_obj.major}</td>
+                    </tr>
+                    <tr>
+                        <td>Current year</td>
+                        <td>{this.state.profile_obj.current_year}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{this.state.profile_obj.description}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br/>
 
                 <button id="edit" onClick={this.handle_edit_profile.bind(this)} >Edit profile</button>
 
