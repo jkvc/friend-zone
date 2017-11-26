@@ -199,6 +199,8 @@ class StartNewChatView extends Component {
                     {
                         Object.keys(this.state.filtered_friend_profiles).map((friend_profile_key, index) => {
                             var friend_profile = this.state.friend_profiles[friend_profile_key]
+                            if (this.state.selected_friend_id.indexOf(friend_profile.user_id) !== -1) return (<tr> </tr>);
+
                             return (
                                 <tr className="potential_friend_entry"
                                     key={"friend-profile-" + index}>
