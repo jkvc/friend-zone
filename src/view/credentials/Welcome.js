@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
 import Login from './Login';
 import './MainLoginSignup.css'
-import './MainLoginSignupbutton.css'
+/*import './MainLoginSignupbutton.css'*/
 import blue_line from '../../image/BlueLine.png'
 
 import TestCourseManager from '../../TempViews/TestCourseManager'
@@ -50,7 +50,7 @@ class Welcome extends Component {
                             <br/>
                             <br/>
 
-                            <button namme = "Signup" className="button-text" onClick={this.goto_signup.bind(this)}>Sign up</button>
+                            <button name = "Signup" className="button-text" onClick={this.goto_signup.bind(this)}>Sign up</button>
                             <br/>
                             <img className="separator" src={blue_line} alt=""/>
                             <br/>
