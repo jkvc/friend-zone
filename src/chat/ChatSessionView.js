@@ -28,7 +28,7 @@ class ChatSessionView extends Component {
     componentWillMount() {
         var ref = firebase.database().ref('ChatSession/' + this.state.session_id);
 
-        ref.child('message').limitToLast(15).on('child_added', (snapshot) => {
+        ref.child('message').limitToLast(30).on('child_added', (snapshot) => {
             var messages = this.state.messages;
             messages[snapshot.val().time] = snapshot.val();
             this.setState({messages: messages}, () => {

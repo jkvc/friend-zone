@@ -79,8 +79,15 @@ class FriendProfile extends Component {
                 <br/>
 
                 <div>
-                    <button className='friend-profile-button' onClick={this.send_message.bind(this)}>Send message
+                    <button className='friend-profile-button' onClick={this.send_message.bind(this)}>
+                        Send message &nbsp;
+                        <svg id="i-settings" viewBox="0 0 32 32" width="20" height="20" fill="none"
+                             stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round"
+                             strokeWidth="2">
+                            <path d="M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z" />
+                        </svg>
                     </button>
+                    &nbsp;
                     <button className='friend-profile-button'>Block</button>
                 </div>
 
