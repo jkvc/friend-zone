@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import EditProfile from './EditProfile'
 import {get_self_profile} from "../../api/StaticData";
 
+import './UserProfile.css'
 class UserProfile extends Component{
 
 
@@ -24,19 +25,34 @@ class UserProfile extends Component{
 
         return(
 
-            <div>
+            <div id="content">
 
+                <h1>My Profile</h1>
                 <img src={this.state.profile_obj.profile_pic}
-                     alt={""} width={"500"}/>
+                     alt={""} width={"250"}/>
                 <h1>{this.title}</h1>
                 <h4>これがうまるのプロファイルだ！</h4>
 
-                <br/>
-                state:
-                <pre>{JSON.stringify(this.state,null,2)}</pre>
+                <div id="infolist">
+                  <br/>
+                  <a>first name: </a>
+                  <a>{JSON.stringify(this.state.profile_obj.first_name,null,2)}</a>
+                  <br/>
+                  <a>last name: </a>
+                  <a>{JSON.stringify(this.state.profile_obj.last_name,null,2)}</a>
+                  <br/>
+                  <a>major: </a>
+                  <a>{JSON.stringify(this.state.profile_obj.major,null,2)}</a>
+                  <br/>
+                  <a>current year: </a>
+                  <a>{JSON.stringify(this.state.profile_obj.current_year,null,2)}</a>
+                  <br/>
+                  <a>description: </a>
+                  <a>{JSON.stringify(this.state.profile_obj.description,null,2)}</a>
+                  <br/>
+                </div>
 
-
-                <button onClick={this.handle_edit_profile.bind(this)} >Edit profile</button>
+                <button id="edit" onClick={this.handle_edit_profile.bind(this)} >Edit profile</button>
 
             </div>
 

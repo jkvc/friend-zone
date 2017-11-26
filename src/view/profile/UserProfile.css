@@ -1,0 +1,31 @@
+#infolist{
+   text-align : center;
+   font-family: Helvetica;
+   color:#3F6699;
+}
+
+.myprofile{
+    text-align: center;
+    font-size: large;
+    margin-top: 10px;
+    margin-right: 5px;  
+ }
+
+ .profilepicture{
+    text-align:center;
+ }
+
+#edit{
+    cursor: pointer;
+    background: transparent;
+    border: transparent;
+    font-size: large;
+    font-style: Helvetica;
+    color: #00649F;
+
+   }
+
+
+#content{
+   text-align: center;
+}
