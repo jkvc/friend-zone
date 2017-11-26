@@ -9,13 +9,14 @@
     cursor: pointer;
 }
 .press{
-    background-color: #40a798;
+    background:none!important;
     border: 1px solid white;
-    color: white;
-    padding: 20px 28px;
+    color: blue;
+    padding: 0!important;
     text-align: center;
+    font-size: 20px;
     display: block;
-    width: 300px;
+    border-bottom: 1px solid blue;
     cursor: pointer;
 }
 

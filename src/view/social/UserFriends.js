@@ -102,7 +102,7 @@ class UserFriends extends Component {
                                             <button className={"button"} onClick={() => {
                                                 this.goto_other_profile(friend_id);
                                             }}>
-                                                goto profile
+                                                Goto profile
                                             </button>
 
 
