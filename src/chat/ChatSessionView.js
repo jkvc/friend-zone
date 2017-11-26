@@ -88,6 +88,17 @@ class ChatSessionView extends Component {
         })
     }
 
+    enlarge_image(url){
+        ReactDOM.render(<div align='center'>
+            <div>
+                <button onClick={()=>{ReactDOM.render(<div> </div>,document.getElementById('expanding-space'))}}>
+                    close
+                </button>
+            </div>
+
+            <img src={url} alt="" className='enlarged-image'/>
+        </div>, document.getElementById('expanding-space'))
+    }
 
     render() {
         var friend_profiles = get_friend_profiles();
@@ -123,6 +134,7 @@ class ChatSessionView extends Component {
                             if (message.is_image === true) {
                                 message_body = <img src={message.msg} alt=""
                                                     className='message_img'
+                                                    onClick={()=>{this.enlarge_image(message.msg)}}
                                                     onLoad={this.scroll_message_container_to_bottom.bind(this)}
                                 />
                             }

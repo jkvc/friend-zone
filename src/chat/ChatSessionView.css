@@ -113,6 +113,7 @@
 .message_img {
     border-radius: 15px;
     max-width: 300px;
+    cursor: pointer;
 }
 
 #send-image {
@@ -131,4 +132,8 @@
     cursor: pointer;
     float: left;
     margin-top: 20px;
+}
+
+.enlarged-image{
+    max-width: 100%;
 }
