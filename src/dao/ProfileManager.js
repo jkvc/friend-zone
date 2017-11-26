@@ -11,7 +11,7 @@ export function lookup_profile_by_user_id(user_id, callback){
     let db = firebase.database();
     let verify = false;
     firebase.auth().onAuthStateChanged(function(user){
-        if(user.emailVerified){
+        if(user != null && user.emailVerified){
             verify = true;
         }
     })
