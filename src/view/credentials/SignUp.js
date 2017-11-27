@@ -6,7 +6,7 @@ import InitProfile from "../profile/InitProfile";
 import facebook_icon from '../../image/FacebookIcon.png'
 import google_icon from '../../image/GoogleIcon.png'
 import {handle_third_party_auth} from './thirdparty/HandleThirdParty'
-
+import './MainLoginSignup.css'
 class SignUp extends Component {
 
     constructor(props) {
@@ -142,28 +142,25 @@ class SignUp extends Component {
         }.bind(this));
     }
 
-    render() {
-        return (
+   render() {
+       /* return (
 
             <div align={"center"}>
-
-                <img src={"https://res.cloudinary.com/teepublic/image/private/s--8-dGDDZg--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1470902298/production/designs/627022_1.jpg"}
-                     alt={""} width={"300"}/>
                 <h1>{this.title}</h1>
                 <form >
-                    <label>user_email </label>
+                    <label>User email:  </label>
                     <input type={"text"} placeholder="put user email here" value={this.state.user_email}
                            onChange={e=> this.setState({user_email: e.target.value})}/>
-                    {/*<label>{this.state.err_msg}</label>*/}
-                </form>
+                    {/*<label>{this.state.err_msg}</label> */
+                /*</form>
                 <form>
-                    <label>password </label>
+                    <label>Password:  </label>
                     <input type={"text"} placeholder="put password here" value={this.state.password}
                            onChange={ e=> this.setState({password: e.target.value})}/>
                     <label>{this.state.success_msg}</label>
                 </form>
                 <form>
-                    <label>Verify password </label>
+                    <label>Verify Password:  </label>
                     <input type={"text"} placeholder="Type password again" value={this.state.verify_password}
                            onChange={ e=> this.setState({verify_password: e.target.value})}/>
                     <label>{this.state.success_msg}</label>
@@ -177,19 +174,7 @@ class SignUp extends Component {
                     <button onClick={this.handle_signup_button.bind(this)}>Signup and login</button>
                 </form>
 
-                {/* 3rd party log signup */}
-                <div className="subtitle-text">Or, sign up with</div>
-                <button className="third-party-button"
-                        onClick={(e) => {e.preventDefault(); this.handle_third_party("google")}}>
-                    <img src={google_icon} alt="" width='40px'/>
-                </button>
 
-                &nbsp;
-
-                <button className="third-party-button"
-                        onClick={(e) => {e.preventDefault(); this.handle_third_party("facebook")}}>
-                    <img src={facebook_icon} alt="" width='40px'/>
-                </button>
 
                 <br/>
                 <form>
@@ -198,8 +183,71 @@ class SignUp extends Component {
 
             </div>
 
-        );
+        );*/
+       return(
+
+           <div className="body">
+               <div className="mid-container">
+
+                   <div className="mid-column-left">
+                       <img className="image-strip"
+                            src="https://umad.com/img/2015/7/city-light-blur-wallpaper-background-2709-2855-hd-wallpapers.jpg"
+                            alt="left-strip"/>
+                   </div>
+
+                   <div className="mid-column-right">
+                       <div className="right-middle" align={"center"}>
+
+                           <div className="logo"> FriendZone </div>
+                           <br/>
+
+                           <div className="subtitle-text">
+                               Create your Friendzone account and find who is also in your class!
+                           </div>
+                           <br/>
+
+                           <div className="email-password-container">
+                               <div className="email-password-left" align={"right"}>
+                                   <text className="label-text"> Email:  </text>
+                                   <br/>
+                                   <br/>
+                                   <text className="label-text"> Password: </text>
+                                   <br/>
+                                   <br/>
+                                   <text className="label-text"> Verify Password: </text>
+                               </div>
+
+                               <div className="email-password-right" align={"left"}>
+                                   <input className="transparent-text-box" type="text"
+                                          value={this.state.user_email}
+                                          onChange={e=> this.setState({user_email: e.target.value})}/>
+                                   <br/>
+                                   <br/>
+                                   <input className="transparent-text-box" type={"password"}
+                                          value={this.state.password}
+                                          onChange={ e=> this.setState({password: e.target.value})}/>
+                                   <br/>
+                                   <br/>
+                                   <input className="transparent-text-box" type={"password"}
+                                          value={this.state.verify_password}
+                                          onChange={ e=> this.setState({verify_password: e.target.value})}/>
+                               </div>
+                           </div>
+
+                           <br/>
+                           <br/>
+
+                               <button className="buttonStyle" onClick={this.handle_signup_button.bind(this)}>Signup and login</button>
+                               <button className="buttonStyle" onClick={this.goto_login.bind(this)}>goto login instead</button>
+                           <br/>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+       )
     }
+
 }
 
 export default SignUp;

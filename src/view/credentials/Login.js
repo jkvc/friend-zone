@@ -108,10 +108,10 @@ class Login extends Component {
 
                             <div className="email-password-container">
                                 <div className="email-password-left" align={"right"}>
-                                    <text className="label-text"> Email </text>
+                                    <text className="label-text"> Email:  </text>
                                     <br/>
                                     <br/>
-                                    <text className="label-text"> Password </text>
+                                    <text className="label-text"> Password: </text>
                                 </div>
 
                                 <div className="email-password-right" align={"left"}>

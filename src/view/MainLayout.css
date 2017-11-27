@@ -26,10 +26,10 @@
     left: 0;
     background: url("../image/background.jpg") no-repeat 49% center fixed;
     background-size: cover;
-    -webkit-background-size: cover;
+    /*-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover
+    background-size: cover*/
 }
 
 .nav-bar {
@@ -61,7 +61,7 @@
 .above-middle-panel {
     margin-top: 1.5%;
     min-width: 500px;
-    width: 65%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
 
@@ -88,7 +88,7 @@
     outline: none;
 }
 
-/*add similar bouncing effect and underline */
+/*add similar bouncing effect*/
 @keyframes bounce {
     0%, 20%, 60%, 100% {
         -webkit-transform: translateY(0);
