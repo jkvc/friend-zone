@@ -14,6 +14,14 @@
     src: url('https://fonts.googleapis.com/css?family=Varela+Round')
    /* src: url("../font/Helvetica.ttf")*/
 }
+/* ensure there is no gap*/
+html {
+    background: url("../image/background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
 .body-main-layout{
     position:absolute;
@@ -21,7 +29,7 @@
     right:0;
     bottom:0;
     left:0;
-    background: url("../image/background.jpg");
+    background: url("../image/background.jpg") no-repeat 49% center fixed;
     background-size: cover;
 }
 
@@ -101,7 +109,7 @@
 }
 
 .button-nav-bar:hover{
-    animation: bounce 3s;
+    animation: bounce 2s;
     font-size: medium;
 }
 
