@@ -30,7 +30,7 @@ let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 // If you want to be able to do something with the Calendar when the user clicks on an event, modify the
 //      prop "onSelectEvent={ some_function }, where you pass in a function that tells the program what to do.
 //      For more, read the official documentation on the link provided above.
-class BasicCalendar extends Component{
+class Selectable extends Component{
 
     constructor(props)
     {
@@ -38,22 +38,36 @@ class BasicCalendar extends Component{
         this.events = props.events;
     }
 
-    render(){
+    render() {
         return (
-            <BigCalendar
-                {...this.props}
-                events={this.events}
-                views={allViews}
-                step={60}
-                // Be default this should return current date
-                defaultDate={new Date()}
-                defaultView={'week'}
-                onSelectEvent={(data)=>{
-                    alert("Selected an event!");
-                }}
-            />
+            <div {...this.props}>
+                <h3 className="callout">
+                    Click an event to see more info, or
+                    drag the mouse over the calendar to select a date/time range.
+                </h3>
+                <BigCalendar
+                    selectable
+                    events={this.events}
+                    views={allViews}
+                    step={60}
+                    // Be default this should return current date
+                    defaultDate={new Date()}
+                    defaultView={'week'}
+                    //onSelectEvent={(data)=>{
+                    //    alert("Selected an event!");
+                    //}}
+                    //  scrollToTime={new Date(1970, 1, 1, 6)}
+
+                    onSelectEvent={event => alert(event.title)}
+
+                    onSelectSlot={(slotInfo) => alert(
+                        `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
+                        `\nend: ${slotInfo.end.toLocaleString()}` +
+                        `\naction: ${slotInfo.action}`
+                    )}
+                />
+            </div>
         )
     }
 }
-
-export default BasicCalendar;
+export default Selectable;

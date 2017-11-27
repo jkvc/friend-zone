@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {get_weekday_array} from './TimeHelper';
-import BasicCalendar from './ReactBigCalendar';
+import Selectable from './ReactBigCalendar';
 
 /*
  * @author: Yiming Cai
@@ -131,7 +131,7 @@ class ClassScheduleHelper extends Component
 
     render()
     {
-        return <div> <BasicCalendar events={this.state.parsedEvents} key={this.state.parsedEvents.length}/>  </div>;
+        return <div> <Selectable events={this.state.parsedEvents} key={this.state.parsedEvents.length}/>  </div>;
     }
 }
 
