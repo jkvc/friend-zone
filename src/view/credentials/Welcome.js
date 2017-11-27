@@ -45,21 +45,22 @@ class Welcome extends Component {
                             <div className="logo"> FriendZone </div>
                             <br/>
 
-                            <div className="subtitle-text">Sign up or log in to make friends in your classes.</div>
+                            <div className="subtitle-text"><p>Ready to be FriendZoned?</p></div>
                             <br/>
                             <br/>
 
-                            <button className="button-text" onClick={this.goto_signup.bind(this)}>Sign up</button>
+                            <button name = "Signup" className="button-text" onClick={this.goto_signup.bind(this)}>Sign up</button>
                             <br/>
                             <img className="separator" src={blue_line} alt=""/>
                             <br/>
-                            <button className="button-text" onClick={this.goto_login.bind(this)}>Log in</button>
+                            <button name = "Login" className="button-text" onClick={this.goto_login.bind(this)}>Log in</button>
                             <br/>
 
 
                             <br/>
                             <form>
-                                <button onClick={this.goto_test_course_search.bind(this)}>Goto course search test
+                                <button className="buttonStyle" onClick={this.goto_test_course_search.bind(this)}>Search Course
+
                                 </button>
                             </form>
 

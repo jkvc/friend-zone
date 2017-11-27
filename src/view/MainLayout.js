@@ -71,8 +71,7 @@ class MainLayout extends Component{
                     <div className="logo-main">FriendZone</div>
 
                     <button className="button-nav-bar"
-                            onClick={this.goto_schedule.bind(this)}>
-                        Schedule
+                            onClick={this.goto_schedule.bind(this)}> Schedule
                     </button>
                     <button className="button-nav-bar"
                             onClick={this.goto_friends.bind(this)}>
@@ -119,7 +118,7 @@ class MainLayout extends Component{
     }
 
     componentDidMount(){
-        ReactDOM.render(<ChatView />, document.getElementById('main-layout'));
+        ReactDOM.render(<UserSchedule />, document.getElementById('main-layout'));
     }
 }
 

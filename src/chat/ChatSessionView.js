@@ -90,8 +90,9 @@ class ChatSessionView extends Component {
 
     enlarge_image(url){
         ReactDOM.render(<div align='center'>
-            <div>
-                <button onClick={()=>{ReactDOM.render(<div> </div>,document.getElementById('expanding-space'))}}>
+            <div className='enlarged-image-container'>
+                <button
+                    onClick={()=>{ReactDOM.render(<div> </div>,document.getElementById('expanding-space'))}}>
                     close
                 </button>
             </div>

@@ -3,9 +3,8 @@
     cursor: pointer;
     background: transparent;
     border: transparent;
-    font-size: large;
-    font-style: Helvetica;
-    color: #00649F;
+    font-size: small;
+    color: #2f5597;
 
    }
 
@@ -42,5 +41,4 @@
     max-width: 350px;
     vertical-align: top;
 }
-
 

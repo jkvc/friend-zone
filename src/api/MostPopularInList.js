@@ -1,6 +1,32 @@
 /*
  * @author: Yiming Cai and Kevin Chen
  */
+
+
+/*
+ * Returns a string that prints out the mutual classes
+ */
+export function list_same_classes(list1, list2)
+{
+    let str = "";
+    for (let item in list1)
+    {
+        if (item in list2)
+        {
+            let tokens = item.split('_');
+            for (let i in tokens) {
+                str += tokens[i] + " ";
+            }
+            str = str.substr(0, str.length-1);
+            str += ", ";
+        }
+    }
+
+    str = str.substr(0, str.length-2);
+    return str;
+}
+
+
 /* Done
 * given a list of lists of user_id's, return the most popular user_id in these lists, sorted descending by popularity
 * params: param
@@ -118,9 +144,9 @@ export function most_popular_in_list(param, callback){
         if (a[0] === b[0])
         {
             // Note that when comparing names/IDs for sorting order, it will be changed to lowercase first
-            return a[1].toLowerCase() > b[1].toLowerCase();
+            return a[1].localeCompare(b[1]);
         }
-        else return a[0] < b[0];
+        else return b[0] - a[0] ;
     });
 
     // Push the student names onto the list based on the count specified

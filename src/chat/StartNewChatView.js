@@ -91,7 +91,12 @@ class StartNewChatView extends Component {
         var participant_ids = this.state.selected_friend_id;
         participant_ids.push(firebase.auth().currentUser.uid);
 
-        create_chat_session(my_name, participant_ids, this.state.chat_title, (session_id) => {
+        var chat_title = this.state.chat_title;
+        if (chat_title.length === 0 && participant_ids.length > 2) {
+            chat_title = this.state.selected_friend_name.join(', ');
+        }
+
+        create_chat_session(my_name, participant_ids, chat_title, (session_id) => {
             ReactDOM.render(<ChatSessionView session_id={session_id}/>, document.getElementById('session-container'));
 
             /*if passed in a callback function, callback a session id once starting is done*/
@@ -135,8 +140,7 @@ class StartNewChatView extends Component {
             start_button = (
                 <button className="start_chat_button"
                         onClick={this.start_chat.bind(this)}
-                        disabled={this.state.selected_friend_id.length === 0 ||
-                        (this.state.chat_title.length === 0 && this.state.selected_friend_id.length > 1)}>
+                        disabled={this.state.selected_friend_id.length === 0 }>
                     Start chat
                 </button>
             );
@@ -199,6 +203,8 @@ class StartNewChatView extends Component {
                     {
                         Object.keys(this.state.filtered_friend_profiles).map((friend_profile_key, index) => {
                             var friend_profile = this.state.friend_profiles[friend_profile_key]
+                            if (this.state.selected_friend_id.indexOf(friend_profile.user_id) !== -1) return (<tr> </tr>);
+
                             return (
                                 <tr className="potential_friend_entry"
                                     key={"friend-profile-" + index}>

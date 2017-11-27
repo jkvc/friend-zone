@@ -6,13 +6,12 @@ import PageTitle from "../components/PageTitle";
 import default_profile_pic from '../../image/DefaultProfilePic.jpg'
 
 
-
-
 import './UserProfile.css'
-class UserProfile extends Component{
+
+class UserProfile extends Component {
 
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.title = "UserProfile.js";
         this.state = {
@@ -21,19 +20,19 @@ class UserProfile extends Component{
 
     }
 
-    handle_edit_profile(){
-        ReactDOM.render(<EditProfile />, document.getElementById('main-layout'));
+    handle_edit_profile() {
+        ReactDOM.render(<EditProfile/>, document.getElementById('main-layout'));
     }
 
-    render(){
+    render() {
 
         var profile_pic = this.state.profile_obj.profile_pic || default_profile_pic;
         if (profile_pic === "") profile_pic = default_profile_pic;
-            
 
-        return(
 
-                        
+        return (
+
+
             <div align="center">
 
                 <PageTitle title="My Profile"/>
@@ -44,7 +43,7 @@ class UserProfile extends Component{
                 <br/>
 
 
-                 <table id='infolist'>
+                <table id='infolist'>
                     <tbody>
                     <tr>
                         <td>Name</td>
@@ -66,7 +65,13 @@ class UserProfile extends Component{
                 </table>
                 <br/>
 
-                <button id="edit" onClick={this.handle_edit_profile.bind(this)} >Edit profile</button>
+
+                <button id="edit" onClick={this.handle_edit_profile.bind(this)}>
+                    Edit profile
+                </button>
+
+                <br/>
+                <br/>
 
             </div>
 

@@ -1,42 +1,47 @@
-.img{
-    border-radius: 50%
+
+.friend-profile-container {
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 1px #ebebeb;
+    margin-left: 10px;
+    margin-right: 20px;
 }
-.name{
-    font-size: 30px;
+
+.friend-profile {
+    float: left;
+    height: 100%;
 }
-.group .button{
-    background-color: #40a798;
-    border: 1px solid white;
-    color: white;
-    padding: 20px 28px;
+
+.name {
+    font-size: small;
+    margin-right: 20px;
+}
+
+.group{
+    margin-right: 20px;
+}
+
+.group .button {
+    background: none !important;
+    border: none;
+    padding: 0;
+    color: #2f5597;
+    font-size: small;
     text-align: center;
     display: block;
-    width: 200px;
     cursor: pointer;
 }
-th{
 
-    border: 0px solid black;
-    padding: 10px;
-}
-td{
-
-    border: 0px solid black;
-    padding: 20px;
-}
-tr{
-
-    border: 0px solid black;
-    padding: 1px;
-}
-.button_red{
-    border-radius: 100%;
-    background-color: #e20049;
-    border: 1px solid white;
-    color: white;
-    padding: 20px 28px;
+.button_red {
+    background: none !important;
+    border: none;
+    font-size: small;
+    padding: 0;
+    color: #2f5597;
     text-align: center;
-    width: 100px;
     cursor: pointer;
 }
 

@@ -14,7 +14,7 @@ export function lookup_profile_by_user_id(user_id, callback){
         if(user != null && user.emailVerified){
             verify = true;
         }
-    })
+    });
     db.ref('Profile/'+user_id).once('value').then(function(snapshot){
 
         let content = snapshot.val();
@@ -27,7 +27,6 @@ export function lookup_profile_by_user_id(user_id, callback){
                 content.last_name,
                 content.major,
                 content.current_year,
-                content.profile_pic,
                 content.description,
                 verify
 
@@ -38,6 +37,7 @@ export function lookup_profile_by_user_id(user_id, callback){
             profile.incoming_request = content.incoming_request ||{};
             profile.upcoming_events = content.upcoming_events ||{};
             profile.blocked_user = content.blocked_user || {};
+            profile.profile_pic = content.profile_pic || "";
             callback(null, profile);
         }
     })
