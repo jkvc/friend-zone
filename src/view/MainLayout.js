@@ -111,7 +111,7 @@ class MainLayout extends Component{
     }
 
     componentDidMount(){
-        ReactDOM.render(<UserProfile />, document.getElementById('main-layout'));
+        ReactDOM.render(<UserSchedule />, document.getElementById('main-layout'));
     }
 }
 
