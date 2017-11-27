@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
 @font-face {
     font-family: "Harlow Solid Italic";
     src: url("../font/HarlowSolidItalic.TTF")
@@ -10,8 +10,9 @@
 }
 
 @font-face {
-    font-family: "Helvetica";
-    src: url("../font/Helvetica.ttf")
+    font-family: "Varela Round', sans-serif";
+    src: url('https://fonts.googleapis.com/css?family=Varela+Round')
+   /* src: url("../font/Helvetica.ttf")*/
 }
 
 .body-main-layout{
@@ -28,7 +29,7 @@
 .nav-bar{
     margin-top: 0;
     width: 100%;
-    height: 45px;
+    height: 48px;
     float: top;
     background-color: white;
     box-shadow: 0 0 40px 3px black;
@@ -45,7 +46,7 @@
 .middle-panel{
     margin-top: 1.5%;
     min-width:500px;
-    width: 65%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 0 40px 3px black;
@@ -64,7 +65,7 @@
 .logo-main{
     float: left;
     font-family: "Harlow Solid Italic",serif;
-    font-size: 150%;
+    font-size: 165%;
     margin-left: 20%;
     margin-top: 3px;
     margin-right: 1%;
@@ -81,6 +82,29 @@
     border: transparent;
 }
 
+/*add similar bouncing effect and underline */
+@keyframes bounce {
+    0%, 20%, 60%, 100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    40% {
+        -webkit-transform: translateY(-2px);
+        transform: translateY(-2px);
+    }
+
+    80% {
+        -webkit-transform: translateY(-1px);
+        transform: translateY(-1px);
+    }
+}
+
+.button-nav-bar:hover{
+    animation: bounce 3s;
+    font-size: medium;
+}
+
 .logout-button{
     float: right;
     margin-top: 15px;
@@ -91,5 +115,9 @@
     color: #2f5597;
     background: transparent;
     border: transparent;
+}
+.logout-button:hover{
+    font-size: large;
+    color: #3174ad;
 }
 
