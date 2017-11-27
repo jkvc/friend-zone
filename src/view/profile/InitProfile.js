@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import MainLayout from '../../view/MainLayout';
 import '../credentials/MainLoginSignup.css'
 import './InitProfile.css'
+import {init_data} from '../../api/StaticData'
 import default_profile_pic from '../../image/DefaultProfilePic.jpg'
 
 class InitProfile extends Component {
@@ -35,8 +36,9 @@ class InitProfile extends Component {
             this.state.verified_email,
             this.state.profile_pic
         );
-        profile.push();
-        ReactDOM.render(<MainLayout/>, document.getElementById('root'));
+        profile.push().then( init_data( ()=>{
+            ReactDOM.render(<MainLayout/>, document.getElementById('root'));
+        } ) );
     }
 
     upload_profile_pic(e) {
