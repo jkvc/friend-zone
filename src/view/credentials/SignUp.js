@@ -169,7 +169,7 @@ class SignUp extends Component {
                     <label>{this.state.success_msg}</label>
                 </form>
                 <br/>
-                <h4> {this.state.password_action_msg} </h4>
+                <h4> {this.state.err_msg} </h4>
 
                 <br/>
 
