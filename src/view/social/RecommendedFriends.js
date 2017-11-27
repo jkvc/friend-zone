@@ -16,7 +16,7 @@ class RecommendedFriends extends Component {
         super(props);
         this.state = {
             recommendation_ids: [],
-            recommendation_profiles: [],
+            recommendation_profiles: {},
             courses_enrolled: Object.keys(get_self_profile().enrolled_courses),
             all_classmates: [],
             self_profile: get_self_profile(),
@@ -63,7 +63,8 @@ class RecommendedFriends extends Component {
                         this.setState({recommendation_ids: data});
 
                         /*from list of ids, get ist of profiles, skip those who are already friends*/
-                        var aggregated_profiles = [];
+                        var aggregated_profiles = {};
+
                         for (var j = 0; j < data.length; j += 1) {
                             var friend_id = data[j];
 
@@ -71,7 +72,7 @@ class RecommendedFriends extends Component {
                             if (this.state.self_profile.friend_list[friend_id] === true) continue;
 
                             lookup_profile_by_user_id(friend_id, (err, data) => {
-                                aggregated_profiles.push(data);
+                                aggregated_profiles[data.user_id] = data;
                                 this.setState({recommendation_profiles: aggregated_profiles})
                             })
                         }
@@ -94,56 +95,67 @@ class RecommendedFriends extends Component {
         return (
 
             <div align={"center"}>
+
                 <PageTitle title="Recommended friends"/>
 
-                <table className='recommended-friend-table'>
+                <table>
 
-
+                    <tbody>
                     {
-                        this.state.recommendation_profiles.map((profile) => {
-                            return (
-                                <tr key={"recommended-friend-" + profile.user_id}>
-                                    <td>
-                                        <div className='friend-profile-container'>
-                                            <img className='friend-profile'
-                                                 src={profile.profile_pic}
-                                                 alt=""
-                                            />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p className={"name"}>{profile.first_name} {profile.last_name} </p>
-                                        <p className={"name"}>
-                                            Same classes:{list_same_classes(profile.enrolled_courses, this.state.self_profile.enrolled_courses || {})} </p>
-                                    </td>
-                                    <td>
-                                        <div className={"button group"}>
-                                            {profile.user_id in this.state.sent_requests ? (
+                        this.state.recommendation_ids.map((user_id, index) => {
+                            if (user_id in this.state.recommendation_profiles) {
+                                let profile = this.state.recommendation_profiles[user_id];
+                                return (
+                                    <tr key={"recommended-friend-" + index}>
+                                        <td>
+                                            <div className='friend-profile-container'>
+                                                <img className='friend-profile'
+                                                     src={profile.profile_pic}
+                                                     alt=""
+                                                />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p className={"name"}>{profile.first_name} {profile.last_name} </p>
+                                            <p className={"name"}>
+                                                Same
+                                                classes:{list_same_classes(profile.enrolled_courses, this.state.self_profile.enrolled_courses || {})} </p>
+                                        </td>
+                                        <td>
 
-                                                <button className={"button"} onClick={() => {
-                                                    cancel_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err, data) => {
-                                                        this.setState({sent_requests: data.outgoing_request})
-                                                    });
-                                                }}>
-                                                    Cancel friend request
-                                                </button>
-                                            ) : (
-                                                <button className={"button"} onClick={() => {
-                                                    create_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err, data) => {
-                                                        this.setState({sent_requests: data.outgoing_request})
-                                                    });
-                                                }}>
-                                                    Send friend request
-                                                </button>
+                                            <div className={"button group"}>
+                                                {profile.user_id in this.state.sent_requests ? (
 
-                                            )
-                                            }
-                                        </div>
-                                    </td>
-                                </tr>
-                            )
+                                                    <button className={"button"} onClick={() => {
+                                                        cancel_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err, data) => {
+                                                            this.setState({sent_requests: data.outgoing_request})
+                                                        });
+                                                    }}>
+                                                        Cancel friend request
+                                                    </button>
+                                                ) : (
+                                                    <button className={"button"} onClick={() => {
+                                                        create_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err, data) => {
+                                                            this.setState({sent_requests: data.outgoing_request})
+                                                        });
+                                                    }}>
+                                                        Send friend request
+                                                    </button>
+
+                                                )
+                                                }
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            else return (<tr key={"recommended-friend-" + index}>
+                                <td></td>
+                            </tr>)
                         })
                     }
+                    </tbody>
                 </table>
 
                 {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
