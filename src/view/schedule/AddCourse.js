@@ -39,14 +39,12 @@ class AddCourse extends Component{
 
                 <br/>
 
-                <form >
                     <label>lookup_course</label>
                     <input type={"text"} value={this.state.search_key}
                            onChange={function(e){
                                this.setState({search_key:e.target.value});
                                this.lookup(e.target.value);
                            }.bind(this)}/>
-                </form>
 
                 {this.state.result.map(function(entry){
                     return (
