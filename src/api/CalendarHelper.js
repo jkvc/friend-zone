@@ -122,7 +122,6 @@ class ClassScheduleHelper extends Component
         }
         all_events.push(...this.other_events);
         this.setState( {parsedEvents: all_events} );
-        return all_events;
     }
 
     componentWillMount()

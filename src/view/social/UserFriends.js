@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import {unblock_friend, delete_friend, block_friend} from "../../dao/ProfileManager";
 import './UserFriends.css'
 import PageTitle from "../components/PageTitle";
+import {list_same_classes} from "../../api/MostPopularInList"
 
 class UserFriends extends Component {
 
@@ -87,7 +88,7 @@ class UserFriends extends Component {
                                             {this.state.friend_profiles[friend_id].first_name}{" "}
                                             {this.state.friend_profiles[friend_id].last_name}{" "}
                                             <br/>
-                                            Same classes: {" "}</p>
+                                            Same classes: {list_same_classes(this.state.friend_profiles[friend_id].enrolled_courses, this.state.profile_obj.enrolled_courses)}</p>
                                     </td>
 
                                     <td>

@@ -29,3 +29,7 @@
 .pic{
     border-radius: 50%;
 }
+
+.recommended-friend-table td{
+    border-bottom: solid 1px lightgrey;
+}
