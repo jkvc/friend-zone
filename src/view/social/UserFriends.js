@@ -68,7 +68,7 @@ class UserFriends extends Component {
 
                 <PageTitle title='My friends'/>
 
-                <table >
+                <table>
                     <tbody>
                     {
                         Object.keys(this.state.friend_profiles).map((friend_id, index) => {
@@ -101,7 +101,6 @@ class UserFriends extends Component {
                                     </td>
                                     <td>
                                         <div className={"group"}>
-
 
 
                                             {friend_id in this.state.profile_obj.friend_list &&
@@ -160,6 +159,8 @@ class UserFriends extends Component {
                     }
                     </tbody>
                 </table>
+
+                <br/>
 
                 {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
 
