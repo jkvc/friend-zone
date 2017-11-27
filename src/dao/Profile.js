@@ -21,13 +21,12 @@ class Profile {
     blocked_user;
     verified_email;
 
-    constructor(user_id, first_name, last_name, major, current_year, profile_pic, description, verified_email){
+    constructor(user_id, first_name, last_name, major, current_year, description, verified_email){
         this.user_id = user_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.major = major;
         this.current_year = current_year;
-        this.profile_pic = profile_pic;
         this.description = description;
         this.verified_email = verified_email;
 
@@ -37,6 +36,7 @@ class Profile {
         this.incoming_request = {};
         this.upcoming_events = {};
         this.blocked_user = {};
+        this.profile_pic = {};
 
     }
 
