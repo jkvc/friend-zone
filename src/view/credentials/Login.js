@@ -117,7 +117,7 @@ class Login extends Component {
                                 <div className="email-password-right" align={"left"}>
                                     <input className="transparent-text-box" type="text"
                                            value={this.state.user_email}
-                                           onChange={e=> this.setState({user_email: e.target.value})}/>
+                                           onChange={e=> {this.setState({user_email: e.target.value})}}/>
                                     <br/>
                                     <br/>
                                     <input className="transparent-text-box" type={"password"}

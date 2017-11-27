@@ -129,29 +129,27 @@ class UserFriends extends Component {
                                         </div>
                                     </td>
                                     <td>
-                                        <td>
 
-                                            {friend_id in this.state.profile_obj.friend_list ? (
+                                        {friend_id in this.state.profile_obj.friend_list ? (
 
-                                                <button className={"button_red"} onClick={() => {
-                                                    this.delete_a_friend(friend_id);
-                                                }}>
-                                                    Delete friend
-                                                </button>
+                                            <button className={"button_red"} onClick={() => {
+                                                this.delete_a_friend(friend_id);
+                                            }}>
+                                                Delete friend
+                                            </button>
 
-                                            ) : ( // Note that the undelete button is a trick, since unblock does the same
+                                        ) : ( // Note that the undelete button is a trick, since unblock does the same
 
 
-                                                <button className={"button_red"} onClick={() => {
-                                                    this.undelete_a_friend(friend_id);
-                                                }}>
-                                                    Undelete friend
-                                                </button>
+                                            <button className={"button_red"} onClick={() => {
+                                                this.undelete_a_friend(friend_id);
+                                            }}>
+                                                Undelete friend
+                                            </button>
 
-                                            )
-                                            }
+                                        )
+                                        }
 
-                                        </td>
                                     </td>
                                 </tr>
                             )
