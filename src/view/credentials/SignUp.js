@@ -231,10 +231,13 @@ class SignUp extends Component {
                                    <input className="transparent-text-box" type={"password"}
                                           value={this.state.verify_password}
                                           onChange={ e=> this.setState({verify_password: e.target.value})}/>
+                                   <label>{this.state.success_msg}</label>
                                </div>
+
                            </div>
 
                            <br/>
+                           <div className="error-message">{this.state.err_msg}</div>
                            <br/>
 
                                <button className="buttonStyle" onClick={this.handle_signup_button.bind(this)}>Signup and login</button>
