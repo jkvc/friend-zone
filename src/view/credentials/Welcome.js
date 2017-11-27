@@ -58,11 +58,6 @@ class Welcome extends Component {
 
 
                             <br/>
-                            <form>
-                                <button className="buttonStyle" onClick={this.goto_test_course_search.bind(this)}>Search Course
-
-                                </button>
-                            </form>
 
                         </div>
                     </div>

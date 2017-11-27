@@ -5,6 +5,7 @@ import Login from './Login';
 import InitProfile from "../profile/InitProfile";
 import {handle_third_party_auth} from './thirdparty/HandleThirdParty'
 import './MainLoginSignup.css'
+import blue_line from '../../image/BlueLine.png'
 class SignUp extends Component {
 
     constructor(props) {
@@ -200,7 +201,7 @@ class SignUp extends Component {
                            <br/>
 
                            <div className="subtitle-text">
-                               Create your Friendzone account and find who is also in your class!
+                               Get your Friendzone account and see who is also in your class!
                            </div>
                            <br/>
 
@@ -237,10 +238,14 @@ class SignUp extends Component {
                            <br/>
                            <div className="error-message">{this.state.err_msg}</div>
                            <br/>
-
-                               <button className="buttonStyle" onClick={this.handle_signup_button.bind(this)}>Signup and login</button>
-                               <button className="buttonStyle" onClick={this.goto_login.bind(this)}>goto login instead</button>
+                           <h4>  </h4>
+                               <button className="button-text buttonPadding" onClick={this.handle_signup_button.bind(this)}>Sign up and Log In</button>
                            <br/>
+                           <img className="separator" src={blue_line} alt=""/>
+                           <br/>
+                               <button className="button-text" onClick={this.goto_login.bind(this)}>Go Back to Log in</button>
+                           <br/>
+                           <p className="thirdpartymenssage">----You can log in with third party account on log in page----</p>
                        </div>
                    </div>
                </div>

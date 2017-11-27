@@ -148,7 +148,7 @@ class Login extends Component {
                             <img className="separator" src={blue_line} alt=""/>
                             <br/>
 
-                            <div className="subtitle-text">Or, log in with</div>
+                            <div className="thirdpartymenssage">Or, log in with</div>
 
                             <button className="third-party-button"
                                 onClick={(e) => {e.preventDefault(); this.handle_third_party("google")}}>
