@@ -9,6 +9,8 @@ import RecommendedFriends from "../social/RecommendedFriends";
 import {lookup_course_by_id} from "../../dao/CourseManager";
 import {get_time_numeric} from "../../api/TimeHelper";
 import {get_self_profile} from "../../api/StaticData";
+import PageTitle from "../components/PageTitle";
+import './UserSchedule.css'
 
 class UserSchedule extends Component {
 
@@ -180,25 +182,22 @@ class UserSchedule extends Component {
 
             <div align={'center'}>
 
-                <img
-                    src={"https://res.cloudinary.com/teepublic/image/private/s--8-dGDDZg--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1470902298/production/designs/627022_1.jpg"}
-                    alt={""} width={"300"}/>
-                <h1>{this.title}</h1>
+                <PageTitle title={'My schedule'}/>
 
-                <button onClick={this.goto_AddCourse.bind(this)}>Add course</button>
-                <button onClick={this.goto_DropCourse.bind(this)}>Drop course</button>
-                <button onClick={this.goto_AddEvent.bind(this)}>Add Event</button>
-                <button onClick={this.goto_RemoveEvent.bind(this)}>Remove Event</button>
-                <button onClick={this.goto_RecommendedFriends.bind(this)}>Recommended Friends</button>
+                <div className='schedule-button-container'>
+                    <button onClick={this.goto_AddCourse.bind(this)}>Add course</button>
+                    <button onClick={this.goto_DropCourse.bind(this)}>Drop course</button>
+                    <button onClick={this.goto_AddEvent.bind(this)}>Add Event</button>
+                    <button onClick={this.goto_RemoveEvent.bind(this)}>Remove Event</button>
+                    <button onClick={this.goto_RecommendedFriends.bind(this)}>Recommended Friends</button>
+                </div>
+                <br/>
                 <br/>
 
                 <div id='calendar-helper-container'> </div>
 
-
-                <h4>いつでもダラダラしたいなぁ...</h4>
-                <h4> うまるちゃん！遊びやめてください、手伝いましょう </h4>
-
-
+                <br/>
+                <br/>
             </div>
 
 

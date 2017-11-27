@@ -1,0 +1,12 @@
+.schedule-button-container button{
+    font-size: medium;
+    background: transparent;
+    border:none;
+    color: #2f5597;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#calendar-helper-container{
+    width: 90%;
+}

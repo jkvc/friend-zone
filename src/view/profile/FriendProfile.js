@@ -48,17 +48,14 @@ class FriendProfile extends Component {
     // In order to check whether or not the friend is blocked,
     // you will have to manually check if friend_list[friend_list] === false;
     block_a_friend(friend_id) {
-        block_friend(this.state.my_profile.user_id, friend_id, (err, data) =>
-        {
+        block_friend(this.state.my_profile.user_id, friend_id, (err, data) => {
             this.setState({my_profile: data});
         });
     }
 
     // Simply does the opposite of block
-    unblock_a_friend(friend_id)
-    {
-        unblock_friend(this.state.my_profile.user_id, friend_id, (err,data) =>
-        {
+    unblock_a_friend(friend_id) {
+        unblock_friend(this.state.my_profile.user_id, friend_id, (err, data) => {
             this.setState({my_profile: data});
         });
     }
@@ -105,12 +102,12 @@ class FriendProfile extends Component {
                         <svg id="i-settings" viewBox="0 0 32 32" width="20" height="20" fill="none"
                              stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round"
                              strokeWidth="2">
-                            <path d="M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z" />
+                            <path d="M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z"/>
                         </svg>
                     </button>
                     &nbsp;
 
-                    { !(this.state.user_id in this.state.my_profile.blocked_user) ? (
+                    {!(this.state.user_id in this.state.my_profile.blocked_user) ? (
                         <button className='friend-profile-button' onClick={() => {
                             this.block_a_friend(this.state.profile_obj.user_id);
                         }}>Block</button>

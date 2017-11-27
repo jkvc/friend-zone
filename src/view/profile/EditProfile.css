@@ -1,0 +1,22 @@
+.edit-profile-table input{
+    border:none;
+    border-bottom: solid 1px lightgrey;
+}
+
+.edit-profile-table tr{
+    font-size: small;
+}
+
+.edit-profile-button {
+    border: none;
+    background: transparent;
+    font-size: small;
+    color: #2f5597;
+    cursor: pointer;
+
+}
+
+.edit-profile-subtitle{
+    font-size: small;
+    color: dimgrey;
+}

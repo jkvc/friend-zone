@@ -134,6 +134,12 @@
     margin-top: 20px;
 }
 
-.enlarged-image{
+.enlarged-image {
     max-width: 100%;
+}
+
+.enlarged-image-container {
+    height: 90%;
+    width: 90%;
+    margin: auto;
 }

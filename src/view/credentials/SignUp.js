@@ -3,8 +3,6 @@ import firebase from 'firebase';
 import ReactDOM from 'react-dom';
 import Login from './Login';
 import InitProfile from "../profile/InitProfile";
-import facebook_icon from '../../image/FacebookIcon.png'
-import google_icon from '../../image/GoogleIcon.png'
 import {handle_third_party_auth} from './thirdparty/HandleThirdParty'
 import './MainLoginSignup.css'
 class SignUp extends Component {
