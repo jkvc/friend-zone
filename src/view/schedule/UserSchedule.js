@@ -72,7 +72,11 @@ class UserSchedule extends Component {
 
         let profile_obj = get_self_profile();
 
-        let enrolled_obj = profile_obj.enrolled_courses;
+        let enrolled_obj = {};
+        if ("enrolled_courses" in profile_obj) {
+            let enrolled_obj = profile_obj.enrolled_courses;
+        }
+
         let course_list = Object.keys(enrolled_obj);
         let events = [];
 

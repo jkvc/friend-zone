@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import firebase from 'firebase';
 import {cancel_friend_request, create_friend_request, lookup_profile_by_user_id} from "../../dao/ProfileManager";
 import {lookup_enrollment_by_id} from "../../dao/EnrollmentManager";
-import {most_popular_in_list} from "../../api/MostPopularInList";
+import {most_popular_in_list, list_same_classes} from "../../api/MostPopularInList";
 import {get_friend_profiles, get_self_profile} from "../../api/StaticData";
 
 import './RecommendedFriends.css'
@@ -108,7 +108,8 @@ class RecommendedFriends extends Component {
                                     <img className={"pic"} src={profile.profile_pic} alt="" width=" 250" height="250"/>
                                 </td>
                                 <td>
-                                    <p className={"name"}>{profile.first_name} {profile.last_name}{" "}Same classes: </p>
+                                    <p className={"name"}>{profile.first_name} {profile.last_name} </p>
+                                    <p className={"same_classes"}>Same classes: {list_same_classes(profile.enrolled_courses, this.state.self_profile.enrolled_courses || {})} </p>
                                 </td>
                                 <td>
                                     <td>

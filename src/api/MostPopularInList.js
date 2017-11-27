@@ -1,6 +1,32 @@
 /*
  * @author: Yiming Cai and Kevin Chen
  */
+
+
+/*
+ * Returns a string that prints out the mutual classes
+ */
+export function list_same_classes(list1, list2)
+{
+    let str = "";
+    for (let item in list1)
+    {
+        if (item in list2)
+        {
+            let tokens = item.split('_');
+            for (let i in tokens) {
+                str += tokens[i] + " ";
+            }
+            str = str.substr(0, str.length-1);
+            str += ", ";
+        }
+    }
+
+    str = str.substr(0, str.length-2);
+    return str;
+}
+
+
 /* Done
 * given a list of lists of user_id's, return the most popular user_id in these lists, sorted descending by popularity
 * params: param

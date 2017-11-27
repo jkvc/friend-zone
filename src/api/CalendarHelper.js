@@ -122,7 +122,6 @@ class ClassScheduleHelper extends Component
         }
         all_events.push(...this.other_events);
         this.setState( {parsedEvents: all_events} );
-        return all_events;
     }
 
     componentWillMount()
@@ -181,7 +180,7 @@ class CalendarEvent
         this.weekday = props.weekday;
 
         // Note that the month is 0-indexed while the day is not
-        this.startDate = new Date(2018,0,3);
+        this.startDate = new Date(2018,0,8);
         this.endDate = new Date(2018,2,16);
     }
 
