@@ -71,11 +71,13 @@ class ClassScheduleHelper extends Component
         // These variables will be initialized only after initialize(this.events) is called.
         this.calendardays = []; // calendarDays is the array of CalendarDay objects. There will be 7 of them
 
+        this.state = {
+            parsedEvents : []
+        };
+
         // Initialize all the calendar days
         this.initialize(this.events);
 
-        // this will be set after get_all_events() is called
-        this.parsedEvents = this.get_all_events();
     }
 
 
@@ -108,27 +110,29 @@ class ClassScheduleHelper extends Component
                                                  "events":dayArray[i],
                                                  "weekday":i} ) );
         }
-
     }
 
-    get_all_events()
+    async set_all_events()
     {
         let all_events = [];
         for (let c in this.calendardays)
         {
             all_events.push(...this.calendardays[c].get_all_events() );
-
+            this.setState( {parsedEvents: all_events} );
         }
         all_events.push(...this.other_events);
+        this.setState( {parsedEvents: all_events} );
         return all_events;
+    }
+
+    componentWillMount()
+    {
+        this.set_all_events();
     }
 
     render()
     {
-        if (this.parsedEvents !== null)
-            return <div> <BasicCalendar events={this.parsedEvents}/>  </div>;
-        else
-            return <div> Loading... </div>;
+        return <div> <BasicCalendar events={this.state.parsedEvents} key={this.state.parsedEvents.length}/>  </div>;
     }
 }
 
