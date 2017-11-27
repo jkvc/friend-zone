@@ -117,12 +117,20 @@ class Login extends Component {
                                 <div className="email-password-right" align={"left"}>
                                     <input className="transparent-text-box" type="text"
                                            value={this.state.user_email}
-                                           onChange={e=> this.setState({user_email: e.target.value})}/>
+                                           onChange={e=> {this.setState({user_email: e.target.value})}}
+                                           onKeyPress={e=>{
+                                               if (e.key === 'Enter') this.handle_login_button(e);
+                                           }}
+                                    />
                                     <br/>
                                     <br/>
                                     <input className="transparent-text-box" type={"password"}
                                            value={this.state.password}
-                                           onChange={ e=> this.setState({password: e.target.value})}/>
+                                           onChange={ e=> this.setState({password: e.target.value})}
+                                           onKeyPress={e=>{
+                                               if (e.key === 'Enter') this.handle_login_button(e);
+                                           }}
+                                    />
                                 </div>
                             </div>
 
@@ -130,7 +138,7 @@ class Login extends Component {
                             <br/>
                             <br/>
 
-                            <div className="error-message">{this.state.password_action_msg}</div>
+                            <div className="error-message">{this.state.err_msg}</div>
 
                             <button className="button-text"
                                   onClick={this.handle_login_button.bind(this)}>

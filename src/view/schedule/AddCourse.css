@@ -1,0 +1,41 @@
+.add-course-body{
+    min-height: 500px;
+}
+
+.instruction-message{
+    font-size: small;
+    color: grey;
+}
+
+.search-course-input{
+    border: none ;
+    background: transparent;
+    border-bottom: solid 1px lightgrey;
+}
+
+.course-title{
+    font-size: large;
+}
+
+.course-subtitle{
+    font-size: small;
+    color: dimgrey;
+}
+
+.add-button {
+    cursor: pointer;
+    border:none;
+    background: transparent;
+    color: #2f5597;
+    font-size: small;
+ }
+
+.already-enrolled-label{
+    font-size: small;
+    color: grey;
+}
+
+.course-search-result td{
+    padding: 10px;
+    border-bottom: solid 1px lightgrey;
+}
