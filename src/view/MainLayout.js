@@ -9,7 +9,7 @@ import UserProfile from './profile/UserProfile';
 import Main from './credentials/Welcome';
 import './MainLayout.css'
 import ChatView from "../chat/ChatView";
-
+import FAQ from "./FAQ.js"
 /**
  * Main Layout is the outer body for the pages after user logged in. It consists of the navigation bar, the
  * background image, and the div id="main-layout" where all the user pages should render upon.
@@ -44,6 +44,9 @@ class MainLayout extends Component{
 
     goto_chat(){
         ReactDOM.render(<ChatView />, document.getElementById('main-layout'));
+    }
+    goto_faq(){
+        ReactDOM.render(<FAQ />, document.getElementById('main-layout'));
     }
 
     logout(){
@@ -86,6 +89,10 @@ class MainLayout extends Component{
                     <button className="button-nav-bar"
                             onClick={this.goto_chat.bind(this)}>
                         Chat
+                    </button>
+                    <button className="button-nav-bar"
+                            onClick={this.goto_faq.bind(this)}>
+                        FAQ
                     </button>
 
                     <button className="logout-button"
