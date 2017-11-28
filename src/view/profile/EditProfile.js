@@ -55,6 +55,36 @@ class EditProfile extends Component {
     }
 
     handle_update() {
+
+        let error_msg = "";
+        if (this.state.first_name.trim().length < 2)
+        {
+            error_msg = "Please enter a valid first name (at least 2 characters long)";
+        }
+        else if (this.state.last_name.trim().length < 2)
+        {
+            error_msg = "Please enter a valid last name (at least 2 characters long)";
+        }
+        else if (this.state.current_year.trim().length === 0)
+        {
+            error_msg = "Please select a valid \"current year\" field";
+        }
+        else if (this.state.major.trim().length === 0)
+        {
+            error_msg = "Please enter a valid major or department name."
+        }
+        else if (this.state.description.trim().length === 0)
+        {
+            error_msg = "Please enter something for description. This may be your preferred means of contact or " +
+                "a simple greeting.";
+        }
+        else {
+            error_msg = "";
+        }
+
+        this.setState({profile_update_msg:error_msg});
+        if (error_msg !== "") return;
+
         this.profile_obj.first_name = this.state.first_name;
         this.profile_obj.last_name = this.state.last_name;
         this.profile_obj.major = this.state.major;
@@ -283,7 +313,7 @@ class EditProfile extends Component {
                         <tr>
                             <td>Description</td>
                             <td>
-                                <input type="text" value={this.state.description}
+                                <textarea value={this.state.description}
                                        onChange={e => this.setState({description: e.target.value})}/>
 
                             </td>

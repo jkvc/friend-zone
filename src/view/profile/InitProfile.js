@@ -19,13 +19,43 @@ class InitProfile extends Component {
             last_name: "",
             major: "",
             current_year: "",
-            description: "",
+            description: "Aloha! Would you like to be friendzoned by me?",
             verified_email: "",
-            profile_pic: null
+            profile_pic: null,
+            display_msg: ""
         };
     }
 
     handle_create() {
+
+        let error_msg = "";
+        if (this.state.first_name.trim().length < 2)
+        {
+            error_msg = "Please enter a valid first name (at least 2 characters long)";
+        }
+        else if (this.state.last_name.trim().length < 2)
+        {
+            error_msg = "Please enter a valid last name (at least 2 characters long)";
+        }
+        else if (this.state.current_year.trim().length === 0)
+        {
+            error_msg = "Please select a valid \"current year\" field";
+        }
+        else if (this.state.major.trim().length === 0)
+        {
+            error_msg = "Please enter a valid major or department name."
+        }
+        else if (this.state.description.trim().length === 0)
+        {
+            error_msg = "Please enter something for description";
+        }
+        else {
+            error_msg = "";
+        }
+
+        this.setState({display_msg:error_msg});
+        if (error_msg !== "") return;
+
         var profile = new Profile(
             this.user_id,
             this.state.first_name,
@@ -145,7 +175,7 @@ class InitProfile extends Component {
                                 <tr>
                                     <td>Description</td>
                                     <td>
-                                        <input type="text" value={this.state.description}
+                                        <textarea value={this.state.description}
                                                onChange={e => this.setState({description: e.target.value})}/>
                                     </td>
                                 </tr>
@@ -153,6 +183,7 @@ class InitProfile extends Component {
                                 </tbody>
                             </table>
 
+                            <div className={"error-msg"}> {this.state.display_msg} </div>
                             <div>
                                 <button className='create-profile-button'
                                         onClick={this.handle_create.bind(this)}

@@ -23,3 +23,22 @@
     color: #2f5597;
     cursor: pointer;
 }
+
+textarea {
+    display: block;
+    padding: .5rem .75rem;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+.error-msg {
+    color: red;
+}

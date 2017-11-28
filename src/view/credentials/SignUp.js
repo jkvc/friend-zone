@@ -238,14 +238,14 @@ class SignUp extends Component {
                            <br/>
                            <div className="error-message">{this.state.err_msg}</div>
                            <br/>
-                           <h4>  </h4>
-                               <button className="button-text buttonPadding" onClick={this.handle_signup_button.bind(this)}>Sign up and Log In</button>
-                           <br/>
-                           <img className="separator" src={blue_line} alt=""/>
-                           <br/>
-                               <button className="button-text" onClick={this.goto_login.bind(this)}>Go Back to Log in</button>
-                           <br/>
-                           <p className="thirdpartymenssage">----You can log in with third party account on log in page----</p>
+                               <h4>  </h4>
+                                   <button className="button-text" onClick={this.handle_signup_button.bind(this)}>Sign up and Log In</button>
+                               <br/>
+                               <img className="separator" src={blue_line} alt=""/>
+                               <br/>
+                                   <button className="button-text" onClick={this.goto_login.bind(this)}>Go Back to Log in</button>
+                               <br/>
+                               <p className="thirdpartymenssage">----You can log in with third party account on log in page----</p>
                        </div>
                    </div>
                </div>
