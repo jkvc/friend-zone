@@ -146,19 +146,31 @@ class EditProfile extends Component {
         }
 
         else {
-            //let credential = firebase.auth.EmailAuthProvider.credential( get_self_profile().email, this.state.oldPassword);
-            //user.reauthenticateWithCredential(credential).then(() => {
+
+            // Create a firebase credential object
+            let credential = firebase.auth.EmailAuthProvider.credential( firebase.auth().currentUser.email ,
+                this.state.oldPassword);
+
+            // Authenticate the user's old password and email
+            user.reauthenticateWithCredential(credential).then(() => {
+
+                // If authenticate is successful, grant access to change password
                 user.updatePassword(password).then(function () {
                     password_msg = "Password Changed Successfully";
-                    this.setState({password_action_msg: password_msg, newPassword: "", repeatPassword: ""});
+                    this.setState({password_action_msg: password_msg, oldPassword:"", newPassword: "", repeatPassword: ""});
                 }.bind(this)).catch(function (error) {
                     password_msg = "An error has occurred" + ", please try again later";
-                    this.setState({password_action_msg: password_msg, newPassword: "", repeatPassword: ""});
+                    this.setState({password_action_msg: password_msg, oldPassword:"", newPassword: "", repeatPassword: ""});
                 }.bind(this));
-            //}).catch( (error) => {this.setState({password_action_msg: "Mismatching Old Password!"});} );
+
+            // Else print out error messages
+            }).catch( (error) => {
+                password_msg = "Mismatching Old Password!";
+                this.setState({password_action_msg: password_msg});
+            } );
         }
 
-        this.setState({password_action_msg: password_msg, newPassword: "", repeatPassword: ""});
+        this.setState({password_action_msg: password_msg, oldPassword:"", newPassword: "", repeatPassword: ""});
     }
 
     upload_image(e) {
