@@ -19,6 +19,14 @@ class AddEvent extends Component{
 
     }
 
+    handle_keyPress(event)
+    {
+        if (event.key === 'Enter')
+        {
+            this.handle_add_event();
+        }
+    }
+
     handle_add_event(){
 
         // Check for validity of the event entered
@@ -54,47 +62,47 @@ class AddEvent extends Component{
             <div>
 
                 <br/>
+                <form onKeyPress={this.handle_keyPress.bind(this)}>
+                    <label>Event_Name:</label>
+                    <input type={"text"} value={this.state.event_name}
+                           onChange={function(e){
+                               this.setState({event_name:e.target.value});
+                           }.bind(this)}/>
 
-                <label>Event_Name:</label>
-                <input type={"text"} value={this.state.event_name}
-                       onChange={function(e){
-                           this.setState({event_name:e.target.value});
-                       }.bind(this)}/>
+                    <br />
 
-                <br />
+                    <label>Day:</label>
+                    <input type={"date"} value={this.state.day}
+                           onChange={function(e){
+                               this.setState({day:e.target.value})
+                           }.bind(this)}/>
 
-                <label>Day:</label>
-                <input type={"date"} value={this.state.day}
-                       onChange={function(e){
-                           this.setState({day:e.target.value})
-                       }.bind(this)}/>
+                    <br />
 
-                <br />
+                    <label>Start Time:</label>
+                    <input type={"time"} value={this.state.start_time}
+                           onChange={function(e){
+                               this.setState({start_time:e.target.value})
+                           }.bind(this)}/>
 
-                <label>Start Time:</label>
-                <input type={"time"} value={this.state.start_time}
-                       onChange={function(e){
-                           this.setState({start_time:e.target.value})
-                       }.bind(this)}/>
+                    <br />
 
-                <br />
+                    <label>End Time:</label>
+                    <input type={"time"} value={this.state.end_time}
+                           onChange={function(e){
+                               this.setState({end_time:e.target.value})
+                           }.bind(this)}/>
 
-                <label>End Time:</label>
-                <input type={"time"} value={this.state.end_time}
-                       onChange={function(e){
-                           this.setState({end_time:e.target.value})
-                       }.bind(this)}/>
+                    <br />
 
-                <br />
+                    <label>Location</label>
+                    <input type={"text"} value={this.state.location}
+                           onChange={function(e){
+                               this.setState({location:e.target.value})
+                           }.bind(this)}/>
 
-                <label>Location</label>
-                <input type={"text"} value={this.state.location}
-                       onChange={function(e){
-                           this.setState({location:e.target.value})
-                       }.bind(this)}/>
-
-                <br />
-
+                    <br />
+                </form>
                 <button onClick={()=>{
                     this.handle_add_event();
                 }} > Add Event</button>
