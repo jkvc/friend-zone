@@ -95,8 +95,8 @@ class SignUp extends Component {
                 });
 
                 //send email verification
-                firebase.auth().onAuthStateChanged(function(user) {
-                    alert("Confirmation email sent!");
+                firebase.auth().onAuthStateChanged(function once(user) {
+                    window.alert("Confirmation email sent!");
                     user.sendEmailVerification();
                 });
 
