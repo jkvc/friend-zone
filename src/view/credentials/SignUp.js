@@ -96,8 +96,10 @@ class SignUp extends Component {
 
                 //send email verification
                 firebase.auth().onAuthStateChanged(function once(user) {
-                    window.alert("Confirmation email sent!");
-                    user.sendEmailVerification();
+                    if(user.emailVerified === false ) {
+                        window.alert("Confirmation email sent!");
+                        user.sendEmailVerification();
+                    }
                 });
 
                 ReactDOM.render(<InitProfile />, document.getElementById('root'));
