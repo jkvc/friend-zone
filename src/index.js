@@ -59,6 +59,7 @@ firebase.auth().onAuthStateChanged((user) => {
                         ReactDOM.render(<RedirectNoEmailVerification />, document.getElementById('root'));
 
                     }
+                    //if already verified then log user in
                     else{
                         ReactDOM.render(<MainLayout/>, document.getElementById('root'));
                     }
@@ -66,7 +67,6 @@ firebase.auth().onAuthStateChanged((user) => {
 
 
                 //done checking
-                    //ReactDOM.render(<MainLayout/>, document.getElementById('root'));
 
             }
         });
