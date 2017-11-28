@@ -4,7 +4,6 @@ import {lookup_profile_by_user_id} from '../../dao/ProfileManager'
 import firebase from 'firebase';
 import PageTitle from "../components/PageTitle";
 import './EditProfile.css'
-import {get_self_profile} from "../../api/StaticData";
 
 class EditProfile extends Component {
 
@@ -189,7 +188,7 @@ class EditProfile extends Component {
                     password_msg = "Password Changed Successfully";
                     this.setState({password_action_msg: password_msg, oldPassword:"", newPassword: "", repeatPassword: ""});
                 }.bind(this)).catch(function (error) {
-                    password_msg = "An error has occurred" + ", please try again later";
+                    password_msg = "An error has occurred, please try again later";
                     this.setState({password_action_msg: password_msg, oldPassword:"", newPassword: "", repeatPassword: ""});
                 }.bind(this));
 

@@ -141,6 +141,14 @@ class SignUp extends Component {
         }.bind(this));
     }
 
+    handle_keyPress(event)
+    {
+        if (event.key === 'Enter')
+        {
+            this.handle_signup_button(event);
+        }
+    }
+
    render() {
        /* return (
 
@@ -205,35 +213,37 @@ class SignUp extends Component {
                            </div>
                            <br/>
 
-                           <div className="email-password-container">
-                               <div className="email-password-left" align={"right"}>
-                                   <text className="label-text"> Email:  </text>
-                                   <br/>
-                                   <br/>
-                                   <text className="label-text"> Password: </text>
-                                   <br/>
-                                   <br/>
-                                   <text className="label-text"> Verify Password: </text>
-                               </div>
+                           <form onKeyPress={this.handle_keyPress.bind(this)}>
+                               <div className="email-password-container">
+                                   <div className="email-password-left" align={"right"}>
+                                       <text className="label-text"> Email:  </text>
+                                       <br/>
+                                       <br/>
+                                       <text className="label-text"> Password: </text>
+                                       <br/>
+                                       <br/>
+                                       <text className="label-text"> Verify Password: </text>
+                                   </div>
 
-                               <div className="email-password-right" align={"left"}>
-                                   <input className="transparent-text-box" type="text"
-                                          value={this.state.user_email}
-                                          onChange={e=> this.setState({user_email: e.target.value})}/>
-                                   <br/>
-                                   <br/>
-                                   <input className="transparent-text-box" type={"password"}
-                                          value={this.state.password}
-                                          onChange={ e=> this.setState({password: e.target.value})}/>
-                                   <br/>
-                                   <br/>
-                                   <input className="transparent-text-box" type={"password"}
-                                          value={this.state.verify_password}
-                                          onChange={ e=> this.setState({verify_password: e.target.value})}/>
-                                   <label>{this.state.success_msg}</label>
-                               </div>
+                                   <div className="email-password-right" align={"left"}>
+                                       <input className="transparent-text-box" type="text"
+                                              value={this.state.user_email}
+                                              onChange={e=> this.setState({user_email: e.target.value})}/>
+                                       <br/>
+                                       <br/>
+                                       <input className="transparent-text-box" type={"password"}
+                                              value={this.state.password}
+                                              onChange={ e=> this.setState({password: e.target.value})}/>
+                                       <br/>
+                                       <br/>
+                                       <input className="transparent-text-box" type={"password"}
+                                              value={this.state.verify_password}
+                                              onChange={ e=> this.setState({verify_password: e.target.value})}/>
+                                       <label>{this.state.success_msg}</label>
+                                   </div>
 
-                           </div>
+                               </div>
+                           </form>
 
                            <br/>
                            <div className="error-message">{this.state.err_msg}</div>
