@@ -1,6 +1,7 @@
 import {add_event_to_profile} from "../../dao/ProfileManager";
 import React, {Component} from 'react';
 import firebase from 'firebase';
+import PageTitle from "../components/PageTitle";
 
 
 class AddEvent extends Component{
@@ -59,7 +60,9 @@ class AddEvent extends Component{
     }
     render(){
         return(
-            <div>
+            <div align="center">
+
+                <PageTitle title="Add Event"/>
 
                 <br/>
                 <form onKeyPress={this.handle_keyPress.bind(this)}>

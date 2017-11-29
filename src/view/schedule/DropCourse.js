@@ -69,7 +69,7 @@ class DropCourse extends Component {
 
 
                 <br/>
-                <pre>{JSON.stringify(this.state.courses_list, null, 2)}</pre>
+                <pre>{/*JSON.stringify(this.state.courses_list, null, 2)*/}</pre>
 
             </div>
         )

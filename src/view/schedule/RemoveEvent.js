@@ -1,7 +1,7 @@
 import {remove_event_from_profile, lookup_profile_by_user_id} from "../../dao/ProfileManager";
 import React, {Component} from 'react';
 import firebase from 'firebase';
-
+import PageTitle from "../components/PageTitle";
 
 class RemoveEvent extends Component{
 
@@ -43,10 +43,9 @@ class RemoveEvent extends Component{
         // The first row contains the table header
         // and the second row onwards contain the event name and a button
         return(
-            <div>
+            <div align="center">
 
-                <br/>
-
+                <PageTitle title="Add Event"/>
 
                 <table>
                     <tbody>
