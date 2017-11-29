@@ -240,7 +240,7 @@ class EditProfile extends Component {
         return (
 
             <div align={'center'}>
-                <PageTitle title={'Edit my profile'}/>
+                <PageTitle title="Edit My Profile"/>
 
                 <br/>
                 <div className='profile-pic-container'>

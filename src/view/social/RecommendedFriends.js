@@ -96,7 +96,7 @@ class RecommendedFriends extends Component {
 
             <div align={"center"}>
 
-                <PageTitle title="Recommended friends"/>
+                <PageTitle title="Recommended Friends"/>
 
                 <table>
 

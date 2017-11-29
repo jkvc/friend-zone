@@ -182,7 +182,7 @@ class UserSchedule extends Component {
 
             <div align={'center'}>
 
-                <PageTitle title={'My schedule'}/>
+                <PageTitle title="My Schedule"/>
 
                 <div className='schedule-button-container'>
                     <button onClick={this.goto_AddCourse.bind(this)}>Add course</button>

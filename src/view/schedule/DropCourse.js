@@ -41,7 +41,7 @@ class DropCourse extends Component {
         return (
             <div align={'center'}>
 
-                <PageTitle title='Drop course'/>
+                <PageTitle title="Drop Course"/>
 
 
                 <table className='course-search-result'>

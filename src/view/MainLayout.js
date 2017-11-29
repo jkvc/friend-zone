@@ -68,7 +68,7 @@ class MainLayout extends Component{
 
                 <div className="nav-bar">
 
-                    <div className="logo-main">FriendZone</div>
+                    <div className="logo-main">FriendZoned</div>
 
                     <button className="button-nav-bar"
                             onClick={this.goto_schedule.bind(this)}> Schedule

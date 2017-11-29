@@ -67,7 +67,7 @@ class UserFriends extends Component {
 
             <div align="center">
 
-                <PageTitle title='My friends'/>
+                <PageTitle title='My Friends'/>
 
                 <table>
                     <tbody>

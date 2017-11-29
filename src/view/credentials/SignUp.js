@@ -207,11 +207,11 @@ class SignUp extends Component {
                    <div className="mid-column-right">
                        <div className="right-middle" align={"center"}>
 
-                           <div className="logo"> FriendZone </div>
+                           <div className="logo"> FriendZoned </div>
                            <br/>
 
                            <div className="subtitle-text">
-                               Get your Friendzone account and see who is also in your class!
+                               Get your Friendzoned account and see who is also in your class!
                            </div>
                            <br/>
 

@@ -100,7 +100,7 @@ class AddCourse extends Component {
         return (
             <div align='center' className='add-course-body'>
 
-                <PageTitle title={'Add course'}/>
+                <PageTitle title="Add Course"/>
 
                 <div>
                     <input type={"text"} value={this.state.search_key}

@@ -120,7 +120,7 @@ class Login extends Component {
                     <div className="mid-column-right">
                         <div className="right-middle" align={"center"}>
 
-                            <div className="logo"> FriendZone </div>
+                            <div className="logo"> FriendZoned </div>
                             <br/>
 
                             <div className="subtitle-text">
