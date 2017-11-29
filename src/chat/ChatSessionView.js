@@ -21,7 +21,8 @@ class ChatSessionView extends Component {
             title: "",
             input: "",
             my_name: "",
-            show_load_full_button: true
+            show_load_full_button: true,
+            memefy: false
         }
     }
 
@@ -69,8 +70,24 @@ class ChatSessionView extends Component {
         }
     }
 
+
+    static memefy(string){
+        let result_string = '';
+        let lowercase = false;
+        for (let i=0; i<string.length; i++){
+            const char = string[i];
+            if (lowercase) result_string += char.toLowerCase();
+            else result_string += char.toUpperCase();
+            lowercase = !lowercase;
+        }
+        return result_string;
+    }
+
     send_message() {
-        add_message(this.state.session_id, this.state.my_name, this.state.input);
+        let message = this.state.input;
+        if (this.state.memefy) message = ChatSessionView.memefy(message);
+
+        add_message(this.state.session_id, this.state.my_name, message);
         this.setState({input: ""})
     }
 
@@ -230,6 +247,12 @@ class ChatSessionView extends Component {
                     </label>
                     <input id='send-image' type='file' name='Send Image' accept='image/*'
                            onChange={e => this.send_image(e)}/>
+
+                    <button onClick={()=>{
+                        this.setState({memefy: !this.state.memefy});
+                    }}>
+                        {this.state.memefy? 'Auto Spongebob capitalization: on ' : 'Auto Spongebob capitalization: off '}
+                    </button>
 
                 </div>
 
