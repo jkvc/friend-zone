@@ -195,8 +195,8 @@ class InitProfile extends Component {
                         </div>
                     </div>
                 </div>
-                state:
-                <pre>{JSON.stringify(this.state, null, 2)}</pre>
+                <br />
+                <pre>{/*JSON.stringify(this.state, null, 2)*/}</pre>
             </div>
 
 

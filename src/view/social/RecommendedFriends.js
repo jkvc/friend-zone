@@ -119,7 +119,7 @@ class RecommendedFriends extends Component {
                                             <p className={"name"}>{profile.first_name} {profile.last_name} </p>
                                             <p className={"name"}>
                                                 Mutual
-                                                classes:{list_same_classes(profile.enrolled_courses, this.state.self_profile.enrolled_courses || {})} </p>
+                                                classes: {list_same_classes(profile.enrolled_courses, this.state.self_profile.enrolled_courses || {})} </p>
                                         </td>
                                         <td>
 
