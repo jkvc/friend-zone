@@ -16,8 +16,8 @@ class FAQ extends Component{
             <PageTitle title="FAQ"/>
 
             <div>
-            <center><h2 >Why use FriendZoned?</h2></center>
-            <center><p>If you are a busy student then FriendZoned is the perfect app for you!</p></center>
+            <center><h2 >Why use FriendZone?</h2></center>
+            <center><p>If you are a busy student then FriendZone is the perfect app for you!</p></center>
             </div>
             <br />
 
