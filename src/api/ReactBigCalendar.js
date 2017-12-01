@@ -69,7 +69,55 @@ class Selectable extends Component{
    //  }
    //
 
+    handle_select_slot(slotInfo)
+    {
+        // Call this.setState over here, to render the dialogue box
+        this.setState( );
+    }
 
+    handle_btn_add_event()
+    {
+        // do something with the fields entered by the user, and when the button is pressed, create a new event
+        let event = {event_name : "", day : "", start_time : "00:00", end_time : "23:59", location : "" };
+
+        // set the event to something...
+        // ..............................
+
+
+        // Check for validity of the event entered
+        if (this.state.event_name.trim() === "")
+        {
+            alert("Event Name is not entered!");
+        }
+        else
+        {
+            // TODO: Uncomment following line out
+            //add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.start_time, this.state.end_time, this.state.location);
+            alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
+
+            // Reset the fields of the dialogue box
+            this.setState();
+        }
+    }
+
+    handle_onSelectEvent(event)
+    {
+        // Call this.setState over here, to render the dialogue box
+        this.setState( );
+
+        // Event object has these fields:
+        // title
+        // start
+        // end
+        // type (can be either "lecture" or "other")
+        // event_id (if type === "other")
+        console.log(event);
+    }
+
+    handle_btn_edit_event()
+    {
+
+    }
 
     render() {
 
@@ -81,16 +129,19 @@ class Selectable extends Component{
                 </div>
                 <br/>
                 <BigCalendar
-                    selectable
+                    selectable = 'ignoreEvents'
                     events={this.events}
                     views={allViews}
                     step={60}
                     // Be default this should return current date
                     defaultDate={new Date()}
                     defaultView={'week'}
-                    onSelectEvent={ (data)=>{
-                        alert("Selected an event!");
-                    }}
+                    onSelectEvent={ this.handle_onSelectEvent.bind(this) }
+                    onSelectSlot={(slotInfo) => alert(
+                        `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
+                        `\nend: ${slotInfo.end.toLocaleString()}` +
+                        `\naction: ${slotInfo.action}`
+                    )}
                     //  scrollToTime={new Date(1970, 1, 1, 6)}
 
                    // onSelectEvent={event => add_event()}
@@ -107,11 +158,7 @@ class Selectable extends Component{
                 {/*</div>*/}
 
                 <div>
-                    onSelectSlot={(slotInfo) => alert(
-                        `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
-                        `\nend: ${slotInfo.end.toLocaleString()}` +
-                        `\naction: ${slotInfo.action}`
-                    )}
+
                 </div>
             </div>
         )
