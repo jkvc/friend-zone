@@ -6,8 +6,9 @@ import Loading from './view/credentials/Loading';
 import firebase from 'firebase';
 import MainLayout from './view/MainLayout';
 import registerServiceWorker from './registerServiceWorker';
-import InitProfile from './view/profile/InitProfile'
-
+import InitProfile from './view/profile/InitProfile';
+import {lookup_profile_by_user_id} from "./dao/ProfileManager";
+import RedirectNoEmailVerification from "./view/credentials/RedirectNoEmailVerification"
 // eslint-disable-next-line
 import {test_most_popular_in_list} from './test/TestMostPopularInList';
 
@@ -50,7 +51,23 @@ firebase.auth().onAuthStateChanged((user) => {
 
              /*user already has a profile in our db, go to schedule*/
             }else{
-                ReactDOM.render(<MainLayout/>, document.getElementById('root'));
+                //check if the user has verified their email
+
+                lookup_profile_by_user_id(user.uid, function (err,profile) {
+                    if (profile.verified_email === false) {
+                        window.alert("Email not verified");
+                        ReactDOM.render(<RedirectNoEmailVerification />, document.getElementById('root'));
+
+                    }
+                    //if already verified then log user in
+                    else{
+                        ReactDOM.render(<MainLayout/>, document.getElementById('root'));
+                    }
+                })
+
+
+                //done checking
+
             }
         });
     } else {

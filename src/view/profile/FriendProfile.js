@@ -66,7 +66,7 @@ class FriendProfile extends Component {
 
         return (
             <div align='center'>
-                <PageTitle title="Friend's profile"/>
+                <PageTitle title="Friend's Profile"/>
 
                 <br/>
                 <div className='friend-profile-pic-container'>

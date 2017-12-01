@@ -38,6 +38,26 @@ class Login extends Component {
 
             /* handles login success */
             .then(function(){
+                let uppercase_count = 0;
+                let lowercase_count = 0;
+                let numeric = 0;
+                let total = 0;;
+                let password = this.state.password;
+                for (let i = 0; i < password.length; i++) {
+                    if (password[i] >= 'A' && password[i] <= 'Z') {
+                        uppercase_count++;
+                    }
+                    else if (password[i] >= 'a' && password[i] <= 'z') {
+                        lowercase_count++;
+                    }
+                    else if (password[i] >= '0' && password[i] <= '9') {
+                        numeric++;
+                    }
+                    total++;
+                }
+                if (uppercase_count < 1 || lowercase_count < 1 || numeric < 1 || total < 8 ) {
+                    window.alert("Your password is too weak please go to \"Edit Profile\" to update it");
+                }
                 this.setState({
                    success_msg:"login success!",
                    err_msg:""
@@ -50,6 +70,8 @@ class Login extends Component {
                     err_msg:error.message
                 });
             }.bind(this));
+
+
 
     }
 
@@ -148,7 +170,7 @@ class Login extends Component {
                             <img className="separator" src={blue_line} alt=""/>
                             <br/>
 
-                            <div className="subtitle-text">Or, log in with</div>
+                            <div className="thirdpartymenssage">Or, log in with</div>
 
                             <button className="third-party-button"
                                 onClick={(e) => {e.preventDefault(); this.handle_third_party("google")}}>

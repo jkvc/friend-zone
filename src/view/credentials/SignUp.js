@@ -5,6 +5,8 @@ import Login from './Login';
 import InitProfile from "../profile/InitProfile";
 import {handle_third_party_auth} from './thirdparty/HandleThirdParty'
 import './MainLoginSignup.css'
+import './SignUp.css'
+import blue_line from '../../image/BlueLine.png'
 class SignUp extends Component {
 
     constructor(props) {
@@ -94,9 +96,11 @@ class SignUp extends Component {
                 });
 
                 //send email verification
-                firebase.auth().onAuthStateChanged(function(user) {
-                    alert("Confirmation email sent!");
-                    user.sendEmailVerification();
+                firebase.auth().onAuthStateChanged(function once(user) {
+                    if(user.emailVerified === false || user.emailVerified === undefined  ) {
+                        window.alert("Confirmation email sent!");
+                        user.sendEmailVerification();
+                    }
                 });
 
                 ReactDOM.render(<InitProfile />, document.getElementById('root'));
@@ -138,6 +142,14 @@ class SignUp extends Component {
                 // no need to ReactDOM render since index.js can somehow detect onAuthStateChanged
             }
         }.bind(this));
+    }
+
+    handle_keyPress(event)
+    {
+        if (event.key === 'Enter')
+        {
+            this.handle_signup_button(event);
+        }
     }
 
    render() {
@@ -200,47 +212,56 @@ class SignUp extends Component {
                            <br/>
 
                            <div className="subtitle-text">
-                               Create your Friendzone account and find who is also in your class!
+                               Get your FriendZone account and see who is also in your class!
                            </div>
                            <br/>
 
-                           <div className="email-password-container">
-                               <div className="email-password-left" align={"right"}>
-                                   <text className="label-text"> Email:  </text>
+                           <form onKeyPress={this.handle_keyPress.bind(this)}>
+                               <div className="email-password-container">
+                                   <div className="email-password-left" align={"right"}>
+                                       <text className="label-text"> Email:  </text>
+                                       <br/>
+                                       <br/>
+                                       <text className="label-text"> Password: </text>
+                                       <br/>
+                                       <br/>
+                                       <text className="label-text"> Verify Password: </text>
+                                   </div>
+
+                                   <div className="email-password-right" align={"left"}>
+                                       <input className="transparent-text-box" type="text"
+                                              value={this.state.user_email}
+                                              onChange={e=> this.setState({user_email: e.target.value})}/>
+                                       <br/>
+                                       <br/>
+                                       <input className="transparent-text-box" type={"password"}
+                                              value={this.state.password}
+                                              onChange={ e=> this.setState({password: e.target.value})}/>
+                                       <br/>
+                                       <br/>
+                                       <input className="transparent-text-box" type={"password"}
+                                              value={this.state.verify_password}
+                                              onChange={ e=> this.setState({verify_password: e.target.value})}/>
+                                       <label>{this.state.success_msg}</label>
+
+                                   </div>
                                    <br/>
                                    <br/>
-                                   <text className="label-text"> Password: </text>
-                                   <br/>
-                                   <br/>
-                                   <text className="label-text"> Verify Password: </text>
+
                                </div>
-
-                               <div className="email-password-right" align={"left"}>
-                                   <input className="transparent-text-box" type="text"
-                                          value={this.state.user_email}
-                                          onChange={e=> this.setState({user_email: e.target.value})}/>
+                               <div className="wrapper">
+                                   <div className="error-message">{this.state.err_msg}</div>
+                                   <button className="button-text" onClick={this.handle_signup_button.bind(this)}>Sign up and Log In</button>
                                    <br/>
+                                   <img className="separator" src={blue_line} alt=""/>
                                    <br/>
-                                   <input className="transparent-text-box" type={"password"}
-                                          value={this.state.password}
-                                          onChange={ e=> this.setState({password: e.target.value})}/>
+                                   <button className="button-text" onClick={this.goto_login.bind(this)}>Go Back to Log in</button>
                                    <br/>
-                                   <br/>
-                                   <input className="transparent-text-box" type={"password"}
-                                          value={this.state.verify_password}
-                                          onChange={ e=> this.setState({verify_password: e.target.value})}/>
-                                   <label>{this.state.success_msg}</label>
+                                   <p className="thirdpartymenssage">----You can log in with third party account on log in page----</p>
                                </div>
+                           </form>
 
-                           </div>
 
-                           <br/>
-                           <div className="error-message">{this.state.err_msg}</div>
-                           <br/>
-
-                               <button className="buttonStyle" onClick={this.handle_signup_button.bind(this)}>Signup and login</button>
-                               <button className="buttonStyle" onClick={this.goto_login.bind(this)}>goto login instead</button>
-                           <br/>
                        </div>
                    </div>
                </div>

@@ -23,9 +23,11 @@ class EditProfile extends Component {
             profile_pic: "",
             description: "",
             upload_status: "",
+            oldPassword: "",
             newPassword: "",
             repeatPassword: "",
-            password_action_msg: ""
+            password_action_msg: "",
+            profile_update_msg: ""
         };
 
 
@@ -52,6 +54,36 @@ class EditProfile extends Component {
     }
 
     handle_update() {
+
+        let error_msg = "";
+        if (this.state.first_name.trim().length < 2)
+        {
+            error_msg = "Please enter a valid first name (at least 2 characters long)";
+        }
+        else if (this.state.last_name.trim().length < 2)
+        {
+            error_msg = "Please enter a valid last name (at least 2 characters long)";
+        }
+        else if (this.state.current_year.trim().length === 0)
+        {
+            error_msg = "Please select a valid \"current year\" field";
+        }
+        else if (this.state.major.trim().length === 0)
+        {
+            error_msg = "Please enter a valid major or department name."
+        }
+        else if (this.state.description.trim().length === 0)
+        {
+            error_msg = "Please enter something for description. This may be your preferred means of contact or " +
+                "a simple greeting.";
+        }
+        else {
+            error_msg = "";
+        }
+
+        this.setState({profile_update_msg:error_msg});
+        if (error_msg !== "") return;
+
         this.profile_obj.first_name = this.state.first_name;
         this.profile_obj.last_name = this.state.last_name;
         this.profile_obj.major = this.state.major;
@@ -59,9 +91,45 @@ class EditProfile extends Component {
         this.profile_obj.first_name = this.state.first_name;
         this.profile_obj.profile_pic = this.state.profile_pic;
         this.profile_obj.description = this.state.description;
-        this.profile_obj.push().catch(function (error) {
+        this.profile_obj.push().catch((error) => {
             alert(error);
+            this.setState({profile_update_msg:error.msg});
         });
+        this.setState( {profile_update_msg:"Profile updated!"} );
+    }
+
+    handle_password_enterKey(event)
+    {
+        if (event.key==="Enter")
+        {
+            this.handle_update_password();
+        }
+        else
+        {
+            this.setState({password_action_msg:""});
+        }
+    }
+
+    handle_profile_enterKey(event)
+    {
+        if (event.key === "Enter")
+        {
+            this.handle_update();
+        }
+        else
+        {
+            this.setState({profile_update_msg:""});
+        }
+    }
+
+    handle_profile_backKey(event)
+    {
+        this.setState({profile_update_msg:""});
+    }
+
+    handle_password_backKey(event)
+    {
+        this.setState({password_action_msg:""});
     }
 
     handle_update_password() {
@@ -108,15 +176,30 @@ class EditProfile extends Component {
 
         else {
 
-            user.updatePassword(password).then(function () {
-                password_msg = "Password Changed Successfully";
-                this.setState({password_action_msg: password_msg, newPassword: "", repeatPassword: ""});
-            }.bind(this)).catch(function (error) {
-                password_msg = "An error has occurred, please try again later";
-                this.setState({password_action_msg: password_msg, newPassword: "", repeatPassword: ""});
-            }.bind(this));
+            // Create a firebase credential object
+            let credential = firebase.auth.EmailAuthProvider.credential( firebase.auth().currentUser.email ,
+                this.state.oldPassword);
+
+            // Authenticate the user's old password and email
+            user.reauthenticateWithCredential(credential).then(() => {
+
+                // If authenticate is successful, grant access to change password
+                user.updatePassword(password).then(function () {
+                    password_msg = "Password Changed Successfully";
+                    this.setState({password_action_msg: password_msg, oldPassword:"", newPassword: "", repeatPassword: ""});
+                }.bind(this)).catch(function (error) {
+                    password_msg = "An error has occurred, please try again later";
+                    this.setState({password_action_msg: password_msg, oldPassword:"", newPassword: "", repeatPassword: ""});
+                }.bind(this));
+
+            // Else print out error messages
+            }).catch( (error) => {
+                password_msg = "Mismatching Old Password!";
+                this.setState({password_action_msg: password_msg});
+            } );
         }
-        this.setState({password_action_msg: password_msg, newPassword: "", repeatPassword: ""});
+
+        this.setState({password_action_msg: password_msg, oldPassword:"", newPassword: "", repeatPassword: ""});
     }
 
     upload_image(e) {
@@ -157,7 +240,7 @@ class EditProfile extends Component {
         return (
 
             <div align={'center'}>
-                <PageTitle title={'Edit my profile'}/>
+                <PageTitle title="Edit My Profile"/>
 
                 <br/>
                 <div className='profile-pic-container'>
@@ -180,63 +263,65 @@ class EditProfile extends Component {
                 </div>
                 <br/>
 
-                <table className={'edit-profile-table'}>
-                    <tbody>
-                    <tr>
-                        <td>First Name</td>
-                        <td>
-                            <input type="text" value={this.state.first_name}
-                                   onChange={e => this.setState({first_name: e.target.value})}/>
-                        </td>
-                    </tr>
+                <form onKeyPress={this.handle_profile_enterKey.bind(this)} onKeyDown={this.handle_profile_backKey.bind(this)}>
+                    <table className={'edit-profile-table'}>
+                        <tbody>
+                        <tr>
+                            <td>First Name</td>
+                            <td>
+                                <input type="text" value={this.state.first_name}
+                                       onChange={e => this.setState({first_name: e.target.value})}/>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Last Name</td>
-                        <td>
-                            <input type="text" value={this.state.last_name}
-                                   onChange={e => this.setState({last_name: e.target.value})}/>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>Last Name</td>
+                            <td>
+                                <input type="text" value={this.state.last_name}
+                                       onChange={e => this.setState({last_name: e.target.value})}/>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Major</td>
-                        <td>
-                            <input type="text" value={this.state.major}
-                                   onChange={e => this.setState({major: e.target.value})}/>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>Major</td>
+                            <td>
+                                <input type="text" value={this.state.major}
+                                       onChange={e => this.setState({major: e.target.value})}/>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Current Year</td>
-                        <td>
-                            <select name="current-year" id="current-year"
-                                    value={this.state.current_year}
-                                    onChange={e => {
-                                        this.setState({current_year: e.target.value})
-                                    }}
-                            >
-                                <option value="Other">..</option>
-                                <option value="Freshman">Freshman</option>
-                                <option value="Sophomore">Sophomore</option>
-                                <option value="Junior">Junior</option>
-                                <option value="Senior">Senior</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>Current Year</td>
+                            <td>
+                                <select name="current-year" id="current-year"
+                                        value={this.state.current_year}
+                                        onChange={e => {
+                                            this.setState({current_year: e.target.value})
+                                        }}
+                                >
+                                    <option value="Other">..</option>
+                                    <option value="Freshman">Freshman</option>
+                                    <option value="Sophomore">Sophomore</option>
+                                    <option value="Junior">Junior</option>
+                                    <option value="Senior">Senior</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Description</td>
-                        <td>
-                            <input type="text" value={this.state.description}
-                                   onChange={e => this.setState({description: e.target.value})}/>
+                        <tr>
+                            <td>Description</td>
+                            <td>
+                                <textarea value={this.state.description}
+                                       onChange={e => this.setState({description: e.target.value})}/>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
-                    </tbody>
-                </table>
-
+                        </tbody>
+                    </table>
+                </form>
+                <div className={"display-msg"}> {this.state.profile_update_msg } </div>
                 <button className={'edit-profile-button'}
                     onClick={this.handle_update.bind(this)}> Update Profile</button>
                 <br/>
@@ -249,25 +334,35 @@ class EditProfile extends Component {
                     (Password must contain uppercase, lowercase letters, number, and be at least 8 chars long)
                 </div>
                 <br/>
-                <table className={'edit-profile-table'}>
-                    <tbody>
-                    <tr>
-                        <td>New password</td>
-                        <td>
-                            <input type="text" value={this.state.newPassword}
-                                   onChange={e => this.setState({newPassword: e.target.value})}/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Confirm password</td>
-                        <td>
-                            <input type="text" value={this.state.repeatPassword}
-                                   onChange={e => this.setState({repeatPassword: e.target.value})}/>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div> {this.state.password_action_msg} </div>
+
+                <form onKeyPress={this.handle_password_enterKey.bind(this)} onKeyDown={this.handle_password_backKey.bind(this)}>
+                    <table className={'edit-profile-table'}>
+                        <tbody>
+                        <tr>
+                            <td> Old Password </td>
+                            <td>
+                                <input type="password" value={this.state.oldPassword}
+                                       onChange={e => this.setState({oldPassword: e.target.value})}/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>New password</td>
+                            <td>
+                                <input type="password" value={this.state.newPassword}
+                                       onChange={e => this.setState({newPassword: e.target.value})}/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Confirm password</td>
+                            <td>
+                                <input type="password" value={this.state.repeatPassword}
+                                       onChange={e => this.setState({repeatPassword: e.target.value})}/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <div className={'display-msg'}> {this.state.password_action_msg} </div>
                 <button className={'edit-profile-button'}
                         onClick={this.handle_update_password.bind(this)}>Update Password</button>
 

@@ -67,7 +67,7 @@ class UserFriends extends Component {
 
             <div align="center">
 
-                <PageTitle title='My friends'/>
+                <PageTitle title='My Friends'/>
 
                 <table>
                     <tbody>
@@ -88,7 +88,7 @@ class UserFriends extends Component {
                                             {this.state.friend_profiles[friend_id].first_name}{" "}
                                             {this.state.friend_profiles[friend_id].last_name}{" "}
                                             <br/>
-                                            Same classes: {list_same_classes(this.state.friend_profiles[friend_id].enrolled_courses, this.state.profile_obj.enrolled_courses)}</p>
+                                            Mutual classes: {list_same_classes(this.state.friend_profiles[friend_id].enrolled_courses, this.state.profile_obj.enrolled_courses)}</p>
                                     </td>
 
                                     <td>

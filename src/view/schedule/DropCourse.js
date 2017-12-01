@@ -41,7 +41,7 @@ class DropCourse extends Component {
         return (
             <div align={'center'}>
 
-                <PageTitle title='Drop course'/>
+                <PageTitle title="Drop Course"/>
 
 
                 <table className='course-search-result'>
@@ -69,7 +69,7 @@ class DropCourse extends Component {
 
 
                 <br/>
-                <pre>{JSON.stringify(this.state.courses_list, null, 2)}</pre>
+                <pre>{/*JSON.stringify(this.state.courses_list, null, 2)*/}</pre>
 
             </div>
         )
