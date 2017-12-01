@@ -118,7 +118,8 @@ class Selectable extends Component{
     handle_select_slot(slotInfo)
     {
         // Call this.setState over here, to render the dialogue box
-        this.setState( );
+        this.setState({isNewEventDialogueOpen:true,
+                        } );
     }
 
     handle_btn_add_event()
@@ -173,47 +174,18 @@ class Selectable extends Component{
                     Click an event to see more info, or
                     drag the mouse over the calendar to select a date/time range.
                 </div>
-                <br/>
-                <BigCalendar
-                    selectable = 'ignoreEvents'
-                    events={this.state.events}
-                    views={allViews}
-                    step={60}
-                    // By default this should return current date
-                    defaultDate={new Date()}
-                    defaultView={'week'}
-
-                    onSelectEvent={ this.handle_onSelectEvent.bind(this) }
-                    onSelectSlot={(slotInfo) => alert(
-                        `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
-                        `\nend: ${slotInfo.end.toLocaleString()}` +
-                        `\naction: ${slotInfo.action}`
-                    )}
-                    //  scrollToTime={new Date(1970, 1, 1, 6)}
-
-                   // onSelectEvent={event => add_event()}
-                   // onSelectEvent={ add_event()}
-                   //    onSelectSlot={ (slotInfo) => {
-                   //      console.log(slotInfo);
-                        // this.setState({
-                        //     isNewEventDialogueOpen: true,
-                        //     event_name: "",
-                        //     day: "",
-                        //     start_time: "00:00",
-                        //     end_time: "23:59",
-                        //     location: ""
-                        // });
-                   // } }
-                    />
-                {/*<div>*/}
-                    {/*<button className='add-button'*/}
-                            {/*onClick={() => {*/}
-                                {/*this.setState({course_id_to_add: entry.course_id}, () => {*/}
-                                    {/*this.handle_add_course();*/}
-                                {/*});*/}
-                            {/*}}>Add this course*/}
-                    {/*</button>*/}
-                {/*</div>*/}
+                    <br/>
+                    <BigCalendar
+                        selectable = 'ignoreEvents'
+                        events={this.state.events}
+                        views={allViews}
+                        step={60}
+                        // By default this should return current date
+                        defaultDate={new Date()}
+                        defaultView={'week'}
+                        onSelectEvent={ this.handle_onSelectEvent.bind(this) }
+                        onSelectSlot={ this.handle_select_slot.bind(this) }
+                        />
 
                 <div>
 
