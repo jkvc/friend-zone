@@ -160,10 +160,10 @@ class Selectable extends Component{
         console.log(event);
     }
 
-    handle_btn_edit_event()
-    {
-
-    }
+    // handle_btn_edit_event()
+    // {
+    //
+    // }
 
     render() {
 
@@ -176,7 +176,7 @@ class Selectable extends Component{
                 <br/>
                 <BigCalendar
                     selectable = 'ignoreEvents'
-                    events={this.events}
+                    events={this.state.events}
                     views={allViews}
                     step={60}
                     // By default this should return current date
