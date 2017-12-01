@@ -7,6 +7,10 @@ import React, {Component} from 'react';
 import BigCalendar from 'react-big-calendar';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from 'moment';
+import './ReactBigCalendar.css'
+import ReactDom from 'react-dom';
+import Popup from 'react-popup';
+
 
 
 BigCalendar.setLocalizer(
@@ -38,13 +42,44 @@ class Selectable extends Component{
         this.events = props.events;
     }
 
+   /* popup_event(){
+        ReactDom.render(
+            <Popup />,
+            document.getElementById('popupContainer')
+        Popup.create({
+            title: 'add event',
+            content: '',
+            className: 'Popup',
+            position: {x: 100, y: 200},
+            /* customize button */
+            buttons: {
+               /* text: 'My button text',
+                className: 'special-btn', // optional
+                action: function (popup) {
+                    // do stuff
+                    popup.close();
+                },*/
+              /*  left:['cancel'],
+                right: ['save']
+            },
+            noOverlay: true,
+            closeOnOutsideClick: true
+        }),
+      )
+    }*/
+
+
+
+
     render() {
+
         return (
             <div {...this.props}>
-                <h3 className="callout">
+                <div className='instruction-calendar'>
                     Click an event to see more info, or
                     drag the mouse over the calendar to select a date/time range.
-                </h3>
+                </div>
+                <h1> <span> </span></h1>
                 <BigCalendar
                     selectable
                     events={this.events}
@@ -53,13 +88,22 @@ class Selectable extends Component{
                     // Be default this should return current date
                     defaultDate={new Date()}
                     defaultView={'week'}
-                    //onSelectEvent={(data)=>{
-                    //    alert("Selected an event!");
-                    //}}
+                    onSelectEvent={(data)=>{
+                        alert("Selected an event!");
+                    }}
                     //  scrollToTime={new Date(1970, 1, 1, 6)}
 
-                    onSelectEvent={event => alert(event.title)}
-
+                   // onSelectEvent={event => add_event()}
+                   // onSelectEvent={ add_event()}
+                <div>
+                    <button className='add-button'
+                            onClick={() => {
+                                this.setState({course_id_to_add: entry.course_id}, () => {
+                                    this.handle_add_course();
+                                });
+                            }}>Add this course
+                    </button>
+                </div>
                     onSelectSlot={(slotInfo) => alert(
                         `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
                         `\nend: ${slotInfo.end.toLocaleString()}` +
@@ -69,5 +113,6 @@ class Selectable extends Component{
             </div>
         )
     }
+
 }
 export default Selectable;
