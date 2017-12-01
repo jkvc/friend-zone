@@ -57,7 +57,7 @@ class UserInbox extends Component {
     }
 
     goto_other_profile(){
-
+        ReactDOM.render(<OtherProfile user_id={friend_id}/>, document.getElementById('main-layout'));
     }
 
     render() {
@@ -100,7 +100,9 @@ class UserInbox extends Component {
                                         }}> Accept
                                 </button>
 
-                                <button className="inbox_entry_button">
+                                <button className="inbox_entry_button" onClick={() => {
+                                                this.goto_other_profile(friend_id);
+                                            }}>>
                                     View profile
                                 </button>
 
