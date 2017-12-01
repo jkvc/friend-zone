@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {accept_friend_request, decline_friend_request, lookup_profile_by_user_id} from "../../dao/ProfileManager";
 import firebase from 'firebase';
+import OtherProfile from "../profile/FriendProfile";
 import {get_self_profile} from "../../api/StaticData";
 import PageTitle from "../components/PageTitle";
 import ReactDOM from 'react-dom';
@@ -56,8 +57,8 @@ class UserInbox extends Component {
         ReactDOM.render(<RecommendedFriends/>, document.getElementById('main-layout'));
     }
 
-    goto_other_profile(){
-
+    goto_other_profile(friend_id){
+        ReactDOM.render(<OtherProfile user_id={friend_id}/>, document.getElementById('main-layout'));
     }
 
     render() {
@@ -100,7 +101,9 @@ class UserInbox extends Component {
                                         }}> Accept
                                 </button>
 
-                                <button className="inbox_entry_button">
+                                <button className="inbox_entry_button" onClick={() => {
+                                                this.goto_other_profile(incoming_profile.user_id);
+                                            }}>>
                                     View profile
                                 </button>
 
