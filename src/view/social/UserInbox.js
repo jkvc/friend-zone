@@ -57,7 +57,7 @@ class UserInbox extends Component {
         ReactDOM.render(<RecommendedFriends/>, document.getElementById('main-layout'));
     }
 
-    goto_other_profile(){
+    goto_other_profile(friend_id){
         ReactDOM.render(<OtherProfile user_id={friend_id}/>, document.getElementById('main-layout'));
     }
 
