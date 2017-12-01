@@ -5,6 +5,7 @@ import Login from './Login';
 import InitProfile from "../profile/InitProfile";
 import {handle_third_party_auth} from './thirdparty/HandleThirdParty'
 import './MainLoginSignup.css'
+import './SignUp.css'
 import blue_line from '../../image/BlueLine.png'
 class SignUp extends Component {
 
