@@ -7,6 +7,10 @@ import React, {Component} from 'react';
 import BigCalendar from 'react-big-calendar';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from 'moment';
+import './ReactBigCalendar.css'
+// import ReactDom from 'react-dom';
+// import Popup from 'react-popup';
+
 
 
 BigCalendar.setLocalizer(
@@ -30,7 +34,7 @@ let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 // If you want to be able to do something with the Calendar when the user clicks on an event, modify the
 //      prop "onSelectEvent={ some_function }, where you pass in a function that tells the program what to do.
 //      For more, read the official documentation on the link provided above.
-class BasicCalendar extends Component{
+class Selectable extends Component{
 
     constructor(props)
     {
@@ -38,22 +42,80 @@ class BasicCalendar extends Component{
         this.events = props.events;
     }
 
-    render(){
+   // popup_event(){
+   //      ReactDom.render(
+   //          <Popup />,
+   //          document.getElementById('popupContainer')
+   //      Popup.create({
+   //          title: 'add event',
+   //          content: '',
+   //          className: 'Popup',
+   //          position: {x: 100, y: 200},
+   //          /* customize button */
+   //          buttons: {
+   //             text: 'My button text',
+   //              className: 'special-btn', // optional
+   //              action: function (popup) {
+   //                  // do stuff
+   //                  popup.close();
+   //              },
+   //              left:['cancel'],
+   //              right: ['save']
+   //          },
+   //          noOverlay: true,
+   //          closeOnOutsideClick: true
+   //      }),
+   //    )
+   //  }
+   //
+
+
+
+    render() {
+
         return (
-            <BigCalendar
-                {...this.props}
-                events={this.events}
-                views={allViews}
-                step={60}
-                // Be default this should return current date
-                defaultDate={new Date()}
-                defaultView={'week'}
-                onSelectEvent={(data)=>{
-                    alert("Selected an event!");
-                }}
-            />
+            <div {...this.props}>
+                <div className='instruction-calendar'>
+                    Click an event to see more info, or
+                    drag the mouse over the calendar to select a date/time range.
+                </div>
+                <br/>
+                <BigCalendar
+                    selectable
+                    events={this.events}
+                    views={allViews}
+                    step={60}
+                    // Be default this should return current date
+                    defaultDate={new Date()}
+                    defaultView={'week'}
+                    onSelectEvent={ (data)=>{
+                        alert("Selected an event!");
+                    }}
+                    //  scrollToTime={new Date(1970, 1, 1, 6)}
+
+                   // onSelectEvent={event => add_event()}
+                   // onSelectEvent={ add_event()}
+                    />
+                {/*<div>*/}
+                    {/*<button className='add-button'*/}
+                            {/*onClick={() => {*/}
+                                {/*this.setState({course_id_to_add: entry.course_id}, () => {*/}
+                                    {/*this.handle_add_course();*/}
+                                {/*});*/}
+                            {/*}}>Add this course*/}
+                    {/*</button>*/}
+                {/*</div>*/}
+
+                <div>
+                    onSelectSlot={(slotInfo) => alert(
+                        `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
+                        `\nend: ${slotInfo.end.toLocaleString()}` +
+                        `\naction: ${slotInfo.action}`
+                    )}
+                </div>
+            </div>
         )
     }
-}
 
-export default BasicCalendar;
+}
+export default Selectable;
