@@ -55,7 +55,6 @@ firebase.auth().onAuthStateChanged((user) => {
 
                 lookup_profile_by_user_id(user.uid, function (err,profile) {
                     if (profile.verified_email === false) {
-                        window.alert("Email not verified");
                         ReactDOM.render(<RedirectNoEmailVerification />, document.getElementById('root'));
 
                     }

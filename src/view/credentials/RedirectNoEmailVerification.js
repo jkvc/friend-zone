@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Welcome from './Welcome';
 import firebase from 'firebase';
-import {lookup_profile_by_user_id} from "../../dao/ProfileManager";
-
 class RedirectNoEmailVerification extends Component {
     constructor( props){
         super(props);
