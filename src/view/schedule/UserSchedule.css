@@ -5,8 +5,12 @@
     color: #2f5597;
     padding: 10px;
     cursor: pointer;
+
 }
 
+.buttonHover:hover{
+    text-decoration: underline;
+}
 #calendar-helper-container{
     width: 90%;
 }

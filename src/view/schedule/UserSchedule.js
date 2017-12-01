@@ -43,7 +43,7 @@ class UserSchedule extends Component {
         ReactDOM.render(<RemoveEvent />, document.getElementById('main-layout'));
     }
 
-    async update_event(curr_event)
+    async update_event(event_id, curr_event)
     {
         // A backward compatibility check, making sure start_time and end_time are in event
         if (! ("start_time" in curr_event) || !("end_time" in curr_event) )
@@ -60,6 +60,8 @@ class UserSchedule extends Component {
 
         parsed_event["start"] = new Date( curr_event.day + "T" + curr_event.start_time );
         parsed_event["end"] = new Date( curr_event.day + "T" + curr_event.end_time );
+        parsed_event["type"] = "other";
+        parsed_event["event_id"] = event_id;
 
         return parsed_event;
     }
@@ -92,7 +94,7 @@ class UserSchedule extends Component {
         {
             let curr_event = raw_other_events[event_id];
 
-            this.update_event(curr_event).then( parsed_event => {
+            this.update_event(event_id, curr_event).then( parsed_event => {
                 other_events.push(parsed_event);
                 this.setState({other_events:other_events});
                 ReactDOM.render(<CalendarHelper events={this.state.events}
@@ -185,11 +187,11 @@ class UserSchedule extends Component {
                 <PageTitle title="My Schedule"/>
 
                 <div className='schedule-button-container'>
-                    <button onClick={this.goto_AddCourse.bind(this)}>Add course</button>
-                    <button onClick={this.goto_DropCourse.bind(this)}>Drop course</button>
-                    <button onClick={this.goto_AddEvent.bind(this)}>Add Event</button>
-                    <button onClick={this.goto_RemoveEvent.bind(this)}>Remove Event</button>
-                    <button onClick={this.goto_RecommendedFriends.bind(this)}>Recommended Friends</button>
+                    <button className="buttonHover" onClick={this.goto_AddCourse.bind(this)}>Add course</button>
+                    <button className="buttonHover"onClick={this.goto_DropCourse.bind(this)}>Drop course</button>
+                    <button className="buttonHover" onClick={this.goto_AddEvent.bind(this)}>Add Event</button>
+                    <button className="buttonHover" onClick={this.goto_RemoveEvent.bind(this)}>Remove Event</button>
+                    <button className="buttonHover" onClick={this.goto_RecommendedFriends.bind(this)}>Recommended Friends</button>
                 </div>
                 <br/>
                 <br/>

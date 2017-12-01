@@ -2,7 +2,7 @@ import {add_event_to_profile} from "../../dao/ProfileManager";
 import React, {Component} from 'react';
 import firebase from 'firebase';
 import PageTitle from "../components/PageTitle";
-
+import './AddEvent.css'
 
 class AddEvent extends Component{
 
@@ -66,8 +66,8 @@ class AddEvent extends Component{
 
                 <br/>
                 <form onKeyPress={this.handle_keyPress.bind(this)}>
-                    <label>Event_Name:</label>
-                    <input type={"text"} value={this.state.event_name}
+                    <label>Event Name:</label>
+                    <input className="addEventinputfield" type="text" value={this.state.event_name}
                            onChange={function(e){
                                this.setState({event_name:e.target.value});
                            }.bind(this)}/>
@@ -75,7 +75,7 @@ class AddEvent extends Component{
                     <br />
 
                     <label>Day:</label>
-                    <input type={"date"} value={this.state.day}
+                    <input className="addEventinputfield" type="date" value={this.state.day}
                            onChange={function(e){
                                this.setState({day:e.target.value})
                            }.bind(this)}/>
@@ -83,7 +83,7 @@ class AddEvent extends Component{
                     <br />
 
                     <label>Start Time:</label>
-                    <input type={"time"} value={this.state.start_time}
+                    <input className="addEventinputfield" type="time" value={this.state.start_time}
                            onChange={function(e){
                                this.setState({start_time:e.target.value})
                            }.bind(this)}/>
@@ -91,7 +91,7 @@ class AddEvent extends Component{
                     <br />
 
                     <label>End Time:</label>
-                    <input type={"time"} value={this.state.end_time}
+                    <input className="addEventinputfield" type="time" value={this.state.end_time}
                            onChange={function(e){
                                this.setState({end_time:e.target.value})
                            }.bind(this)}/>
@@ -99,22 +99,33 @@ class AddEvent extends Component{
                     <br />
 
                     <label>Location</label>
-                    <input type={"text"} value={this.state.location}
+                    <input className="addEventinputfield" value={this.state.location}
                            onChange={function(e){
                                this.setState({location:e.target.value})
                            }.bind(this)}/>
 
                     <br />
                 </form>
-                <button onClick={()=>{
+                <button className="eventButton" onClick={()=>{
                     this.handle_add_event();
                 }} > Add Event</button>
+                <div className="flowercontainer">
+                    <div className="droplet" id="no1"></div>
+                    <div className="droplet" id="no2"></div>
+                    <div className="droplet" id="no3"></div>
+                    <div className="droplet" id="no4"></div>
+                    <div className="droplet" id="no5"></div>
+                    <div className="droplet" id="no6"></div>
+                    <div className="droplet" id="no7"></div>
+                    <div className="droplet" id="no8"></div>
+                    <div className="droplet" id="no9"></div>
+                    <div className="droplet" id="no10"></div>
 
-                <br />
-                Raw JSON:
-                <pre>{JSON.stringify(this.state,null,2)}</pre>
+                </div>
+
 
             </div>
+
         )
     }
 

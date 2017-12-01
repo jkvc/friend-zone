@@ -110,6 +110,8 @@
 .button-nav-bar:hover {
     animation: bounce 2s;
     font-size: medium;
+    background: linear-gradient(lightgrey, darkgrey);
+    color:white;
 }
 
 .logout-button {
