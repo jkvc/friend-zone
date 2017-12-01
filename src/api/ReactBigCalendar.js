@@ -1,13 +1,16 @@
 /*
- * @author: Yiming Cai
+ * @author: Yiming Cai, Tianhui
  */
 
-
+import firebase from 'firebase';
+import {add_event_to_profile} from "../dao/ProfileManager";
 import React, {Component} from 'react';
 import BigCalendar from 'react-big-calendar';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from 'moment';
-import './ReactBigCalendar.css'
+import './ReactBigCalendar.css';
+import Dialog from 'react-dialog';
+
 // import ReactDom from 'react-dom';
 // import Popup from 'react-popup';
 
@@ -39,7 +42,50 @@ class Selectable extends Component{
     constructor(props)
     {
         super(props);
-        this.events = props.events;
+        this.state = {
+            events : props.events,
+            isNewEventDialogueOpen: false,
+
+            // for new event dialog box only
+            event_name: "",
+            day: "",
+            start_time: "00:00",
+            end_time: "23:59",
+            location: ""
+
+
+        };
+    }
+
+    handle_add_event(){
+
+        // Check for validity of the event entered
+        if (this.state.event_name === "")
+        {
+            alert("Event Name is not entered!");
+        }
+        else if (this.state.day === "" )
+        {
+            alert("Event Day is not entered!");
+        }
+        else if (this.state.start_time === "")
+        {
+            alert("Start Time is not specified!");
+        }
+        else if (this.state.end_time === "")
+        {
+            alert("End Time is not specified!");
+        }
+        else if ( this.state.start_time > this.state.end_time )
+        {
+            alert("Start time must be greater than end time!");
+        }
+        else {
+            add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.start_time, this.state.end_time, this.state.location);
+            alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
+            this.setState( {event_name : "", day : "", start_time : "00:00", end_time : "23:59", location : ""} );
+        }
+
     }
 
    // popup_event(){
@@ -82,19 +128,43 @@ class Selectable extends Component{
                 <br/>
                 <BigCalendar
                     selectable
-                    events={this.events}
-                    views={allViews}
+                    // events={this.events}
+                    // views={allViews}
+                    events={this.props.events}
                     step={60}
-                    // Be default this should return current date
+                    // By default this should return current date
                     defaultDate={new Date()}
                     defaultView={'week'}
+
+                    // messages={this.state.messages}
+                    // formats={this.state.formats}
+                    // start_time: "00:00"
+                    // end_time: "23:59"
+                    // isNewEventDialogueOpen: true
+                    // location: ""
+                    // day: ""
+                    // event_name: ""
+
+
                     onSelectEvent={ (data)=>{
-                        alert("Selected an event!");
+                        alert(data.title);
                     }}
-                    //  scrollToTime={new Date(1970, 1, 1, 6)}
+
+                    // scrollToTime={new Date(1970, 1, 1, 6)}
 
                    // onSelectEvent={event => add_event()}
                    // onSelectEvent={ add_event()}
+                   //    onSelectSlot={ (slotInfo) => {
+                   //      console.log(slotInfo);
+                        // this.setState({
+                        //     isNewEventDialogueOpen: true,
+                        //     event_name: "",
+                        //     day: "",
+                        //     start_time: "00:00",
+                        //     end_time: "23:59",
+                        //     location: ""
+                        // });
+                   // } }
                     />
                 {/*<div>*/}
                     {/*<button className='add-button'*/}
@@ -107,11 +177,7 @@ class Selectable extends Component{
                 {/*</div>*/}
 
                 <div>
-                    onSelectSlot={(slotInfo) => alert(
-                        `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
-                        `\nend: ${slotInfo.end.toLocaleString()}` +
-                        `\naction: ${slotInfo.action}`
-                    )}
+
                 </div>
             </div>
         )
