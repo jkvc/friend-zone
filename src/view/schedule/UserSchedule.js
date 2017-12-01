@@ -62,6 +62,7 @@ class UserSchedule extends Component {
         parsed_event["end"] = new Date( curr_event.day + "T" + curr_event.end_time );
         parsed_event["type"] = "other";
         parsed_event["event_id"] = event_id;
+        parsed_event["event_obj"] = curr_event;
 
         return parsed_event;
     }
