@@ -10,6 +10,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from 'moment';
 import './ReactBigCalendar.css';
 import Dialog from 'react-dialog';
+import '../view/schedule/AddEvent.css';
 
 // import ReactDom from 'react-dom';
 // import Popup from 'react-popup';
@@ -138,7 +139,6 @@ class Selectable extends Component{
 
     //openDialog = () => this.setState({ isDialogOpen: true })
     handleClose = () => this.setState({ isDialogOpen: false })
-    //handleSave = () =>  this.setState({ isDialogOpen: false })
 
     handle_btn_add_event()
     {
@@ -193,6 +193,13 @@ class Selectable extends Component{
     // {
     //
     // }
+    handle_keyPress(event)
+    {
+        if (event.key === 'Enter')
+        {
+            this.handle_btn_add_event(event);
+        }
+    }
 
     render() {
 
@@ -204,23 +211,78 @@ class Selectable extends Component{
                 </div>
                     <br/>
                 {this.state.isDialogOpen &&
-                    <Dialog
-                    title="Dialog Title"
-                    modal={true}
-                    buttons={
-                        [{
-                            text: "save",
-                            onClick: () => this.handle_btn_add_event()
-                        },
-                        {
-                            text:"cancel",
-                            onClick: () => this.handleClose()
-                        }]
-                    }>
-                    <h1>Dialog Content</h1>
-                    <p>More Content. Anything goes here</p>
-                    </Dialog>
+                    <div className='dialogue-box'>
+                        <Dialog className=''
+                            title="Dialog Title"
+                            modal={true}
+                            buttons={
+                                [{
+                                    text: "save",
+                                    onClick: () => this.handle_btn_add_event()
+                                },
+                                {
+                                    text:"cancel",
+                                    onClick: () => this.handleClose()
+                                }]
+                        }>
+
+                        <h1>Dialog Content</h1>
+                        <p>
+                            
+
+                                {/*<centerPageTitle title="Add Event"/>*/}
+
+                                <br/>
+                                <form onKeyPress={this.handle_keyPress.bind(this)}>
+                                    <label>Event Name:</label>
+                                    <input className="addEventInputField" type="text" value={this.state.event_name}
+                                           onChange={function (e) {
+                                               this.setState({event_name: e.target.value});
+                                           }.bind(this)}/>
+
+                                    <br/>
+
+                                    <label>Day:</label>
+                                    <input className="addEventInputField" type="date" value={this.state.day}
+                                           onChange={function (e) {
+                                               this.setState({day: e.target.value})
+                                           }.bind(this)}/>
+
+                                    <br/>
+
+                                    <label>Start Time:</label>
+                                    <input className="addEventInputField" type="time" value={this.state.start_time}
+                                           onChange={function (e) {
+                                               this.setState({start_time: e.target.value})
+                                           }.bind(this)}/>
+
+                                    <br/>
+
+                                    <label>End Time:</label>
+                                    <input className="addEventInputField" type="time" value={this.state.end_time}
+                                           onChange={function (e) {
+                                               this.setState({end_time: e.target.value})
+                                           }.bind(this)}/>
+
+                                    <br/>
+
+                                    <label>Location</label>
+                                    <input className="addEventInputField" value={this.state.location}
+                                           onChange={function (e) {
+                                               this.setState({location: e.target.value})
+                                           }.bind(this)}/>
+
+                                    <br/>
+                                </form>
+
+                        </p>
+
+                        </Dialog>
+                    </div>
                 }
+
+
+
                     <BigCalendar
                         selectable = 'ignoreEvents'
                         events={this.state.events}

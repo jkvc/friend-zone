@@ -67,7 +67,7 @@ class AddEvent extends Component{
                 <br/>
                 <form onKeyPress={this.handle_keyPress.bind(this)}>
                     <label>Event Name:</label>
-                    <input className="addEventinputfield" type="text" value={this.state.event_name}
+                    <input className="addEventInputField" type="text" value={this.state.event_name}
                            onChange={function(e){
                                this.setState({event_name:e.target.value});
                            }.bind(this)}/>
@@ -75,7 +75,7 @@ class AddEvent extends Component{
                     <br />
 
                     <label>Day:</label>
-                    <input className="addEventinputfield" type="date" value={this.state.day}
+                    <input className="addEventInputField" type="date" value={this.state.day}
                            onChange={function(e){
                                this.setState({day:e.target.value})
                            }.bind(this)}/>
@@ -83,7 +83,7 @@ class AddEvent extends Component{
                     <br />
 
                     <label>Start Time:</label>
-                    <input className="addEventinputfield" type="time" value={this.state.start_time}
+                    <input className="addEventInputField" type="time" value={this.state.start_time}
                            onChange={function(e){
                                this.setState({start_time:e.target.value})
                            }.bind(this)}/>
@@ -91,7 +91,7 @@ class AddEvent extends Component{
                     <br />
 
                     <label>End Time:</label>
-                    <input className="addEventinputfield" type="time" value={this.state.end_time}
+                    <input className="addEventInputField" type="time" value={this.state.end_time}
                            onChange={function(e){
                                this.setState({end_time:e.target.value})
                            }.bind(this)}/>
@@ -99,7 +99,7 @@ class AddEvent extends Component{
                     <br />
 
                     <label>Location</label>
-                    <input className="addEventinputfield" value={this.state.location}
+                    <input className="addEventInputField" value={this.state.location}
                            onChange={function(e){
                                this.setState({location:e.target.value})
                            }.bind(this)}/>
