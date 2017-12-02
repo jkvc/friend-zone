@@ -45,6 +45,7 @@ class Selectable extends Component{
         this.state = {
             events : props.events,
             isNewEventDialogueOpen: false,
+            isDialogOpen: false,
 
             // for new event dialog box only
             event_name: "",
@@ -117,10 +118,27 @@ class Selectable extends Component{
 
     handle_select_slot(slotInfo)
     {
-        // Call this.setState over here, to render the dialogue box
-        this.setState({isNewEventDialogueOpen:true,
+
+
+        // events.push(
+        //     {
+        //         "title":this.event.title,
+        //         "start": new Date(curr_day.getFullYear(), curr_day.getMonth(), curr_day.getDate(), start_hour, start_min ),
+        //         "end": new Date(curr_day.getFullYear(), curr_day.getMonth(), curr_day.getDate(), end_hour, end_min ),
+        //         "type": "lecture"
+        //     }
+        // );
+
+
+        //Call this.setState over here, to render the dialogue box
+        this.setState({
+            isDialogOpen : !this.state.isDialogOpen
                         } );
     }
+
+    //openDialog = () => this.setState({ isDialogOpen: true })
+    handleClose = () => this.setState({ isDialogOpen: false })
+    //handleSave = () =>  this.setState({ isDialogOpen: false })
 
     handle_btn_add_event()
     {
@@ -139,7 +157,14 @@ class Selectable extends Component{
         else
         {
             // TODO: Uncomment following line out
-            //add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.start_time, this.state.end_time, this.state.location);
+            add_event_to_profile(
+                firebase.auth().currentUser.uid,
+                this.state.event_name,
+                this.state.day,
+                this.state.start_time,
+                this.state.end_time,
+                this.state.location
+            );
             alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
 
             // Reset the fields of the dialogue box
@@ -150,7 +175,9 @@ class Selectable extends Component{
     handle_onSelectEvent(event)
     {
         // Call this.setState over here, to render the dialogue box
-        this.setState( );
+        this.setState({
+            isDialogOpen : !this.state.isDialogOpen
+        } );
 
         // Event object has these fields:
         // title
@@ -158,6 +185,7 @@ class Selectable extends Component{
         // end
         // type (can be either "lecture" or "other")
         // event_id (if type === "other")
+        // event_obj
         console.log(event);
     }
 
@@ -175,6 +203,24 @@ class Selectable extends Component{
                     drag the mouse over the calendar to select a date/time range.
                 </div>
                     <br/>
+                {this.state.isDialogOpen &&
+                    <Dialog
+                    title="Dialog Title"
+                    modal={true}
+                    buttons={
+                        [{
+                            text: "save",
+                            onClick: () => this.handle_btn_add_event()
+                        },
+                        {
+                            text:"cancel",
+                            onClick: () => this.handleClose()
+                        }]
+                    }>
+                    <h1>Dialog Content</h1>
+                    <p>More Content. Anything goes here</p>
+                    </Dialog>
+                }
                     <BigCalendar
                         selectable = 'ignoreEvents'
                         events={this.state.events}
