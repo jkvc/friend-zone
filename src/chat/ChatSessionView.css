@@ -14,7 +14,7 @@
 
 .input_holder {
     width: 100%;
-    height: calc(11vh - 15px);
+    height: 100%;
     border-top: solid 1px lightgrey;
 }
 
@@ -131,7 +131,11 @@
 .send-img-button {
     cursor: pointer;
     float: left;
-    margin-top: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
+    background: none;
+    border:none;
+    color: #2f5597;
 }
 
 .enlarged-image {

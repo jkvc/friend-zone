@@ -96,9 +96,9 @@ class UserInbox extends Component {
                                         }}> Accept
                                 </button>
 
-                                /*<button className="inbox_entry_button">
+                                {/*<button className="inbox_entry_button">
                                     View profile
-                                </button>*/
+                                </button>*/}
 
 
                             </div>

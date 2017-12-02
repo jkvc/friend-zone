@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
-import {add_image_message, add_message} from "./ChatSessionManager";
+import {add_emoji, add_image_message, add_message} from "./ChatSessionManager";
 import {lookup_profile_by_user_id} from "../dao/ProfileManager";
 import ReactDOM from 'react-dom';
 
@@ -10,6 +10,7 @@ import {get_friend_profiles, get_self_profile} from "../api/StaticData";
 
 import default_profile_pic from "../image/DefaultProfilePic.jpg"
 import OtherProfile from "../view/profile/FriendProfile";
+import smiley from '../image/Smiley.png'
 
 class ChatSessionView extends Component {
 
@@ -105,6 +106,10 @@ class ChatSessionView extends Component {
         })
     }
 
+    send_emoji(){
+        add_emoji(this.state.session_id, this.state.my_name, '')
+    }
+
     enlarge_image(url){
         ReactDOM.render(<div align='center'>
             <div className='enlarged-image-container'>
@@ -154,6 +159,11 @@ class ChatSessionView extends Component {
                                                     className='message_img'
                                                     onClick={()=>{this.enlarge_image(message.msg)}}
                                                     onLoad={this.scroll_message_container_to_bottom.bind(this)}
+                                />
+                            }
+                            if (message.emoji === true) {
+                                message_body = <img src={smiley} alt=''
+                                                    className='message_img'
                                 />
                             }
 
@@ -248,10 +258,18 @@ class ChatSessionView extends Component {
                     <input id='send-image' type='file' name='Send Image' accept='image/*'
                            onChange={e => this.send_image(e)}/>
 
-                    <button onClick={()=>{
+                    <button className='send-img-button'
+                        onClick={()=>{
                         this.setState({memefy: !this.state.memefy});
                     }}>
-                        {this.state.memefy? 'Auto Spongebob capitalization: on ' : 'Auto Spongebob capitalization: off '}
+                        {this.state.memefy? 'AbCd ' : 'abcd'}
+                    </button>
+
+                    <button className='send-img-button'
+                            onClick={()=>{
+                        this.send_emoji();
+                    }}>
+                        :)
                     </button>
 
                 </div>
