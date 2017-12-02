@@ -7,6 +7,9 @@ class FAQ extends Component{
     /* set prop to state, must check all props, and give it a default value if prop not passed in */
     constructor(props) {
         super(props);
+        this.state = {
+            title: 'FAQ.js'
+        }
     }
 
     render (){

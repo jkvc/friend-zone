@@ -5,6 +5,9 @@ import firebase from 'firebase';
 class RedirectNoEmailVerification extends Component {
     constructor( props){
         super(props);
+        this.state = {
+            title: 'RedirectNoEmailVerification.js'
+        }
     }
     goto_welcome(){
         firebase.auth().signOut()
