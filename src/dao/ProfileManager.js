@@ -95,6 +95,23 @@ export function add_event_to_profile(user_id, event_name, event_day , start_time
     })
 }
 
+export function edit_existing_event(user_id, event_id, event_name, event_day , start_time, end_time, event_location){
+    lookup_profile_by_user_id( user_id, function(err, profile){
+        if(!err){
+
+            if (event_id in profile.upcoming_events) {
+                profile.upcoming_events[event_id] =
+                    new Event(event_name, event_day, start_time, end_time, event_location);
+                profile.push();
+            }
+            else
+            {
+                return { msg: "Unknown Event passed in!" };
+            }
+        }
+    })
+}
+
 export function remove_event_from_profile(user_id, event_id, callback){
     lookup_profile_by_user_id( user_id, function(err, profile){
         if(!err){
