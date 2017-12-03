@@ -154,14 +154,14 @@ class UserSchedule extends Component {
                     event = {
                         "title": "undefined states in Course Obj is detected",
                         "days": "MTWThF",
-                        "hours": ["0000", "2359"],
+                        "hours": ["0600", "2200"],
                         "event_obj": null
                     };
                 }
 
                 // If get_time_numeric returns an error, return some random time
                 if (is_error) {
-                    event.hours = ["0000", "2359"];
+                    event.hours = ["0600", "2200"];
                 }
 
                 // push the event into the events list

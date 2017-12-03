@@ -13,8 +13,8 @@ class AddEvent extends Component{
             //result: [],
             event_name: "",
             day: "",
-            start_time: "00:00",
-            end_time: "23:59",
+            start_time: "06:00",
+            end_time: "22:00",
             location: ""
         };
 
@@ -54,7 +54,7 @@ class AddEvent extends Component{
         else {
             add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.start_time, this.state.end_time, this.state.location);
             alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
-            this.setState( {event_name : "", day : "", start_time : "00:00", end_time : "23:59", location : ""} );
+            this.setState( {event_name : "", day : "", start_time : "06:00", end_time : "22:00", location : ""} );
         }
 
     }

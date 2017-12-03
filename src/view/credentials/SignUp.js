@@ -96,12 +96,11 @@ class SignUp extends Component {
                 });
 
                 //send email verification
-                firebase.auth().onAuthStateChanged(function once(user) {
-                    if(user.emailVerified === false || user.emailVerified === undefined  ) {
-                        window.alert("Confirmation email sent!");
-                        user.sendEmailVerification();
-                    }
-                });
+                var user = firebase.auth().currentUser;
+                if(user.emailVerified === false || user.emailVerified === undefined  ) {
+                    window.alert("Confirmation email sent!");
+                    user.sendEmailVerification();
+                };
 
                 ReactDOM.render(<InitProfile />, document.getElementById('root'));
             }.bind(this) )
