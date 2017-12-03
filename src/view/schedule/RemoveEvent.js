@@ -51,6 +51,9 @@ class RemoveEvent extends Component{
                     <tbody>
                         <tr>
                             <th>Event Name</th>
+                            <th>Start Time</th>
+                            <th>End Time </th>
+                            <th>Event Date </th>
                             <th></th>
                         </tr>
                         {   //print each class with drop button
@@ -59,6 +62,9 @@ class RemoveEvent extends Component{
                                     <tr key={"event-search-result"+entry}>
 
                                         <td> {this.state.events_list[entry].event_name} </td>
+                                        <td> {this.state.events_list[entry].start_time} </td>
+                                        <td> {this.state.events_list[entry].end_time} </td>
+                                        <td> {this.state.events_list[entry].day} </td>
                                         <td>
                                             <button onClick={()=> {
                                                 this.setState({event_name_to_remove: entry}, ()=>{
@@ -75,8 +81,6 @@ class RemoveEvent extends Component{
                 </table>
 
                 <br/>
-                Raw JSON:
-                <pre>{JSON.stringify(this.state.events_list,null,2)}</pre>
 
             </div>
         )
