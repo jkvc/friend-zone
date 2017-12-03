@@ -1,3 +1,7 @@
+.alignLabel{
+    text-align: left;
+    margin-left: 0px;
+}
 .addEventInputField{
     margin-left: 5%;
     width:60%;

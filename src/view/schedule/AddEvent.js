@@ -66,7 +66,7 @@ class AddEvent extends Component{
 
                 <br/>
                 <form onKeyPress={this.handle_keyPress.bind(this)}>
-                    <label>Event Name:</label>
+                    <label className="alignLabel">Event Name:</label>
                     <input className="addEventInputField" type="text" value={this.state.event_name}
                            onChange={function(e){
                                this.setState({event_name:e.target.value});
@@ -74,7 +74,7 @@ class AddEvent extends Component{
 
                     <br />
 
-                    <label>Day:</label>
+                    <label className="alignLabel"> Day:</label>
                     <input className="addEventInputField" type="date" value={this.state.day}
                            onChange={function(e){
                                this.setState({day:e.target.value})

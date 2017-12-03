@@ -258,41 +258,41 @@ class EditProfile extends Component {
                             <circle cx="10" cy="9" r="3"/>
                         </svg>
                     </label>
-                    <input id='chat-pic-upload' type='file' name='New Profile Picture' accept='image/*'
+                    <input className="input1" id='chat-pic-upload' type='file' name='New Profile Picture' accept='image/*'
                            onChange={e => this.upload_image(e)}/>
                 </div>
                 <br/>
 
                 <form onKeyPress={this.handle_profile_enterKey.bind(this)} onKeyDown={this.handle_profile_backKey.bind(this)}>
-                    <table className={'edit-profile-table'}>
+                    <table className="table2">
                         <tbody>
                         <tr>
-                            <td>First Name</td>
-                            <td>
-                                <input type="text" value={this.state.first_name}
+                            <td className="td2">First Name</td>
+                            <td className="td2">
+                                <input className="input1" type="text" value={this.state.first_name}
                                        onChange={e => this.setState({first_name: e.target.value})}/>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Last Name</td>
-                            <td>
-                                <input type="text" value={this.state.last_name}
+                            <td className="td2">Last Name</td>
+                            <td className="td2">
+                                <input className="input1" type="text" value={this.state.last_name}
                                        onChange={e => this.setState({last_name: e.target.value})}/>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Major</td>
-                            <td>
-                                <input type="text" value={this.state.major}
+                            <td className="td2">Major</td>
+                            <td className="td2">
+                                <input className="input1" type="text" value={this.state.major}
                                        onChange={e => this.setState({major: e.target.value})}/>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Current Year</td>
-                            <td>
+                            <td className="td2">Current Year</td>
+                            <td className="td2">
                                 <select name="current-year" id="current-year"
                                         value={this.state.current_year}
                                         onChange={e => {
@@ -310,9 +310,9 @@ class EditProfile extends Component {
                         </tr>
 
                         <tr>
-                            <td>Description</td>
-                            <td>
-                                <textarea value={this.state.description}
+                            <td className="td2">Description</td>
+                            <td className="td2">
+                                <textarea className="textarea1" value={this.state.description}
                                        onChange={e => this.setState({description: e.target.value})}/>
 
                             </td>
@@ -322,7 +322,7 @@ class EditProfile extends Component {
                     </table>
                 </form>
                 <div className={"display-msg"}> {this.state.profile_update_msg } </div>
-                <button className={'edit-profile-button'}
+                <button className="edit-profile-button"
                     onClick={this.handle_update.bind(this)}> Update Profile</button>
                 <br/>
 
@@ -334,28 +334,27 @@ class EditProfile extends Component {
                     (Password must contain uppercase, lowercase letters, number, and be at least 8 chars long)
                 </div>
                 <br/>
-
                 <form onKeyPress={this.handle_password_enterKey.bind(this)} onKeyDown={this.handle_password_backKey.bind(this)}>
-                    <table className={'edit-profile-table'}>
+                    <table className= "table2">
                         <tbody>
                         <tr>
-                            <td> Old Password </td>
-                            <td>
-                                <input type="password" value={this.state.oldPassword}
+                            <td className= "td2"> Old Password </td>
+                            <td className="td2">
+                                <input className="input1" type="password" value={this.state.oldPassword}
                                        onChange={e => this.setState({oldPassword: e.target.value})}/>
                             </td>
                         </tr>
                         <tr>
-                            <td>New password</td>
-                            <td>
-                                <input type="password" value={this.state.newPassword}
+                            <td className= "td2">New password</td>
+                            <td className= "td2">
+                                <input className="input1" type="password" value={this.state.newPassword}
                                        onChange={e => this.setState({newPassword: e.target.value})}/>
                             </td>
                         </tr>
                         <tr>
-                            <td>Confirm password</td>
-                            <td>
-                                <input type="password" value={this.state.repeatPassword}
+                            <td className= "td2">Confirm password</td>
+                            <td className= "td2">
+                                <input className="input1" type="password" value={this.state.repeatPassword}
                                        onChange={e => this.setState({repeatPassword: e.target.value})}/>
                             </td>
                         </tr>

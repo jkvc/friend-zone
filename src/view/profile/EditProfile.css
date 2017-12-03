@@ -1,10 +1,16 @@
-.edit-profile-table input{
-    border:none;
-    border-bottom: solid 1px lightgrey;
+
+.input1{
+     width: 200px;
+     border: none;
+     height: 20px;
+     border-bottom: 1px solid lightgrey;
+    font-size: medium;
+     margin-left: 20px;
+     background-color: transparent;
 }
 
 .edit-profile-table tr{
-    font-size: small;
+    font-size: medium;
 }
 
 .edit-profile-button {
@@ -13,9 +19,12 @@
     font-size: small;
     color: #2f5597;
     cursor: pointer;
+    padding-top: 20px;
 
 }
-
+.edit-profile-button:hover{
+    text-decoration: underline;
+}
 .edit-profile-subtitle{
     font-size: small;
     color: dimgrey;
@@ -27,17 +36,34 @@
     font-size:small;
 }
 
-textarea {
+.textarea1 {
     display: block;
     padding: .5rem .75rem;
     width: 100%;
-    font-size: 1rem;
+    /*font-size: 1rem;*/
+    font-size: medium;
     line-height: 1.25;
-    color: #55595c;
-    background-color: #fff;
-    background-image: none;
+    border: orange;
     background-clip: padding-box;
-    border-top: 0;
-    border-right: 0;
-    border-left: 0;
+
+}
+
+.table2 {
+    position:relative;
+    color: #333; /* Lighten up font color */
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+    width: 320px;
+    border-collapse: collapse; border-spacing:0;
+    margin: 0 auto
+
+}
+
+
+.td2{
+    height: 40px;
+    width: 100px;
+    text-align: left; /* Center our text */
+    float:left;
+
+
 }
