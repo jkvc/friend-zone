@@ -44,7 +44,7 @@ class Profile {
     /* add self to table */
     async push(){
 
-        await firebase.database().ref('Profile').child(this.user_id).set({
+        return await firebase.database().ref('Profile').child(this.user_id).set({
             user_id: this.user_id,
             first_name: this.first_name,
             last_name: this.last_name,
@@ -60,7 +60,6 @@ class Profile {
             blocked_user : this.blocked_user,
             verified_email : this.verified_email
         });
-        return;
     }
 
 }

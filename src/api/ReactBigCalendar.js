@@ -3,7 +3,7 @@
  */
 
 import firebase from 'firebase';
-import {add_event_to_profile, edit_existing_event} from "../dao/ProfileManager";
+import {add_event_to_profile, edit_existing_event, remove_course_from_profile, remove_event_from_profile} from "../dao/ProfileManager";
 import React, {Component} from 'react';
 import BigCalendar from 'react-big-calendar';
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -14,10 +14,10 @@ import '../dao/ProfileManager.js';
 import '../view/schedule/AddEvent.js';
 import '../view/schedule/AddEvent.css';
 import '../dao/ProfileManager.js'
-import {remove_course_from_profile} from "../dao/ProfileManager";
 import ReactDOM from 'react-dom';
 import ViewClassmates from '../view/social/ViewClassmates';
 import UserSchedule from "../view/schedule/UserSchedule";
+import {init_data} from './StaticData'
 // import Popup from 'react-popup';
 
 var this_id = 0;
@@ -107,7 +107,9 @@ class Selectable extends Component{
 
     refresh()
     {
-        ReactDOM.render(<UserSchedule key={this_id}/>,document.getElementById('main-layout'));
+        init_data(profile => {
+            ReactDOM.render(<UserSchedule key={this_id}/>,document.getElementById('main-layout'));
+        });
     }
 
     handle_select_slot(slotInfo)
@@ -283,6 +285,11 @@ class Selectable extends Component{
          this.setState({isEditEventDialogOpen:false})
      }
 
+    handle_btn_delete_event() {
+        remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_id, (err,data) => {
+            this.refresh();
+        });
+    }
 
     handle_keyPress(event)
     {
@@ -411,10 +418,15 @@ class Selectable extends Component{
                             modal={true}
                             isDraggable={true}
                             buttons={
-                                [{
-                                    text: "Update",
-                                    onClick: () => this.handle_btn_edit_event()
-                                },
+                                [
+                                    {
+                                        text: "Update",
+                                        onClick: () => this.handle_btn_edit_event()
+                                    },
+                                    {
+                                        text: "Delete",
+                                        onClick: () => this.handle_btn_delete_event()
+                                    },
                                     {
                                         text:"Cancel",
                                         onClick: () => this.handle_edit_event_close()
@@ -546,7 +558,5 @@ class Selectable extends Component{
 
         )
     }
-
-
 }
 export default Selectable;
