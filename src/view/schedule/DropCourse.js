@@ -3,7 +3,7 @@ import {remove_user_from_enrollment} from "../../dao/EnrollmentManager";
 import React, {Component} from 'react';
 import firebase from 'firebase';
 import PageTitle from "../components/PageTitle";
-
+import './DropCourse.css'
 
 class DropCourse extends Component {
 
@@ -44,21 +44,21 @@ class DropCourse extends Component {
                 <PageTitle title="Drop Course"/>
 
 
-                <table className='course-search-result'>
+                <table className="tableStyle">
                     <tbody>
 
                     {   //print each class with drop button
                         this.state.courses_list.map(function (entry) {
                             return (
                                 <tr key={"course-search-result" + entry}>
-                                    <td> {entry} </td>
-                                    <td>
+                                    <td className= "tableStyle"> {entry} </td>
+                                    <td className= "tableStyle">
                                         <button className='add-button'
                                             onClick={() => {
                                             this.setState({course_id_to_drop: entry}, () => {
                                                 this.handle_drop_course();
                                             })
-                                        }}>Drop
+                                        }}>           Drop
                                         </button>
                                     </td>
                                 </tr>

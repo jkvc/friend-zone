@@ -93,10 +93,10 @@ class UserFriends extends Component {
 
                                     <td>
                                         <div className={'group'}>
-                                            <button className={"button"} onClick={() => {
+                                            <button className="button_red" onClick={() => {
                                                 this.goto_other_profile(friend_id);
                                             }}>
-                                                Goto profile
+                                                Go to profile
                                             </button>
                                         </div>
                                     </td>
@@ -107,7 +107,7 @@ class UserFriends extends Component {
                                             {friend_id in this.state.profile_obj.friend_list &&
                                             this.state.profile_obj.friend_list[friend_id] && ( // render block button here
 
-                                                <button className={"button"} onClick={() => {
+                                                <button className="button_red" onClick={() => {
                                                     this.block_a_friend(friend_id);
                                                 }}>
                                                     Block friend
@@ -119,7 +119,7 @@ class UserFriends extends Component {
                                             {friend_id in this.state.profile_obj.friend_list &&
                                             !this.state.profile_obj.friend_list[friend_id] && ( // render block button here
 
-                                                <button className={"button"} onClick={() => {
+                                                <button className="button_red" onClick={() => {
                                                     this.unblock_a_friend(friend_id);
                                                 }}>
                                                     Unblock friend
@@ -133,7 +133,7 @@ class UserFriends extends Component {
 
                                         {friend_id in this.state.profile_obj.friend_list ? (
 
-                                            <button className={"button_red"} onClick={() => {
+                                            <button className="button_red" onClick={() => {
                                                 this.delete_a_friend(friend_id);
                                             }}>
                                                 Delete friend
@@ -142,7 +142,7 @@ class UserFriends extends Component {
                                         ) : ( // Note that the undelete button is a trick, since unblock does the same
 
 
-                                            <button className={"button_red"} onClick={() => {
+                                            <button className="button_red" onClick={() => {
                                                 this.undelete_a_friend(friend_id);
                                             }}>
                                                 Undelete friend

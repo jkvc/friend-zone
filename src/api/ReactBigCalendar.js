@@ -9,7 +9,7 @@ import BigCalendar from 'react-big-calendar';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from 'moment';
 import './ReactBigCalendar.css';
-import Dialog from 'react-dialog';
+//import Dialog from 'react-dialog';
 
 // import ReactDom from 'react-dom';
 // import Popup from 'react-popup';
@@ -124,7 +124,7 @@ class Selectable extends Component{
     handle_btn_add_event()
     {
         // do something with the fields entered by the user, and when the button is pressed, create a new event
-        let event = {event_name : "", day : "", start_time : "00:00", end_time : "23:59", location : "" };
+        //let event = {event_name : "", day : "", start_time : "00:00", end_time : "23:59", location : "" };
 
         // set the event to something...
         // ..............................
