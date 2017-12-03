@@ -10,8 +10,10 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from 'moment';
 import './ReactBigCalendar.css';
 import Dialog from 'react-dialog';
+import '../dao/ProfileManager.js';
+import '../view/schedule/AddEvent.js';
 import '../view/schedule/AddEvent.css';
-
+import '../dao/ProfileManager.js'
 // import ReactDom from 'react-dom';
 // import Popup from 'react-popup';
 
@@ -163,7 +165,7 @@ class Selectable extends Component{
         this.setState({ isNewEventDialogOpen: false });
     }
 
-    handle_btn_add_event()
+    handle_btn_add_event(event)
     {
         // do something with the fields entered by the user, and when the button is pressed, create a new event
         //let event = {event_name : "", day : "", start_time : "00:00", end_time : "23:59", location : "" };
@@ -173,20 +175,28 @@ class Selectable extends Component{
 
 
         // Check for validity of the event entered
-        if (this.state.event_name.trim() === "")
+        if (this.state.event_name === "")
         {
             alert("Event Name is not entered!");
         }
-        else
+        else if (this.state.day === "" )
         {
-            add_event_to_profile(
-                firebase.auth().currentUser.uid,
-                this.state.event_name,
-                this.state.day,
-                this.state.start_time,
-                this.state.end_time,
-                this.state.location
-            );
+            alert("Event Day is not entered!");
+        }
+        else if (this.state.start_time === "")
+        {
+            alert("Start Time is not specified!");
+        }
+        else if (this.state.end_time === "")
+        {
+            alert("End Time is not specified!");
+        }
+        else if ( this.state.start_time > this.state.end_time )
+        {
+            alert("Start time must be greater than end time!");
+        }
+        else {
+            add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.start_time, this.state.end_time, this.state.location);
             alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
 
             // Reset the fields of the dialogue box
@@ -201,8 +211,11 @@ class Selectable extends Component{
 
             this.setState({ events : temp, isNewEventDialogOpen: false });
         }
+        console.log(event);
+
     }
 
+    // edit, only when user want to edit it will click on an existing event
     handle_onSelectEvent(event)
     {
         if (this.state.isNewEventDialogOpen) return;
@@ -241,6 +254,7 @@ class Selectable extends Component{
         console.log(event);
     }
 
+<<<<<<< HEAD
      handle_btn_edit_event()
      {
          edit_existing_event(
@@ -259,6 +273,18 @@ class Selectable extends Component{
      {
          this.setState({isEditEventDialogOpen:false})
      }
+=======
+     // handle_btn_edit_event()
+     // {
+     //     edit_existing_event(
+     //         firebase.auth().currentUser.uid,
+     //         this.state.event_name,
+     //         this.state.day,
+     //         this.state.start_time,
+     //         this.state.end_time,
+     //         this.state.location)
+     // }
+>>>>>>> 27e13f7edf9b4eeb7f5c5f94540dcc523ba634e7
 
 
     handle_keyPress(event)

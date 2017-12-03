@@ -110,7 +110,7 @@ export function edit_existing_event(user_id, event_id, event_name, event_day , s
                     };
                 profile.push();
             }
-            
+
             else
             {
                 return { msg: "Unknown Event passed in!" };
