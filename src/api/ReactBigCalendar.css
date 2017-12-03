@@ -24,7 +24,7 @@
     flex: 1;
     z-index : 10;
 }
-
+/* dont change ui-dialog to other name because this refer to the original styling class from package. */
 .schedule-button-container button{
     font-size: medium;
     background: transparent;

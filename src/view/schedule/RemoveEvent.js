@@ -2,7 +2,7 @@ import {remove_event_from_profile, lookup_profile_by_user_id} from "../../dao/Pr
 import React, {Component} from 'react';
 import firebase from 'firebase';
 import PageTitle from "../components/PageTitle";
-
+import "./RemoveEvent.css";
 class RemoveEvent extends Component{
 
     constructor(props){
@@ -45,15 +45,16 @@ class RemoveEvent extends Component{
         return(
             <div align="center">
 
-                <PageTitle title="Add Event"/>
+                <PageTitle title="Remove Event"/>
 
-                <table>
-                    <tbody>
+                <table className="table1">
+                    <tbody className="table1">
                         <tr>
-                            <th>Event Name</th>
-                            <th>Start Time</th>
-                            <th>End Time </th>
-                            <th>Event Date </th>
+                            <th className= "th1">Event Name</th>
+                            <th className= "th1">Start Time</th>
+                            <th className= "th1">End Time </th>
+                            <th className= "th1">Event Date </th>
+                            <th className= "th1"> Action </th>
                             <th></th>
                         </tr>
                         {   //print each class with drop button
@@ -61,17 +62,17 @@ class RemoveEvent extends Component{
                                 return (
                                     <tr key={"event-search-result"+entry}>
 
-                                        <td> {this.state.events_list[entry].event_name} </td>
-                                        <td> {this.state.events_list[entry].start_time} </td>
-                                        <td> {this.state.events_list[entry].end_time} </td>
-                                        <td> {this.state.events_list[entry].day} </td>
-                                        <td>
-                                            <button onClick={()=> {
+                                        <td className= "td1"> {this.state.events_list[entry].event_name} </td>
+                                        <td className= "td1"> {this.state.events_list[entry].start_time} </td>
+                                        <td className= "td1">{this.state.events_list[entry].end_time} </td>
+                                        <td className= "td1"> {this.state.events_list[entry].day} </td>
+                                        <td className= "td1">
+                                            <button className="removerButton" onClick={()=> {
                                                 this.setState({event_name_to_remove: entry}, ()=>{
                                                     this.handle_remove_event();
                                                 })
 
-                                            }} >Drop this Event</button>
+                                            }} >Remove this Event</button>
                                         </td>
 
                                     </tr>

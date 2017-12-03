@@ -1,11 +1,11 @@
-.tableStyle {
+.table1 {
     color: #333; /* Lighten up font color */
     font-family: Helvetica, Arial, sans-serif; /* Nicer font */
     width: 800px;
     border-collapse: collapse; border-spacing: 0;
-
 }
-td1, .th1 { border: 2px solid #CCC; height: 40px; } /* Make cells a bit taller */
+
+.td1, .th1 { border: 2px solid #CCC; height: 40px; } /* Make cells a bit taller */
 
 .th1 {
     background: #F3F3F3; /* Light grey background */
@@ -16,13 +16,14 @@ td1, .th1 { border: 2px solid #CCC; height: 40px; } /* Make cells a bit taller *
     background: #FAFAFA; /* Lighter grey background */
     text-align: center; /* Center our text */
 }
-.dropbutton{
+
+.removerButton{
     cursor: pointer;
     border:none;
     background: transparent;
     color: #2f5597;
     font-size: small;
 }
-.dropbutton:hover{
+.removerButton:hover{
     text-decoration: underline;
 }
