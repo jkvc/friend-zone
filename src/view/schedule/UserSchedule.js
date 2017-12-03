@@ -204,8 +204,8 @@ class UserSchedule extends Component {
                 <div className='schedule-button-container'>
                     <button className="buttonHover" onClick={this.goto_AddCourse.bind(this)}>Add course</button>
                     <button className="buttonHover"onClick={this.goto_DropCourse.bind(this)}>Drop course</button>
-                    <button className="buttonHover" onClick={this.goto_AddEvent.bind(this)}>Add Event</button>
-                    <button className="buttonHover" onClick={this.goto_RemoveEvent.bind(this)}>Remove Event</button>
+                    {/*<button className="buttonHover" onClick={this.goto_AddEvent.bind(this)}>Add Event</button>*/}
+                    {/*<button className="buttonHover" onClick={this.goto_RemoveEvent.bind(this)}>Remove Event</button>*/}
                     <button className="buttonHover" onClick={this.goto_RecommendedFriends.bind(this)}>Recommended Friends</button>
                 </div>
                 <br/>
