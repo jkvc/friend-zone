@@ -46,14 +46,19 @@ class DropCourse extends Component {
 
                 <table className="tableStyle">
                     <tbody>
+                    <tr>
+                        <th className= "th1">Course Name</th>
+                        <th className= "th1"> Action </th>
+                        <th></th>
+                    </tr>
 
                     {   //print each class with drop button
                         this.state.courses_list.map(function (entry) {
                             return (
                                 <tr key={"course-search-result" + entry}>
-                                    <td className= "tableStyle"> {entry} </td>
-                                    <td className= "tableStyle">
-                                        <button className='add-button'
+                                    <td className= "td1"> {entry} </td>
+                                    <td className= "td1">
+                                        <button className='dropbutton'
                                             onClick={() => {
                                             this.setState({course_id_to_drop: entry}, () => {
                                                 this.handle_drop_course();
