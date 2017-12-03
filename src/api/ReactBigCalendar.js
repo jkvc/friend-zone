@@ -91,33 +91,7 @@ class Selectable extends Component{
         }
 
     }
-
-   // popup_event(){
-   //      ReactDom.render(
-   //          <Popup />,
-   //          document.getElementById('popupContainer')
-   //      Popup.create({
-   //          title: 'add event',
-   //          content: '',
-   //          className: 'Popup',
-   //          position: {x: 100, y: 200},
-   //          /* customize button */
-   //          buttons: {
-   //             text: 'My button text',
-   //              className: 'special-btn', // optional
-   //              action: function (popup) {
-   //                  // do stuff
-   //                  popup.close();
-   //              },
-   //              left:['cancel'],
-   //              right: ['save']
-   //          },
-   //          noOverlay: true,
-   //          closeOnOutsideClick: true
-   //      }),
-   //    )
-   //  }
-   //
+    
 
     handle_select_slot(slotInfo)
     {
@@ -379,12 +353,11 @@ class Selectable extends Component{
                 {this.state.isEditEventDialogOpen &&
                 <div className='dialogue-box'>
                     <Dialog className=''
-                            title="Edit Event"
                             modal={true}
                             isDraggable={true}
                             buttons={
                                 [{
-                                    text: "Edit this event",
+                                    text: "Update",
                                     onClick: () => this.handle_btn_edit_event()
                                 },
                                     {
@@ -393,7 +366,7 @@ class Selectable extends Component{
                                     }]
                             }>
 
-                        <h2> Change Event Details </h2>
+                        <h2> Edit Event </h2>
 
                         <br/>
                         <form onKeyPress={this.handle_keyPress.bind(this)}>
