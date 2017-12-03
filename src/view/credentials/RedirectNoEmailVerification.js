@@ -29,11 +29,11 @@ class RedirectNoEmailVerification extends Component {
     render() {
         return (
             <div class="hero-bkg-animated" align="center">
-                <h2>You have not verified your e-mail yet,</h2>
-                <h3>Please come back when you have done so.</h3>
+                <h2>You have not verified your e-mail yet</h2>
+                <h4>Please come back when you have done so.</h4>
                 <button className="buttonStyle1" onClick={this.goto_welcome}>Go back to MainPage</button>
                 <button className="buttonStyle1" onClick={this.send_verification}>Send Verification Email</button>
-                <h4>--------Powered by FriendZone--------</h4>
+                <h6>--------Powered by FriendZone--------</h6>
             </div>
         )
     }
