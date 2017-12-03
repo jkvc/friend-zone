@@ -12,6 +12,7 @@ import {get_self_profile} from "../../api/StaticData";
 import PageTitle from "../components/PageTitle";
 import './UserSchedule.css'
 
+
 class UserSchedule extends Component {
 
     constructor(props) {
@@ -19,7 +20,9 @@ class UserSchedule extends Component {
         this.title = "UserSchedule.js";
         this.state = {
             events: [],
-            other_events: []
+            other_events: [],
+            finished_adding_lectures: false,
+            finished_adding_events: false
         };
 
     }
@@ -43,7 +46,7 @@ class UserSchedule extends Component {
         ReactDOM.render(<RemoveEvent />, document.getElementById('main-layout'));
     }
 
-    async update_event(event_id, curr_event)
+    update_event(event_id, curr_event)
     {
         // A backward compatibility check, making sure start_time and end_time are in event
         if (! ("start_time" in curr_event) || !("end_time" in curr_event) )
@@ -95,17 +98,21 @@ class UserSchedule extends Component {
         {
             let curr_event = raw_other_events[event_id];
 
-            this.update_event(event_id, curr_event).then( parsed_event => {
-                other_events.push(parsed_event);
-                this.setState({other_events:other_events});
-                ReactDOM.render(<CalendarHelper events={this.state.events}
-                                                other_events={this.state.other_events}
-                                                key={"calendar-" + (this.state.events.length + this.state.other_events.length) }/>,
-                    document.getElementById('calendar-helper-container')
-                );
-            } );
-        } } );
+            let parsed_event = this.update_event(event_id, curr_event);
+            other_events.push(parsed_event);
+            this.setState({other_events:other_events});
+            // ReactDOM.render(<CalendarHelper events={this.state.events}
+            //                                 other_events={this.state.other_events}
+            //                                 key={"calendar-" + (this.state.events.length + this.state.other_events.length) }/>,
+            //     document.getElementById('calendar-helper-container')
+            // );
 
+        } } );
+        this.setState({finished_adding_events:true});
+
+        let i = 0;
+        let size = course_list.length;
+        if (size === i) this.setState({finished_adding_lectures:true});
 
         // This is used to parse all the other events
         course_list.forEach((course_id) => {
@@ -160,11 +167,17 @@ class UserSchedule extends Component {
 
                 // set the state of UserSchedule
                 this.setState({events: events});
-                ReactDOM.render(<CalendarHelper events={this.state.events}
-                                                other_events={this.state.other_events}
-                                                key={"calendar-" + (this.state.events.length + this.state.other_events.length) }/>,
-                    document.getElementById('calendar-helper-container')
-                )
+                // ReactDOM.render(<CalendarHelper events={this.state.events}
+                //                                 other_events={this.state.other_events}
+                //                                 key={"calendar-" + (this.state.events.length + this.state.other_events.length) }/>,
+                //     document.getElementById('calendar-helper-container')
+                // )
+                i++;
+                if (i===size)
+                {
+                    this.setState({finished_adding_lectures:true})
+                }
+                console.log(i + "<" + size);
             });
         });
 
@@ -173,10 +186,10 @@ class UserSchedule extends Component {
     // In case the user did not have any classes
     componentDidMount()
     {
-        ReactDOM.render(<CalendarHelper events={this.state.events}
-                                        other_events={this.state.other_events}
-                                        key={"calendar-" + (this.state.events.length + this.state.other_events.length) }/>,
-            document.getElementById('calendar-helper-container') );
+        // ReactDOM.render(<CalendarHelper events={this.state.events}
+        //                                 other_events={this.state.other_events}
+        //                                 key={"calendar-" + (this.state.events.length + this.state.other_events.length) }/>,
+        //     document.getElementById('calendar-helper-container') );
     }
 
     render() {
@@ -197,7 +210,26 @@ class UserSchedule extends Component {
                 <br/>
                 <br/>
 
-                <div id='calendar-helper-container'> </div>
+                <div id='calendar-helper-container'>
+                    {this.state.finished_adding_lectures && this.state.finished_adding_events ? (
+                        <CalendarHelper events={this.state.events}
+                                        other_events={this.state.other_events}
+                                        key={"calendar-" + (this.state.events.length + this.state.other_events.length)}/>
+                    ) : (
+                        <div className="sk-cube-grid">
+                            <div className="sk-cube sk-cube1"></div>
+                            <div className="sk-cube sk-cube2"></div>
+                            <div className="sk-cube sk-cube3"></div>
+                            <div className="sk-cube sk-cube4"></div>
+                            <div className="sk-cube sk-cube5"></div>
+                            <div className="sk-cube sk-cube6"></div>
+                            <div className="sk-cube sk-cube7"></div>
+                            <div className="sk-cube sk-cube8"></div>
+                            <div className="sk-cube sk-cube9"></div>
+                        </div>
+                    )
+                    }
+                </div>
 
                 <br/>
                 <br/>
