@@ -303,7 +303,7 @@ class Selectable extends Component{
                         selectable = 'ignoreEvents'
                         events={this.state.events}
                         views={allViews}
-                        step={60}
+                        step={30}
                         // By default this should return current date
                         defaultDate={new Date()}
                         defaultView={'week'}
