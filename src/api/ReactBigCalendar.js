@@ -16,11 +16,11 @@ import '../view/schedule/AddEvent.css';
 import '../dao/ProfileManager.js'
 import {remove_course_from_profile} from "../dao/ProfileManager";
 import ReactDOM from 'react-dom';
-// import UserSchedule from '../view/schedule/UserSchedule'
-import ViewClassmates from '../view/social/ViewClassmates'
+import ViewClassmates from '../view/social/ViewClassmates';
+import UserSchedule from "../view/schedule/UserSchedule";
 // import Popup from 'react-popup';
 
-
+var this_id = 0;
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -72,6 +72,7 @@ class Selectable extends Component{
             lecture_location: "",
             time: ""
         };
+        this_id++;
     }
 
     handle_add_event(){
@@ -102,23 +103,17 @@ class Selectable extends Component{
             alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
             this.setState( {event_name : this.state.event_name, day : this.state.day, start_time : this.state.start_time, end_time : this.state.end_time, location : this.state.location} );
         }
-
     }
-    
+
+    refresh()
+    {
+        ReactDOM.render(<UserSchedule key={this_id}/>,document.getElementById('main-layout'));
+    }
 
     handle_select_slot(slotInfo)
     {
-        // events.push(
-        //     {
-        //         "title":this.event.title,
-        //         "start": new Date(curr_day.getFullYear(), curr_day.getMonth(), curr_day.getDate(), start_hour, start_min ),
-        //         "end": new Date(curr_day.getFullYear(), curr_day.getMonth(), curr_day.getDate(), end_hour, end_min ),
-        //         "type": "lecture"
-        //     }
-        // );
+        if (this.state.isEditEventDialogOpen || this.state.isViewLecture || this.state.isNewEventDialogOpen) return;
 
-        //Call this.setState over here, to render the dialogue box
-        console.log(slotInfo);
 
         let start_hour = slotInfo.start.getHours().toString();
         if (start_hour.length < 2) start_hour = '0' + start_hour;
@@ -135,16 +130,13 @@ class Selectable extends Component{
         let day = slotInfo.start.getDate().toString();
         if (day.length < 2) day = '0' + day;
 
-        console.log(slotInfo.start.getFullYear().toString() + "-" + slotInfo.start.getMonth().toString() + "-" + slotInfo.start.getDate().toString());
+        this.setState({
+            isNewEventDialogOpen: true,
+            start_time: start_hour + ":" + start_minute,
+            end_time: end_hour + ":" + end_minute,
+            day: slotInfo.start.getFullYear().toString() + "-" + month + "-" + day
+        });
 
-        if (!this.state.isEditEventDialogOpen) {
-            this.setState({
-                isNewEventDialogOpen: true,
-                start_time: start_hour + ":" + start_minute,
-                end_time: end_hour + ":" + end_minute,
-                day: slotInfo.start.getFullYear().toString() + "-" + month + "-" + day
-            });
-        }
     }
 
     //openDialog = () => this.setState({ isEditEventDialogOpen: true })
@@ -183,47 +175,61 @@ class Selectable extends Component{
             alert("Start time must be greater than end time!");
         }
         else {
-            add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.start_time, this.state.end_time, this.state.location);
-            alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
+            add_event_to_profile(firebase.auth().currentUser.uid,
+                this.state.event_name,
+                this.state.day,
+                this.state.start_time,
+                this.state.end_time,
+                this.state.location,
+                (err,data) =>
+                {
+                    alert("Successfully Added Event!");
+                    this.refresh();
+                }
+            );
 
-            // Reset the fields of the dialogue box
-            let temp = this.state.events;
-            temp.push({
-                day: this.state.day,
-                end_time: this.state.end_time,
-                event_name: this.state.event_name,
-                location:this.state.location,
-                start_time: this.state.start_time
-            });
 
-            this.setState({ events : temp, isNewEventDialogOpen: false });
+            // alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
+            //
+            // // Reset the fields of the dialogue box
+            // let temp = this.state.events;
+            // temp.push({
+            //     day: this.state.day,
+            //     end_time: this.state.end_time,
+            //     event_name: this.state.event_name,
+            //     location:this.state.location,
+            //     start_time: this.state.start_time
+            // });
+            //
+            // this.setState({ events : temp, isNewEventDialogOpen: false });
         }
-        console.log(event);
+
+        // console.log(event);
 
     }
 
     // edit, only when user want to edit it will click on an existing event
     handle_onSelectEvent(event)
     {
-        if (this.state.isNewEventDialogOpen) return;
+        if (this.state.isEditEventDialogOpen || this.state.isViewLecture || this.state.isNewEventDialogOpen) return;
 
         // handle if event type is other
         if (event.type === "other")
         {
             let event_obj = event.event_obj;
-            if (!this.state.isNewEventDialogOpen) {
-                // Call this.setState over here, to render the dialogue box
-                this.setState({
-                    isEditEventDialogOpen: true,
-                    day: event_obj.day,
-                    start_time: event_obj.start_time,
-                    end_time: event_obj.end_time,
-                    event_name :event_obj.event_name,
-                    event_id:event.event_id,
-                    location:event_obj.location,
-                    event : event
-                });
-            }
+
+            // Call this.setState over here, to render the dialogue box
+            this.setState({
+                isEditEventDialogOpen: true,
+                day: event_obj.day,
+                start_time: event_obj.start_time,
+                end_time: event_obj.end_time,
+                event_name :event_obj.event_name,
+                event_id:event.event_id,
+                location:event_obj.location,
+                event : event
+            });
+
         }
         // hand if event type is lecture
         else if (event.type === 'lecture')
@@ -261,9 +267,15 @@ class Selectable extends Component{
              this.state.day,
              this.state.start_time,
              this.state.end_time,
-             this.state.location
+             this.state.location,
+             (err,data) =>
+             {
+                 alert("Successfully editted event!");
+                 this.refresh();
+             }
          );
-         this.setState({isEditEventDialogOpen:false})
+         // this.setState({isEditEventDialogOpen:false});
+
      }
 
      handle_edit_event_close()
@@ -282,7 +294,8 @@ class Selectable extends Component{
 
     handle_btn_drop_course() {
         remove_course_from_profile(firebase.auth().currentUser.uid,this.state.course_id, (err,data)=>{
-            alert("Successfully dropped course! Refreshing the page since you got extra free time!");
+            alert("Successfully Dropped course!");
+            this.refresh();
         });
         this.setState({isViewLecture:false});
     }
@@ -315,7 +328,7 @@ class Selectable extends Component{
                         selectable = 'ignoreEvents'
                         events={this.state.events}
                         views={allViews}
-                        step={60}
+                        step={30}
                         // By default this should return current date
                         defaultDate={new Date()}
                         defaultView={'week'}
@@ -330,7 +343,7 @@ class Selectable extends Component{
                             open={true}
                             style={{width: '200px', marginLeft: '40%', backgroundColor: 'white'}}
                             overlayStyle={{backgroundColor: 'white'}}
-                            title="Add Event"
+                            title=""
                             modal={true}
                             isDraggable={true}
                             buttons={
@@ -459,7 +472,7 @@ class Selectable extends Component{
                 {this.state.isViewLecture &&
                 <div className='dialogue-box'>
                     <Dialog className=''
-                            title="See lecture details"
+                            title=""
                             modal={true}
                             isDraggable={true}
                             buttons={
