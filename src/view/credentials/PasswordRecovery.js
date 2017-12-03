@@ -26,9 +26,25 @@ class PasswordRecovery extends Component {
 
         var auth = firebase.auth();
         var emailAddress = this.state.user_email;
-        
-        auth.sendPasswordResetEmail(emailAddress);
-        alert("Password Recovery Email sent!")
+        if( emailAddress === null ){
+            alert("Please provide us your Email.")
+        }
+        else {
+            //check if provided email exists
+            firebase.auth().fetchProvidersForEmail(emailAddress)
+                .then(providers => {
+                    if (providers.length === 0) {
+                        // this email hasn't signed up yet
+                        alert("Invalid Email. Please try again.")
+                    } else {
+                        // has signed up
+                        auth.sendPasswordResetEmail(emailAddress);
+                        alert("Password Recovery Email sent!")
+                    }
+                });
+
+
+        }
     }
 
    
