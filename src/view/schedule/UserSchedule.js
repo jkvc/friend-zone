@@ -144,7 +144,8 @@ class UserSchedule extends Component {
                                     is_error = true;
                                 }
 
-                            })]
+                            })],
+                        "event_obj":course_obj
                     };
                 }
 
@@ -153,7 +154,8 @@ class UserSchedule extends Component {
                     event = {
                         "title": "undefined states in Course Obj is detected",
                         "days": "MTWThF",
-                        "hours": ["0000", "2359"]
+                        "hours": ["0000", "2359"],
+                        "event_obj": null
                     };
                 }
 
@@ -177,7 +179,6 @@ class UserSchedule extends Component {
                 {
                     this.setState({finished_adding_lectures:true})
                 }
-                console.log(i + "<" + size);
             });
         });
 
