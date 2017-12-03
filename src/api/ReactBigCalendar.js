@@ -14,7 +14,10 @@ import '../dao/ProfileManager.js';
 import '../view/schedule/AddEvent.js';
 import '../view/schedule/AddEvent.css';
 import '../dao/ProfileManager.js'
-// import ReactDom from 'react-dom';
+import {remove_course_from_profile} from "../dao/ProfileManager";
+import ReactDOM from 'react-dom';
+// import UserSchedule from '../view/schedule/UserSchedule'
+import ViewClassmates from '../view/social/ViewClassmates'
 // import Popup from 'react-popup';
 
 
@@ -49,6 +52,7 @@ class Selectable extends Component{
             events : props.events,
             isNewEventDialogOpen: false,
             isEditEventDialogOpen: false,
+            isViewLecture: false,
 
             // for new event dialog box only
             event_id: "",
@@ -57,7 +61,16 @@ class Selectable extends Component{
             start_time: "00:00",
             end_time: "23:59",
             location: "",
-            event: null
+            event: null,
+
+            // for the lecture
+            course_code: "",
+            course_id: "",
+            course_name: "",
+            days: "",
+            instructor: "",
+            lecture_location: "",
+            time: ""
         };
     }
 
@@ -215,7 +228,18 @@ class Selectable extends Component{
         // hand if event type is lecture
         else if (event.type === 'lecture')
         {
-            console.log(event);
+            let lecture = event.event_obj;
+            this.setState( {
+                // for the lecture
+                isViewLecture : true,
+                course_code: lecture.course_code,
+                course_id: lecture.course_id,
+                course_name: lecture.course_name,
+                days: lecture.days,
+                instructor: lecture.instructor,
+                lecture_location: lecture.location,
+                time: lecture.time
+            })
         }
 
         // Event object has these fields:
@@ -254,6 +278,21 @@ class Selectable extends Component{
         {
             this.handle_btn_add_event(event);
         }
+    }
+
+    handle_btn_drop_course() {
+        remove_course_from_profile(firebase.auth().currentUser.uid,this.state.course_id, (err,data)=>{
+            alert("Successfully dropped course! Refreshing the page since you got extra free time!");
+        });
+        this.setState({isViewLecture:false});
+    }
+
+    handle_edit_view_classmates() {
+        ReactDOM.render(<ViewClassmates course_id={this.state.course_id}/>, document.getElementById('main-layout'));
+    }
+
+    handle_edit_lecture_close() {
+        this.setState({isViewLecture:false})
     }
 
     componentDidMount()
@@ -417,6 +456,76 @@ class Selectable extends Component{
                 </div>
                 }
 
+                {this.state.isViewLecture &&
+                <div className='dialogue-box'>
+                    <Dialog className=''
+                            title="See lecture details"
+                            modal={true}
+                            isDraggable={true}
+                            buttons={
+                                [
+                                    {
+                                        text: "Drop this course",
+                                        onClick: () => this.handle_btn_drop_course()
+                                    },
+                                    {
+                                        text:"View classmates",
+                                        onClick: () => this.handle_edit_view_classmates()
+                                    },
+                                    {
+                                        text:"Cancel",
+                                        onClick: () => this.handle_edit_lecture_close()
+                                    }
+                                ]
+                            }>
+
+                        <h2> See lecture details </h2>
+                        <br/>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td> Course Code: </td>
+                                    <td> {this.state.course_code}</td>
+                                </tr>
+
+                                <tr>
+                                    <td> Course ID: </td>
+                                    <td> {this.state.course_id} </td>
+                                </tr>
+
+                                <tr>
+                                    <td> Course Name: </td>
+                                    <td> {this.state.course_name}</td>
+                                </tr>
+
+                                <tr>
+                                    <td> Lecture Days: </td>
+                                    <td> {this.state.days} </td>
+                                </tr>
+
+                                <tr>
+                                    <td> Instructor: </td>
+                                    <td> {this.state.instructor} </td>
+                                </tr>
+
+                                <tr>
+                                    <td> Location: </td>
+                                    <td> {this.state.lecture_location} </td>
+                                </tr>
+
+                                <tr>
+                                    <td> Time: </td>
+                                    <td> {this.state.time} </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <br/>
+
+                    </Dialog>
+                </div>
+                }
+
                 {/*<div>*/}
                     {/*{JSON.stringify(this.state)}*/}
                 {/*</div>*/}
@@ -424,6 +533,7 @@ class Selectable extends Component{
 
         )
     }
+
 
 }
 export default Selectable;
