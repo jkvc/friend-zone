@@ -43,30 +43,30 @@ class UserProfile extends Component {
                 <br/>
 
 
-                <table id='infolist'>
+                <table className="table3">
                     <tbody>
                     <tr>
-                        <td>Name</td>
-                        <td>{this.state.profile_obj.first_name + " " + this.state.profile_obj.last_name}</td>
+                        <td className="td3">Name:</td>
+                        <td className="td3">{this.state.profile_obj.first_name + " " + this.state.profile_obj.last_name}</td>
                     </tr>
                     <tr>
-                        <td>Major</td>
-                        <td>{this.state.profile_obj.major}</td>
+                        <td className="td3">Major:</td>
+                        <td className="td3">{this.state.profile_obj.major}</td>
                     </tr>
                     <tr>
-                        <td>Current year</td>
-                        <td>{this.state.profile_obj.current_year}</td>
+                        <td className="td3">Current year:</td>
+                        <td className="td3">{this.state.profile_obj.current_year}</td>
                     </tr>
                     <tr>
-                        <td>Description</td>
-                        <td>{this.state.profile_obj.description}</td>
+                        <td className="td3">Description:</td>
+                        <td className="td3">{this.state.profile_obj.description}</td>
                     </tr>
                     </tbody>
                 </table>
                 <br/>
 
 
-                <button id="edit" onClick={this.handle_edit_profile.bind(this)}>
+                <button className="edit" onClick={this.handle_edit_profile.bind(this)}>
                     Edit profile
                 </button>
 

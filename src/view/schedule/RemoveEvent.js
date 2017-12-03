@@ -28,7 +28,7 @@ class RemoveEvent extends Component{
     }
 
     handle_remove_event(){
-        if(  window.confirm("Are you sure?")) {
+
             remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_name_to_remove);
             /*remove the item once clicked drop*/
             var new_event_list = this.state.events_list;

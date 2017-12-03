@@ -9,9 +9,6 @@
    }
 
 
-#content{
-   text-align: center;
-}
 
 .profile-pic-container {
     width: 300px;
@@ -42,3 +39,22 @@
     vertical-align: top;
 }
 
+.table3 {
+    position:relative;
+    color: #333; /* Lighten up font color */
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+    width: 320px;
+    border-collapse: collapse; border-spacing:0;
+    margin: 0 auto
+
+}
+
+
+.td3{
+    height: 40px;
+    width: 100px;
+    text-align: left; /* Center our text */
+    float:left;
+    margin-left: 40px;
+
+}
