@@ -49,14 +49,14 @@
 }
 
 .table2 {
-    position:relative;
-    color: #333; /* Lighten up font color */
-    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
-    width: 320px;
-    border-collapse: collapse; border-spacing:0;
-    margin: 0 auto
+     position:relative;
+     color: #333; /* Lighten up font color */
+     font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+     width: 320px;
+     border-collapse: collapse; border-spacing:0;
+     margin: 0 auto
 
-}
+ }
 
 
 .td2{
@@ -66,4 +66,16 @@
     float:left;
 
 
+}
+.edit{
+    margin-top: 20px;
+    font-size: medium;
+    background: transparent;
+    border:none;
+    color: #2f5597;
+    padding: 10px;
+    cursor: pointer;
+}
+.edit:hover{
+    text-decoration: underline;
 }

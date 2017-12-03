@@ -423,14 +423,17 @@ class Selectable extends Component{
                                 [
                                     {
                                         text: "Update",
+                                        className:"diaButton",
                                         onClick: () => this.handle_btn_edit_event()
                                     },
                                     {
                                         text: "Delete",
+                                        className:"diaButton",
                                         onClick: () => this.handle_btn_delete_event()
                                     },
                                     {
                                         text:"Cancel",
+                                        className:"diaButton",
                                         onClick: () => this.handle_edit_event_close()
                                     }]
                             }>
@@ -493,14 +496,17 @@ class Selectable extends Component{
                                 [
                                     {
                                         text: "Drop this course",
+                                        className:"diaButton",
                                         onClick: () => this.handle_btn_drop_course()
                                     },
                                     {
                                         text:"View classmates",
+                                        className:"diaButton",
                                         onClick: () => this.handle_edit_view_classmates()
                                     },
                                     {
                                         text:"Cancel",
+                                        className:"diaButton",
                                         onClick: () => this.handle_edit_lecture_close()
                                     }
                                 ]
