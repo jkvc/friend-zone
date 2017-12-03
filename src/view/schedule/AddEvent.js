@@ -66,7 +66,7 @@ class AddEvent extends Component{
 
                 <br/>
                 <form onKeyPress={this.handle_keyPress.bind(this)}>
-                    <label>Event Name:</label>
+                    <label className="alignLabel">Event Name:</label>
                     <input className="addEventInputField" type="text" value={this.state.event_name}
                            onChange={function(e){
                                this.setState({event_name:e.target.value});
@@ -74,7 +74,7 @@ class AddEvent extends Component{
 
                     <br />
 
-                    <label>Day:</label>
+                    <label className="alignLabel"> Day:</label>
                     <input className="addEventInputField" type="date" value={this.state.day}
                            onChange={function(e){
                                this.setState({day:e.target.value})
@@ -82,7 +82,7 @@ class AddEvent extends Component{
 
                     <br />
 
-                    <label>Start Time:</label>
+                    <label className="alignLabel">Start Time:</label>
                     <input className="addEventInputField" type="time" value={this.state.start_time}
                            onChange={function(e){
                                this.setState({start_time:e.target.value})
@@ -90,7 +90,7 @@ class AddEvent extends Component{
 
                     <br />
 
-                    <label>End Time:</label>
+                    <label className="alignLabel">End Time:</label>
                     <input className="addEventInputField" type="time" value={this.state.end_time}
                            onChange={function(e){
                                this.setState({end_time:e.target.value})
@@ -98,7 +98,7 @@ class AddEvent extends Component{
 
                     <br />
 
-                    <label>Location</label>
+                    <label className="alignLabel">Location</label>
                     <input className="addEventInputField" value={this.state.location}
                            onChange={function(e){
                                this.setState({location:e.target.value})
@@ -120,6 +120,21 @@ class AddEvent extends Component{
                     <div className="droplet" id="no8"></div>
                     <div className="droplet" id="no9"></div>
                     <div className="droplet" id="no10"></div>
+
+
+                    <div className="flowercontainer3">
+                        <div className="droplet2" id="no1"></div>
+                        <div className="droplet2" id="no2"></div>
+                        <div className="droplet2" id="no3"></div>
+                        <div className="droplet2" id="no4"></div>
+                        <div className="droplet2" id="no5"></div>
+                        <div className="droplet2" id="no6"></div>
+                        <div className="droplet2" id="no7"></div>
+                        <div className="droplet2" id="no8"></div>
+                        <div className="droplet2" id="no9"></div>
+                        <div className="droplet2" id="no10"></div>
+
+                    </div>
 
                 </div>
 

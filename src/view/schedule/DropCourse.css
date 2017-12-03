@@ -4,6 +4,7 @@
     width: 800px;
     border-collapse: collapse; border-spacing: 0;
 
+
 }
 td1, .th1 { border: 2px solid #CCC; height: 40px; } /* Make cells a bit taller */
 

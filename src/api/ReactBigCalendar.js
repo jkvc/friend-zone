@@ -348,7 +348,7 @@ class Selectable extends Component{
 
                         <Dialog
                             open={true}
-                            style={{width: '200px', marginLeft: '40%', backgroundColor: 'white'}}
+                           // style={{width: '200px', marginLeft: '40%', backgroundColor: 'white'}}
                             overlayStyle={{backgroundColor: 'white'}}
                             title=""
                             modal={true}
@@ -356,10 +356,12 @@ class Selectable extends Component{
                             buttons={
                                 [{
                                     text: "Add this event",
+                                    className:"diaButton",
                                     onClick: () => this.handle_btn_add_event()
                                 },
                                 {
                                     text:"Cancel",
+                                    className:"diaButton",
                                     onClick: () => this.handleClose()
                                 }]
 
@@ -369,7 +371,7 @@ class Selectable extends Component{
 
                         <br/>
                         <form onKeyPress={this.handle_keyPress.bind(this)}>
-                            <label>Event Name:</label>
+                            <label className="alignLabel">Event Name:</label>
                             <input className="addEventInputField" type="text" value={this.state.event_name}
                                    onChange={function (e) {
                                        this.setState({event_name: e.target.value});
@@ -377,7 +379,7 @@ class Selectable extends Component{
 
                             <br/>
 
-                            <label>Day:</label>
+                            <label className="alignLabel">Day:</label>
                             <input className="addEventInputField" type="date" value={this.state.day}
                                    onChange={function (e) {
                                        this.setState({day: e.target.value})
@@ -385,7 +387,7 @@ class Selectable extends Component{
 
                             <br/>
 
-                            <label>Start Time:</label>
+                            <label className="alignLabel">Start Time:</label>
                             <input className="addEventInputField" type="time" value={this.state.start_time}
                                    onChange={function (e) {
                                        this.setState({start_time: e.target.value})
@@ -393,7 +395,7 @@ class Selectable extends Component{
 
                             <br/>
 
-                            <label>End Time:</label>
+                            <label className="alignLabel">End Time:</label>
                             <input className="addEventInputField" type="time" value={this.state.end_time}
                                    onChange={function (e) {
                                        this.setState({end_time: e.target.value})
@@ -401,7 +403,7 @@ class Selectable extends Component{
 
                             <br/>
 
-                            <label>Location</label>
+                            <label className="alignLabel">Location</label>
                             <input className="addEventInputField" value={this.state.location}
                                    onChange={function (e) {
                                        this.setState({location: e.target.value})
@@ -413,7 +415,7 @@ class Selectable extends Component{
                 }
 
                 {this.state.isEditEventDialogOpen &&
-                <div className='dialogue-box'>
+
                     <Dialog className=''
                             modal={true}
                             isDraggable={true}
@@ -421,14 +423,17 @@ class Selectable extends Component{
                                 [
                                     {
                                         text: "Update",
+                                        className:"diaButton",
                                         onClick: () => this.handle_btn_edit_event()
                                     },
                                     {
                                         text: "Delete",
+                                        className:"diaButton",
                                         onClick: () => this.handle_btn_delete_event()
                                     },
                                     {
                                         text:"Cancel",
+                                        className:"diaButton",
                                         onClick: () => this.handle_edit_event_close()
                                     }]
                             }>
@@ -437,7 +442,7 @@ class Selectable extends Component{
 
                         <br/>
                         <form onKeyPress={this.handle_keyPress.bind(this)}>
-                            <label>Event Name:</label>
+                            <label className="alignLabel">Event Name:</label>
                             <input className="addEventInputField" type="text" value={this.state.event_name}
                                    onChange={function (e) {
                                        this.setState({event_name: e.target.value});
@@ -445,7 +450,7 @@ class Selectable extends Component{
 
                             <br/>
 
-                            <label>Day:</label>
+                            <label className="alignLabel">Day:</label>
                             <input className="addEventInputField" type="date" value={this.state.day}
                                    onChange={function (e) {
                                        this.setState({day: e.target.value})
@@ -453,7 +458,7 @@ class Selectable extends Component{
 
                             <br/>
 
-                            <label>Start Time:</label>
+                            <label className="alignLabel">Start Time:</label>
                             <input className="addEventInputField" type="time" value={this.state.start_time}
                                    onChange={function (e) {
                                        this.setState({start_time: e.target.value})
@@ -461,7 +466,7 @@ class Selectable extends Component{
 
                             <br/>
 
-                            <label>End Time:</label>
+                            <label className="alignLabel">End Time:</label>
                             <input className="addEventInputField" type="time" value={this.state.end_time}
                                    onChange={function (e) {
                                        this.setState({end_time: e.target.value})
@@ -469,7 +474,7 @@ class Selectable extends Component{
 
                             <br/>
 
-                            <label>Location</label>
+                            <label className="alignLabel">Location</label>
                             <input className="addEventInputField" value={this.state.location}
                                    onChange={function (e) {
                                        this.setState({location: e.target.value})
@@ -478,11 +483,11 @@ class Selectable extends Component{
                         </form>
 
                     </Dialog>
-                </div>
+
                 }
 
                 {this.state.isViewLecture &&
-                <div className='dialogue-box'>
+
                     <Dialog className=''
                             title=""
                             modal={true}
@@ -491,14 +496,17 @@ class Selectable extends Component{
                                 [
                                     {
                                         text: "Drop this course",
+                                        className:"diaButton",
                                         onClick: () => this.handle_btn_drop_course()
                                     },
                                     {
                                         text:"View classmates",
+                                        className:"diaButton",
                                         onClick: () => this.handle_edit_view_classmates()
                                     },
                                     {
                                         text:"Cancel",
+                                        className:"diaButton",
                                         onClick: () => this.handle_edit_lecture_close()
                                     }
                                 ]
@@ -548,7 +556,7 @@ class Selectable extends Component{
                         <br/>
 
                     </Dialog>
-                </div>
+
                 }
 
                 {/*<div>*/}
