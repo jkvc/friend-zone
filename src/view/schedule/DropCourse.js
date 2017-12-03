@@ -25,6 +25,7 @@ class DropCourse extends Component {
 
     handle_drop_course() {
 
+        if(window.confirm("Are you sure you want to drop "+this.state.course_id_to_drop + "?")) {
             remove_course_from_profile(firebase.auth().currentUser.uid, this.state.course_id_to_drop)
             remove_user_from_enrollment(firebase.auth().currentUser.uid, this.state.course_id_to_drop)
 
