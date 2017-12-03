@@ -101,9 +101,16 @@ export function edit_existing_event(user_id, event_id, event_name, event_day , s
 
             if (event_id in profile.upcoming_events) {
                 profile.upcoming_events[event_id] =
-                    new Event(event_name, event_day, start_time, end_time, event_location);
+                    {
+                        day: event_day,
+                        end_time: end_time,
+                        event_name:event_name,
+                        location:event_location,
+                        start_time: start_time
+                    };
                 profile.push();
             }
+            
             else
             {
                 return { msg: "Unknown Event passed in!" };

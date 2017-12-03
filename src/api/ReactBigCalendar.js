@@ -3,7 +3,7 @@
  */
 
 import firebase from 'firebase';
-import {add_event_to_profile} from "../dao/ProfileManager";
+import {add_event_to_profile, edit_existing_event} from "../dao/ProfileManager";
 import React, {Component} from 'react';
 import BigCalendar from 'react-big-calendar';
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -45,17 +45,17 @@ class Selectable extends Component{
         super(props);
         this.state = {
             events : props.events,
-            isNewEventDialogueOpen: false,
-            isDialogOpen: false,
+            isNewEventDialogOpen: false,
+            isEditEventDialogOpen: false,
 
             // for new event dialog box only
+            event_id: "",
             event_name: "",
             day: "",
             start_time: "00:00",
             end_time: "23:59",
-            location: ""
-
-
+            location: "",
+            event: null
         };
     }
 
@@ -119,8 +119,6 @@ class Selectable extends Component{
 
     handle_select_slot(slotInfo)
     {
-
-
         // events.push(
         //     {
         //         "title":this.event.title,
@@ -130,15 +128,40 @@ class Selectable extends Component{
         //     }
         // );
 
-
         //Call this.setState over here, to render the dialogue box
-        this.setState({
-            isDialogOpen : !this.state.isDialogOpen
-                        } );
+        console.log(slotInfo);
+
+        let start_hour = slotInfo.start.getHours().toString();
+        if (start_hour.length < 2) start_hour = '0' + start_hour;
+        let start_minute = slotInfo.start.getMinutes().toString();
+        if (start_minute.length < 2) start_minute = '0' + start_minute;
+
+        let end_hour = slotInfo.end.getHours().toString();
+        if (end_hour.length < 2) end_hour = '0' + end_hour;
+        let end_minute = slotInfo.end.getMinutes().toString();
+        if (end_minute.length < 2) end_minute = '0' + end_minute;
+
+        let month = (slotInfo.start.getMonth()+1).toString();
+        if (month.length < 2) month = '0' + month;
+        let day = slotInfo.start.getDate().toString();
+        if (day.length < 2) day = '0' + day;
+
+        console.log(slotInfo.start.getFullYear().toString() + "-" + slotInfo.start.getMonth().toString() + "-" + slotInfo.start.getDate().toString());
+
+        if (!this.state.isEditEventDialogOpen) {
+            this.setState({
+                isNewEventDialogOpen: true,
+                start_time: start_hour + ":" + start_minute,
+                end_time: end_hour + ":" + end_minute,
+                day: slotInfo.start.getFullYear().toString() + "-" + month + "-" + day
+            });
+        }
     }
 
-    //openDialog = () => this.setState({ isDialogOpen: true })
-    handleClose = () => this.setState({ isDialogOpen: false })
+    //openDialog = () => this.setState({ isEditEventDialogOpen: true })
+    handleClose() {
+        this.setState({ isNewEventDialogOpen: false });
+    }
 
     handle_btn_add_event()
     {
@@ -167,16 +190,46 @@ class Selectable extends Component{
             alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
 
             // Reset the fields of the dialogue box
-            this.setState();
+            let temp = this.state.events;
+            temp.push({
+                day: this.state.day,
+                end_time: this.state.end_time,
+                event_name: this.state.event_name,
+                location:this.state.location,
+                start_time: this.state.start_time
+            });
+
+            this.setState({ events : temp, isNewEventDialogOpen: false });
         }
     }
 
     handle_onSelectEvent(event)
     {
-        // Call this.setState over here, to render the dialogue box
-        this.setState({
-            isDialogOpen : !this.state.isDialogOpen
-        } );
+        if (this.state.isNewEventDialogOpen) return;
+
+        // handle if event type is other
+        if (event.type === "other")
+        {
+            let event_obj = event.event_obj;
+            if (!this.state.isNewEventDialogOpen) {
+                // Call this.setState over here, to render the dialogue box
+                this.setState({
+                    isEditEventDialogOpen: true,
+                    day: event_obj.day,
+                    start_time: event_obj.start_time,
+                    end_time: event_obj.end_time,
+                    event_name :event_obj.event_name,
+                    event_id:event.event_id,
+                    location:event_obj.location,
+                    event : event
+                });
+            }
+        }
+        // hand if event type is lecture
+        else if (event.type === 'lecture')
+        {
+
+        }
 
         // Event object has these fields:
         // title
@@ -190,7 +243,21 @@ class Selectable extends Component{
 
      handle_btn_edit_event()
      {
+         edit_existing_event(
+             firebase.auth().currentUser.uid,
+             this.state.event_id,
+             this.state.event_name,
+             this.state.day,
+             this.state.start_time,
+             this.state.end_time,
+             this.state.location
+         );
+         this.setState({isEditEventDialogOpen:false})
+     }
 
+     handle_edit_event_close()
+     {
+         this.setState({isEditEventDialogOpen:false})
      }
 
 
@@ -202,6 +269,11 @@ class Selectable extends Component{
         }
     }
 
+    componentDidMount()
+    {
+
+    }
+
     render() {
 
         return (
@@ -210,78 +282,9 @@ class Selectable extends Component{
                     Click an event to see more info, or
                     drag the mouse over the calendar to select a date/time range.
                 </div>
-                    <br/>
-                {this.state.isDialogOpen &&
-                    <div className='dialogue-box'>
-                        <Dialog className=''
-                            title="Dialog Title"
-                            modal={true}
-                            buttons={
-                                [{
-                                    text: "save",
-                                    onClick: () => this.handle_btn_add_event()
-                                },
-                                {
-                                    text:"cancel",
-                                    onClick: () => this.handleClose()
-                                }]
-                        }>
+                <br/>
 
-                        <h1>Dialog Content</h1>
-                        <p>
-
-
-                                <br/>
-                                <form onKeyPress={this.handle_keyPress.bind(this)}>
-                                    <label>Event Name:</label>
-                                    <input className="addEventInputField" type="text" value={this.state.event_name}
-                                           onChange={function (e) {
-                                               this.setState({event_name: e.target.value});
-                                           }.bind(this)}/>
-
-                                    <br/>
-
-                                    <label>Day:</label>
-                                    <input className="addEventInputField" type="date" value={this.state.day}
-                                           onChange={function (e) {
-                                               this.setState({day: e.target.value})
-                                           }.bind(this)}/>
-
-                                    <br/>
-
-                                    <label>Start Time:</label>
-                                    <input className="addEventInputField" type="time" value={this.state.start_time}
-                                           onChange={function (e) {
-                                               this.setState({start_time: e.target.value})
-                                           }.bind(this)}/>
-
-                                    <br/>
-
-                                    <label>End Time:</label>
-                                    <input className="addEventInputField" type="time" value={this.state.end_time}
-                                           onChange={function (e) {
-                                               this.setState({end_time: e.target.value})
-                                           }.bind(this)}/>
-
-                                    <br/>
-
-                                    <label>Location</label>
-                                    <input className="addEventInputField" value={this.state.location}
-                                           onChange={function (e) {
-                                               this.setState({location: e.target.value})
-                                           }.bind(this)}/>
-
-                                    <br/>
-                                </form>
-
-                        </p>
-
-                        </Dialog>
-                    </div>
-                }
-
-
-
+                <div id={'react-big-calendar-container'}>
                     <BigCalendar
                         selectable = 'ignoreEvents'
                         events={this.state.events}
@@ -292,12 +295,144 @@ class Selectable extends Component{
                         defaultView={'week'}
                         onSelectEvent={ this.handle_onSelectEvent.bind(this) }
                         onSelectSlot={ this.handle_select_slot.bind(this) }
-                        />
-
-                <div>
-
+                    />
                 </div>
+
+                {this.state.isNewEventDialogOpen &&
+                    <div className='dialogue-box'>
+                        <Dialog className=''
+                            title="Add Event"
+                            modal={true}
+                            isDraggable={true}
+                            buttons={
+                                [{
+                                    text: "Add this event",
+                                    onClick: () => this.handle_btn_add_event()
+                                },
+                                {
+                                    text:"Cancel",
+                                    onClick: () => this.handleClose()
+                                }]
+                        }>
+
+                        <h2> Input Event Details </h2>
+
+                        <br/>
+                        <form onKeyPress={this.handle_keyPress.bind(this)}>
+                            <label>Event Name:</label>
+                            <input className="addEventInputField" type="text" value={this.state.event_name}
+                                   onChange={function (e) {
+                                       this.setState({event_name: e.target.value});
+                                   }.bind(this)}/>
+
+                            <br/>
+
+                            <label>Day:</label>
+                            <input className="addEventInputField" type="date" value={this.state.day}
+                                   onChange={function (e) {
+                                       this.setState({day: e.target.value})
+                                   }.bind(this)}/>
+
+                            <br/>
+
+                            <label>Start Time:</label>
+                            <input className="addEventInputField" type="time" value={this.state.start_time}
+                                   onChange={function (e) {
+                                       this.setState({start_time: e.target.value})
+                                   }.bind(this)}/>
+
+                            <br/>
+
+                            <label>End Time:</label>
+                            <input className="addEventInputField" type="time" value={this.state.end_time}
+                                   onChange={function (e) {
+                                       this.setState({end_time: e.target.value})
+                                   }.bind(this)}/>
+
+                            <br/>
+
+                            <label>Location</label>
+                            <input className="addEventInputField" value={this.state.location}
+                                   onChange={function (e) {
+                                       this.setState({location: e.target.value})
+                                   }.bind(this)}/>
+                            <br/>
+                        </form>
+
+                        </Dialog>
+                    </div>
+                }
+
+                {this.state.isEditEventDialogOpen &&
+                <div className='dialogue-box'>
+                    <Dialog className=''
+                            title="Edit Event"
+                            modal={true}
+                            isDraggable={true}
+                            buttons={
+                                [{
+                                    text: "Edit this event",
+                                    onClick: () => this.handle_btn_edit_event()
+                                },
+                                    {
+                                        text:"Cancel",
+                                        onClick: () => this.handle_edit_event_close()
+                                    }]
+                            }>
+
+                        <h2> Change Event Details </h2>
+
+                        <br/>
+                        <form onKeyPress={this.handle_keyPress.bind(this)}>
+                            <label>Event Name:</label>
+                            <input className="addEventInputField" type="text" value={this.state.event_name}
+                                   onChange={function (e) {
+                                       this.setState({event_name: e.target.value});
+                                   }.bind(this)}/>
+
+                            <br/>
+
+                            <label>Day:</label>
+                            <input className="addEventInputField" type="date" value={this.state.day}
+                                   onChange={function (e) {
+                                       this.setState({day: e.target.value})
+                                   }.bind(this)}/>
+
+                            <br/>
+
+                            <label>Start Time:</label>
+                            <input className="addEventInputField" type="time" value={this.state.start_time}
+                                   onChange={function (e) {
+                                       this.setState({start_time: e.target.value})
+                                   }.bind(this)}/>
+
+                            <br/>
+
+                            <label>End Time:</label>
+                            <input className="addEventInputField" type="time" value={this.state.end_time}
+                                   onChange={function (e) {
+                                       this.setState({end_time: e.target.value})
+                                   }.bind(this)}/>
+
+                            <br/>
+
+                            <label>Location</label>
+                            <input className="addEventInputField" value={this.state.location}
+                                   onChange={function (e) {
+                                       this.setState({location: e.target.value})
+                                   }.bind(this)}/>
+                            <br/>
+                        </form>
+
+                    </Dialog>
+                </div>
+                }
+
+                {/*<div>*/}
+                    {/*{JSON.stringify(this.state)}*/}
+                {/*</div>*/}
             </div>
+
         )
     }
 
