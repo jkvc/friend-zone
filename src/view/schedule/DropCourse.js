@@ -24,17 +24,19 @@ class DropCourse extends Component {
     }
 
     handle_drop_course() {
-        remove_course_from_profile(firebase.auth().currentUser.uid, this.state.course_id_to_drop)
-        remove_user_from_enrollment(firebase.auth().currentUser.uid, this.state.course_id_to_drop)
+        if(  window.confirm("Are you sure?")) {
+            remove_course_from_profile(firebase.auth().currentUser.uid, this.state.course_id_to_drop)
+            remove_user_from_enrollment(firebase.auth().currentUser.uid, this.state.course_id_to_drop)
 
-        /*remove the item once clicked drop*/
-        var new_course_list = this.state.courses_list;
-        new_course_list.splice(new_course_list.indexOf(this.state.course_id_to_drop), 1);
-        window.alert("The course \"" + this.state.course_id_to_drop + "\" was successfully removed from your schedule!")
-        this.setState({
-            courses_list: new_course_list,
-            course_id_to_drop: ""
-        })
+            /*remove the item once clicked drop*/
+            var new_course_list = this.state.courses_list;
+            new_course_list.splice(new_course_list.indexOf(this.state.course_id_to_drop), 1);
+            window.alert("The course \"" + this.state.course_id_to_drop + "\" was successfully removed from your schedule!")
+            this.setState({
+                courses_list: new_course_list,
+                course_id_to_drop: ""
+            })
+        }
     }
 
     render() {
@@ -63,7 +65,7 @@ class DropCourse extends Component {
                                             this.setState({course_id_to_drop: entry}, () => {
                                                 this.handle_drop_course();
                                             })
-                                        }}>           Drop
+                                        }}> Drop
                                         </button>
                                     </td>
                                 </tr>

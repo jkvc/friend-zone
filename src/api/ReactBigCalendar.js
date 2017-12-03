@@ -286,9 +286,11 @@ class Selectable extends Component{
      }
 
     handle_btn_delete_event() {
-        remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_id, (err,data) => {
+        if (window.confirm("Are you sure?")) {
+        remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_id, (err, data) => {
             this.refresh();
         });
+        }
     }
 
     handle_keyPress(event)
@@ -300,11 +302,13 @@ class Selectable extends Component{
     }
 
     handle_btn_drop_course() {
-        remove_course_from_profile(firebase.auth().currentUser.uid,this.state.course_id, (err,data)=>{
-            alert("Successfully Dropped course!");
-            this.refresh();
-        });
-        this.setState({isViewLecture:false});
+        if(  window.confirm("Are you sure?")) {
+            remove_course_from_profile(firebase.auth().currentUser.uid, this.state.course_id, (err, data) => {
+                alert("Successfully Dropped course!");
+                this.refresh();
+            });
+            this.setState({isViewLecture: false});
+        }
     }
 
     handle_edit_view_classmates() {
