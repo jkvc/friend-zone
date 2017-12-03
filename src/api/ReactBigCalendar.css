@@ -10,7 +10,6 @@
 }
 
 .ui-dialog {
-    background: #FFFFFF;
     border: 1px solid #eee;
     padding: 20px;
     border-radius: 5px;
@@ -23,7 +22,9 @@
     transform: translate(-50%, -50%);
     flex: 1;
     z-index : 10;
+    background-color: #f4fef4;
 }
+
 /* dont change ui-dialog to other name because this refer to the original styling class from package. */
 .schedule-button-container button{
     font-size: medium;
@@ -94,9 +95,6 @@
     35% {
         transform: scale3D(0, 0, 1);
     }
-}
-.ui-dialog{
-    background-color: #f4fef4;
 }
 
 .alignLabel{
