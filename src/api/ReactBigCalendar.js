@@ -15,7 +15,9 @@ import '../view/schedule/AddEvent.js';
 import '../view/schedule/AddEvent.css';
 import '../dao/ProfileManager.js'
 import {remove_course_from_profile} from "../dao/ProfileManager";
-// import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+// import UserSchedule from '../view/schedule/UserSchedule'
+import ViewClassmates from '../view/social/ViewClassmates'
 // import Popup from 'react-popup';
 
 
@@ -286,7 +288,7 @@ class Selectable extends Component{
     }
 
     handle_edit_view_classmates() {
-
+        ReactDOM.render(<ViewClassmates course_id={this.state.course_id}/>, document.getElementById('main-layout'));
     }
 
     handle_edit_lecture_close() {
