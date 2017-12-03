@@ -313,8 +313,11 @@ class Selectable extends Component{
                 </div>
 
                 {this.state.isNewEventDialogOpen &&
-                    <div className='dialogue-box'>
-                        <Dialog className=''
+
+                        <Dialog
+                            open={true}
+                            style={{width: '200px', marginLeft: '40%', backgroundColor: 'white'}}
+                            overlayStyle={{backgroundColor: 'white'}}
                             title="Add Event"
                             modal={true}
                             isDraggable={true}
@@ -327,6 +330,7 @@ class Selectable extends Component{
                                     text:"Cancel",
                                     onClick: () => this.handleClose()
                                 }]
+
                         }>
 
                         <h2> Input Event Details </h2>
@@ -374,7 +378,6 @@ class Selectable extends Component{
                         </form>
 
                         </Dialog>
-                    </div>
                 }
 
                 {this.state.isEditEventDialogOpen &&

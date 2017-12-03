@@ -44,4 +44,6 @@
     text-align: center;
     cursor: pointer;
 }
-
+.button_red:hover{
+    text-decoration: underline;
+}
