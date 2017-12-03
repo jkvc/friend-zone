@@ -286,7 +286,7 @@ class Selectable extends Component{
      }
 
     handle_btn_delete_event() {
-        if (window.confirm("Are you sure?")) {
+        if( window.confirm("Are you sure you want to remove \""+this.state.event_name+"\" from your calendar?")) {
         remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_id, (err, data) => {
             this.refresh();
         });
@@ -302,7 +302,7 @@ class Selectable extends Component{
     }
 
     handle_btn_drop_course() {
-        if(  window.confirm("Are you sure?")) {
+        if(window.confirm("Are you sure you want to drop "+this.state.course_id + "?")){
             remove_course_from_profile(firebase.auth().currentUser.uid, this.state.course_id, (err, data) => {
                 alert("Successfully Dropped course!");
                 this.refresh();
