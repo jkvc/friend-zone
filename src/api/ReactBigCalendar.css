@@ -98,3 +98,32 @@
 .ui-dialog{
     background-color: white;
 }
+.alignLabel{
+    text-align: left;
+    display: inline-block;
+    width: 140px;
+
+}
+.addEventInputField{
+    width:60%;
+    font-family: "Biko", sans-serif;
+    font-size: medium;
+    border:none;
+    background-color: transparent;
+    border-bottom: solid 1px grey;
+    color: grey;
+
+}
+.diaButton{
+    margin-top: 20px;
+    font-size: medium;
+    background: transparent;
+    border:none;
+    color: #2f5597;
+    padding: 10px;
+    cursor: pointer;
+}
+.diaButton:hover{
+    text-decoration: underline;
+
+}

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Welcome from './Welcome';
 import firebase from 'firebase';
+import './RedirectNodEmailVerification.css'
 class RedirectNoEmailVerification extends Component {
     constructor( props){
         super(props);
@@ -27,11 +28,12 @@ class RedirectNoEmailVerification extends Component {
     }
     render() {
         return (
-            <div>
+            <div class="hero-bkg-animated" align="center">
                 <h2>You have not verified your e-mail yet,</h2>
                 <h3>Please come back when you have done so.</h3>
-                <button onClick={this.goto_welcome}>Go back to MainPage</button>
-                <button onClick={this.send_verification}>Send Verification Email</button>
+                <button className="buttonStyle1" onClick={this.goto_welcome}>Go back to MainPage</button>
+                <button className="buttonStyle1" onClick={this.send_verification}>Send Verification Email</button>
+                <h4>--------Powered by FriendZone--------</h4>
             </div>
         )
     }

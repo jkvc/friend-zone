@@ -312,7 +312,7 @@ class EditProfile extends Component {
                         <tr>
                             <td className="td2">Description</td>
                             <td className="td2">
-                                <textarea className="textarea1" value={this.state.description}
+                                <input className="input1" value={this.state.description}
                                        onChange={e => this.setState({description: e.target.value})}/>
 
                             </td>
