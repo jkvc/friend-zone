@@ -241,7 +241,7 @@ class Selectable extends Component{
         // hand if event type is lecture
         else if (event.type === 'lecture')
         {
-
+            console.log(event);
         }
 
         // Event object has these fields:

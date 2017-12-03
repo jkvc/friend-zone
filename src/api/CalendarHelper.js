@@ -203,7 +203,8 @@ class CalendarEvent
                     "title":this.event.title,
                     "start": new Date(curr_day.getFullYear(), curr_day.getMonth(), curr_day.getDate(), start_hour, start_min ),
                     "end": new Date(curr_day.getFullYear(), curr_day.getMonth(), curr_day.getDate(), end_hour, end_min ),
-                    "type": "lecture"
+                    "type": "lecture",
+                    "event_obj": this.event.event_obj
                 }
             );
             curr_day.setDate(curr_day.getDate() + 7);
