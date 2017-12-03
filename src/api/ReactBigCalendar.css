@@ -6,10 +6,24 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2em;
     color: #555;
-
+    z-index: 1;
 }
 
-
+.dialogue-box {
+    background: #FFFFFF;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(50, 50, 50, 0.25);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(50, 50, 50, 0.25);
+    box-shadow: 0px 0px 0px 0px rgba(50, 50, 50, 0.25);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex: 1;
+    z-index : 10;
+}
 
 .schedule-button-container button{
     font-size: medium;
@@ -18,4 +32,66 @@
     color: #2f5597;
     padding: 10px;
     cursor: pointer;
+}
+
+
+.sk-cube-grid {
+    width: 40px;
+    height: 40px;
+    margin: 200px auto;
+}
+
+.sk-cube-grid .sk-cube {
+    width: 33%;
+    height: 33%;
+    background-color: #333;
+    float: left;
+    animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+
+.sk-cube-grid .sk-cube1 {
+    animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube2 {
+    animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube3 {
+    animation-delay: 0.4s;
+}
+
+.sk-cube-grid .sk-cube4 {
+    animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube5 {
+    animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube6 {
+    animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube7 {
+    animation-delay: 0s;
+}
+
+.sk-cube-grid .sk-cube8 {
+    animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube9 {
+    animation-delay: 0.2s;
+}
+
+@keyframes sk-cubeGridScaleDelay {
+    0%,
+    70%,
+    100% {
+        transform: scale3D(1, 1, 1);
+    }
+    35% {
+        transform: scale3D(0, 0, 1);
+    }
 }
