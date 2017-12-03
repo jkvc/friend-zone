@@ -28,15 +28,17 @@ class RemoveEvent extends Component{
     }
 
     handle_remove_event(){
-        remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_name_to_remove);
-        /*remove the item once clicked drop*/
-        var new_event_list = this.state.events_list;
-        window.alert("The event \"" + this.state.events_list[this.state.event_name_to_remove].event_name+ "\" was successfully removed to your schedule!")
-        delete new_event_list[this.state.event_name_to_remove];
-        this.setState({
-            courses_list: new_event_list,
-            course_id_to_drop: ""
-        })
+        if( window.confirm("Are you sure you want to remove \""+this.state.events_list[this.state.event_name_to_remove].event_name+"\" from your calendar?")) {
+            remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_name_to_remove);
+            /*remove the item once clicked drop*/
+            var new_event_list = this.state.events_list;
+            window.alert("The event \"" + this.state.events_list[this.state.event_name_to_remove].event_name + "\" was successfully removed to your schedule!")
+            delete new_event_list[this.state.event_name_to_remove];
+            this.setState({
+                courses_list: new_event_list,
+                course_id_to_drop: ""
+            })
+        }
     }
     render(){
         // This basically uses a table to represent the list
