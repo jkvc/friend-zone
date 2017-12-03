@@ -85,7 +85,7 @@ class Selectable extends Component{
         else {
             add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.start_time, this.state.end_time, this.state.location);
             alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
-            this.setState( {event_name : "", day : "", start_time : "00:00", end_time : "23:59", location : ""} );
+            this.setState( {event_name : this.state.event_name, day : this.state.day, start_time : this.state.start_time, end_time : this.state.end_time, location : this.state.location} );
         }
 
     }
@@ -143,7 +143,7 @@ class Selectable extends Component{
     handle_btn_add_event()
     {
         // do something with the fields entered by the user, and when the button is pressed, create a new event
-        let event = {event_name : "", day : "", start_time : "00:00", end_time : "23:59", location : "" };
+        //let event = {event_name : "", day : "", start_time : "00:00", end_time : "23:59", location : "" };
 
         // set the event to something...
         // ..............................
@@ -156,7 +156,6 @@ class Selectable extends Component{
         }
         else
         {
-            // TODO: Uncomment following line out
             add_event_to_profile(
                 firebase.auth().currentUser.uid,
                 this.state.event_name,
@@ -189,10 +188,12 @@ class Selectable extends Component{
         console.log(event);
     }
 
-    // handle_btn_edit_event()
-    // {
-    //
-    // }
+     handle_btn_edit_event()
+     {
+
+     }
+
+
     handle_keyPress(event)
     {
         if (event.key === 'Enter')
@@ -228,9 +229,7 @@ class Selectable extends Component{
 
                         <h1>Dialog Content</h1>
                         <p>
-                            
 
-                                {/*<centerPageTitle title="Add Event"/>*/}
 
                                 <br/>
                                 <form onKeyPress={this.handle_keyPress.bind(this)}>
