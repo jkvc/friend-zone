@@ -254,7 +254,6 @@ class Selectable extends Component{
         console.log(event);
     }
 
-<<<<<<< HEAD
      handle_btn_edit_event()
      {
          edit_existing_event(
@@ -273,18 +272,6 @@ class Selectable extends Component{
      {
          this.setState({isEditEventDialogOpen:false})
      }
-=======
-     // handle_btn_edit_event()
-     // {
-     //     edit_existing_event(
-     //         firebase.auth().currentUser.uid,
-     //         this.state.event_name,
-     //         this.state.day,
-     //         this.state.start_time,
-     //         this.state.end_time,
-     //         this.state.location)
-     // }
->>>>>>> 27e13f7edf9b4eeb7f5c5f94540dcc523ba634e7
 
 
     handle_keyPress(event)
