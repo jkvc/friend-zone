@@ -96,8 +96,9 @@
     }
 }
 .ui-dialog{
-    background-color: white;
+    background-color: #f4fef4;
 }
+
 .alignLabel{
     text-align: left;
     display: inline-block;
@@ -126,4 +127,16 @@
 .diaButton:hover{
     text-decoration: underline;
 
+}
+
+.ui-dialog-overlay {
+    background: #aaa;
+    opacity: .5;
+    filter: Alpha(Opacity=50);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
 }
