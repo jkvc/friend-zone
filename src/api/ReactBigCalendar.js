@@ -108,17 +108,8 @@ class Selectable extends Component{
 
     handle_select_slot(slotInfo)
     {
-        // events.push(
-        //     {
-        //         "title":this.event.title,
-        //         "start": new Date(curr_day.getFullYear(), curr_day.getMonth(), curr_day.getDate(), start_hour, start_min ),
-        //         "end": new Date(curr_day.getFullYear(), curr_day.getMonth(), curr_day.getDate(), end_hour, end_min ),
-        //         "type": "lecture"
-        //     }
-        // );
+        if (this.state.isEditEventDialogOpen || this.state.isViewLecture || this.state.isNewEventDialogOpen) return;
 
-        //Call this.setState over here, to render the dialogue box
-        console.log(slotInfo);
 
         let start_hour = slotInfo.start.getHours().toString();
         if (start_hour.length < 2) start_hour = '0' + start_hour;
@@ -135,16 +126,13 @@ class Selectable extends Component{
         let day = slotInfo.start.getDate().toString();
         if (day.length < 2) day = '0' + day;
 
-        console.log(slotInfo.start.getFullYear().toString() + "-" + slotInfo.start.getMonth().toString() + "-" + slotInfo.start.getDate().toString());
+        this.setState({
+            isNewEventDialogOpen: true,
+            start_time: start_hour + ":" + start_minute,
+            end_time: end_hour + ":" + end_minute,
+            day: slotInfo.start.getFullYear().toString() + "-" + month + "-" + day
+        });
 
-        if (!this.state.isEditEventDialogOpen) {
-            this.setState({
-                isNewEventDialogOpen: true,
-                start_time: start_hour + ":" + start_minute,
-                end_time: end_hour + ":" + end_minute,
-                day: slotInfo.start.getFullYear().toString() + "-" + month + "-" + day
-            });
-        }
     }
 
     //openDialog = () => this.setState({ isEditEventDialogOpen: true })
@@ -205,25 +193,25 @@ class Selectable extends Component{
     // edit, only when user want to edit it will click on an existing event
     handle_onSelectEvent(event)
     {
-        if (this.state.isNewEventDialogOpen) return;
+        if (this.state.isEditEventDialogOpen || this.state.isViewLecture || this.state.isNewEventDialogOpen) return;
 
         // handle if event type is other
         if (event.type === "other")
         {
             let event_obj = event.event_obj;
-            if (!this.state.isNewEventDialogOpen) {
-                // Call this.setState over here, to render the dialogue box
-                this.setState({
-                    isEditEventDialogOpen: true,
-                    day: event_obj.day,
-                    start_time: event_obj.start_time,
-                    end_time: event_obj.end_time,
-                    event_name :event_obj.event_name,
-                    event_id:event.event_id,
-                    location:event_obj.location,
-                    event : event
-                });
-            }
+
+            // Call this.setState over here, to render the dialogue box
+            this.setState({
+                isEditEventDialogOpen: true,
+                day: event_obj.day,
+                start_time: event_obj.start_time,
+                end_time: event_obj.end_time,
+                event_name :event_obj.event_name,
+                event_id:event.event_id,
+                location:event_obj.location,
+                event : event
+            });
+
         }
         // hand if event type is lecture
         else if (event.type === 'lecture')
