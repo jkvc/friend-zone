@@ -318,7 +318,7 @@ class Selectable extends Component{
                             open={true}
                             style={{width: '200px', marginLeft: '40%', backgroundColor: 'white'}}
                             overlayStyle={{backgroundColor: 'white'}}
-                            title="Add Event"
+                            title=""
                             modal={true}
                             isDraggable={true}
                             buttons={
@@ -447,7 +447,7 @@ class Selectable extends Component{
                 {this.state.isViewLecture &&
                 <div className='dialogue-box'>
                     <Dialog className=''
-                            title="See lecture details"
+                            title=""
                             modal={true}
                             isDraggable={true}
                             buttons={
