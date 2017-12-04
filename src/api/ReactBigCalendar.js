@@ -104,9 +104,11 @@ class Selectable extends Component{
 
         this.setState({
             isNewEventDialogOpen: true,
+            event_name: "",
             start_time: start_hour + ":" + start_minute,
             end_time: end_hour + ":" + end_minute,
-            day: slotInfo.start.getFullYear().toString() + "-" + month + "-" + day
+            day: slotInfo.start.getFullYear().toString() + "-" + month + "-" + day,
+            location: ""
         });
 
     }
