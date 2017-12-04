@@ -75,36 +75,6 @@ class Selectable extends Component{
         this_id++;
     }
 
-    handle_add_event(){
-
-        // Check for validity of the event entered
-        if (this.state.event_name === "")
-        {
-            alert("Event Name is not entered!");
-        }
-        else if (this.state.day === "" )
-        {
-            alert("Event Day is not entered!");
-        }
-        else if (this.state.start_time === "")
-        {
-            alert("Start Time is not specified!");
-        }
-        else if (this.state.end_time === "")
-        {
-            alert("End Time is not specified!");
-        }
-        else if ( this.state.start_time > this.state.end_time )
-        {
-            alert("Start time must be greater than end time!");
-        }
-        else {
-            add_event_to_profile(firebase.auth().currentUser.uid, this.state.event_name, this.state.day, this.state.start_time, this.state.end_time, this.state.location);
-            alert("The event \""+ this.state.event_name + "\" was successfully added to your schedule!");
-            this.setState( {event_name : this.state.event_name, day : this.state.day, start_time : this.state.start_time, end_time : this.state.end_time, location : this.state.location} );
-        }
-    }
-
     refresh()
     {
         init_data(profile => {
@@ -319,15 +289,10 @@ class Selectable extends Component{
         this.setState({isViewLecture:false})
     }
 
-    componentDidMount()
-    {
-
-    }
-
     render() {
 
         return (
-            <div {...this.props}>
+            <div>
                 <div className='instruction-calendar'>
                     Click an event to see more info, or
                     drag the mouse over the calendar to select a date/time range.
