@@ -3,14 +3,15 @@ import firebase from 'firebase';
 
 /*first time edit the user data
   no callback fucntion since there should not be duplcate insertion so no error*/
-export function writeUserInfo(user_id, firstname, lastname, major, currentyear, profileURL, mydescription) {
+export function writeUserInfo(user_id, firstname, lastname, major, currentyear, profileURL, mydescription, fb_link) {
   firebase.database().ref('UserInfo/' + user_id).set({
     first_name: firstname,
     last_name: lastname,
     major: major,
     current_year: currentyear,
     profile_pic: profileURL,
-    user_description: mydescription
+    user_description: mydescription,
+    fb_link: fb_link
   });
 }
 

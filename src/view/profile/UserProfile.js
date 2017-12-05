@@ -4,6 +4,7 @@ import EditProfile from './EditProfile'
 import {get_self_profile} from "../../api/StaticData";
 import PageTitle from "../components/PageTitle";
 import default_profile_pic from '../../image/DefaultProfilePic.jpg'
+import facebook_icon from '../../image/FacebookIcon.png'
 
 
 import './UserProfile.css'
@@ -60,6 +61,9 @@ class UserProfile extends Component {
                     <tr>
                         <td className="td3">Description:</td>
                         <td className="td3">{this.state.profile_obj.description}</td>
+                    </tr>
+                    <tr>
+                        <a href={this.state.profile_obj.fb_link}><img className="td4" src={facebook_icon} alt="" width='40px'/></a>
                     </tr>
                     </tbody>
                 </table>

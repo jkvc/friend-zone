@@ -28,6 +28,7 @@ export function lookup_profile_by_user_id(user_id, callback){
                 content.major,
                 content.current_year,
                 content.description,
+                content.fb_link,
                 verify
 
             );
@@ -37,6 +38,7 @@ export function lookup_profile_by_user_id(user_id, callback){
             profile.incoming_request = content.incoming_request ||{};
             profile.upcoming_events = content.upcoming_events ||{};
             profile.blocked_user = content.blocked_user || {};
+            profile.fb_link = content.fb_link || "";
             profile.profile_pic = content.profile_pic || "";
             callback(null, profile);
         }

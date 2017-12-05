@@ -22,6 +22,7 @@ class EditProfile extends Component {
             current_year: "",
             profile_pic: "",
             description: "",
+            fb_link: "",
             upload_status: "",
             oldPassword: "",
             newPassword: "",
@@ -47,7 +48,8 @@ class EditProfile extends Component {
                     major: profile.major,
                     current_year: profile.current_year,
                     profile_pic: profile.profile_pic,
-                    description: profile.description
+                    description: profile.description,
+                    fb_link: profile.fb_link
                 });
             }
         }.bind(this))
@@ -77,6 +79,11 @@ class EditProfile extends Component {
             error_msg = "Please enter something for description. This may be your preferred means of contact or " +
                 "a simple greeting.";
         }
+        else if (this.state.fb_link.trim().length === 0)
+        {
+            error_msg = "Please enter something for facebook link. This may be your preferred means of contact or " +
+                "a simple greeting.";
+        }
         else {
             error_msg = "";
         }
@@ -91,6 +98,7 @@ class EditProfile extends Component {
         this.profile_obj.first_name = this.state.first_name;
         this.profile_obj.profile_pic = this.state.profile_pic;
         this.profile_obj.description = this.state.description;
+        this.profile_obj.fb_link = this.state.fb_link;
         this.profile_obj.push().catch((error) => {
             alert(error);
             this.setState({profile_update_msg:error.msg});
@@ -318,6 +326,14 @@ class EditProfile extends Component {
                             </td>
                         </tr>
 
+                        <tr>
+                            <td className="td2">Facebook link</td>
+                            <td className="td2">
+                                <input className="input1" value={this.state.fb_link}
+                                       onChange={e => this.setState({fb_link: e.target.value})}/>
+
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </form>

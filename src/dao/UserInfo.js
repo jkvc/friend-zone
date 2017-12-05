@@ -10,8 +10,9 @@ class UserInfo {
     current_year;
     profile_pic;
     user_description;
+    fb_link;
 
-    constructor(userID, firstname, lastname, major, currentyear, profileURL, mydescription){
+    constructor(userID, firstname, lastname, major, currentyear, profileURL, mydescription, fb_link){
         this.user_id = userID;
         this.first_name = firstname;
         this.last_name = lastname;
@@ -19,6 +20,7 @@ class UserInfo {
         this.current_year = currentyear;
         this.profile_pic = profileURL;
         this.user_description = mydescription;
+        this.fb_link = fb_link;
     }
 
 
@@ -31,7 +33,8 @@ class UserInfo {
             major: this.major, 
             currentyear: this.current_year, 
             profileURL: this.profile_pic,
-            mydescription: this.user_description
+            mydescription: this.user_description,
+            fb_link: this.fb_link,
         });
     }
 
