@@ -115,7 +115,7 @@ class RecommendedFriends extends Component {
                                         <div className={"button group"}>
                                             {profile.user_id in this.state.sent_requests ? (
 
-                                                <button className={"button"} onClick={() => {
+                                                <button className={"rec-friend-button"} onClick={() => {
                                                     cancel_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err, data) => {
                                                         this.setState({sent_requests: data.outgoing_request})
                                                     });
@@ -123,7 +123,7 @@ class RecommendedFriends extends Component {
                                                     Cancel friend request
                                                 </button>
                                             ) : (
-                                                <button className={"button"} onClick={() => {
+                                                <button className={"rec-friend-button"} onClick={() => {
                                                     create_friend_request(firebase.auth().currentUser.uid, profile.user_id, (err, data) => {
                                                         this.setState({sent_requests: data.outgoing_request})
                                                     });

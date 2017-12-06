@@ -1,14 +1,14 @@
 
-#edit{
-    cursor: pointer;
-    background: transparent;
-    border: transparent;
+#edit {
     font-size: small;
+    background: transparent;
+    border-radius: 20px;
+    border: solid 1px lightgrey;
     color: #2f5597;
-
-   }
-
-
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
 
 .profile-pic-container {
     width: 300px;
@@ -21,13 +21,12 @@
     margin-right: auto;
 }
 
-
 .profile-pic {
     float: left;
     height: 100%;
 }
 
-#infolist{
+#infolist {
     padding: 5px;
     font-size: small;
 }
@@ -40,21 +39,21 @@
 }
 
 .table3 {
-    position:relative;
+    position: relative;
     color: #333; /* Lighten up font color */
     font-family: Helvetica, Arial, sans-serif; /* Nicer font */
     width: 320px;
-    border-collapse: collapse; border-spacing:0;
+    border-collapse: collapse;
+    border-spacing: 0;
     margin: 0 auto
 
 }
 
-
-.td3{
+.td3 {
     height: 40px;
     width: 100px;
     text-align: left; /* Center our text */
-    float:left;
+    float: left;
     margin-left: 40px;
 
 }

@@ -36,13 +36,14 @@
 }
 
 .button_red {
-    background: none !important;
-    border: none;
     font-size: small;
-    padding: 0;
+    background: transparent;
+    border-radius: 20px;
+    border:solid 1px lightgrey;
     color: #2f5597;
-    text-align: center;
+    padding: 5px;
     cursor: pointer;
+    margin: 5px;
 }
 .button_red:hover{
     text-decoration: underline;

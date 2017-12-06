@@ -209,7 +209,6 @@ class UserSchedule extends Component {
                     <button className="buttonHover" onClick={this.goto_RecommendedFriends.bind(this)}>Recommended Friends</button>
                 </div>
                 <br/>
-                <br/>
 
                 <div id='calendar-helper-container'>
                     {this.state.finished_adding_lectures && this.state.finished_adding_events ? (

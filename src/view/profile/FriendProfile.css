@@ -28,10 +28,13 @@
 }
 
 .friend-profile-button {
-    cursor: pointer;
-    color: #2f5597;
     font-size: small;
-    border: transparent;
     background: transparent;
+    border-radius: 20px;
+    border:solid 1px lightgrey;
+    color: #2f5597;
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px;
 }
 
