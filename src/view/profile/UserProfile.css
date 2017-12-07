@@ -1,14 +1,19 @@
-
-#edit {
-    font-size: small;
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+.edit {
+    font-size: medium;
     background: transparent;
-    border-radius: 20px;
-    border: solid 3px lightgrey;
+    border-color: transparent;
     color: #2f5597;
     padding: 5px;
     cursor: pointer;
     margin: 5px;
+    margin-left:35px;
 }
+.edit:hover{
+    text-decoration: underline;
+    text-underline:#2f5597 ;
+}
+
 
 .profile-pic-container {
     width: 300px;
@@ -19,6 +24,11 @@
     border: solid 3px #ebebeb;
     margin-left: auto;
     margin-right: auto;
+}
+.profile-pic-container:hover{
+
+    border: solid 5px #ebebeb;
+    transition:all 0.3s ease;
 }
 
 .profile-pic {
@@ -45,26 +55,39 @@
     width: 320px;
     border-collapse: collapse;
     border-spacing: 0;
-    margin: 0 auto
+    margin: 0 auto;
+    margin-left:450px;
 
 }
 
 .td3 {
-    height: 40px;
-    width: 100px;
+    height: 50px;
+    width: 140px;
     display: inline-block;
     text-align:left; /* Center our text */
-    float: left;
-    margin-left: 20px;
-
+    margin-left: 80px;
+    border:1px solid #ddd;
 }
 
 .td4 {
-    width: 100px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     overflow: hidden;
-    align-items: right;
-    margin-left: 140px;
+    align-items: center;
+    margin-top: 5px;
+    margin-left: 120px;
     margin-right: auto;
+    border:1px solid #ddd;
+}
+.l1{
+    float: left;
+}
 
+.glyphicon{
+    position: relative;
+    margin-right: 5px;
+
+}
+.glyphicon:hover{
+    color: #3174ad;
 }

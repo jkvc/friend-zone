@@ -4,7 +4,7 @@
     overflow: hidden;
     align-items: center;
     border-radius: 50%;
-    border: solid 1px #ebebeb;
+    border: solid 3px #ebebeb;
     margin-left: auto;
     margin-right: auto;
 }
@@ -20,7 +20,7 @@
     font-size: small;
 }
 
-#friend-detail-table td {
+#friend-detail-table {
     padding-top: 7px;
     padding-left: 15px;
     max-width: 350px;
@@ -28,13 +28,23 @@
 }
 
 .friend-profile-button {
-    font-size: small;
+    font-size: medium;
     background: transparent;
-    border-radius: 20px;
-    border:solid 1px lightgrey;
+    border:transparent;
     color: #2f5597;
     padding: 5px;
     cursor: pointer;
     margin: 5px;
+}
+.table4 {
+    position: relative;
+    color: #333; /* Lighten up font color */
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+    width: 320px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 auto;
+    margin-left:450px;
+
 }
 

@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import ChatView from "../../chat/ChatView";
 import {create_chat_session} from "../../chat/ChatSessionManager";
 import ChatSessionView from "../../chat/ChatSessionView";
-
+import './UserProfile.css'
 class FriendProfile extends Component {
 
     constructor(props) {
@@ -74,30 +74,42 @@ class FriendProfile extends Component {
                 </div>
 
                 <br/>
-                <table id='friend-detail-table'>
+                <table className=".table4" align="center">
                     <tbody>
                     <tr>
-                        <td>Name</td>
-                        <td>{this.state.profile_obj.first_name + " " + this.state.profile_obj.last_name}</td>
+                        <td className=".td3">
+                        <span className="glyphicon glyphicon-user"> </span>
+                        <label className=".l1">     Name:        {this.state.profile_obj.first_name + " " + this.state.profile_obj.last_name}</label>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Major</td>
-                        <td>{this.state.profile_obj.major}</td>
+                        <td className=".td3">
+                        <span className="glyphicon glyphicon-screenshot"></span>
+                        <label className=".l1">     Major:       {this.state.profile_obj.major}</label>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Current year</td>
-                        <td>{this.state.profile_obj.current_year}</td>
+                        <td className=".td3">
+                        <span className="glyphicon glyphicon-star"></span>
+                        <label>         Year:           {this.state.profile_obj.current_year}</label>
+
+                        </td>
                     </tr>
                     <tr>
-                        <td>Description</td>
-                        <td>{this.state.profile_obj.description}</td>
+
+                        <td className=".td3">
+
+                        <span className="glyphicon glyphicon-zoom-in"></span>
+                        <label className=".l1">     Description:     {this.state.profile_obj.description}</label>
+
+                        </td>
                     </tr>
                     </tbody>
                 </table>
                 <br/>
 
                 <div>
-                    <button className='friend-profile-button' onClick={this.send_message.bind(this)}>
+                    <button className='.edit' onClick={this.send_message.bind(this)}>
                         Send message &nbsp;
                         <svg id="i-settings" viewBox="0 0 32 32" width="20" height="20" fill="none"
                              stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round"
@@ -108,11 +120,11 @@ class FriendProfile extends Component {
                     &nbsp;
 
                     {!(this.state.user_id in this.state.my_profile.blocked_user) ? (
-                        <button className='friend-profile-button' onClick={() => {
+                        <button className='.edit' onClick={() => {
                             this.block_a_friend(this.state.profile_obj.user_id);
                         }}>Block</button>
                     ) : (
-                        <button className='friend-profile-button' onClick={() => {
+                        <button className='.edit' onClick={() => {
                             this.unblock_a_friend(this.state.profile_obj.user_id);
                         }}>Unblock</button>
                     )

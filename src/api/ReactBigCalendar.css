@@ -109,7 +109,7 @@
 }
 .addEventInputField{
     width:60%;
-    font-family: 'Audiowide', cursive;
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
     font-size: medium;
     border:none;
     background-color: transparent;

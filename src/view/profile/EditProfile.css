@@ -1,9 +1,8 @@
-
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 .input1{
      width: 200px;
      border: none;
      height: 20px;
-     border-bottom: 1px solid lightgrey;
     font-size: medium;
      margin-left: 20px;
      background-color: transparent;
@@ -78,4 +77,5 @@
 }
 .edit:hover{
     text-decoration: underline;
+
 }

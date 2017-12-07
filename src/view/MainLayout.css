@@ -56,7 +56,7 @@
 .middle-panel {
     margin-top: 1.5%;
     min-width: 500px;
-    font-family: 'Righteous', cursive;
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
     font-size: large;
     width: 80%;
     min-height: 94%;
@@ -88,7 +88,7 @@
 
 .button-nav-bar {
     float: left;
-    font-family: 'Righteous', cursive;
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
     margin-top: 15px;
     margin-left: .5%;
     font-size: medium;
