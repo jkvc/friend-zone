@@ -85,7 +85,7 @@ class EditProfile extends Component {
                 && !this.state.fb_link.startsWith("http://www.facebook.com/") )
                 && this.state.fb_link.trim().length != 0)
         {
-            error_msg = "Please enter your facebook link that starts with \"https://facebook.com/...\""
+            error_msg = "Please enter your facebook link that starts with \"https://www.facebook.com/...\""
         }
         else {
             error_msg = "";
