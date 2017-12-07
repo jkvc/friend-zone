@@ -1,11 +1,12 @@
 .schedule-button-container button{
-    font-size: medium;
+    font-size: small;
     background: transparent;
-    border:none;
+    border-radius: 20px;
+    border:solid 1px lightgrey;
     color: #2f5597;
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
-
+    margin: 5px;
 }
 
 .buttonHover:hover{
@@ -13,4 +14,5 @@
 }
 #calendar-helper-container{
     width: 90%;
+    font-size: x-small;
 }

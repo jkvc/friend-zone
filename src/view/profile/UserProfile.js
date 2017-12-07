@@ -67,10 +67,8 @@ class UserProfile extends Component {
                     </tr>
                     </tbody>
                 </table>
-                <br/>
 
-
-                <button className="edit" onClick={this.handle_edit_profile.bind(this)}>
+                <button id="edit" onClick={this.handle_edit_profile.bind(this)}>
                     Edit profile
                 </button>
 

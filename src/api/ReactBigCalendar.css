@@ -122,9 +122,9 @@
     padding: 10px;
     cursor: pointer;
 }
+
 .diaButton:hover{
     text-decoration: underline;
-
 }
 
 .ui-dialog-overlay {

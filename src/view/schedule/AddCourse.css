@@ -28,11 +28,14 @@
 }
 
 .add-button {
-    cursor: pointer;
-    border:none;
-    background: transparent;
-    color: #2f5597;
     font-size: small;
+    background: transparent;
+    border-radius: 20px;
+    border:solid 1px lightgrey;
+    color: #2f5597;
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px;
  }
 
 .already-enrolled-label{
