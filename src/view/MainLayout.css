@@ -112,7 +112,8 @@
 .button-nav-bar:hover {
     animation: bounce 2s;
     font-size: medium;
-    background: linear-gradient(lightgrey, darkgrey);
+    height:30px;
+    background: linear-gradient(lightblue, whitesmoke);
     color:white;
 }
 
@@ -133,3 +134,11 @@
     color: #3174ad;
 }
 
+
+/* This will change headline color*/
+/* but notice that border-bottom does not have gradient style*/
+/*if want to use gradient style maye use border-image*/
+
+.page_title_text{
+    border-bottom: solid 1px lightgrey ;
+}

@@ -1,16 +1,16 @@
 .alignLabel{
-    text-align: left;
+    text-align: right;
     display: inline-block;
-    width: 140px;
+    width: 100px;
 
 }
 .addEventInputField{
     width:60%;
     font-family: "Biko", sans-serif;
-    font-size: medium;
+    font-size: small;
     border:none;
     background-color: transparent;
-    border-bottom: solid 1px grey;
+    border-bottom: solid 2px grey;
     color: lightgrey;
 
 }

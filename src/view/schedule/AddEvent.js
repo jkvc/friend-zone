@@ -98,7 +98,7 @@ class AddEvent extends Component{
 
                     <br />
 
-                    <label className="alignLabel">Location</label>
+                    <label className="alignLabel">Location:</label>
                     <input className="addEventInputField" value={this.state.location}
                            onChange={function(e){
                                this.setState({location:e.target.value})

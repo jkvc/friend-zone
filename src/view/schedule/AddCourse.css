@@ -10,7 +10,12 @@
 .search-course-input{
     border: none ;
     background: transparent;
-    border-bottom: solid 1px lightgrey;
+    border: solid 1px lightgrey;
+    transition: all .5s;
+}
+.search-course-input:focus{
+    width: 600px;
+    cursor: auto;
 }
 
 .course-title{

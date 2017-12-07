@@ -105,7 +105,7 @@ class AddCourse extends Component {
                 <div>
                     <input type={"text"} value={this.state.search_key}
                            className='search-course-input'
-                           placeholder={'Search course'}
+                           placeholder={'Search Course Here'}
                            onChange={function (e) {
                                this.setState({search_key: e.target.value});
                                this.lookup(e.target.value);
