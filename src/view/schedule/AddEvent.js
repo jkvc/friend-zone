@@ -1,7 +1,6 @@
 import {add_event_to_profile} from "../../dao/ProfileManager";
 import React, {Component} from 'react';
 import firebase from 'firebase';
-import PageTitle from "../components/PageTitle";
 import './AddEvent.css'
 /*import Dialog from 'react-dialog';*/
 
