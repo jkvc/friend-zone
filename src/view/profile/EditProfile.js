@@ -83,6 +83,10 @@ class EditProfile extends Component {
         {
             this.state.fb_link = "";
         }
+        else if(!this.state.fb_link.includes("https://") && this.state.fb_link.includes("www.facebook.com"))
+        {
+            this.state.fb_link = "https://"+this.state.fb_link;
+        }
         else if (( !this.state.fb_link.startsWith("https://facebook.com/")
                 && !this.state.fb_link.startsWith("https://www.facebook.com/")
                 && !this.state.fb_link.startsWith("http://facebook.com/")
