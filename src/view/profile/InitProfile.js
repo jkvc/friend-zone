@@ -62,7 +62,6 @@ class InitProfile extends Component {
             this.state.last_name,
             this.state.major,
             this.state.current_year,
-            "",
             this.state.description,
             this.state.verified_email,
             this.state.profile_pic
