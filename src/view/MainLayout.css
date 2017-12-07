@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Varela+Round');
-
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+@import url('https://fonts.googleapis.com/css?family=Poiret+One');
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
 @font-face {
     font-family: "Harlow Solid Italic";
     src: url("../font/HarlowSolidItalic.TTF")
@@ -11,11 +12,15 @@
 }
 
 @font-face {
-    font-family: "Varela Round', sans-serif";
-    src: url('https://fonts.googleapis.com/css?family=Varela+Round')
+    font-family: 'Righteous', cursive;
+    src: url('https://fonts.googleapis.com/css?family=Righteous')
     /* src: url("../font/Helvetica.ttf")*/
 }
 
+@font-face {
+    font-family: 'Audiowide', cursive;
+    src: url('https://fonts.googleapis.com/css?family=Audiowide')
+}
 /* ensure there is no gap*/
 
 .body-main-layout {
@@ -51,6 +56,8 @@
 .middle-panel {
     margin-top: 1.5%;
     min-width: 500px;
+    font-family: 'Righteous', cursive;
+    font-size: large;
     width: 80%;
     min-height: 94%;
     margin-left: auto;
@@ -81,16 +88,20 @@
 
 .button-nav-bar {
     float: left;
+    font-family: 'Righteous', cursive;
     margin-top: 15px;
     margin-left: .5%;
-    font-size: small;
+    font-size: medium;
     cursor: pointer;
     color: #2f5597;
     background: transparent;
     border: transparent;
     outline: none;
 }
-
+.button-nav-bar:hover{
+    text-shadow: 2px 2px lightgrey;
+    animation:bounce 2s;
+}
 /*add similar bouncing effect*/
 @keyframes bounce {
     0%, 20%, 60%, 100% {
@@ -112,13 +123,12 @@
 .button-nav-bar:hover {
     animation: bounce 2s;
     font-size: medium;
-    height:30px;
-    background: linear-gradient(lightblue, whitesmoke);
-    color:white;
+
 }
 
 .logout-button {
     float: right;
+    font-family: 'Righteous', cursive;
     margin-top: 15px;
     margin-left: 1%;
     margin-right: 22%;
@@ -140,5 +150,6 @@
 /*if want to use gradient style maye use border-image*/
 
 .page_title_text{
+    font-family:Audiowide;
     border-bottom: solid 1px lightgrey ;
 }

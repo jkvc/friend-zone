@@ -1,4 +1,8 @@
-<<<<<<< HEAD
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
+@font-face {
+    font-family: 'Audiowide', cursive;
+    src: url('https://fonts.googleapis.com/css?family=Audiowide')
+}
 .alignLabel{
     text-align: right;
     display: inline-block;
@@ -15,20 +19,7 @@
     color: lightgrey;
 
 }
-.flowercontainer {
-    height: 100px;
-    width: 100px;
-    position: absolute;
-    top: 250px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-.flowercontainer2{
-    height: 10px;
-    width: 10px;
-=======
+
 .ui-dialog {
     border: 1px solid #eee;
     padding: 20px;
@@ -36,7 +27,6 @@
     -webkit-box-shadow: 0px 0px 0px 0px rgba(50, 50, 50, 0.25);
     -moz-box-shadow: 0px 0px 0px 0px rgba(50, 50, 50, 0.25);
     box-shadow: 0px 0px 0px 0px rgba(50, 50, 50, 0.25);
->>>>>>> 7702754cea5874652113c1a4621051d0003bf485
     position: absolute;
     top: 50%;
     left: 50%;

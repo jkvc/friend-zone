@@ -3,7 +3,7 @@
     font-size: small;
     background: transparent;
     border-radius: 20px;
-    border: solid 1px lightgrey;
+    border: solid 3px lightgrey;
     color: #2f5597;
     padding: 5px;
     cursor: pointer;
@@ -16,7 +16,7 @@
     overflow: hidden;
     align-items: center;
     border-radius: 50%;
-    border: solid 1px #ebebeb;
+    border: solid 3px #ebebeb;
     margin-left: auto;
     margin-right: auto;
 }
@@ -52,14 +52,15 @@
 .td3 {
     height: 40px;
     width: 100px;
-    text-align: left; /* Center our text */
+    display: inline-block;
+    text-align:left; /* Center our text */
     float: left;
-    margin-left: 40px;
+    margin-left: 20px;
 
 }
 
 .td4 {
-    width: 40px;
+    width: 100px;
     height: 40px;
     overflow: hidden;
     align-items: right;
