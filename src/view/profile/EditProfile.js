@@ -79,10 +79,9 @@ class EditProfile extends Component {
             error_msg = "Please enter something for description. This may be your preferred means of contact or " +
                 "a simple greeting.";
         }
-        else if (this.state.fb_link.trim().length === 0)
+        else if (!this.state.fb_link.startsWith("https://facebook.com/") && this.state.fb_link.trim().length != 0)
         {
-            error_msg = "Please enter something for facebook link. This may be your preferred means of contact or " +
-                "a simple greeting.";
+            error_msg = "Please enter your facebook link that starts with \"https://facebook.com/...\""
         }
         else {
             error_msg = "";
@@ -347,7 +346,9 @@ class EditProfile extends Component {
                 <br/>
                 <PageTitle title={'Change password'}/>
                 <div className={'edit-profile-subtitle'}>
-                    (Password must contain uppercase, lowercase letters, number, and be at least 8 chars long)
+                    Password must contain uppercase, lowercase letters, number, and be at least 8 chars long.
+                    <br />
+                    If you signed up through 3rd party, You can't change your password.
                 </div>
                 <br/>
                 <form onKeyPress={this.handle_password_enterKey.bind(this)} onKeyDown={this.handle_password_backKey.bind(this)}>
