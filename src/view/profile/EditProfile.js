@@ -79,13 +79,13 @@ class EditProfile extends Component {
             error_msg = "Please enter something for description. This may be your preferred means of contact or " +
                 "a simple greeting.";
         }
-        else if (this.state.fb_link.trim().length == 0)
+        else if (this.state.fb_link.trim().length === 0)
         {
-            this.state.fb_link = "";
+            this.setState({fb_link:""});
         }
-        else if(!this.state.fb_link.includes("https://") && this.state.fb_link.includes("www.facebook.com"))
+        else if(!this.state.fb_link.includes("https://") && !this.state.fb_link.includes("http://") && this.state.fb_link.startsWith("www.facebook.com"))
         {
-            this.state.fb_link = "https://"+this.state.fb_link;
+            this.setState({fb_link:"https://"+this.state.fb_link});
         }
         else if (( !this.state.fb_link.startsWith("https://facebook.com/")
                 && !this.state.fb_link.startsWith("https://www.facebook.com/")
