@@ -66,11 +66,9 @@ class InitProfile extends Component {
             this.state.verified_email,
             this.state.profile_pic
         );
-
-        profile.push_non_async();
-
-        ReactDOM.render(<MainLayout/>, document.getElementById('root'));
-
+        profile.push().then( init_data( ()=>{
+            ReactDOM.render(<MainLayout/>, document.getElementById('root'));
+        } ) );
     }
 
     upload_profile_pic(e) {

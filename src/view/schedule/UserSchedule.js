@@ -94,8 +94,6 @@ class UserSchedule extends Component {
 
     // This function will initialize all the events (classes) of the user
     initialize_events() {
-
-
         this.setState( {finished_adding_lectures: false, finished_adding_events: false});
 
         let profile_obj = get_self_profile();

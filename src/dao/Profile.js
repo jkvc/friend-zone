@@ -38,7 +38,7 @@ class Profile {
         this.incoming_request = {};
         this.upcoming_events = {};
         this.blocked_user = {};
-        this.profile_pic = profile_pic || "";
+        this.profile_pic = profile_pic;
 
     }
 
@@ -46,7 +46,7 @@ class Profile {
     /* add self to table */
     async push(){
 
-        firebase.database().ref('Profile').child(this.user_id).set({
+        return await firebase.database().ref('Profile').child(this.user_id).set({
             user_id: this.user_id,
             first_name: this.first_name,
             last_name: this.last_name,
@@ -62,30 +62,7 @@ class Profile {
             upcoming_events: this.upcoming_events,
             blocked_user : this.blocked_user,
             verified_email : this.verified_email
-        }).then( ()=> {
-            return;
-        })
-
-    }
-
-    push_non_async() {
-        firebase.database().ref('Profile').child(this.user_id).set({
-            user_id: this.user_id,
-            first_name: this.first_name,
-            last_name: this.last_name,
-            major: this.major,
-            current_year: this.current_year,
-            profile_pic: this.profile_pic,
-            description: this.description,
-            fb_link: this.fb_link,
-            enrolled_courses: this.enrolled_courses,
-            friend_list: this.friend_list,
-            outgoing_request: this.outgoing_request,
-            incoming_request: this.incoming_request,
-            upcoming_events: this.upcoming_events,
-            blocked_user: this.blocked_user,
-            verified_email: this.verified_email
-        })
+        });
     }
 
 }
