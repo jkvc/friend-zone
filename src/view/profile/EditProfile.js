@@ -79,17 +79,21 @@ class EditProfile extends Component {
             error_msg = "Please enter something for description. This may be your preferred means of contact or " +
                 "a simple greeting.";
         }
+        else if (this.state.fb_link.trim().length == 0)
+        {
+            this.state.fb_link = "";
+        }
         else if (( !this.state.fb_link.startsWith("https://facebook.com/")
                 && !this.state.fb_link.startsWith("https://www.facebook.com/")
                 && !this.state.fb_link.startsWith("http://facebook.com/")
-                && !this.state.fb_link.startsWith("http://www.facebook.com/") )
-                && this.state.fb_link.trim().length != 0)
+                && !this.state.fb_link.startsWith("http://www.facebook.com/") ))
         {
-            error_msg = "Please enter your facebook link that starts with \"https://www.facebook.com/...\""
+            error_msg = "Please enter your facebook link that starts with \"https://facebook.com/...\""
         }
         else {
             error_msg = "";
         }
+
 
         this.setState({profile_update_msg:error_msg});
         if (error_msg !== "") return;

@@ -63,7 +63,7 @@ class UserProfile extends Component {
                         <td className="td3">{this.state.profile_obj.description}</td>
                     </tr>
                     <tr>
-                        <a href={this.state.profile_obj.fb_link}><img className="td4" src={facebook_icon} alt="" width='40px'/></a>
+                        {this.state.profile_obj.fb_link && <a href={this.state.profile_obj.fb_link}><img className="td4" src={facebook_icon} alt="" width='40px'/></a>}
                     </tr>
                     </tbody>
                 </table>
