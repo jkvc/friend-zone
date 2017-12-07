@@ -8,7 +8,7 @@ import CalendarHelper from '../../api/CalendarHelper';
 import RecommendedFriends from "../social/RecommendedFriends";
 import {lookup_course_by_id} from "../../dao/CourseManager";
 import {get_time_numeric} from "../../api/TimeHelper";
-import {get_self_profile} from "../../api/StaticData";
+import {get_self_profile, init_data} from "../../api/StaticData";
 import PageTitle from "../components/PageTitle";
 import './UserSchedule.css'
 
@@ -22,7 +22,8 @@ class UserSchedule extends Component {
             events: [],
             other_events: [],
             finished_adding_lectures: false,
-            finished_adding_events: false
+            finished_adding_events: false,
+            displayAddEventDialog: false
         };
 
     }
@@ -40,8 +41,24 @@ class UserSchedule extends Component {
     }
 
     goto_AddEvent() {
-        ReactDOM.render(<AddEvent/>, document.getElementById('main-layout'));
+        //ReactDOM.render(<AddEvent/>, document.getElementById('main-layout'));
+        this.setState({displayAddEventDialog : true});
     }
+
+    close_dialog() {
+        this.setState({displayAddEventDialog : false});
+    }
+
+    update_dialog()
+    {
+        this.setState({displayAddEventDialog : false});
+
+        // call init data to fetch new data
+        init_data( (profile) => {
+            this.initialize_events();
+        });
+    }
+
     goto_RemoveEvent(){
         ReactDOM.render(<RemoveEvent />, document.getElementById('main-layout'));
     }
@@ -77,6 +94,7 @@ class UserSchedule extends Component {
 
     // This function will initialize all the events (classes) of the user
     initialize_events() {
+        this.setState( {finished_adding_lectures: false, finished_adding_events: false});
 
         let profile_obj = get_self_profile();
 
@@ -230,6 +248,10 @@ class UserSchedule extends Component {
                     )
                     }
                 </div>
+
+                {this.state.displayAddEventDialog &&
+                    <AddEvent closefunc={this.close_dialog.bind(this)} updatefunc={this.update_dialog.bind(this)}/>
+                }
 
                 <br/>
                 <br/>
