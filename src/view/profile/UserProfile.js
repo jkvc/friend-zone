@@ -9,16 +9,6 @@ import facebook_icon from '../../image/FacebookIcon.png'
 
 import './UserProfile.css'
 
-function TableRow_fb_link() {
-
-    return (
-
-        <tr>
-            <a href={this.state.profile_obj.fb_link}><img className="td4" src={facebook_icon} alt="" width='40px'/></a>
-        </tr>
-    )
-}
-
 class UserProfile extends Component {
 
 
@@ -72,7 +62,9 @@ class UserProfile extends Component {
                         <td className="td3">Description:</td>
                         <td className="td3">{this.state.profile_obj.description}</td>
                     </tr>
-                    {/*<TableRow_fb_link />*/}
+                    <tr>
+                        <a href={this.state.profile_obj.fb_link}><img className="td4" src={facebook_icon} alt="" width='40px'/></a>
+                    </tr>
                     </tbody>
                 </table>
 
