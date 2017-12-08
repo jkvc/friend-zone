@@ -76,12 +76,11 @@ class EditProfile extends Component {
         }
         else if (this.state.description.trim().length === 0)
         {
-            error_msg = "Please enter something for description. This may be your preferred means of contact or " +
-                "a simple greeting.";
+            error_msg = "Please enter something for description. This may be your preferred means of contact or a simple greeting.";
         }
-<<<<<<< HEAD
-        else if (!this.state.fb_link.startsWith("https://facebook.com/") && this.state.fb_link.trim().length !== 0)
-=======
+
+       // else if (!this.state.fb_link.startsWith("https://facebook.com/") && this.state.fb_link.trim().length !== 0){}
+
         else if (this.state.fb_link.trim().length === 0)
         {
             this.setState({fb_link:""});
@@ -94,7 +93,7 @@ class EditProfile extends Component {
                 && !this.state.fb_link.startsWith("https://www.facebook.com/")
                 && !this.state.fb_link.startsWith("http://facebook.com/")
                 && !this.state.fb_link.startsWith("http://www.facebook.com/") ))
->>>>>>> a7a53c4decb4158341872c5f069375cdd2ab14f1
+
         {
             error_msg = "Please enter your facebook link that starts with \"https://facebook.com/...\""
         }
