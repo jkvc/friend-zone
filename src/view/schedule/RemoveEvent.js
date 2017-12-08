@@ -11,7 +11,8 @@ class RemoveEvent extends Component{
         this.state = {
             //result: [],
             event_name_to_remove: "",
-            events_list: []
+            events_list: [],
+            success_msg: ""
         };
         //get full schedule of user
         lookup_profile_by_user_id(firebase.auth().currentUser.uid, function (err, profile) {
@@ -33,7 +34,8 @@ class RemoveEvent extends Component{
             remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_name_to_remove);
             /*remove the item once clicked drop*/
             var new_event_list = this.state.events_list;
-            window.alert("The event \"" + this.state.events_list[this.state.event_name_to_remove].event_name + "\" was successfully removed to your schedule!")
+            this.setState({success_msg: "The event \""+ this.state.events_list[this.state.event_name_to_remove].event_name + "\" was successfully removed from your schedule!"})
+            //window.alert("The event \"" + this.state.events_list[this.state.event_name_to_remove].event_name + "\" was successfully removed to your schedule!")
             delete new_event_list[this.state.event_name_to_remove];
             this.setState({
                 courses_list: new_event_list,
@@ -83,6 +85,7 @@ class RemoveEvent extends Component{
                             }.bind(this))}
                     </tbody>
                 </table>
+                <div className="success-message">{this.state.success_msg}</div>
 
                 <br/>
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Welcome from './Welcome';
 import firebase from 'firebase';
-import './RedirectNodEmailVerification.css'
+import './RedirectNoEmailVerification.css'
 class RedirectNoEmailVerification extends Component {
     constructor( props){
         super(props);

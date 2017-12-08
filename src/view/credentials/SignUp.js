@@ -98,7 +98,7 @@ class SignUp extends Component {
                 //send email verification
                 var user = firebase.auth().currentUser;
                 if(user.emailVerified === false || user.emailVerified === undefined  ) {
-                    window.alert("Confirmation email sent!");
+                    this.setState({success_msg:"Email verification has been sent"});
                     user.sendEmailVerification();
                 };
 

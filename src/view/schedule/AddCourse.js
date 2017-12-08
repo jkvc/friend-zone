@@ -18,7 +18,8 @@ class AddCourse extends Component {
             result: [],
             search_key: "",
             course_id_to_add: "",
-            enrolled: get_self_profile().enrolled_courses
+            enrolled: get_self_profile().enrolled_courses,
+            success_msg : ""
         };
     }
 
@@ -36,6 +37,7 @@ class AddCourse extends Component {
         add_course_to_profile(firebase.auth().currentUser.uid, this.state.course_id_to_add);
         add_user_to_enrollment(firebase.auth().currentUser.uid, this.state.course_id_to_add);
 
+        this.setState({success_msg: "The course \""+ this.state.course_id_to_add +"\" was successfully added to your schedule!" })
         let enrolled = this.state.enrolled;
         enrolled[this.state.course_id_to_add] = true;
         this.setState({enrolled:enrolled})
@@ -116,6 +118,7 @@ class AddCourse extends Component {
                 {search_result}
 
                 <br/>
+                <div className={"success-message"}>{this.state.success_msg}</div>
                 {/*Raw JSON:*/}
                 {/*<pre>{JSON.stringify(this.state.result, null, 2)}</pre>*/}
 

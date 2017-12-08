@@ -14,7 +14,8 @@ class DropCourse extends Component {
             //result: [],
             course_id_to_drop: "",
             courses_list: [], // array of strings of courses
-            course_obj: {}
+            course_obj: {},
+            success_msg : ""
         };
 
         //get full schedule of user
@@ -29,10 +30,11 @@ class DropCourse extends Component {
             remove_course_from_profile(firebase.auth().currentUser.uid, this.state.course_id_to_drop)
             remove_user_from_enrollment(firebase.auth().currentUser.uid, this.state.course_id_to_drop)
 
+            this.setState({success_msg:"The course \"" + this.state.course_id_to_drop + "\" was successfully removed from your schedule!"})
             /*remove the item once clicked drop*/
             var new_course_list = this.state.courses_list;
             new_course_list.splice(new_course_list.indexOf(this.state.course_id_to_drop), 1);
-            window.alert("The course \"" + this.state.course_id_to_drop + "\" was successfully removed from your schedule!")
+            //window.alert("The course \"" + this.state.course_id_to_drop + "\" was successfully removed from your schedule!")
             this.setState({
                 courses_list: new_course_list,
                 course_id_to_drop: ""
@@ -74,9 +76,10 @@ class DropCourse extends Component {
                         }.bind(this))}
                     </tbody>
                 </table>
-
-
                 <br/>
+                <div className="success-message">{this.state.success_msg}</div>
+
+
                 <pre>{/*JSON.stringify(this.state.courses_list, null, 2)*/}</pre>
 
             </div>
