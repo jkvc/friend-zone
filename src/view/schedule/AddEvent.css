@@ -4,19 +4,19 @@
     src: url('https://fonts.googleapis.com/css?family=Audiowide')
 }
 .alignLabel{
-    text-align: right;
+    text-align: left;
     display: inline-block;
-    width: 100px;
-
+    width: 140px;
 }
+
 .addEventInputField{
     width:60%;
-    font-family: "Biko", sans-serif;
-    font-size: small;
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+    font-size: medium;
     border:none;
     background-color: transparent;
-    border-bottom: solid 2px grey;
-    color: lightgrey;
+    border-bottom: solid 1px grey;
+    color: grey;
 
 }
 
@@ -72,17 +72,10 @@
     max-width:70%;
 }
 
-
-.alignLabel{
-    text-align: left;
-    display: inline-block;
-    width: 140px;
-}
-
 .addEventInputField{
     width:60%;
     font-family: "Biko", sans-serif;
-    font-size: medium;
+    font-size: small;
     border:none;
     background-color: transparent;
     border-bottom: solid 1px grey;

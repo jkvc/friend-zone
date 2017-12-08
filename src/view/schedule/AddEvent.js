@@ -2,8 +2,8 @@ import {add_event_to_profile} from "../../dao/ProfileManager";
 import React, {Component} from 'react';
 import firebase from 'firebase';
 import './AddEvent.css'
-import PageTitle from "../components/PageTitle";
-/*import Dialog from 'react-dialog';*/
+//import PageTitle from "../components/PageTitle";
+import Dialog from 'react-dialog';
 
 class AddEvent extends Component{
 
@@ -78,61 +78,77 @@ class AddEvent extends Component{
 
     render(){
 
-        return(
-            <div align="center">
+        return (
+            <Dialog
+                open={true}
+                // style={{width: '200px', marginLeft: '40%', backgroundColor: 'white'}}
+                overlayStyle={{backgroundColor: 'white'}}
+                title=""
+                modal={true}
+                isDraggable={true}
+                buttons={
+                    [
+                        {
+                            text: "Add this event",
+                            className:"diaButton",
+                            onClick: () => this.handle_add_event()
+                        },
+                        {
+                            text:"Cancel",
+                            className:"diaButton",
+                            onClick: () => this.closefunc()
+                        }]
 
+                }>
 
-                <PageTitle title="Add Event"/>
+                <h2> Input Event Details </h2>
+
                 <br/>
                 <form onKeyPress={this.handle_keyPress.bind(this)}>
                     <label className="alignLabel">Event Name:</label>
                     <input className="addEventInputField" type="text" value={this.state.event_name}
-                           onChange={function(e){
-                               this.setState({event_name:e.target.value});
+                           onChange={function (e) {
+                               this.setState({event_name: e.target.value});
                            }.bind(this)}/>
 
-                    <br />
+                    <br/>
 
-                    <label className="alignLabel"> Day:</label>
+                    <label className="alignLabel">Day:</label>
                     <input className="addEventInputField" type="date" value={this.state.day}
-                           onChange={function(e){
-                               this.setState({day:e.target.value})
+                           onChange={function (e) {
+                               this.setState({day: e.target.value})
                            }.bind(this)}/>
 
-                    <br />
+                    <br/>
 
                     <label className="alignLabel">Start Time:</label>
                     <input className="addEventInputField" type="time" value={this.state.start_time}
-                           onChange={function(e){
-                               this.setState({start_time:e.target.value})
+                           onChange={function (e) {
+                               this.setState({start_time: e.target.value})
                            }.bind(this)}/>
 
-                    <br />
+                    <br/>
 
                     <label className="alignLabel">End Time:</label>
                     <input className="addEventInputField" type="time" value={this.state.end_time}
-                           onChange={function(e){
-                               this.setState({end_time:e.target.value})
+                           onChange={function (e) {
+                               this.setState({end_time: e.target.value})
                            }.bind(this)}/>
 
-                    <br />
+                    <br/>
 
-                    <label className="alignLabel">Location:</label>
+                    <label className="alignLabel">Location</label>
                     <input className="addEventInputField" value={this.state.location}
-                           onChange={function(e){
-                               this.setState({location:e.target.value})
+                           onChange={function (e) {
+                               this.setState({location: e.target.value})
                            }.bind(this)}/>
-
-                    <br />
+                    <br/>
                 </form>
-                <button className="eventButton" onClick={()=>{
-                    this.handle_add_event();
-                }} > Add Event</button>
 
+                <br/>
+                <div className={"error-message"}> {this.state.err_msg} </div>
 
-
-            </div>
-
+            </Dialog>
         )
     }
 

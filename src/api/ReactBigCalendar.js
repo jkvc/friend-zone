@@ -11,8 +11,6 @@ import moment from 'moment';
 import './ReactBigCalendar.css';
 import Dialog from 'react-dialog';
 import '../dao/ProfileManager.js';
-import '../view/schedule/AddEvent.js';
-import '../view/schedule/AddEvent.css';
 import '../dao/ProfileManager.js'
 import ReactDOM from 'react-dom';
 import ViewClassmates from '../view/social/ViewClassmates';
