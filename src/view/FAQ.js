@@ -19,8 +19,8 @@ class FAQ extends Component{
             <PageTitle title="FAQ"/>
 
             <div>
-            <center><h2 >Why use FriendZoned?</h2></center>
-            <center><p>If you are a shy and introverted student then FriendZoned is the perfect app for you!
+            <center><h2 >Why use FriendZone?</h2></center>
+            <center><p>If you are a shy and introverted student then FriendZone is the perfect app for you!
                 <br /> It will help you create bonds with your classmates and so much more! </p></center>
             </div>
 
