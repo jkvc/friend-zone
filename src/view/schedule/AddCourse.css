@@ -10,7 +10,6 @@
 .search-course-input{
     border: none ;
     background: transparent;
-    border: solid 1px lightgrey;
     transition: all .5s;
 }
 .search-course-input:focus{

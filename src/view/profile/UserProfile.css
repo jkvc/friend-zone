@@ -6,8 +6,6 @@
     color: #2f5597;
     padding: 5px;
     cursor: pointer;
-    margin: 5px;
-    margin-left:35px;
 }
 .edit:hover{
     text-decoration: underline;
@@ -49,14 +47,12 @@
 }
 
 .table3 {
-    position: relative;
     color: #333; /* Lighten up font color */
     font-family: Helvetica, Arial, sans-serif; /* Nicer font */
     width: 320px;
     border-collapse: collapse;
     border-spacing: 0;
-    margin: 0 auto;
-    margin-left:450px;
+    margin: auto;
 
 }
 
