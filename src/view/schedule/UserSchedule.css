@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Audiowide');
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates');
 @font-face {
-    font-family: 'Audiowide', cursive;
-    src: url('https://fonts.googleapis.com/css?family=Audiowide')
+    font-family: 'Montserrat Alternates', sans-serif;
+    src: url('https://fonts.googleapis.com/css?family=Montserrat+Alternates')
 }
 .schedule-button-container button{
     font-size: small;
-    font-family: 'Audiowide', cursive;
+    font-family: 'Montserrat Alternates', sans-serif;
     background: transparent;
     color: #2f5597;
     padding: 5px;
@@ -13,7 +13,7 @@
     margin: 5px;
 }
 .buttonHover{
-    font-family: 'Audiowide', cursive;
+    font-family: 'Montserrat Alternates', sans-serif;
 }
 
 .buttonHover:hover{

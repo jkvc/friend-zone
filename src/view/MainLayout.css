@@ -128,7 +128,7 @@
 
 .logout-button {
     float: right;
-    font-family: 'Righteous', cursive;
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
     margin-top: 15px;
     margin-left: 1%;
     margin-right: 22%;
@@ -150,6 +150,7 @@
 /*if want to use gradient style maye use border-image*/
 
 .page_title_text{
-    font-family:Audiowide;
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+
     border-bottom: solid 1px lightgrey ;
 }
