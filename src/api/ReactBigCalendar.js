@@ -51,6 +51,7 @@ class Selectable extends Component{
             isNewEventDialogOpen: false,
             isEditEventDialogOpen: false,
             isViewLecture: false,
+            event_msg: "",              // to communicate success in adding/editing/removing and event
 
             // for new event dialog box only
             event_id: "",
@@ -155,7 +156,7 @@ class Selectable extends Component{
                 this.state.location,
                 (err,data) =>
                 {
-                    alert("Successfully Added Event!");
+                    this.setState({event_msg: "Successfully Added Event" });
                     this.refresh();
                 }
             );
@@ -242,7 +243,7 @@ class Selectable extends Component{
              this.state.location,
              (err,data) =>
              {
-                 alert("Successfully editted event!");
+                 this.setState({event_msg: "Successfully edited event!"});
                  this.refresh();
              }
          );
@@ -258,6 +259,7 @@ class Selectable extends Component{
     handle_btn_delete_event() {
         if( window.confirm("Are you sure you want to remove \""+this.state.event_name+"\" from your calendar?")) {
         remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_id, (err, data) => {
+            this.setState({event_msg: "Successfully removed event!"})
             this.refresh();
         });
         }
@@ -378,6 +380,7 @@ class Selectable extends Component{
                                        this.setState({location: e.target.value})
                                    }.bind(this)}/>
                             <br/>
+                            <div className="success-message">{this.state.event_msg}</div>
                         </form>
 
                         </Dialog>

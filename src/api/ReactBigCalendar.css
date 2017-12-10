@@ -145,3 +145,11 @@
 button{
     font-family: 'Montserrat Alternates', sans-serif;
 }
+.success-message{
+    font-family: "Calibri Light", serif;
+    color: green;
+    font-size: small;
+    margin-bottom: 3px;
+    min-height:12px;
+    max-width:70%;
+}
