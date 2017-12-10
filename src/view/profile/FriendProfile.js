@@ -109,7 +109,7 @@ class FriendProfile extends Component {
                 <br/>
 
                 <div>
-                    <button className='.edit' onClick={this.send_message.bind(this)}>
+                    <button className='edit' onClick={this.send_message.bind(this)}>
                         Send message &nbsp;
                         <svg id="i-settings" viewBox="0 0 32 32" width="20" height="20" fill="none"
                              stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round"
@@ -120,11 +120,11 @@ class FriendProfile extends Component {
                     &nbsp;
 
                     {!(this.state.user_id in this.state.my_profile.blocked_user) ? (
-                        <button className='.edit' onClick={() => {
+                        <button className='edit' onClick={() => {
                             this.block_a_friend(this.state.profile_obj.user_id);
                         }}>Block</button>
                     ) : (
-                        <button className='.edit' onClick={() => {
+                        <button className='edit' onClick={() => {
                             this.unblock_a_friend(this.state.profile_obj.user_id);
                         }}>Unblock</button>
                     )

@@ -44,7 +44,7 @@ class UserProfile extends Component {
                 <br/>
 
 
-                <table className="table4" align="center">
+                <table className="table3" align="center">
                     <tbody>
                     <tr>
                         <td >
@@ -76,13 +76,15 @@ class UserProfile extends Component {
                     <tr>
 
                         <td className=".td3">
-                        <a href={this.state.profile_obj.fb_link}><img className="td4" src={facebook_icon} alt="" width='100px' height='20px'/></a>
-                        </td>
                         {this.state.profile_obj.fb_link && <a href={this.state.profile_obj.fb_link}><img className="td4" src={facebook_icon} alt="" width='40px'/></a>}
+                        </td>
 
                     </tr>
                     </tbody>
                 </table>
+
+
+                <br/>
 
                 <button className="edit" onClick={this.handle_edit_profile.bind(this)}>
                     Edit profile
