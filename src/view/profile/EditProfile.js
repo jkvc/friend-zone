@@ -289,32 +289,32 @@ class EditProfile extends Component {
                     <table className="table2">
                         <tbody>
                         <tr>
-                            <td className="td2">First Name</td>
-                            <td className="td2">
+                            <td ><label className="labelprofile">First Name</label></td>
+                            <td >
                                 <input className="input1" type="text" value={this.state.first_name}
                                        onChange={e => this.setState({first_name: e.target.value})}/>
                             </td>
                         </tr>
 
                         <tr>
-                            <td className="td2">Last Name</td>
-                            <td className="td2">
+                            <td><label className="labelprofile">Last Name</label></td>
+                            <td>
                                 <input className="input1" type="text" value={this.state.last_name}
                                        onChange={e => this.setState({last_name: e.target.value})}/>
                             </td>
                         </tr>
 
                         <tr>
-                            <td className="td2">Major</td>
-                            <td className="td2">
+                            <td ><label className="labelprofile">Major</label></td>
+                            <td>
                                 <input className="input1" type="text" value={this.state.major}
                                        onChange={e => this.setState({major: e.target.value})}/>
                             </td>
                         </tr>
 
                         <tr>
-                            <td className="td2">Current Year</td>
-                            <td className="td2">
+                            <td ><label className="labelprofile">Current Year</label></td>
+                            <td >
                                 <select name="current-year" id="current-year"
                                         value={this.state.current_year}
                                         onChange={e => {
@@ -332,8 +332,8 @@ class EditProfile extends Component {
                         </tr>
 
                         <tr>
-                            <td className="td2">Description</td>
-                            <td className="td2">
+                            <td><label className="labelprofile">Description</label></td>
+                            <td>
                                 <input className="input1" value={this.state.description}
                                        onChange={e => this.setState({description: e.target.value})}/>
 
@@ -341,8 +341,8 @@ class EditProfile extends Component {
                         </tr>
 
                         <tr>
-                            <td className="td2">Facebook link</td>
-                            <td className="td2">
+                            <td><label className="labelprofile">Facebook link</label></td>
+                            <td>
                                 <input className="input1" value={this.state.fb_link}
                                        onChange={e => this.setState({fb_link: e.target.value})}/>
 
@@ -370,22 +370,22 @@ class EditProfile extends Component {
                     <table className= "table2">
                         <tbody>
                         <tr>
-                            <td className= "td2"> Old Password </td>
-                            <td className="td2">
+                            <td > <label className="labelprofile">Old Password</label></td>
+                            <td>
                                 <input className="input1" type="password" value={this.state.oldPassword}
                                        onChange={e => this.setState({oldPassword: e.target.value})}/>
                             </td>
                         </tr>
                         <tr>
-                            <td className= "td2">New password</td>
-                            <td className= "td2">
+                            <td ><label className="labelprofile">New password</label></td>
+                            <td >
                                 <input className="input1" type="password" value={this.state.newPassword}
                                        onChange={e => this.setState({newPassword: e.target.value})}/>
                             </td>
                         </tr>
                         <tr>
-                            <td className= "td2">Confirm password</td>
-                            <td className= "td2">
+                            <td ><label className="labelprofile">Confirm password</label></td>
+                            <td >
                                 <input className="input1" type="password" value={this.state.repeatPassword}
                                        onChange={e => this.setState({repeatPassword: e.target.value})}/>
                             </td>

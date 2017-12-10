@@ -47,20 +47,20 @@ class UserProfile extends Component {
                 <table className="table4" align="center">
                     <tbody>
                     <tr>
-                        <td className=".td3">
+                        <td >
                             <span className="glyphicon glyphicon-user">  </span>
                             <label className=".l1">                 Name:               {this.state.profile_obj.first_name + " " + this.state.profile_obj.last_name} </label>
                         </td>
                     </tr>
                     <tr>
-                        <td className=".td3">
+                        <td >
                             <span className="glyphicon glyphicon-screenshot"> </span>
                             <label className=".l1">                 Major:               {this.state.profile_obj.major} </label>
                         </td>
 
                     </tr>
                     <tr>
-                        <td className=".td3">
+                        <td >
                             <span className="glyphicon glyphicon-star"></span>
 
                             <label className=".l1">                 Current year:     {this.state.profile_obj.current_year} </label>
@@ -68,7 +68,7 @@ class UserProfile extends Component {
 
                     </tr>
                     <tr>
-                        <td className=".td3">
+                        <td >
                             <span className="glyphicon glyphicon-zoom-in"></span>
                             <label className=".l">                  Description:   {this.state.profile_obj.description} </label>
                         </td>
@@ -84,7 +84,7 @@ class UserProfile extends Component {
                     </tbody>
                 </table>
 
-                <button className=".edit" onClick={this.handle_edit_profile.bind(this)}>
+                <button className="edit" onClick={this.handle_edit_profile.bind(this)}>
                     Edit profile
                 </button>
 

@@ -8,6 +8,7 @@
     cursor: pointer;
     margin: 5px;
     margin-left:35px;
+    align: center;
 }
 .edit:hover{
     text-decoration: underline;

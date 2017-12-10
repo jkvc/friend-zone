@@ -1,11 +1,14 @@
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 .input1{
-     width: 200px;
-     border: none;
+     width: 300px;
+
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid lightgrey;
      height: 20px;
     font-size: medium;
-     margin-left: 20px;
-     background-color: transparent;
+     margin-left: 15px;
+
 }
 
 .edit-profile-table tr{
@@ -78,4 +81,20 @@
 .edit:hover{
     text-decoration: underline;
 
+}
+.labelprofile{
+    /* Other styling.. */
+    text-align:left;
+    clear: both;
+    float:left;
+    margin-right:55px;
+    width:200%;
+    height:100%;
+
+}
+select{
+    height: 20px;
+    line-height:20px;
+    margin-left: 15px;
+    font-size: small;
 }
