@@ -9,6 +9,7 @@ import ChatView from "../../chat/ChatView";
 import {create_chat_session} from "../../chat/ChatSessionManager";
 import ChatSessionView from "../../chat/ChatSessionView";
 import './UserProfile.css'
+import facebook_icon from '../../image/FacebookIcon.png'
 class FriendProfile extends Component {
 
     constructor(props) {
@@ -103,6 +104,13 @@ class FriendProfile extends Component {
                         <label className=".l1">     Description:     {this.state.profile_obj.description}</label>
 
                         </td>
+                    </tr>
+                    <tr>
+
+                        <td className=".td3">
+                        {this.state.profile_obj.fb_link && <a href={this.state.profile_obj.fb_link}><img className="td4" src={facebook_icon} alt="" width='40px'/></a>}
+                        </td>
+
                     </tr>
                     </tbody>
                 </table>
