@@ -36,7 +36,7 @@ class RedirectNoEmailVerification extends Component {
                 <h4>Please come back when you have done so.</h4>
                 <button className="buttonStyle1" onClick={this.goto_welcome}>Go back to MainPage</button>
                 <button className="buttonStyle1" onClick={this.send_verification.bind(this)}>Send Verification Email</button>
-                <div className="success-message">{this.state.success_msg}</div>
+                <div className="success-message-redirect">{this.state.success_msg}</div>
                 <h6>--------Powered by FriendZone--------</h6>
             </div>
         )

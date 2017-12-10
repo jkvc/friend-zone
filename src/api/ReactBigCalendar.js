@@ -107,7 +107,8 @@ class Selectable extends Component{
             start_time: start_hour + ":" + start_minute,
             end_time: end_hour + ":" + end_minute,
             day: slotInfo.start.getFullYear().toString() + "-" + month + "-" + day,
-            location: ""
+            location: "",
+            event_msg : ""
         });
 
     }
@@ -129,23 +130,23 @@ class Selectable extends Component{
         // Check for validity of the event entered
         if (this.state.event_name === "")
         {
-            alert("Event Name is not entered!");
+            this.setState({event_msg:"Event Name is not entered!"});
         }
         else if (this.state.day === "" )
         {
-            alert("Event Day is not entered!");
+            this.setState({event_msg:"Event Day is not entered!"});
         }
         else if (this.state.start_time === "")
         {
-            alert("Start Time is not specified!");
+            this.setState({event_msg:"Start Time is not specified!"});
         }
         else if (this.state.end_time === "")
         {
-            alert("End Time is not specified!");
+            this.setState({event_msg:"End Time is not specified!"});
         }
         else if ( this.state.start_time > this.state.end_time )
         {
-            alert("Start time must be greater than end time!");
+            this.setState({event_msg:"Start time must be greater than end time!"});
         }
         else {
             add_event_to_profile(firebase.auth().currentUser.uid,
@@ -200,7 +201,8 @@ class Selectable extends Component{
                 event_name :event_obj.event_name,
                 event_id:event.event_id,
                 location:event_obj.location,
-                event : event
+                event : event,
+                event_msg : ""
             });
 
         }
@@ -233,22 +235,43 @@ class Selectable extends Component{
 
      handle_btn_edit_event()
      {
-         edit_existing_event(
-             firebase.auth().currentUser.uid,
-             this.state.event_id,
-             this.state.event_name,
-             this.state.day,
-             this.state.start_time,
-             this.state.end_time,
-             this.state.location,
-             (err,data) =>
-             {
-                 this.setState({event_msg: "Successfully edited event!"});
-                 this.refresh();
-             }
-         );
+         // Check for validity of the event entered
+         if (this.state.event_name === "")
+         {
+             this.setState({event_msg:"Event Name is not entered!"});
+         }
+         else if (this.state.day === "" )
+         {
+             this.setState({event_msg:"Event Day is not entered!"});
+         }
+         else if (this.state.start_time === "")
+         {
+             this.setState({event_msg:"Start Time is not specified!"});
+         }
+         else if (this.state.end_time === "")
+         {
+             this.setState({event_msg:"End Time is not specified!"});
+         }
+         else if ( this.state.start_time > this.state.end_time )
+         {
+             this.setState({event_msg:"Start time must be greater than end time!"});
+         }
+         else {
+             edit_existing_event(
+                 firebase.auth().currentUser.uid,
+                 this.state.event_id,
+                 this.state.event_name,
+                 this.state.day,
+                 this.state.start_time,
+                 this.state.end_time,
+                 this.state.location,
+                 (err, data) => {
+                     this.setState({event_msg: "Successfully edited event!"});
+                     this.refresh();
+                 }
+             );
+         }
          // this.setState({isEditEventDialogOpen:false});
-
      }
 
      handle_edit_event_close()
@@ -259,7 +282,7 @@ class Selectable extends Component{
     handle_btn_delete_event() {
         if( window.confirm("Are you sure you want to remove \""+this.state.event_name+"\" from your calendar?")) {
         remove_event_from_profile(firebase.auth().currentUser.uid, this.state.event_id, (err, data) => {
-            this.setState({event_msg: "Successfully removed event!"})
+            this.setState({event_msg: "Successfully removed event!"});
             this.refresh();
         });
         }
@@ -276,7 +299,7 @@ class Selectable extends Component{
     handle_btn_drop_course() {
         if(window.confirm("Are you sure you want to drop "+this.state.course_id + "?")){
             remove_course_from_profile(firebase.auth().currentUser.uid, this.state.course_id, (err, data) => {
-                alert("Successfully Dropped course!");
+                //alert("Successfully Dropped course!");
                 this.refresh();
             });
             this.setState({isViewLecture: false});
@@ -452,6 +475,7 @@ class Selectable extends Component{
                                        this.setState({location: e.target.value})
                                    }.bind(this)}/>
                             <br/>
+                            <div className="success-message">{this.state.event_msg}</div>
                         </form>
 
                     </Dialog>
